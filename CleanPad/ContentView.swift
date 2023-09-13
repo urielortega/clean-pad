@@ -12,39 +12,28 @@ struct ContentView: View {
     @StateObject var viewModel = NotesListViewModel()
     
     var body: some View {
-        NavigationStack {
-            Group {
-                if viewModel.notes.isEmpty {
-                    HStack {
-                        Text(viewModel.placeholders.randomElement() ?? "Start writing...")
-                            .font(.system(size: 60))
-                            .fontWeight(.black)
-                            .fontDesign(.serif).italic()
-                            .foregroundColor(.brown.opacity(0.3))
-                            .multilineTextAlignment(.leading)
-                        Spacer()
+        ZStack {
+            NavigationStack {
+                Group {
+                    if viewModel.notes.isEmpty {
+                        EmptyListView(viewModel: viewModel)
+                    } else {
+                        NotesListView(viewModel: viewModel)
                     }
-                    .padding()
-                    .onTapGesture {
-                        // TODO: Create note.
-                    }
-                } else {
-                    List(viewModel.notes) { note in
-                        Text(note.title)
+                }
+                .navigationTitle("CleanPad")
+                .toolbar {
+                    ToolbarItem {
+                        Button {
+                            // TODO: Create note
+                        } label: {
+                            Label("Create note", systemImage: "plus")
+                        }
                     }
                 }
             }
-            .navigationTitle("CleanPad")
-            .toolbar {
-                ToolbarItem {
-                    Button {
-                        // TODO: Create note
-                    } label: {
-                        Label("Create note", systemImage: "plus")
-                    }
-
-                }
-            }
+            
+            BackgroundView()
         }
     }
 }
@@ -52,5 +41,57 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+    }
+}
+
+struct EmptyListView: View {
+    // Using the viewModel in a different view with @ObservedObject.
+    @ObservedObject var viewModel: NotesListViewModel
+    
+    var body: some View {
+        HStack {
+            Text(viewModel.placeholders.randomElement() ?? "Start writing...")
+                .font(.system(size: 60))
+                .fontWeight(.black)
+                .fontDesign(.serif).italic()
+                .foregroundColor(.secondary)
+                .multilineTextAlignment(.leading)
+                .padding()
+            Spacer()
+        }
+        .padding()
+        .onTapGesture {
+            // TODO: Create note
+        }
+    }
+}
+
+struct BackgroundView: View {
+    var body: some View {
+        Color.brown
+            .opacity(0.2)
+            .ignoresSafeArea()
+            .allowsHitTesting(false)
+    }
+}
+
+struct NotesListView: View {
+    // Using the viewModel in a different view with @ObservedObject.
+    @ObservedObject var viewModel: NotesListViewModel
+    
+    var body: some View {
+        List(viewModel.notes) { note in
+            NavigationLink {
+                Text(note.title) // FIXME: Just for testing purposes. Change later.
+            } label: {
+                VStack(alignment: .leading) {
+                    Text(note.title)
+                    Text(note.date.formatted(date: .abbreviated, time: .shortened))
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+            }
+
+        }
     }
 }

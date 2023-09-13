@@ -29,7 +29,10 @@ class NotesListViewModel: ObservableObject {
             notes = try JSONDecoder().decode([Note].self, from: data)
         } catch {
             notes = [
-                // Fill to test the List.
+                // Uncomment to test the List:
+//                Note(title: "Test 1"),
+//                Note(title: "Test 2"),
+//                Note(title: "Test 3")
             ]
         }
     }

@@ -10,6 +10,7 @@ import Foundation
 struct Note: Codable, Identifiable {
     var id = UUID()
     var isLocked = false
+    var date = Date.now
     
     var title = ""
     var textContent = ""
