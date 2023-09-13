@@ -8,14 +8,44 @@
 import SwiftUI
 
 struct ContentView: View {
+    // Creating shared viewModel with @StateObject.
+    @StateObject var viewModel = NotesListViewModel()
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        NavigationStack {
+            Group {
+                if viewModel.notes.isEmpty {
+                    HStack {
+                        Text(viewModel.placeholders.randomElement() ?? "Start writing...")
+                            .font(.system(size: 60))
+                            .fontWeight(.black)
+                            .fontDesign(.serif).italic()
+                            .foregroundColor(.brown.opacity(0.3))
+                            .multilineTextAlignment(.leading)
+                        Spacer()
+                    }
+                    .padding()
+                    .onTapGesture {
+                        // TODO: Create note.
+                    }
+                } else {
+                    List(viewModel.notes) { note in
+                        Text(note.title)
+                    }
+                }
+            }
+            .navigationTitle("CleanPad")
+            .toolbar {
+                ToolbarItem {
+                    Button {
+                        // TODO: Create note
+                    } label: {
+                        Label("Create note", systemImage: "plus")
+                    }
+
+                }
+            }
         }
-        .padding()
     }
 }
 
