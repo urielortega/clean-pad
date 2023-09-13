@@ -49,19 +49,20 @@ struct EmptyListView: View {
     @ObservedObject var viewModel: NotesListViewModel
     
     var body: some View {
-        HStack {
-            Text(viewModel.placeholders.randomElement() ?? "Start writing...")
-                .font(.system(size: 60))
-                .fontWeight(.black)
-                .fontDesign(.serif).italic()
-                .foregroundColor(.secondary)
-                .multilineTextAlignment(.leading)
-                .padding()
-            Spacer()
-        }
-        .padding()
-        .onTapGesture {
+        Button {
             // TODO: Create note
+        } label: {
+            HStack {
+                Text(viewModel.placeholders.randomElement() ?? "Start writing...")
+                    .font(.system(size: 60))
+                    .fontWeight(.black)
+                    .fontDesign(.serif).italic()
+                    .foregroundColor(.secondary)
+                    .multilineTextAlignment(.leading)
+                    .padding()
+                Spacer()
+            }
+            .padding()
         }
     }
 }
