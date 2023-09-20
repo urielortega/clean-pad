@@ -83,6 +83,24 @@ class NotesListViewModel: ObservableObject {
         saveAllNotes()
     }
     
+    func removeLockedNoteFromList(at offsets: IndexSet) {
+        var lockedNotes = notes.filter { $0.isLocked }
+        
+        lockedNotes.remove(atOffsets: offsets)
+        
+        notes = lockedNotes + notes.filter {
+            $0.isLocked == false
+        }
+    }
+    
+    func removeNonLockedNoteFromList(at offsets: IndexSet) {
+        var nonLockedNotes = notes.filter { $0.isLocked == false }
+        
+        nonLockedNotes.remove(atOffsets: offsets)
+        
+        notes = nonLockedNotes + notes.filter { $0.isLocked }
+    }
+    
     func saveAllNotes() {
         // Saving data with documents directory:
         do {

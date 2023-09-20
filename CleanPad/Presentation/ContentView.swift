@@ -16,24 +16,16 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             NavigationStack {
-                Group {
-                    if viewModel.notes.isEmpty {
-                        EmptyListView(
-                            viewModel: viewModel,
-                            showEditViewSheet: $showEditViewSheet
-                        )
-                    } else {
-                        AllNotesListView(viewModel: viewModel)
-                    }
-                }
+                MainNotesListView(
+                    viewModel: viewModel,
+                    showEditViewSheet: $showEditViewSheet
+                )
                 .navigationTitle("Your Space")
                 .toolbar {
-                    ToolbarItem {
-                        Button {
-                            showEditViewSheet.toggle()
-                        } label: {
-                            Label("Create note", systemImage: "plus")
-                        }
+                    Button {
+                        showEditViewSheet.toggle()
+                    } label: {
+                        Label("Create note", systemImage: "plus")
                     }
                 }
                 .sheet(isPresented: $showEditViewSheet) {

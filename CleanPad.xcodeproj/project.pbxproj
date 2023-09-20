@@ -63,10 +63,9 @@
 		A44E76942AB11E70004BBB21 /* CleanPad */ = {
 			isa = PBXGroup;
 			children = (
+				A465AB7C2ABB395E001CFFD9 /* Domain */,
+				A465AB7B2ABB2D50001CFFD9 /* App */,
 				A465AB742ABA704B001CFFD9 /* Presentation */,
-				A44E76952AB11E70004BBB21 /* CleanPadApp.swift */,
-				A44E76A32AB12C0A004BBB21 /* Note.swift */,
-				A44E76A52AB1307A004BBB21 /* NotesListViewModel.swift */,
 				A44E76A72AB13214004BBB21 /* FileManager-DocumentsDirectory.swift */,
 				A44E76992AB11E72004BBB21 /* Assets.xcassets */,
 				A44E769B2AB11E72004BBB21 /* Preview Content */,
@@ -89,8 +88,25 @@
 				A465AB792ABA7149001CFFD9 /* NoteEditView.swift */,
 				A465AB772ABA70F2001CFFD9 /* ListViews.swift */,
 				A465AB752ABA70B8001CFFD9 /* BackgroundViews.swift */,
+				A44E76A52AB1307A004BBB21 /* NotesListViewModel.swift */,
 			);
 			path = Presentation;
+			sourceTree = "<group>";
+		};
+		A465AB7B2ABB2D50001CFFD9 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				A44E76952AB11E70004BBB21 /* CleanPadApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		A465AB7C2ABB395E001CFFD9 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				A44E76A32AB12C0A004BBB21 /* Note.swift */,
+			);
+			path = Domain;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
