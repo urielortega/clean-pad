@@ -1,8 +1,8 @@
 //
-//  BackgroundViews.swift
+//  EmptyListView.swift
 //  CleanPad
 //
-//  Created by Uriel Ortega on 19/09/23.
+//  Created by Uriel Ortega on 20/09/23.
 //
 
 import SwiftUI
@@ -42,14 +42,5 @@ struct EmptyListView: View {
                 .padding()
             }
         }
-    }
-}
-
-struct MainBackgroundView: View {
-    var body: some View {
-        Color.brown
-            .opacity(0.15)
-            .ignoresSafeArea()
-            .allowsHitTesting(false)
     }
 }

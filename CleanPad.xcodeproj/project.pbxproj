@@ -8,29 +8,35 @@
 
 /* Begin PBXBuildFile section */
 		A44E76962AB11E70004BBB21 /* CleanPadApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44E76952AB11E70004BBB21 /* CleanPadApp.swift */; };
-		A44E76982AB11E70004BBB21 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44E76972AB11E70004BBB21 /* ContentView.swift */; };
 		A44E769A2AB11E72004BBB21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A44E76992AB11E72004BBB21 /* Assets.xcassets */; };
 		A44E769D2AB11E72004BBB21 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A44E769C2AB11E72004BBB21 /* Preview Assets.xcassets */; };
 		A44E76A42AB12C0A004BBB21 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44E76A32AB12C0A004BBB21 /* Note.swift */; };
 		A44E76A62AB1307A004BBB21 /* NotesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44E76A52AB1307A004BBB21 /* NotesListViewModel.swift */; };
 		A44E76A82AB13214004BBB21 /* FileManager-DocumentsDirectory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44E76A72AB13214004BBB21 /* FileManager-DocumentsDirectory.swift */; };
-		A465AB762ABA70B8001CFFD9 /* BackgroundViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A465AB752ABA70B8001CFFD9 /* BackgroundViews.swift */; };
-		A465AB782ABA70F2001CFFD9 /* ListViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A465AB772ABA70F2001CFFD9 /* ListViews.swift */; };
 		A465AB7A2ABA7149001CFFD9 /* NoteEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A465AB792ABA7149001CFFD9 /* NoteEditView.swift */; };
+		A4DB7B0A2ABB837D0008AF12 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DB7B092ABB837D0008AF12 /* ContentView.swift */; };
+		A4DB7B0E2ABB84910008AF12 /* MainNotesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DB7B0D2ABB84910008AF12 /* MainNotesListView.swift */; };
+		A4DB7B102ABB84B10008AF12 /* LockedNotesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DB7B0F2ABB84B10008AF12 /* LockedNotesListView.swift */; };
+		A4DB7B122ABB84CC0008AF12 /* NonLockedNotesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DB7B112ABB84CC0008AF12 /* NonLockedNotesListView.swift */; };
+		A4DB7B162ABB85130008AF12 /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DB7B152ABB85130008AF12 /* EmptyListView.swift */; };
+		A4DB7B182ABB852D0008AF12 /* MainBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DB7B172ABB852D0008AF12 /* MainBackgroundView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A44E76922AB11E70004BBB21 /* CleanPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CleanPad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A44E76952AB11E70004BBB21 /* CleanPadApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanPadApp.swift; sourceTree = "<group>"; };
-		A44E76972AB11E70004BBB21 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A44E76992AB11E72004BBB21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A44E769C2AB11E72004BBB21 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A44E76A32AB12C0A004BBB21 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		A44E76A52AB1307A004BBB21 /* NotesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesListViewModel.swift; sourceTree = "<group>"; };
 		A44E76A72AB13214004BBB21 /* FileManager-DocumentsDirectory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager-DocumentsDirectory.swift"; sourceTree = "<group>"; };
-		A465AB752ABA70B8001CFFD9 /* BackgroundViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundViews.swift; sourceTree = "<group>"; };
-		A465AB772ABA70F2001CFFD9 /* ListViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViews.swift; sourceTree = "<group>"; };
 		A465AB792ABA7149001CFFD9 /* NoteEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEditView.swift; sourceTree = "<group>"; };
+		A4DB7B092ABB837D0008AF12 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = CleanPad/ContentView.swift; sourceTree = SOURCE_ROOT; };
+		A4DB7B0D2ABB84910008AF12 /* MainNotesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNotesListView.swift; sourceTree = "<group>"; };
+		A4DB7B0F2ABB84B10008AF12 /* LockedNotesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockedNotesListView.swift; sourceTree = "<group>"; };
+		A4DB7B112ABB84CC0008AF12 /* NonLockedNotesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonLockedNotesListView.swift; sourceTree = "<group>"; };
+		A4DB7B152ABB85130008AF12 /* EmptyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyListView.swift; sourceTree = "<group>"; };
+		A4DB7B172ABB852D0008AF12 /* MainBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBackgroundView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,10 +90,10 @@
 		A465AB742ABA704B001CFFD9 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				A44E76972AB11E70004BBB21 /* ContentView.swift */,
-				A465AB792ABA7149001CFFD9 /* NoteEditView.swift */,
-				A465AB772ABA70F2001CFFD9 /* ListViews.swift */,
-				A465AB752ABA70B8001CFFD9 /* BackgroundViews.swift */,
+				A4DB7B142ABB850A0008AF12 /* BackgroundViews */,
+				A4DB7B132ABB84F80008AF12 /* DetailViews */,
+				A4DB7B0C2ABB84860008AF12 /* ListViews */,
+				A4DB7B092ABB837D0008AF12 /* ContentView.swift */,
 				A44E76A52AB1307A004BBB21 /* NotesListViewModel.swift */,
 			);
 			path = Presentation;
@@ -107,6 +113,33 @@
 				A44E76A32AB12C0A004BBB21 /* Note.swift */,
 			);
 			path = Domain;
+			sourceTree = "<group>";
+		};
+		A4DB7B0C2ABB84860008AF12 /* ListViews */ = {
+			isa = PBXGroup;
+			children = (
+				A4DB7B0D2ABB84910008AF12 /* MainNotesListView.swift */,
+				A4DB7B112ABB84CC0008AF12 /* NonLockedNotesListView.swift */,
+				A4DB7B0F2ABB84B10008AF12 /* LockedNotesListView.swift */,
+			);
+			path = ListViews;
+			sourceTree = "<group>";
+		};
+		A4DB7B132ABB84F80008AF12 /* DetailViews */ = {
+			isa = PBXGroup;
+			children = (
+				A465AB792ABA7149001CFFD9 /* NoteEditView.swift */,
+			);
+			path = DetailViews;
+			sourceTree = "<group>";
+		};
+		A4DB7B142ABB850A0008AF12 /* BackgroundViews */ = {
+			isa = PBXGroup;
+			children = (
+				A4DB7B152ABB85130008AF12 /* EmptyListView.swift */,
+				A4DB7B172ABB852D0008AF12 /* MainBackgroundView.swift */,
+			);
+			path = BackgroundViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -180,13 +213,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				A44E76A62AB1307A004BBB21 /* NotesListViewModel.swift in Sources */,
-				A465AB782ABA70F2001CFFD9 /* ListViews.swift in Sources */,
+				A4DB7B0A2ABB837D0008AF12 /* ContentView.swift in Sources */,
+				A4DB7B122ABB84CC0008AF12 /* NonLockedNotesListView.swift in Sources */,
 				A44E76A82AB13214004BBB21 /* FileManager-DocumentsDirectory.swift in Sources */,
-				A465AB762ABA70B8001CFFD9 /* BackgroundViews.swift in Sources */,
+				A4DB7B162ABB85130008AF12 /* EmptyListView.swift in Sources */,
 				A465AB7A2ABA7149001CFFD9 /* NoteEditView.swift in Sources */,
-				A44E76982AB11E70004BBB21 /* ContentView.swift in Sources */,
 				A44E76962AB11E70004BBB21 /* CleanPadApp.swift in Sources */,
+				A4DB7B0E2ABB84910008AF12 /* MainNotesListView.swift in Sources */,
+				A4DB7B102ABB84B10008AF12 /* LockedNotesListView.swift in Sources */,
 				A44E76A42AB12C0A004BBB21 /* Note.swift in Sources */,
+				A4DB7B182ABB852D0008AF12 /* MainBackgroundView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
