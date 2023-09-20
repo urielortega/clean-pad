@@ -11,25 +11,34 @@ struct ContentView: View {
     // Creating shared viewModel with @StateObject.
     @StateObject var viewModel = NotesListViewModel()
     
+    @State private var showEditViewSheet = false
+    
     var body: some View {
         ZStack {
             NavigationStack {
                 Group {
                     if viewModel.notes.isEmpty {
-                        EmptyListView(viewModel: viewModel)
+                        EmptyListView(
+                            viewModel: viewModel,
+                            showEditViewSheet: $showEditViewSheet
+                        )
                     } else {
-                        NotesListView(viewModel: viewModel)
+                        AllNotesListView(viewModel: viewModel)
                     }
                 }
-                .navigationTitle("CleanPad")
+                .navigationTitle("Your Space")
                 .toolbar {
                     ToolbarItem {
                         Button {
-                            // TODO: Create note
+                            showEditViewSheet.toggle()
                         } label: {
                             Label("Create note", systemImage: "plus")
                         }
                     }
+                }
+                .sheet(isPresented: $showEditViewSheet) {
+                    // NoteEditView with a blank Note:
+                    NoteEditView(note: Note(), creatingNewNote: true)
                 }
             }
             
@@ -44,13 +53,15 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
+// MARK: Child Views.
 struct EmptyListView: View {
     // Using the viewModel in a different view with @ObservedObject.
     @ObservedObject var viewModel: NotesListViewModel
+    @Binding var showEditViewSheet: Bool
     
     var body: some View {
         Button {
-            // TODO: Create note
+            showEditViewSheet.toggle()
         } label: {
             HStack {
                 Text(viewModel.placeholders.randomElement() ?? "Start writing...")
@@ -70,29 +81,118 @@ struct EmptyListView: View {
 struct BackgroundView: View {
     var body: some View {
         Color.brown
-            .opacity(0.2)
+            .opacity(0.15)
             .ignoresSafeArea()
             .allowsHitTesting(false)
     }
 }
 
-struct NotesListView: View {
+struct AllNotesListView: View {
     // Using the viewModel in a different view with @ObservedObject.
     @ObservedObject var viewModel: NotesListViewModel
     
     var body: some View {
-        List(viewModel.notes) { note in
-            NavigationLink {
-                Text(note.title) // FIXME: Just for testing purposes. Change later.
-            } label: {
-                VStack(alignment: .leading) {
-                    Text(note.title)
-                    Text(note.date.formatted(date: .abbreviated, time: .shortened))
-                        .font(.caption)
-                        .foregroundColor(.secondary)
+        Form {
+            Section {
+                NavigationLink {
+                    // Opens another List, only for locked notes.
+                    LockedNotesListView(viewModel: viewModel)
+                } label: {
+                    Label("Personal notes", systemImage: "lock.fill")
+                        .foregroundColor(.brown)
                 }
             }
+            
+            // For non-locked notes:
+            NonLockedNotesListView(viewModel: viewModel)
+        }
+    }
+}
 
+struct LockedNotesListView: View {
+    @ObservedObject var viewModel: NotesListViewModel
+
+    var body: some View {
+        List {
+            ForEach(viewModel.notes.filter { $0.isLocked }) { note in
+                NavigationLink {
+                    // Open NoteEditView with the tapped note.
+                    NoteEditView(note: note, creatingNewNote: false)
+                } label: {
+                    VStack(alignment: .leading) {
+                        Text(note.title)
+                        Text(note.date.formatted(date: .abbreviated, time: .shortened))
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                }
+                
+            }
+            // TODO: .onDelete()
+        }
+        .navigationTitle("Personal")
+    }
+}
+
+struct NonLockedNotesListView: View {
+    @ObservedObject var viewModel: NotesListViewModel
+    
+    var body: some View {
+        List {
+            ForEach(viewModel.notes.filter { $0.isLocked == false }) { note in
+                NavigationLink {
+                    // Open NoteEditView with the tapped note.
+                    NoteEditView(note: note, creatingNewNote: false)
+                } label: {
+                    VStack(alignment: .leading) {
+                        Text(note.title)
+                        Text(note.date.formatted(date: .abbreviated, time: .shortened))
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                }
+                
+            }
+            // TODO: .onDelete()
+        }
+    }
+}
+
+struct NoteEditView: View {
+    @State var note: Note
+    // var save: (Note) -> ()
+    
+    var creatingNewNote: Bool // Property to show Cancel and Save buttons.
+    @Environment(\.dismiss) var dismiss
+    
+    var body: some View {
+        NavigationStack {
+            VStack {
+                TextField(note.title, text: $note.title, prompt: Text("Title it"))
+                    .font(.title).bold()
+                    .padding()
+                
+                Divider()
+                
+                TextEditor(text: $note.textContent)
+                    .ignoresSafeArea()
+                    .padding(.horizontal)
+            }
+            .toolbar {
+                if creatingNewNote {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button("Cancel") {
+                            dismiss()
+                        }
+                    }
+                    
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button("Save") {
+                            // TODO: Save note (add() and then saveAllNotes())
+                        }
+                    }
+                }
+            }
         }
     }
 }
