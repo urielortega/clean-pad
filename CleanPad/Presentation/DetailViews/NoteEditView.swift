@@ -12,6 +12,7 @@ struct NoteEditView: View {
     // var save: (Note) -> ()
     
     var creatingNewNote: Bool // Property to show Cancel and Save buttons.
+    @FocusState private var textEditorIsFocused: Bool // Property to show the OK button that dismisses keyboard.
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
@@ -26,18 +27,38 @@ struct NoteEditView: View {
                 TextEditor(text: $note.textContent)
                     .ignoresSafeArea()
                     .padding(.horizontal)
+                    .focused($textEditorIsFocused)
             }
             .toolbar {
-                if creatingNewNote {
-                    ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    if creatingNewNote {
                         Button("Cancel") {
                             dismiss()
                         }
                     }
-                    
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button("Save") {
-                            // TODO: Save note (add() and then saveAllNotes())
+                }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    HStack {
+                        Menu {
+                            Button {
+                                // TODO: Request biometrics to lock note.
+                            } label: {
+                                Label("Lock note", systemImage: "lock.fill")
+                            }
+                        } label: {
+                            Label("More options", systemImage: "ellipsis.circle")
+                        }
+                        
+                        if textEditorIsFocused {
+                            Button("OK") {
+                                textEditorIsFocused = false
+                            }
+                        } else if (creatingNewNote && !textEditorIsFocused) {
+                            Button("Save") {
+                                // TODO: Save note (add() and then saveAllNotes())
+                                dismiss()
+                            }
                         }
                     }
                 }

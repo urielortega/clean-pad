@@ -15,3 +15,9 @@ struct MainBackgroundView: View {
             .allowsHitTesting(false)
     }
 }
+
+struct MainBackgroundView_Previews: PreviewProvider {
+    static var previews: some View {
+        MainBackgroundView()
+    }
+}

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class NotesListViewModel: ObservableObject {
+final class NotesListViewModel: ObservableObject {
     // Array containing all notes
     @Published private(set) var notes: [Note] = []
     
