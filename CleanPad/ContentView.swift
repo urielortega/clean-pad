@@ -20,12 +20,29 @@ struct ContentView: View {
                     viewModel: viewModel,
                     showEditViewSheet: $showEditViewSheet
                 )
-                .navigationTitle("Your Space")
+                .navigationTitle("Your CleanPad")
                 .toolbar {
-                    Button {
-                        showEditViewSheet.toggle()
-                    } label: {
-                        Label("Create note", systemImage: "plus")
+                    HStack {
+                        Button {
+                            if viewModel.isUnlocked {
+                                // TODO: Lock notes.
+                                viewModel.lockNotes()
+                            } else {
+                                // TODO: Authenticate to unlock notes.
+                                viewModel.authenticate(for: .viewNotes)
+                            }
+                        } label: {
+                            Label(
+                                viewModel.isUnlocked ? "Lock notes" : "Unlock notes",
+                                systemImage: viewModel.isUnlocked ? "lock.open.fill" : "lock.fill"
+                            )
+                        }
+                        
+                        Button {
+                            showEditViewSheet.toggle()
+                        } label: {
+                            Label("Create note", systemImage: "plus")
+                        }
                     }
                 }
                 .sheet(isPresented: $showEditViewSheet) {
@@ -35,6 +52,11 @@ struct ContentView: View {
             }
             
             MainBackgroundView()
+        }
+        .alert("Authentication error", isPresented: $viewModel.isShowingAuthenticationError) {
+            Button("OK") { }
+        } message: {
+            Text(viewModel.authenticationError)
         }
     }
 }

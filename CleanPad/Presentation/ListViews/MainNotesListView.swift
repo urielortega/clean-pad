@@ -19,8 +19,11 @@ struct MainNotesListView: View {
                 NavigationLink {
                     LockedNotesListView(viewModel: viewModel)
                 } label: {
-                    Label("Personal notes", systemImage: "lock.fill")
-                        .foregroundColor(.brown)
+                    Label(
+                        "Personal notes", 
+                        systemImage:viewModel.isUnlocked ? "lock.open.fill" : "lock.fill"
+                    )
+                    .foregroundColor(.brown)
                 }
             }
             

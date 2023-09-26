@@ -15,37 +15,58 @@ struct LockedNotesListView: View {
 
     var body: some View {
         Group {
-            if viewModel.notes.filter({ $0.isLocked }).isEmpty {
-                EmptyListView(
-                    viewModel: viewModel,
-                    showEditViewSheet: $showEditViewSheet
-                )
-            } else {
-                List {
-                    ForEach(viewModel.notes.filter { $0.isLocked }) { note in
-                        NavigationLink {
-                            // Open NoteEditView with the tapped note.
-                            NoteEditView(note: note, creatingNewNote: false)
-                        } label: {
-                            VStack(alignment: .leading) {
-                                Text(note.title)
-                                Text(note.date.formatted(date: .abbreviated, time: .shortened))
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
+            if viewModel.isUnlocked {
+                if viewModel.notes.filter({ $0.isLocked }).isEmpty {
+                    EmptyListView(
+                        viewModel: viewModel,
+                        showEditViewSheet: $showEditViewSheet
+                    )
+                } else {
+                    List {
+                        ForEach(viewModel.notes.filter { $0.isLocked }) { note in
+                            NavigationLink {
+                                // Open NoteEditView with the tapped note.
+                                NoteEditView(note: note, creatingNewNote: false)
+                            } label: {
+                                VStack(alignment: .leading) {
+                                    Text(note.title)
+                                    Text(note.date.formatted(date: .abbreviated, time: .shortened))
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                }
                             }
+                            
                         }
-                        
+                        .onDelete(perform: viewModel.removeLockedNoteFromList)
                     }
-                    .onDelete(perform: viewModel.removeLockedNoteFromList)
                 }
+            } else {
+                Button("Unlock Notes") {
+                    viewModel.authenticate(for: .viewNotes)
+                }
+                .padding()
+                .background(.brown)
+                .foregroundColor(.white)
+                .clipShape(Capsule())
             }
         }
         .navigationTitle("Personal")
         .toolbar {
-            Button {
-                showEditViewSheet.toggle()
-            } label: {
-                Label("Create note", systemImage: "plus")
+            if viewModel.isUnlocked {
+                HStack {
+                    Button {
+                        // TODO: Lock notes.
+                        viewModel.lockNotes()
+                    } label: {
+                        Label("Lock notes", systemImage: "lock.open.fill")
+                    }
+                    
+                    Button {
+                        showEditViewSheet.toggle()
+                    } label: {
+                        Label("Create note", systemImage: "plus")
+                    }
+                }
             }
         }
         .sheet(isPresented: $showEditViewSheet) {

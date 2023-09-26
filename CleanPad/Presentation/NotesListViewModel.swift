@@ -6,10 +6,22 @@
 //
 
 import Foundation
+import LocalAuthentication
+import SwiftUI
 
 final class NotesListViewModel: ObservableObject {
     // Array containing all notes
     @Published private(set) var notes: [Note] = []
+    
+    @Published private(set) var isUnlocked = false
+    @Published private(set) var areChangesAllowed = false
+    
+    @Published private(set) var authenticationError = "Unknown error"
+    @Published var isShowingAuthenticationError = false
+    
+    enum AuthenticationReason {
+        case viewNotes, changeLockStatus
+    }
     
     let placeholders = [
         "What's on your mind?",
@@ -52,6 +64,39 @@ final class NotesListViewModel: ObservableObject {
                 )
             ]
         }
+    }
+    
+    func authenticate(for authenticationReason: AuthenticationReason) {
+        let context = LAContext()
+        var error: NSError?
+        
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            let reason = "Please authenticate yourself to lock and unlock your notes data." // Used for Touch ID
+            
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
+                Task { @MainActor in
+                    if success {
+                        if authenticationReason == .viewNotes {
+                            self.isUnlocked = true
+                        } else if authenticationReason == .changeLockStatus {
+                            self.areChangesAllowed = true
+                        }
+                    } else {
+                        // Error.
+                        self.authenticationError = "There was a problem authenticating you. Try again."
+                        self.isShowingAuthenticationError = true
+                    }
+                }
+            }
+        } else {
+            // No biometrics.
+            authenticationError = "Sorry, your device does not support biometrics."
+            isShowingAuthenticationError = true
+        }
+    }
+    
+    func lockNotes() {
+        isUnlocked = false
     }
     
     // CRUD functions

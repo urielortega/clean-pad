@@ -30,6 +30,7 @@
 		A44E76A32AB12C0A004BBB21 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		A44E76A52AB1307A004BBB21 /* NotesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesListViewModel.swift; sourceTree = "<group>"; };
 		A44E76A72AB13214004BBB21 /* FileManager-DocumentsDirectory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager-DocumentsDirectory.swift"; sourceTree = "<group>"; };
+		A45FD7342ABDE57300CBF255 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		A465AB792ABA7149001CFFD9 /* NoteEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEditView.swift; sourceTree = "<group>"; };
 		A4DB7B092ABB837D0008AF12 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = CleanPad/ContentView.swift; sourceTree = SOURCE_ROOT; };
 		A4DB7B0D2ABB84910008AF12 /* MainNotesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNotesListView.swift; sourceTree = "<group>"; };
@@ -69,6 +70,7 @@
 		A44E76942AB11E70004BBB21 /* CleanPad */ = {
 			isa = PBXGroup;
 			children = (
+				A45FD7342ABDE57300CBF255 /* Info.plist */,
 				A465AB7C2ABB395E001CFFD9 /* Domain */,
 				A465AB7B2ABB2D50001CFFD9 /* App */,
 				A465AB742ABA704B001CFFD9 /* Presentation */,
@@ -354,6 +356,8 @@
 				DEVELOPMENT_TEAM = JK7SXFP9R2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CleanPad/Info.plist;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "We need to lock and unlock your notes data.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -383,6 +387,8 @@
 				DEVELOPMENT_TEAM = JK7SXFP9R2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CleanPad/Info.plist;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "We need to lock and unlock your notes data.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
