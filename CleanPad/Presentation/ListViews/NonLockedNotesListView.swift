@@ -15,7 +15,7 @@ struct NonLockedNotesListView: View {
             ForEach(viewModel.notes.filter { $0.isLocked == false }) { note in
                 NavigationLink {
                     // Open NoteEditView with the tapped note.
-                    NoteEditView(note: note, creatingNewNote: false)
+                    NoteEditView(note: note, viewModel: viewModel, creatingNewNote: false)
                 } label: {
                     VStack(alignment: .leading) {
                         Text(note.title)

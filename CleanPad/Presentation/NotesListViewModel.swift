@@ -14,7 +14,7 @@ final class NotesListViewModel: ObservableObject {
     @Published private(set) var notes: [Note] = []
     
     @Published private(set) var isUnlocked = false
-    @Published private(set) var areChangesAllowed = false
+    @Published private(set) var areChangesAllowed = false // Property to control changes in notes.
     
     @Published private(set) var authenticationError = "Unknown error"
     @Published var isShowingAuthenticationError = false
@@ -95,8 +95,23 @@ final class NotesListViewModel: ObservableObject {
         }
     }
     
+    func toggleIsLocked(for note: Note) {
+        // To find the given note.
+        guard let index = notes.firstIndex(where: {$0.id == note.id}) else {
+            return
+        }
+        // Toggle the isLocked property for the given note.
+        notes[index].isLocked.toggle()
+        
+        saveAllNotes()
+    }
+    
     func lockNotes() {
         isUnlocked = false
+    }
+    
+    func forbidChanges() {
+        areChangesAllowed = false
     }
     
     // CRUD functions
@@ -152,7 +167,7 @@ final class NotesListViewModel: ObservableObject {
             let data = try JSONEncoder().encode(notes)
             try data.write(to: savePath, options: [.atomic, .completeFileProtection])
         } catch {
-            print( "Unable to save data.")
+            print("Unable to save data.")
         }
     }
 }

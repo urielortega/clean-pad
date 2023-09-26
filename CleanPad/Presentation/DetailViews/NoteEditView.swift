@@ -11,6 +11,9 @@ struct NoteEditView: View {
     @State var note: Note
     // var save: (Note) -> ()
     
+    // Using the viewModel created in ContentView with @ObservedObject.
+    @ObservedObject var viewModel: NotesListViewModel
+    
     var creatingNewNote: Bool // Property to show Cancel and Save buttons.
     @FocusState private var textEditorIsFocused: Bool // Property to show the OK button that dismisses keyboard.
     @Environment(\.dismiss) var dismiss
@@ -42,9 +45,15 @@ struct NoteEditView: View {
                     HStack {
                         Menu {
                             Button {
-                                // TODO: Request biometrics to lock note.
+                                viewModel.authenticate(for: .changeLockStatus)
+                                viewModel.toggleIsLocked(for: note)
+                                
+                                viewModel.forbidChanges()
                             } label: {
-                                Label("Lock note", systemImage: "lock.fill")
+                                Label(
+                                    !note.isLocked ? "Make this note personal" : "Make this note not personal",
+                                    systemImage: !note.isLocked ? "lock.fill" : "lock.slash.fill"
+                                )
                             }
                         } label: {
                             Label("More options", systemImage: "ellipsis.circle")
@@ -56,7 +65,9 @@ struct NoteEditView: View {
                             }
                         } else if (creatingNewNote && !textEditorIsFocused) {
                             Button("Save") {
-                                // TODO: Save note (add() and then saveAllNotes())
+                                viewModel.add(note: note)
+                                viewModel.saveAllNotes()
+                                
                                 dismiss()
                             }
                         }

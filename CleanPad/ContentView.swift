@@ -25,10 +25,8 @@ struct ContentView: View {
                     HStack {
                         Button {
                             if viewModel.isUnlocked {
-                                // TODO: Lock notes.
                                 viewModel.lockNotes()
                             } else {
-                                // TODO: Authenticate to unlock notes.
                                 viewModel.authenticate(for: .viewNotes)
                             }
                         } label: {
@@ -37,7 +35,7 @@ struct ContentView: View {
                                 systemImage: viewModel.isUnlocked ? "lock.open.fill" : "lock.fill"
                             )
                         }
-                        
+
                         Button {
                             showEditViewSheet.toggle()
                         } label: {
@@ -47,7 +45,7 @@ struct ContentView: View {
                 }
                 .sheet(isPresented: $showEditViewSheet) {
                     // NoteEditView with a blank Note:
-                    NoteEditView(note: Note(), creatingNewNote: true)
+                    NoteEditView(note: Note(), viewModel: viewModel, creatingNewNote: true)
                 }
             }
             
