@@ -35,6 +35,10 @@ final class NotesListViewModel: ObservableObject {
     let savePath = FileManager.documentsDirectory.appendingPathComponent("SavedNotes")
     
     init() {
+        loadData()
+    }
+    
+    func loadData() {
         // Loading data with documents directory:
         do {
             let data = try Data(contentsOf: savePath)
@@ -77,6 +81,8 @@ final class NotesListViewModel: ObservableObject {
         authenticate(for: .changeLockStatus)
 
         update(note: note)
+        
+        forbidChanges()
     }
     
     func lockNotes() {

@@ -58,7 +58,6 @@ struct NoteEditView: View {
                                 note.isLocked.toggle() // To properly update the UI.
                                 
                                 viewModel.updateLockStatus(for: note)
-                                viewModel.forbidChanges()
                             } label: {
                                 Label(
                                     !note.isLocked ? "Move to personal folder" : "Remove from personal folder",
