@@ -78,11 +78,18 @@ struct NoteEditView: View {
                                 viewModel.saveAllNotes()
                                 
                                 dismiss()
+                                
+                                successHapticFeedback()
                             }
                         }
                     }
                 }
             }
         }
+    }
+    
+    func successHapticFeedback() {
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
     }
 }
