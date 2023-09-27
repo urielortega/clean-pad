@@ -24,6 +24,11 @@ struct NoteEditView: View {
                 TextField(note.title, text: $note.title, prompt: Text("Title it"))
                     .font(.title).bold()
                     .padding()
+                    .onChange(of: note.title) { _ in
+                        if !creatingNewNote {
+                            viewModel.update(note: note)
+                        }
+                    }
                 
                 Divider()
                 
@@ -31,6 +36,11 @@ struct NoteEditView: View {
                     .ignoresSafeArea()
                     .padding(.horizontal)
                     .focused($textEditorIsFocused)
+                    .onChange(of: note.textContent) { _ in
+                        if !creatingNewNote {
+                            viewModel.update(note: note)
+                        }
+                    }
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
