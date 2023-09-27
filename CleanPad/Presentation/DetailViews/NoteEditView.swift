@@ -14,7 +14,7 @@ struct NoteEditView: View {
     // Using the viewModel created in ContentView with @ObservedObject.
     @ObservedObject var viewModel: NotesListViewModel
     
-    var creatingNewNote: Bool // Property to show Cancel and Save buttons.
+    var creatingNewNote: Bool // Property to show Cancel and Save buttons, and handle onChange closures.
     @FocusState private var textEditorIsFocused: Bool // Property to show the OK button that dismisses keyboard.
     @Environment(\.dismiss) var dismiss
     
@@ -55,9 +55,9 @@ struct NoteEditView: View {
                     HStack {
                         Menu {
                             Button {
-                                viewModel.authenticate(for: .changeLockStatus)
-                                viewModel.toggleIsLocked(for: note)
+                                note.isLocked.toggle() // To properly update the UI.
                                 
+                                viewModel.updateLockStatus(for: note)
                                 viewModel.forbidChanges()
                             } label: {
                                 Label(
