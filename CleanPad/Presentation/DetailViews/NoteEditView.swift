@@ -61,7 +61,7 @@ struct NoteEditView: View {
                                 viewModel.forbidChanges()
                             } label: {
                                 Label(
-                                    !note.isLocked ? "Make this note personal" : "Make this note not personal",
+                                    !note.isLocked ? "Move to personal folder" : "Remove from personal folder",
                                     systemImage: !note.isLocked ? "lock.fill" : "lock.slash.fill"
                                 )
                             }
