@@ -9,7 +9,6 @@ import SwiftUI
 
 struct NoteEditView: View {
     @State var note: Note
-    // var save: (Note) -> ()
     
     // Using the viewModel created in ContentView with @ObservedObject.
     @ObservedObject var viewModel: NotesListViewModel
