@@ -10,6 +10,7 @@ import SwiftUI
 struct MainNotesListView: View {
     // Using the viewModel created in ContentView with @ObservedObject.
     @ObservedObject var viewModel: NotesListViewModel
+    
     @Binding var showEditViewSheet: Bool
 
     var body: some View {
@@ -30,7 +31,7 @@ struct MainNotesListView: View {
             // Non-locked notes section.
             Section {
                 if viewModel.notes.filter({ $0.isLocked == false }).isEmpty {
-                    EmptyListView(
+                    PlaceholderView(
                         viewModel: viewModel,
                         showEditViewSheet: $showEditViewSheet
                     )

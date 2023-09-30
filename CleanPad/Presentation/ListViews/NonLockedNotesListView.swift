@@ -17,14 +17,8 @@ struct NonLockedNotesListView: View {
                     // Open NoteEditView with the tapped note.
                     NoteEditView(note: note, viewModel: viewModel, creatingNewNote: false)
                 } label: {
-                    VStack(alignment: .leading) {
-                        Text(note.title)
-                        Text(note.date.formatted(date: .abbreviated, time: .shortened))
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                    }
+                    NoteLabelView(note: note)
                 }
-                
             }
             .onDelete(perform: viewModel.removeNonLockedNoteFromList)
         }

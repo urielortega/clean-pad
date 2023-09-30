@@ -1,5 +1,5 @@
 //
-//  MainBackgroundView.swift
+//  BackgroundColorView.swift
 //  CleanPad
 //
 //  Created by Uriel Ortega on 20/09/23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MainBackgroundView: View {
+struct BackgroundColorView: View {
     var body: some View {
         Color.brown
             .opacity(0.15)
@@ -16,8 +16,8 @@ struct MainBackgroundView: View {
     }
 }
 
-struct MainBackgroundView_Previews: PreviewProvider {
+struct BackgroundColorView_Previews: PreviewProvider {
     static var previews: some View {
-        MainBackgroundView()
+        BackgroundColorView()
     }
 }

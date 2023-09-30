@@ -23,24 +23,8 @@ struct ContentView: View {
                 .navigationTitle("Your CleanPad")
                 .toolbar {
                     HStack {
-                        Button {
-                            if viewModel.isUnlocked {
-                                viewModel.lockNotes()
-                            } else {
-                                viewModel.authenticate(for: .viewNotes)
-                            }
-                        } label: {
-                            Label(
-                                viewModel.isUnlocked ? "Lock notes" : "Unlock notes",
-                                systemImage: viewModel.isUnlocked ? "lock.open.fill" : "lock.fill"
-                            )
-                        }
-
-                        Button {
-                            showEditViewSheet.toggle()
-                        } label: {
-                            Label("Create note", systemImage: "plus")
-                        }
+                        lockAndUnlockNotesButtonView
+                        CreateNoteButtonView(showEditViewSheet: $showEditViewSheet)
                     }
                 }
                 .sheet(isPresented: $showEditViewSheet) {
@@ -49,12 +33,27 @@ struct ContentView: View {
                 }
             }
             
-            MainBackgroundView()
+            BackgroundColorView()
         }
         .alert("Authentication error", isPresented: $viewModel.isShowingAuthenticationError) {
             Button("OK") { }
         } message: {
             Text(viewModel.authenticationError)
+        }
+    }
+    
+    var lockAndUnlockNotesButtonView: some View {
+        Button {
+            if viewModel.isUnlocked {
+                viewModel.lockNotes()
+            } else {
+                viewModel.authenticate(for: .viewNotes)
+            }
+        } label: {
+            Label(
+                viewModel.isUnlocked ? "Lock notes" : "Unlock notes",
+                systemImage: viewModel.isUnlocked ? "lock.open.fill" : "lock.fill"
+            )
         }
     }
 }

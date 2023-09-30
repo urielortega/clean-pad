@@ -14,4 +14,10 @@ struct Note: Codable, Identifiable {
     
     var title = ""
     var textContent = ""
+    
+    static let example = Note(
+        date: .now,
+        title: "This is an example note",
+        textContent: "Hello, world! 🌎"
+    )
 }

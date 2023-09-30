@@ -17,7 +17,7 @@ struct LockedNotesListView: View {
         Group {
             if viewModel.isUnlocked {
                 if viewModel.notes.filter({ $0.isLocked }).isEmpty {
-                    EmptyListView(
+                    PlaceholderView(
                         viewModel: viewModel,
                         showEditViewSheet: $showEditViewSheet
                     )
@@ -28,49 +28,46 @@ struct LockedNotesListView: View {
                                 // Open NoteEditView with the tapped note.
                                 NoteEditView(note: note, viewModel: viewModel, creatingNewNote: false)
                             } label: {
-                                VStack(alignment: .leading) {
-                                    Text(note.title)
-                                    Text(note.date.formatted(date: .abbreviated, time: .shortened))
-                                        .font(.caption)
-                                        .foregroundColor(.secondary)
-                                }
+                                NoteLabelView(note: note)
                             }
-                            
                         }
                         .onDelete(perform: viewModel.removeLockedNoteFromList)
                     }
                 }
             } else {
-                Button("Unlock Notes") {
-                    viewModel.authenticate(for: .viewNotes)
-                }
-                .padding()
-                .background(.brown)
-                .foregroundColor(.white)
-                .clipShape(Capsule())
+                unlockNotesButtonView
             }
         }
         .navigationTitle("Personal")
         .toolbar {
             if viewModel.isUnlocked {
                 HStack {
-                    Button {
-                        viewModel.lockNotes()
-                    } label: {
-                        Label("Lock notes", systemImage: "lock.open.fill")
-                    }
-                    
-                    Button {
-                        showEditViewSheet.toggle()
-                    } label: {
-                        Label("Create note", systemImage: "plus")
-                    }
+                    lockNotesButtonView
+                    CreateNoteButtonView(showEditViewSheet: $showEditViewSheet)
                 }
             }
         }
         .sheet(isPresented: $showEditViewSheet) {
             // NoteEditView with a blank locked Note:
             NoteEditView(note: Note(isLocked: true), viewModel: viewModel, creatingNewNote: true)
+        }
+    }
+    
+    var unlockNotesButtonView: some View {
+        Button("Unlock Notes") {
+            viewModel.authenticate(for: .viewNotes)
+        }
+        .padding()
+        .background(.brown)
+        .foregroundColor(.white)
+        .clipShape(Capsule())
+    }
+    
+    var lockNotesButtonView: some View {
+        Button {
+            viewModel.lockNotes()
+        } label: {
+            Label("Lock notes", systemImage: "lock.open.fill")
         }
     }
 }
