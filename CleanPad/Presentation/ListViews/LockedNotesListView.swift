@@ -12,6 +12,7 @@ struct LockedNotesListView: View {
     @ObservedObject var viewModel: NotesListViewModel
     
     @State private var showEditViewSheet = false
+    @State private var isAnimating = false
 
     var body: some View {
         Group {
@@ -58,9 +59,19 @@ struct LockedNotesListView: View {
             viewModel.authenticate(for: .viewNotes)
         }
         .padding()
+        .frame(width: 200, height: 50)
         .background(.brown)
         .foregroundColor(.white)
+        .fontWeight(.medium)
         .clipShape(Capsule())
+        .opacity(isAnimating ? 0.6 : 1.0)
+        .onAppear {
+            DispatchQueue.main.async {
+                withAnimation(.easeInOut(duration: 1.5).repeatForever(autoreverses: true)) {
+                    isAnimating.toggle()
+                }
+            }
+        }
     }
     
     var lockNotesButtonView: some View {
