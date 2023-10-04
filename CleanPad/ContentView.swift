@@ -14,6 +14,9 @@ struct ContentView: View {
     @State private var showEditViewSheet = false
     @State private var isAnimating = false
     
+    @AppStorage("isFirstLaunch") var isFirstLaunch: Bool = true
+    @State private var showWelcomeSheet = false
+    
     var body: some View {
         ZStack {
             NavigationStack {
@@ -28,13 +31,20 @@ struct ContentView: View {
                         CreateNoteButtonView(showEditViewSheet: $showEditViewSheet)
                     }
                 }
-                .sheet(isPresented: $showEditViewSheet) {
-                    // NoteEditView with a blank Note:
-                    NoteEditView(note: Note(), viewModel: viewModel, creatingNewNote: true)
-                }
             }
             
             BackgroundColorView()
+        }
+        .onAppear {
+            if isFirstLaunch {
+                showWelcomeSheet = true
+                isFirstLaunch = false // Setting the flag to false so WelcomeView won't show again.
+            }
+        }
+        .sheet(isPresented: $showWelcomeSheet) { WelcomeView() }
+        .sheet(isPresented: $showEditViewSheet) {
+            // NoteEditView with a blank Note:
+            NoteEditView(note: Note(), viewModel: viewModel, creatingNewNote: true)
         }
         .alert("Authentication error", isPresented: $viewModel.isShowingAuthenticationError) {
             Button("OK") { }

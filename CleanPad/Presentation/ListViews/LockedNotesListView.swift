@@ -67,6 +67,7 @@ struct LockedNotesListView: View {
         .opacity(isAnimating ? 0.6 : 1.0)
         .onAppear {
             DispatchQueue.main.async {
+                // Using withAnimation() to avoid unintentional movement:
                 withAnimation(.easeInOut(duration: 1.5).repeatForever(autoreverses: true)) {
                     isAnimating.toggle()
                 }

@@ -14,6 +14,7 @@
 		A44E76A62AB1307A004BBB21 /* NotesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44E76A52AB1307A004BBB21 /* NotesListViewModel.swift */; };
 		A44E76A82AB13214004BBB21 /* FileManager-DocumentsDirectory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44E76A72AB13214004BBB21 /* FileManager-DocumentsDirectory.swift */; };
 		A465AB7A2ABA7149001CFFD9 /* NoteEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A465AB792ABA7149001CFFD9 /* NoteEditView.swift */; };
+		A475B9642ACCD7DE00BE6575 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A475B9632ACCD7DE00BE6575 /* WelcomeView.swift */; };
 		A482F0DD2AC7D48E0075A385 /* LabelsViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A482F0DC2AC7D48E0075A385 /* LabelsViews.swift */; };
 		A482F0DF2AC7D7CA0075A385 /* ButtonsViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A482F0DE2AC7D7CA0075A385 /* ButtonsViews.swift */; };
 		A4DB7B0A2ABB837D0008AF12 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DB7B092ABB837D0008AF12 /* ContentView.swift */; };
@@ -34,6 +35,7 @@
 		A44E76A72AB13214004BBB21 /* FileManager-DocumentsDirectory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager-DocumentsDirectory.swift"; sourceTree = "<group>"; };
 		A45FD7342ABDE57300CBF255 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		A465AB792ABA7149001CFFD9 /* NoteEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEditView.swift; sourceTree = "<group>"; };
+		A475B9632ACCD7DE00BE6575 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		A482F0DC2AC7D48E0075A385 /* LabelsViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelsViews.swift; sourceTree = "<group>"; };
 		A482F0DE2AC7D7CA0075A385 /* ButtonsViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsViews.swift; sourceTree = "<group>"; };
 		A4DB7B092ABB837D0008AF12 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = CleanPad/ContentView.swift; sourceTree = SOURCE_ROOT; };
@@ -102,6 +104,7 @@
 				A4DB7B0C2ABB84860008AF12 /* ListViews */,
 				A4DB7B092ABB837D0008AF12 /* ContentView.swift */,
 				A44E76A52AB1307A004BBB21 /* NotesListViewModel.swift */,
+				A475B9632ACCD7DE00BE6575 /* WelcomeView.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -241,6 +244,7 @@
 				A4DB7B102ABB84B10008AF12 /* LockedNotesListView.swift in Sources */,
 				A44E76A42AB12C0A004BBB21 /* Note.swift in Sources */,
 				A4DB7B182ABB852D0008AF12 /* BackgroundColorView.swift in Sources */,
+				A475B9642ACCD7DE00BE6575 /* WelcomeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
