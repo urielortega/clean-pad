@@ -13,7 +13,15 @@ struct WelcomeView: View {
     var body: some View {
         VStack {
             Spacer()
-            
+            headerView
+            detailsView
+            Spacer()
+            dismissButtonView
+        }
+    }
+    
+    var headerView: some View {
+        Group {
             Image("CleanPadIcon")
                 .resizable()
                 .frame(width: 150, height: 150)
@@ -24,33 +32,35 @@ struct WelcomeView: View {
             Text("Welcome to CleanPad")
                 .font(.title).bold()
                 .padding(.bottom, 20)
-            Group {
-                Text("This app is your canvas for capturing your thoughts, feelings, ideas and all you can imagine.")
-                    .multilineTextAlignment(.center)
-                    .padding(.bottom, 10)
-                
-                Text("Feel free to write anything you like. Your data is securely stored on your device and can be protected with authentication if you choose.")
-                    .multilineTextAlignment(.center)
-                    .padding(.bottom, 10)
-                
-                Text("Enjoy it! 🫶🏼")
+        }
+    }
+    
+    var detailsView: some View {
+        Group {
+            Text("This app is your canvas for capturing your thoughts, feelings, ideas and all you can imagine.")
+                .multilineTextAlignment(.center)
+                .padding(.bottom, 10)
+            
+            Text("Feel free to write anything you like. Your data is securely stored on your device and can be protected with authentication if you choose.")
+                .multilineTextAlignment(.center)
+                .padding(.bottom, 10)
+            
+            Text("Enjoy it! 🫶🏼")
 
-            }
-            .padding(.horizontal)
-            
-            Spacer()
-            
-            Button {
-                dismiss()
-            } label: {
-                Text("Great!")
-                    .frame(width: 300, height: 50)
-                    .background(.brown)
-                    .foregroundColor(.white)
-                    .clipShape(RoundedRectangle(cornerRadius: 15.0))
-                    .padding(.bottom)
-            }
-//
+        }
+        .padding(.horizontal)
+    }
+    
+    var dismissButtonView: some View {
+        Button {
+            dismiss()
+        } label: {
+            Text("Great!")
+                .frame(width: 300, height: 50)
+                .background(.brown)
+                .foregroundColor(.white)
+                .clipShape(RoundedRectangle(cornerRadius: 15.0))
+                .padding(.bottom)
         }
     }
 }
