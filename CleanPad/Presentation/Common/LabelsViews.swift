@@ -8,15 +8,16 @@
 import Foundation
 import SwiftUI
 
-struct NoteLabelView: View {
-    let note: Note
-    
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text(note.title)
-            Text(note.date.formatted(date: .abbreviated, time: .shortened))
-                .font(.caption)
-                .foregroundColor(.secondary)
-        }
-    }
-}
+#warning("Not used due to View updating issues.")
+//struct NoteLabelView: View {
+//    @State var note: Note
+//    
+//    var body: some View {
+//        VStack(alignment: .leading) {
+//            Text(note.title)
+//            Text(note.date.formatted(date: .abbreviated, time: .shortened))
+//                .font(.caption)
+//                .foregroundColor(.secondary)
+//        }
+//    }
+//}

@@ -79,9 +79,7 @@ final class NotesListViewModel: ObservableObject {
     
     func updateLockStatus(for note: Note) {
         authenticate(for: .changeLockStatus)
-
         update(note: note)
-        
         forbidChanges()
     }
     
@@ -106,8 +104,12 @@ final class NotesListViewModel: ObservableObject {
         guard let index = notes.firstIndex(where: {$0.id == note.id}) else {
             return
         }
-        // Replace the original note with the updated one.
+        
+        // Replace the original note with the updated one:
         notes[index] = note
+        
+        // Update note date.
+        notes[index].date = .now
         
         saveAllNotes()
     }
