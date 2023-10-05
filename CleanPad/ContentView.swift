@@ -28,7 +28,9 @@ struct ContentView: View {
                 .toolbar {
                     HStack {
                         lockAndUnlockNotesButtonView
-                        CreateNoteButtonView(showEditViewSheet: $showEditViewSheet)
+                        if !(viewModel.notes.filter({ $0.isLocked == false }).isEmpty) {
+                            CreateNoteButtonView(showEditViewSheet: $showEditViewSheet) // Only shown when the list isn't empty.
+                        }
                     }
                 }
             }

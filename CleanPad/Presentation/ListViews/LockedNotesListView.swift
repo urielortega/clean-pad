@@ -44,7 +44,9 @@ struct LockedNotesListView: View {
             if viewModel.isUnlocked {
                 HStack {
                     lockNotesButtonView
-                    CreateNoteButtonView(showEditViewSheet: $showEditViewSheet)
+                    if !(viewModel.notes.filter({ $0.isLocked }).isEmpty) {
+                        CreateNoteButtonView(showEditViewSheet: $showEditViewSheet) // // Only shown when the list isn't empty.
+                    }
                 }
             }
         }

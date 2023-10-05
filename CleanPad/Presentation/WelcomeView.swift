@@ -60,7 +60,7 @@ struct WelcomeView: View {
                 .background(.brown)
                 .foregroundColor(.white)
                 .clipShape(RoundedRectangle(cornerRadius: 15.0))
-                .padding(.bottom)
+                .padding(.bottom, 50)
         }
     }
 }
