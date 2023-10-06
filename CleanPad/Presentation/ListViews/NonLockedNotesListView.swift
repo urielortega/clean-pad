@@ -12,7 +12,7 @@ struct NonLockedNotesListView: View {
     
     var body: some View {
         List {
-            ForEach(viewModel.notes.filter { $0.isLocked == false }) { note in
+            ForEach(viewModel.nonLockedNotes) { note in
                 NavigationLink {
                     // Open NoteEditView with the tapped note.
                     NoteEditView(note: note, viewModel: viewModel, creatingNewNote: false)

@@ -19,6 +19,14 @@ final class NotesListViewModel: ObservableObject {
     @Published private(set) var authenticationError = "Unknown error"
     @Published var isShowingAuthenticationError = false
     
+    var lockedNotes: [Note] {
+        notes.filter { $0.isLocked }
+    }
+    
+    var nonLockedNotes: [Note] {
+        notes.filter { $0.isLocked == false }
+    }
+    
     enum AuthenticationReason {
         case viewNotes, changeLockStatus
     }

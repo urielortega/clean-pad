@@ -17,14 +17,14 @@ struct LockedNotesListView: View {
     var body: some View {
         Group {
             if viewModel.isUnlocked {
-                if viewModel.notes.filter({ $0.isLocked }).isEmpty {
+                if viewModel.lockedNotes.isEmpty {
                     PlaceholderView(
                         viewModel: viewModel,
                         showEditViewSheet: $showEditViewSheet
                     )
                 } else {
                     List {
-                        ForEach(viewModel.notes.filter { $0.isLocked }) { note in
+                        ForEach(viewModel.lockedNotes) { note in
                             NavigationLink {
                                 // Open NoteEditView with the tapped note.
                                 NoteEditView(note: note, viewModel: viewModel, creatingNewNote: false)
@@ -49,8 +49,8 @@ struct LockedNotesListView: View {
             if viewModel.isUnlocked {
                 HStack {
                     lockNotesButtonView
-                    if !(viewModel.notes.filter({ $0.isLocked }).isEmpty) {
-                        CreateNoteButtonView(showEditViewSheet: $showEditViewSheet) // // Only shown when the list isn't empty.
+                    if !(viewModel.lockedNotes.isEmpty) {
+                        CreateNoteButtonView(showEditViewSheet: $showEditViewSheet) // Only shown when the list isn't empty.
                     }
                 }
             }

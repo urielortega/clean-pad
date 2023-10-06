@@ -30,7 +30,7 @@ struct MainNotesListView: View {
             
             // Non-locked notes section.
             Section {
-                if viewModel.notes.filter({ $0.isLocked == false }).isEmpty {
+                if viewModel.nonLockedNotes.isEmpty {
                     PlaceholderView(
                         viewModel: viewModel,
                         showEditViewSheet: $showEditViewSheet
