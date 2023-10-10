@@ -56,11 +56,18 @@ final class NotesListViewModel: ObservableObject {
         }
     }
     
-    func getNoteFromNotesArray(note: Note) -> Note? {
+    func getNoteIndexFromNotesArray(note: Note) -> Int? {
+        // To find the given note.
         guard let index = self.notes.firstIndex(where: {$0.id == note.id}) else {
-            // The note is NOT in the notes array.
+            print("Couldn't find note in the 'notes' array.")
             return nil
         }
+        
+        return index
+    }
+    
+    func getNoteFromNotesArray(note: Note) -> Note? {
+        let index = getNoteIndexFromNotesArray(note: note)!
         
         return self.notes[index]
     }
@@ -95,20 +102,16 @@ final class NotesListViewModel: ObservableObject {
         }
     }
     
-    func updateLockStatus(for note: Note) { // 1. isLocked = false
+    func updateLockStatus(for note: Note) {
         authenticate(for: .changeLockStatus) {
-            // To find the given note.
-            guard let index = self.notes.firstIndex(where: {$0.id == note.id}) else {
-                // The note is NOT in the notes array.
-                return
-            }
+            let index = self.getNoteIndexFromNotesArray(note: note)!
             
             // Update isLocked property.
-            self.notes[index].isLocked.toggle() // 2. notes[index].isLocked = true
+            self.notes[index].isLocked.toggle() 
             
             self.saveAllNotes()
             
-            self.forbidChanges()            
+            self.forbidChanges()
         }
     }
     
@@ -124,15 +127,11 @@ final class NotesListViewModel: ObservableObject {
     
     func add(note: Note) {
         notes.append(note)
-        
         saveAllNotes()
     }
     
     func update(note: Note) {
-        // To find the given note.
-        guard let index = notes.firstIndex(where: {$0.id == note.id}) else {
-            return
-        }
+        let index = self.getNoteIndexFromNotesArray(note: note)!
         
         // Replace the original note with the updated one:
         notes[index] = note
@@ -144,30 +143,20 @@ final class NotesListViewModel: ObservableObject {
     }
     
     func delete(note: Note) {
-        // To find the given note.
-        guard let index = notes.firstIndex(where: {$0.id == note.id}) else {
-            return
-        }
+        let index = self.getNoteIndexFromNotesArray(note: note)!
         notes.remove(at: index)
-        
         saveAllNotes()
     }
     
     func removeLockedNoteFromList(at offsets: IndexSet) {
         var lockedNotes = notes.filter { $0.isLocked }
-        
         lockedNotes.remove(atOffsets: offsets)
-        
-        notes = lockedNotes + notes.filter {
-            $0.isLocked == false
-        }
+        notes = lockedNotes + notes.filter { $0.isLocked == false }
     }
     
     func removeNonLockedNoteFromList(at offsets: IndexSet) {
         var nonLockedNotes = notes.filter { $0.isLocked == false }
-        
         nonLockedNotes.remove(atOffsets: offsets)
-        
         notes = nonLockedNotes + notes.filter { $0.isLocked }
     }
     
