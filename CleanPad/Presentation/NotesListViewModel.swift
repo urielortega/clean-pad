@@ -63,7 +63,7 @@ final class NotesListViewModel: ObservableObject {
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
             let reason = "Please authenticate yourself to lock and unlock your notes data." // Used for Touch ID
             
-            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
+            context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { success, authenticationError in
                 Task { @MainActor in
                     if success {
                         if authenticationReason == .viewNotes {
