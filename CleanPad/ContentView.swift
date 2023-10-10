@@ -60,7 +60,7 @@ struct ContentView: View {
                 if viewModel.isUnlocked {
                     viewModel.lockNotes()
                 } else {
-                    viewModel.authenticate(for: .viewNotes)
+                    viewModel.authenticate(for: .viewNotes) { }
                 }
             isAnimating.toggle()
         } label: {

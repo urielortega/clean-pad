@@ -35,6 +35,13 @@ struct LockedNotesListView: View {
                                         .font(.caption)
                                         .foregroundColor(.secondary)
                                 }
+                                .contextMenu {
+                                    Button {
+                                        viewModel.updateLockStatus(for: note)
+                                    } label: {
+                                        Label("Remove from personal space", systemImage: "lock.open.fill")
+                                    }
+                                }
                             }
                         }
                         .onDelete(perform: viewModel.removeLockedNoteFromList)
@@ -63,7 +70,7 @@ struct LockedNotesListView: View {
     
     var unlockNotesButtonView: some View {
         Button("Unlock Notes") {
-            viewModel.authenticate(for: .viewNotes)
+            viewModel.authenticate(for: .viewNotes) {  }
         }
         .padding()
         .frame(width: 200, height: 50)

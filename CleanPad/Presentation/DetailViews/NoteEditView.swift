@@ -77,7 +77,6 @@ struct NoteEditView: View {
     
     var isLockedToggleButtonView: some View {
         Button {
-            note.isLocked.toggle() // To properly update the UI.
             viewModel.updateLockStatus(for: note)
         } label: {
             Label(

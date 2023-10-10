@@ -56,7 +56,7 @@ final class NotesListViewModel: ObservableObject {
         }
     }
     
-    func authenticate(for authenticationReason: AuthenticationReason) {
+    func authenticate(for authenticationReason: AuthenticationReason, successAction: @escaping () -> Void) {
         let context = LAContext()
         var error: NSError?
         
@@ -71,6 +71,7 @@ final class NotesListViewModel: ObservableObject {
                         } else if authenticationReason == .changeLockStatus {
                             self.areChangesAllowed = true
                         }
+                        successAction()
                     } else {
                         // Error.
                         self.authenticationError = "There was a problem authenticating you. Try again."
@@ -86,9 +87,22 @@ final class NotesListViewModel: ObservableObject {
     }
     
     func updateLockStatus(for note: Note) {
-        authenticate(for: .changeLockStatus)
-        update(note: note)
-        forbidChanges()
+        authenticate(for: .changeLockStatus) {
+            // To find the given note.
+            guard let index = self.notes.firstIndex(where: {$0.id == note.id}) else {
+                return
+            }
+            
+            // Replace the original note with the updated one.
+            self.notes[index] = note
+            
+            // Update isLocked property.
+            self.notes[index].isLocked.toggle()
+            
+            self.saveAllNotes()
+            
+            self.forbidChanges()
+        }
     }
     
     func lockNotes() {

@@ -23,6 +23,13 @@ struct NonLockedNotesListView: View {
                             .font(.caption)
                             .foregroundColor(.secondary)
                     }
+                    .contextMenu {
+                        Button {
+                            viewModel.updateLockStatus(for: note)
+                        } label: {
+                            Label("Move to personal space", systemImage: "lock.open.fill")
+                        }
+                    }
                 }
             }
             .onDelete(perform: viewModel.removeNonLockedNoteFromList)
