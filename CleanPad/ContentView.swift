@@ -46,7 +46,7 @@ struct ContentView: View {
         .sheet(isPresented: $showWelcomeSheet) { WelcomeView() }
         .sheet(isPresented: $showEditViewSheet) {
             // NoteEditView with a blank Note:
-            NoteEditView(note: Note(), viewModel: viewModel, creatingNewNote: true)
+            NoteEditView(note: Note(), vm: viewModel, creatingNewNote: true)
         }
         .alert("Authentication error", isPresented: $viewModel.isShowingAuthenticationError) {
             Button("OK") { }

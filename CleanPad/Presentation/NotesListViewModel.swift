@@ -56,6 +56,15 @@ final class NotesListViewModel: ObservableObject {
         }
     }
     
+    func getNoteFromNotesArray(note: Note) -> Note? {
+        guard let index = self.notes.firstIndex(where: {$0.id == note.id}) else {
+            // The note is NOT in the notes array.
+            return nil
+        }
+        
+        return self.notes[index]
+    }
+    
     func authenticate(for authenticationReason: AuthenticationReason, successAction: @escaping () -> Void) {
         let context = LAContext()
         var error: NSError?
@@ -86,22 +95,20 @@ final class NotesListViewModel: ObservableObject {
         }
     }
     
-    func updateLockStatus(for note: Note) {
+    func updateLockStatus(for note: Note) { // 1. isLocked = false
         authenticate(for: .changeLockStatus) {
             // To find the given note.
             guard let index = self.notes.firstIndex(where: {$0.id == note.id}) else {
+                // The note is NOT in the notes array.
                 return
             }
             
-            // Replace the original note with the updated one.
-            self.notes[index] = note
-            
             // Update isLocked property.
-            self.notes[index].isLocked.toggle()
+            self.notes[index].isLocked.toggle() // 2. notes[index].isLocked = true
             
             self.saveAllNotes()
             
-            self.forbidChanges()
+            self.forbidChanges()            
         }
     }
     

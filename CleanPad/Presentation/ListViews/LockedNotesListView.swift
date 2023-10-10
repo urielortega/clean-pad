@@ -27,7 +27,7 @@ struct LockedNotesListView: View {
                         ForEach(viewModel.lockedNotes) { note in
                             NavigationLink {
                                 // Open NoteEditView with the tapped note.
-                                NoteEditView(note: note, viewModel: viewModel, creatingNewNote: false)
+                                NoteEditView(note: note, vm: viewModel, creatingNewNote: false)
                             } label: {
                                 VStack(alignment: .leading) {
                                     Text(note.title)
@@ -64,7 +64,7 @@ struct LockedNotesListView: View {
         }
         .sheet(isPresented: $showEditViewSheet) {
             // NoteEditView with a blank locked Note:
-            NoteEditView(note: Note(isLocked: true), viewModel: viewModel, creatingNewNote: true)
+            NoteEditView(note: Note(isLocked: true), vm: viewModel, creatingNewNote: true)
         }
     }
     
