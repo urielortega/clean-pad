@@ -31,10 +31,22 @@ struct MainNotesListView: View {
             // Non-locked notes section.
             Section {
                 if viewModel.nonLockedNotes.isEmpty {
-                    PlaceholderView(
-                        viewModel: viewModel,
-                        showEditViewSheet: $showEditViewSheet
-                    )
+                    // FIXME: Temporal solution to center EmptyListView.
+                    HStack {
+                        Spacer()
+                        
+                        EmptyListView(
+                            imageSystemName: "note.text",
+                            label: "This looks a little empty...",
+                            description: viewModel.placeholders.randomElement() ?? "Start writing...",
+                            buttonLabel: "Create a note!"
+                        ) {
+                            showEditViewSheet.toggle()
+                        }
+                        
+                        Spacer()
+                    }
+                    .padding()
                 } else {
                     NonLockedNotesListView(viewModel: viewModel)
                 }

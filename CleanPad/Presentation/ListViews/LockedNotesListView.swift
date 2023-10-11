@@ -18,10 +18,15 @@ struct LockedNotesListView: View {
         Group {
             if viewModel.isUnlocked {
                 if viewModel.lockedNotes.isEmpty {
-                    PlaceholderView(
-                        viewModel: viewModel,
-                        showEditViewSheet: $showEditViewSheet
-                    )
+                    EmptyListView(
+                        imageSystemName: "note.text",
+                        label: "This looks a little empty...",
+                        description: viewModel.placeholders.randomElement() ?? "Start writing...",
+                        buttonLabel: "Create a note!"
+                    ) {
+                        showEditViewSheet.toggle()
+                    }
+                    .padding(.bottom, 100)
                 } else {
                     List {
                         ForEach(viewModel.lockedNotes) { note in

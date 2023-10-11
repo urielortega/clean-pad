@@ -36,7 +36,6 @@ final class NotesListViewModel: ObservableObject {
         "How's been your day?",
         "How are you feeling right now?",
         "It's OK. Write it down.",
-        "It's nice to see you here.",
         "Make today a little bit better"
     ]
     
