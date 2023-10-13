@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Color View used as background throughout the app.
 struct BackgroundColorView: View {
     var body: some View {
         Color.brown

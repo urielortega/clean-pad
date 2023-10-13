@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Main View that shows the list of non-locked notes, as well as buttons to access locked (personal) notes and create new notes.
 struct MainNotesListView: View {
     // Using the viewModel created in ContentView with @ObservedObject.
     @ObservedObject var viewModel: NotesListViewModel

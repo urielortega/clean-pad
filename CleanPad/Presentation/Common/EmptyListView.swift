@@ -8,6 +8,8 @@
 
 import SwiftUI
 
+/// View meant to be used when a list is empty, inviting the user to add an item.
+/// Can be personalized modifying its default parameters values.
 struct EmptyListView: View {
     var imageSystemName: String = "questionmark"
     var label: String = "No Items"

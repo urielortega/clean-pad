@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// View shown on the first app launch, containing fundamental information about the purpose and operation of the app.
 struct WelcomeView: View {
     @Environment(\.dismiss) var dismiss
     

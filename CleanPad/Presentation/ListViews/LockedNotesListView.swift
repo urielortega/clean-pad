@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// View that contains locked notes, and let users tap a note to view and edit it.
 struct LockedNotesListView: View {
     // Using the viewModel created in ContentView with @ObservedObject.
     @ObservedObject var viewModel: NotesListViewModel
@@ -32,7 +33,7 @@ struct LockedNotesListView: View {
                         ForEach(viewModel.lockedNotes) { note in
                             NavigationLink {
                                 // Open NoteEditView with the tapped note.
-                                NoteEditView(note: note, vm: viewModel, creatingNewNote: false)
+                                NoteEditView(note: note, viewModel: viewModel, creatingNewNote: false)
                             } label: {
                                 VStack(alignment: .leading) {
                                     Text(note.title)
@@ -41,6 +42,7 @@ struct LockedNotesListView: View {
                                         .foregroundColor(.secondary)
                                 }
                                 .contextMenu {
+                                    // Button to change isLocked note property, i.e., remove it from the personal space.
                                     Button {
                                         viewModel.updateLockStatus(for: note)
                                     } label: {
@@ -69,10 +71,11 @@ struct LockedNotesListView: View {
         }
         .sheet(isPresented: $showEditViewSheet) {
             // NoteEditView with a blank locked Note:
-            NoteEditView(note: Note(isLocked: true), vm: viewModel, creatingNewNote: true)
+            NoteEditView(note: Note(isLocked: true), viewModel: viewModel, creatingNewNote: true)
         }
     }
     
+    /// Button to authenticate and show locked notes list.
     var unlockNotesButtonView: some View {
         Button("Unlock Notes") {
             viewModel.authenticate(for: .viewNotes) {  }
@@ -94,6 +97,7 @@ struct LockedNotesListView: View {
         }
     }
     
+    /// Button to hide locked notes list.
     var lockNotesButtonView: some View {
         Button {
             viewModel.lockNotes()

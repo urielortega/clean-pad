@@ -14,7 +14,9 @@ struct ContentView: View {
     @State private var showEditViewSheet = false
     @State private var isAnimating = false
     
+    /// Property to show WelcomeView when launching app for the first time.
     @AppStorage("isFirstLaunch") var isFirstLaunch: Bool = true
+    
     @State private var showWelcomeSheet = false
     
     var body: some View {
@@ -46,7 +48,7 @@ struct ContentView: View {
         .sheet(isPresented: $showWelcomeSheet) { WelcomeView() }
         .sheet(isPresented: $showEditViewSheet) {
             // NoteEditView with a blank Note:
-            NoteEditView(note: Note(), vm: viewModel, creatingNewNote: true)
+            NoteEditView(note: Note(), viewModel: viewModel, creatingNewNote: true)
         }
         .alert("Authentication error", isPresented: $viewModel.isShowingAuthenticationError) {
             Button("OK") { }
@@ -55,6 +57,7 @@ struct ContentView: View {
         }
     }
     
+    /// Button to allow and forbid access to the locked notes list (personal space).
     var lockAndUnlockNotesButtonView: some View {
         Button {
                 if viewModel.isUnlocked {

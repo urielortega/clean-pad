@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+/// Button to show NoteEditView sheet.
 struct CreateNoteButtonView: View {
     @Binding var showEditViewSheet: Bool
     

@@ -21,7 +21,6 @@
 		A4DB7B0E2ABB84910008AF12 /* MainNotesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DB7B0D2ABB84910008AF12 /* MainNotesListView.swift */; };
 		A4DB7B102ABB84B10008AF12 /* LockedNotesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DB7B0F2ABB84B10008AF12 /* LockedNotesListView.swift */; };
 		A4DB7B122ABB84CC0008AF12 /* NonLockedNotesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DB7B112ABB84CC0008AF12 /* NonLockedNotesListView.swift */; };
-		A4DB7B162ABB85130008AF12 /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DB7B152ABB85130008AF12 /* PlaceholderView.swift */; };
 		A4DB7B182ABB852D0008AF12 /* BackgroundColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DB7B172ABB852D0008AF12 /* BackgroundColorView.swift */; };
 /* End PBXBuildFile section */
 
@@ -42,7 +41,6 @@
 		A4DB7B0D2ABB84910008AF12 /* MainNotesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNotesListView.swift; sourceTree = "<group>"; };
 		A4DB7B0F2ABB84B10008AF12 /* LockedNotesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockedNotesListView.swift; sourceTree = "<group>"; };
 		A4DB7B112ABB84CC0008AF12 /* NonLockedNotesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonLockedNotesListView.swift; sourceTree = "<group>"; };
-		A4DB7B152ABB85130008AF12 /* PlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderView.swift; sourceTree = "<group>"; };
 		A4DB7B172ABB852D0008AF12 /* BackgroundColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundColorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -129,7 +127,6 @@
 			isa = PBXGroup;
 			children = (
 				A482F0DE2AC7D7CA0075A385 /* ButtonsViews.swift */,
-				A4DB7B152ABB85130008AF12 /* PlaceholderView.swift */,
 				A49E2FDF2AD61DA000D8EC6D /* EmptyListView.swift */,
 			);
 			path = Common;
@@ -237,7 +234,6 @@
 				A4DB7B122ABB84CC0008AF12 /* NonLockedNotesListView.swift in Sources */,
 				A49E2FE02AD61DA000D8EC6D /* EmptyListView.swift in Sources */,
 				A44E76A82AB13214004BBB21 /* FileManager-DocumentsDirectory.swift in Sources */,
-				A4DB7B162ABB85130008AF12 /* PlaceholderView.swift in Sources */,
 				A465AB7A2ABA7149001CFFD9 /* NoteEditView.swift in Sources */,
 				A44E76962AB11E70004BBB21 /* CleanPadApp.swift in Sources */,
 				A4DB7B0E2ABB84910008AF12 /* MainNotesListView.swift in Sources */,
