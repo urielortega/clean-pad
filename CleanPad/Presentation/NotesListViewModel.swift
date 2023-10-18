@@ -22,6 +22,8 @@ final class NotesListViewModel: ObservableObject {
     @Published private(set) var authenticationError = "Unknown error"
     @Published var isShowingAuthenticationError = false
     
+    @Published var selectedTab: Tab = .nonLockedNotes
+    
     var lockedNotes: [Note] {
         notes.filter { $0.isLocked }
     }
@@ -32,6 +34,10 @@ final class NotesListViewModel: ObservableObject {
     
     enum AuthenticationReason {
         case viewNotes, changeLockStatus
+    }
+    
+    enum Tab {
+        case nonLockedNotes, lockedNotes
     }
     
     /// Strings shown when a list is empty to invite the user to create a note.

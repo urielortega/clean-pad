@@ -11,47 +11,60 @@ import SwiftUI
 struct MainNotesListView: View {
     // Using the viewModel created in ContentView with @ObservedObject.
     @ObservedObject var viewModel: NotesListViewModel
-    
     @Binding var showEditViewSheet: Bool
-
+    
     var body: some View {
-        Form {
-            // Locked notes section.
-            Section {
-                NavigationLink {
-                    LockedNotesListView(viewModel: viewModel)
-                } label: {
-                    Label(
-                        "Personal notes", 
-                        systemImage:viewModel.isUnlocked ? "lock.open.fill" : "lock.fill"
-                    )
-                    .foregroundColor(.brown)
-                }
+        ZStack {
+            if viewModel.selectedTab == .nonLockedNotes {
+                NonLockedNotesListView(viewModel: viewModel, showEditViewSheet: $showEditViewSheet)
+            } else {
+                LockedNotesListView(viewModel: viewModel, showEditViewSheet: $showEditViewSheet)
             }
             
-            // Non-locked notes section.
-            Section {
-                if viewModel.nonLockedNotes.isEmpty {
-                    // FIXME: Temporal solution to center EmptyListView.
-                    HStack {
-                        Spacer()
-                        
-                        EmptyListView(
-                            imageSystemName: "note.text",
-                            label: "This looks a little empty...",
-                            description: viewModel.placeholders.randomElement() ?? "Start writing...",
-                            buttonLabel: "Create a note!"
-                        ) {
-                            showEditViewSheet.toggle()
-                        }
-                        
-                        Spacer()
+            CustomTabBar(viewModel: viewModel)
+        }
+    }
+}
+
+struct CustomTabBar: View {
+    @ObservedObject var viewModel: NotesListViewModel
+
+    var body: some View {
+        VStack {
+            Spacer() // To push the TabBar to the bottom.
+            
+            HStack {
+                Spacer()
+                
+                Button {
+                    // TODO: Show non-locked notes list.
+                    viewModel.selectedTab = .nonLockedNotes
+                } label: {
+                    VStack {
+                        Label("Notes", systemImage: "note.text")
+                            .padding(.bottom, 4)
                     }
-                    .padding()
-                } else {
-                    NonLockedNotesListView(viewModel: viewModel)
                 }
+                .padding(.horizontal, 10)
+
+                Spacer()
+                CustomHStackDivider()
+                Spacer()
+                
+                Button {
+                    // TODO: Show locked notes list.
+                    viewModel.selectedTab = .lockedNotes
+                } label: {
+                    VStack {
+                        Label("Personal", systemImage: "lock.fill")
+                            .padding(.bottom, 4)
+                    }
+                }
+                .padding(.trailing, 10)
+                
+                Spacer()
             }
+            .dockStyle()
         }
     }
 }

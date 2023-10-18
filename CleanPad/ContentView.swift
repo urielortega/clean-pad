@@ -26,8 +26,8 @@ struct ContentView: View {
                     viewModel: viewModel,
                     showEditViewSheet: $showEditViewSheet
                 )
-                .navigationTitle("Your CleanPad")
-                .toolbar {
+                .navigationTitle("Your CleanPad") // FIXME: Make it respond to viewModel.selectedTab changes.
+                .toolbar { // FIXME: Make it respond to viewModel.selectedTab changes.
                     HStack {
                         lockAndUnlockNotesButtonView
                         if !(viewModel.nonLockedNotes.isEmpty) {

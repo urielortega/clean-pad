@@ -12,7 +12,7 @@ struct LockedNotesListView: View {
     // Using the viewModel created in ContentView with @ObservedObject.
     @ObservedObject var viewModel: NotesListViewModel
     
-    @State private var showEditViewSheet = false
+    @Binding var showEditViewSheet: Bool
     @State private var isAnimating = false
 
     var body: some View {
@@ -27,39 +27,41 @@ struct LockedNotesListView: View {
                     ) {
                         showEditViewSheet.toggle()
                     }
-                    .padding(.bottom, 100)
+                    .padding(.bottom, 80)
                 } else {
-                    List {
-                        ForEach(viewModel.lockedNotes) { note in
-                            NavigationLink {
-                                // Open NoteEditView with the tapped note.
-                                NoteEditView(note: note, viewModel: viewModel, creatingNewNote: false)
-                            } label: {
-                                VStack(alignment: .leading) {
-                                    Text(note.title)
-                                    Text(note.date.formatted(date: .abbreviated, time: .shortened))
-                                        .font(.caption)
-                                        .foregroundColor(.secondary)
-                                }
-                                .contextMenu {
-                                    // Button to change isLocked note property, i.e., remove it from the personal space.
-                                    Button {
-                                        viewModel.updateLockStatus(for: note)
-                                    } label: {
-                                        Label("Remove from personal space", systemImage: "lock.open.fill")
+                    Form {
+                        List {
+                            ForEach(viewModel.lockedNotes) { note in
+                                NavigationLink {
+                                    // Open NoteEditView with the tapped note.
+                                    NoteEditView(note: note, viewModel: viewModel, creatingNewNote: false)
+                                } label: {
+                                    VStack(alignment: .leading) {
+                                        Text(note.title)
+                                        Text(note.date.formatted(date: .abbreviated, time: .shortened))
+                                            .font(.caption)
+                                            .foregroundColor(.secondary)
+                                    }
+                                    .contextMenu {
+                                        // Button to change isLocked note property, i.e., remove it from the personal space.
+                                        Button {
+                                            viewModel.updateLockStatus(for: note)
+                                        } label: {
+                                            Label("Remove from personal space", systemImage: "lock.open.fill")
+                                        }
                                     }
                                 }
                             }
+                            .onDelete(perform: viewModel.removeLockedNoteFromList)
                         }
-                        .onDelete(perform: viewModel.removeLockedNoteFromList)
                     }
                 }
             } else {
                 unlockNotesButtonView
             }
         }
-        .navigationTitle("Personal")
-        .toolbar {
+        .navigationTitle("Personal") // FIXME: Remove it, so that ContentView's navigationTitle is used.
+        .toolbar { // FIXME: Remove it, so that ContentView's toolbar is used.
             if viewModel.isUnlocked {
                 HStack {
                     lockNotesButtonView
