@@ -70,16 +70,22 @@ struct LockedNotesListView: View {
     
     /// Button to authenticate and show locked notes list.
     var unlockNotesButtonView: some View {
-        Button("Unlock Notes") {
+        Button {
             viewModel.authenticate(for: .viewNotes) {  }
+        } label: {
+            ZStack {
+                Capsule()
+                    .foregroundStyle(.brown)
+                    .frame(width: 200, height: 50)
+
+                Text("Unlock Notes")
+                    .foregroundColor(.white)
+                    .fontWeight(.medium)
+            }
         }
         .padding()
-        .frame(width: 200, height: 50)
-        .background(.brown)
-        .foregroundColor(.white)
-        .fontWeight(.medium)
-        .clipShape(Capsule())
-        .opacity(isAnimating ? 0.6 : 1.0)
+        .opacity(isAnimating ? 0.8 : 1.0)
+        .scaleEffect(isAnimating ? 0.95 : 1.0)
         .onAppear {
             DispatchQueue.main.async {
                 // Using withAnimation() to avoid unintentional movement:
