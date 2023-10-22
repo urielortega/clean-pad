@@ -8,7 +8,7 @@
 import Foundation
 
 /// Main model in the app defining a note structure.
-struct Note: Codable, Identifiable {
+struct Note: Codable, Identifiable, Equatable {
     var id = UUID()
     
     /// Property that indicates whether a note is personal (locked) or not.

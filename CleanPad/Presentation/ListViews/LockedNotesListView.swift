@@ -29,51 +29,42 @@ struct LockedNotesListView: View {
                     }
                     .padding(.bottom, 80)
                 } else {
-                    Form {
-                        List {
-                            ForEach(viewModel.lockedNotes) { note in
-                                NavigationLink {
-                                    // Open NoteEditView with the tapped note.
-                                    NoteEditView(note: note, viewModel: viewModel, creatingNewNote: false)
-                                } label: {
-                                    VStack(alignment: .leading) {
-                                        Text(note.title)
-                                        Text(note.date.formatted(date: .abbreviated, time: .shortened))
-                                            .font(.caption)
-                                            .foregroundColor(.secondary)
-                                    }
-                                    .contextMenu {
-                                        // Button to change isLocked note property, i.e., remove it from the personal space.
-                                        Button {
-                                            viewModel.updateLockStatus(for: note)
-                                        } label: {
-                                            Label("Remove from personal space", systemImage: "lock.open.fill")
+                    VStack {
+                        Form {
+                            List {
+                                ForEach(viewModel.lockedNotes) { note in
+                                    NavigationLink {
+                                        // Open NoteEditView with the tapped note.
+                                        NoteEditView(note: note, viewModel: viewModel, creatingNewNote: false)
+                                    } label: {
+                                        VStack(alignment: .leading) {
+                                            Text(note.title)
+                                            Text(note.date.formatted(date: .abbreviated, time: .shortened))
+                                                .font(.caption)
+                                                .foregroundColor(.secondary)
+                                        }
+                                        .contextMenu {
+                                            // Button to change isLocked note property, i.e., remove it from the personal space.
+                                            Button {
+                                                viewModel.updateLockStatus(for: note)
+                                            } label: {
+                                                Label("Remove from personal space", systemImage: "lock.open.fill")
+                                            }
                                         }
                                     }
                                 }
+                                .onDelete(perform: viewModel.removeLockedNoteFromList)
                             }
-                            .onDelete(perform: viewModel.removeLockedNoteFromList)
                         }
+                        
+                        // View to prevent CustomTabBar from hiding the List.
+                        Color.clear
+                            .frame(height: 40)
                     }
                 }
             } else {
                 unlockNotesButtonView
             }
-        }
-        .navigationTitle("Personal") // FIXME: Remove it, so that ContentView's navigationTitle is used.
-        .toolbar { // FIXME: Remove it, so that ContentView's toolbar is used.
-            if viewModel.isUnlocked {
-                HStack {
-                    lockNotesButtonView
-                    if !(viewModel.lockedNotes.isEmpty) {
-                        CreateNoteButtonView(showEditViewSheet: $showEditViewSheet) // Only shown when the list isn't empty.
-                    }
-                }
-            }
-        }
-        .sheet(isPresented: $showEditViewSheet) {
-            // NoteEditView with a blank locked Note:
-            NoteEditView(note: Note(isLocked: true), viewModel: viewModel, creatingNewNote: true)
         }
     }
     
@@ -96,15 +87,6 @@ struct LockedNotesListView: View {
                     isAnimating.toggle()
                 }
             }
-        }
-    }
-    
-    /// Button to hide locked notes list.
-    var lockNotesButtonView: some View {
-        Button {
-            viewModel.lockNotes()
-        } label: {
-            Label("Lock notes", systemImage: "lock.open.fill")
         }
     }
 }

@@ -26,12 +26,23 @@ struct ContentView: View {
                     viewModel: viewModel,
                     showEditViewSheet: $showEditViewSheet
                 )
-                .navigationTitle("Your CleanPad") // FIXME: Make it respond to viewModel.selectedTab changes.
-                .toolbar { // FIXME: Make it respond to viewModel.selectedTab changes.
+                .navigationTitle(viewModel.isNonLockedNotesTabSelected ? "Notes" : "Personal Notes")
+                .toolbar {
                     HStack {
-                        lockAndUnlockNotesButtonView
-                        if !(viewModel.nonLockedNotes.isEmpty) {
-                            CreateNoteButtonView(showEditViewSheet: $showEditViewSheet) // Only shown when the list isn't empty.
+                        if viewModel.isNonLockedNotesTabSelected {
+                            lockAndUnlockNotesButtonView
+                            if !(viewModel.nonLockedNotes.isEmpty) {
+                                CreateNoteButtonView(showEditViewSheet: $showEditViewSheet) // Only shown when the list isn't empty.
+                            }
+                        } else if viewModel.isLockedNotesTabSelected {
+                            if viewModel.isUnlocked {
+                                HStack {
+                                    lockNotesButtonView
+                                    if !(viewModel.lockedNotes.isEmpty) {
+                                        CreateNoteButtonView(showEditViewSheet: $showEditViewSheet) // Only shown when the list isn't empty.
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -47,8 +58,13 @@ struct ContentView: View {
         }
         .sheet(isPresented: $showWelcomeSheet) { WelcomeView() }
         .sheet(isPresented: $showEditViewSheet) {
-            // NoteEditView with a blank Note:
-            NoteEditView(note: Note(), viewModel: viewModel, creatingNewNote: true)
+            if viewModel.isNonLockedNotesTabSelected {
+                // Open NoteEditView with a blank Note:
+                NoteEditView(note: Note(), viewModel: viewModel, creatingNewNote: true)
+            } else if viewModel.isLockedNotesTabSelected {
+                // Open NoteEditView with a blank locked Note:
+                NoteEditView(note: Note(isLocked: true), viewModel: viewModel, creatingNewNote: true)
+            }
         }
         .alert("Authentication error", isPresented: $viewModel.isShowingAuthenticationError) {
             Button("OK") { }
@@ -57,15 +73,28 @@ struct ContentView: View {
         }
     }
     
+    /// Button to hide locked notes list.
+    var lockNotesButtonView: some View {
+        Button {
+            withAnimation {
+                viewModel.lockNotes()
+            }
+        } label: {
+            Label("Lock notes", systemImage: "lock.open.fill")
+        }
+    }
+    
     /// Button to allow and forbid access to the locked notes list (personal space).
     var lockAndUnlockNotesButtonView: some View {
         Button {
+            withAnimation {
                 if viewModel.isUnlocked {
                     viewModel.lockNotes()
                 } else {
                     viewModel.authenticate(for: .viewNotes) { }
                 }
-            isAnimating.toggle()
+                isAnimating.toggle()
+            }
         } label: {
             Label(
                 viewModel.isUnlocked ? "Lock notes" : "Unlock notes",

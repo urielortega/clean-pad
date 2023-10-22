@@ -23,6 +23,8 @@ final class NotesListViewModel: ObservableObject {
     @Published var isShowingAuthenticationError = false
     
     @Published var selectedTab: Tab = .nonLockedNotes
+    var isNonLockedNotesTabSelected: Bool { selectedTab == .nonLockedNotes }
+    var isLockedNotesTabSelected: Bool { selectedTab == .lockedNotes }
     
     var lockedNotes: [Note] {
         notes.filter { $0.isLocked }

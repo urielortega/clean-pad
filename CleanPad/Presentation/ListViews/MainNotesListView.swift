@@ -16,9 +16,15 @@ struct MainNotesListView: View {
     var body: some View {
         ZStack {
             if viewModel.selectedTab == .nonLockedNotes {
-                NonLockedNotesListView(viewModel: viewModel, showEditViewSheet: $showEditViewSheet)
+                NonLockedNotesListView(
+                    viewModel: viewModel,
+                    showEditViewSheet: $showEditViewSheet
+                )
             } else {
-                LockedNotesListView(viewModel: viewModel, showEditViewSheet: $showEditViewSheet)
+                LockedNotesListView(
+                    viewModel: viewModel,
+                    showEditViewSheet: $showEditViewSheet
+                )
             }
             
             CustomTabBar(viewModel: viewModel)
@@ -28,8 +34,6 @@ struct MainNotesListView: View {
 
 struct CustomTabBar: View {
     @ObservedObject var viewModel: NotesListViewModel
-    var isNonLockedNotesTabSelected: Bool { viewModel.selectedTab == .nonLockedNotes }
-    var isLockedNotesTabSelected: Bool { viewModel.selectedTab == .lockedNotes }
 
     var body: some View {
         VStack {
@@ -56,6 +60,7 @@ struct CustomTabBar: View {
                 
                 Spacer()
             }
+            .frame(height: 50)
             .dockStyle()
         }
     }
@@ -65,9 +70,9 @@ struct CustomTabBar: View {
             Spacer()
             Label("Notes", systemImage: "note.text")
                 .padding(.bottom, 4)
-                .tint(isNonLockedNotesTabSelected ? .brown : .gray)
-                .bold(isNonLockedNotesTabSelected ? true : false)
-                .scaleEffect(isNonLockedNotesTabSelected ? 1.0 : 0.9)
+                .tint(viewModel.isNonLockedNotesTabSelected ? .brown : .gray)
+                .bold(viewModel.isNonLockedNotesTabSelected ? true : false)
+                .scaleEffect(viewModel.isNonLockedNotesTabSelected ? 1.0 : 0.9)
             Spacer()
         }
     }
@@ -75,11 +80,14 @@ struct CustomTabBar: View {
     var lockedNotesTabLabel: some View {
         HStack {
             Spacer()
-            Label("Personal", systemImage: "lock.fill")
-                .padding(.bottom, 4)
-                .tint(isLockedNotesTabSelected ? .brown : .gray)
-                .bold(isLockedNotesTabSelected ? true : false)
-                .scaleEffect(isLockedNotesTabSelected ? 1.0 : 0.9)
+            Label(
+                "Personal",
+                systemImage: viewModel.isUnlocked ? "lock.open.fill" : "lock.fill"
+            )
+            .padding(.bottom, 4)
+            .tint(viewModel.isLockedNotesTabSelected ? .brown : .gray)
+            .bold(viewModel.isLockedNotesTabSelected ? true : false)
+            .scaleEffect(viewModel.isLockedNotesTabSelected ? 1.0 : 0.9)
             Spacer()
         }
     }
