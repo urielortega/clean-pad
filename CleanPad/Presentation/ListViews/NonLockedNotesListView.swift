@@ -12,6 +12,8 @@ struct NonLockedNotesListView: View {
     @ObservedObject var viewModel: NotesListViewModel
     @Binding var showEditViewSheet: Bool
     
+    @State private var searchText = ""
+    
     var body: some View {
         if viewModel.nonLockedNotes.isEmpty {
             EmptyListView(
@@ -27,7 +29,7 @@ struct NonLockedNotesListView: View {
             VStack {
                 Form {
                     List {
-                        ForEach(viewModel.nonLockedNotes) { note in
+                        ForEach(filteredNotes) { note in
                             NavigationLink {
                                 // Open NoteEditView with the tapped note.
                                 NoteEditView(note: note, viewModel: viewModel, creatingNewNote: false)
@@ -55,6 +57,18 @@ struct NonLockedNotesListView: View {
                 // View to prevent CustomTabBar from hiding the List.
                 Color.clear
                     .frame(height: 40)
+            }
+            .searchable(text: $searchText, prompt: "Look for a note...")
+        }
+    }
+    
+    /// Computed property that returns a Note array with all non-locked notes or the ones resulting from a search.
+    var filteredNotes: [Note] {
+        if searchText.isEmpty {
+            return viewModel.nonLockedNotes // All nonLockedNotes.
+        } else {
+            return viewModel.nonLockedNotes.filter {
+                $0.title.localizedCaseInsensitiveContains(searchText) || $0.textContent.localizedCaseInsensitiveContains(searchText)
             }
         }
     }

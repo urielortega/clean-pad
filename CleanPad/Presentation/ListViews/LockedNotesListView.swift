@@ -15,6 +15,8 @@ struct LockedNotesListView: View {
     @Binding var showEditViewSheet: Bool
     @State private var isAnimating = false
 
+    @State private var searchText = ""
+
     var body: some View {
         Group {
             if viewModel.isUnlocked {
@@ -32,7 +34,7 @@ struct LockedNotesListView: View {
                     VStack {
                         Form {
                             List {
-                                ForEach(viewModel.lockedNotes) { note in
+                                ForEach(filteredNotes) { note in
                                     NavigationLink {
                                         // Open NoteEditView with the tapped note.
                                         NoteEditView(note: note, viewModel: viewModel, creatingNewNote: false)
@@ -61,9 +63,21 @@ struct LockedNotesListView: View {
                         Color.clear
                             .frame(height: 40)
                     }
+                    .searchable(text: $searchText, prompt: "Look for a note...")
                 }
             } else {
                 unlockNotesButtonView
+            }
+        }
+    }
+    
+    /// Computed property that returns a Note array with all locked notes or the ones resulting from a search.
+    var filteredNotes: [Note] {
+        if searchText.isEmpty {
+            return viewModel.lockedNotes // All lockedNotes.
+        } else {
+            return viewModel.lockedNotes.filter {
+                $0.title.localizedCaseInsensitiveContains(searchText) || $0.textContent.localizedCaseInsensitiveContains(searchText)
             }
         }
     }
