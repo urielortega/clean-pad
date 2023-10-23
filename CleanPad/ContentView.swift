@@ -20,35 +20,31 @@ struct ContentView: View {
     @State private var showWelcomeSheet = false
     
     var body: some View {
-        ZStack {
-            NavigationStack {
-                MainNotesListView(
-                    viewModel: viewModel,
-                    showEditViewSheet: $showEditViewSheet
-                )
-                .navigationTitle(viewModel.isNonLockedNotesTabSelected ? "Notes" : "Personal Notes")
-                .toolbar {
-                    HStack {
-                        if viewModel.isNonLockedNotesTabSelected {
-                            lockAndUnlockNotesButtonView
-                            if !(viewModel.nonLockedNotes.isEmpty) {
-                                CreateNoteButtonView(showEditViewSheet: $showEditViewSheet) // Only shown when the list isn't empty.
-                            }
-                        } else if viewModel.isLockedNotesTabSelected {
-                            if viewModel.isUnlocked {
-                                HStack {
-                                    lockNotesButtonView
-                                    if !(viewModel.lockedNotes.isEmpty) {
-                                        CreateNoteButtonView(showEditViewSheet: $showEditViewSheet) // Only shown when the list isn't empty.
-                                    }
+        NavigationStack {
+            MainNotesListView(
+                viewModel: viewModel,
+                showEditViewSheet: $showEditViewSheet
+            )
+            .navigationTitle(viewModel.isNonLockedNotesTabSelected ? "Notes" : "Personal Notes")
+            .toolbar {
+                HStack {
+                    if viewModel.isNonLockedNotesTabSelected {
+                        lockAndUnlockNotesButtonView
+                        if !(viewModel.nonLockedNotes.isEmpty) {
+                            CreateNoteButtonView(showEditViewSheet: $showEditViewSheet) // Only shown when the list isn't empty.
+                        }
+                    } else if viewModel.isLockedNotesTabSelected {
+                        if viewModel.isUnlocked {
+                            HStack {
+                                lockNotesButtonView
+                                if !(viewModel.lockedNotes.isEmpty) {
+                                    CreateNoteButtonView(showEditViewSheet: $showEditViewSheet) // Only shown when the list isn't empty.
                                 }
                             }
                         }
                     }
                 }
             }
-            
-            BackgroundColorView()
         }
         .onAppear {
             if isFirstLaunch {

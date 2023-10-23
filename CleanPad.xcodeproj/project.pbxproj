@@ -23,7 +23,6 @@
 		A4DB7B0E2ABB84910008AF12 /* MainNotesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DB7B0D2ABB84910008AF12 /* MainNotesListView.swift */; };
 		A4DB7B102ABB84B10008AF12 /* LockedNotesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DB7B0F2ABB84B10008AF12 /* LockedNotesListView.swift */; };
 		A4DB7B122ABB84CC0008AF12 /* NonLockedNotesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DB7B112ABB84CC0008AF12 /* NonLockedNotesListView.swift */; };
-		A4DB7B182ABB852D0008AF12 /* BackgroundColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DB7B172ABB852D0008AF12 /* BackgroundColorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,7 +44,6 @@
 		A4DB7B0D2ABB84910008AF12 /* MainNotesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNotesListView.swift; sourceTree = "<group>"; };
 		A4DB7B0F2ABB84B10008AF12 /* LockedNotesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockedNotesListView.swift; sourceTree = "<group>"; };
 		A4DB7B112ABB84CC0008AF12 /* NonLockedNotesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonLockedNotesListView.swift; sourceTree = "<group>"; };
-		A4DB7B172ABB852D0008AF12 /* BackgroundColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundColorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,7 +99,6 @@
 			isa = PBXGroup;
 			children = (
 				A482F0DB2AC7D4410075A385 /* Common */,
-				A4DB7B142ABB850A0008AF12 /* BackgroundViews */,
 				A4DB7B132ABB84F80008AF12 /* DetailViews */,
 				A4DB7B0C2ABB84860008AF12 /* ListViews */,
 				A4DB7B092ABB837D0008AF12 /* ContentView.swift */,
@@ -154,14 +151,6 @@
 				A465AB792ABA7149001CFFD9 /* NoteEditView.swift */,
 			);
 			path = DetailViews;
-			sourceTree = "<group>";
-		};
-		A4DB7B142ABB850A0008AF12 /* BackgroundViews */ = {
-			isa = PBXGroup;
-			children = (
-				A4DB7B172ABB852D0008AF12 /* BackgroundColorView.swift */,
-			);
-			path = BackgroundViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,7 +236,6 @@
 				A4DB7B0E2ABB84910008AF12 /* MainNotesListView.swift in Sources */,
 				A4DB7B102ABB84B10008AF12 /* LockedNotesListView.swift in Sources */,
 				A44E76A42AB12C0A004BBB21 /* Note.swift in Sources */,
-				A4DB7B182ABB852D0008AF12 /* BackgroundColorView.swift in Sources */,
 				A475B9642ACCD7DE00BE6575 /* WelcomeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
