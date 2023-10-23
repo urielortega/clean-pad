@@ -41,12 +41,7 @@ struct NonLockedNotesListView: View {
                                         .foregroundColor(.secondary)
                                 }
                                 .contextMenu {
-                                    // Button to change isLocked note property, i.e., move it to the personal space.
-                                    Button {
-                                        viewModel.updateLockStatus(for: note)
-                                    } label: {
-                                        Label("Move to personal space", systemImage: "lock.open.fill")
-                                    }
+                                    MoveToPersonalSpaceButton(note: note, viewModel: viewModel)
                                 }
                             }
                         }
@@ -59,6 +54,20 @@ struct NonLockedNotesListView: View {
                     .frame(height: 40)
             }
             .searchable(text: $searchText, prompt: "Look for a note...")
+        }
+    }
+    
+    /// Button to change isLocked note property, i.e., move it to the personal space.
+    struct MoveToPersonalSpaceButton: View {
+        var note: Note
+        @ObservedObject var viewModel: NotesListViewModel
+        
+        var body: some View {
+            Button {
+                viewModel.updateLockStatus(for: note)
+            } label: {
+                Label("Move to personal space", systemImage: "lock.open.fill")
+            }
         }
     }
     

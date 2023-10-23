@@ -46,12 +46,7 @@ struct LockedNotesListView: View {
                                                 .foregroundColor(.secondary)
                                         }
                                         .contextMenu {
-                                            // Button to change isLocked note property, i.e., remove it from the personal space.
-                                            Button {
-                                                viewModel.updateLockStatus(for: note)
-                                            } label: {
-                                                Label("Remove from personal space", systemImage: "lock.open.fill")
-                                            }
+                                            RemoveFromPersonalSpaceButton(note: note, viewModel: viewModel)
                                         }
                                     }
                                 }
@@ -67,6 +62,20 @@ struct LockedNotesListView: View {
                 }
             } else {
                 unlockNotesButtonView
+            }
+        }
+    }
+    
+    /// Button to change isLocked note property, i.e., remove it from the personal space.
+    struct RemoveFromPersonalSpaceButton: View {
+        var note: Note
+        @ObservedObject var viewModel: NotesListViewModel
+        
+        var body: some View {
+            Button {
+                viewModel.updateLockStatus(for: note)
+            } label: {
+                Label("Remove from personal space", systemImage: "lock.open.fill")
             }
         }
     }

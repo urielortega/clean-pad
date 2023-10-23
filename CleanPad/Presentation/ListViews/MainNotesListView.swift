@@ -32,6 +32,7 @@ struct MainNotesListView: View {
     }
 }
 
+/// Tab Bar with two buttons to switch between non-locked notes list and locked notes list.
 struct CustomTabBar: View {
     @ObservedObject var viewModel: NotesListViewModel
 
