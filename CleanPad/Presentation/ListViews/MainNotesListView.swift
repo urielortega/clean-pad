@@ -44,6 +44,7 @@ struct CustomTabBar: View {
                 
                 Button {
                     withAnimation { viewModel.selectedTab = .nonLockedNotes }
+                    HapticManager.instance.impact(style: .soft)
                 } label: {
                     nonLockedNotesTabLabel
                 }
@@ -53,6 +54,7 @@ struct CustomTabBar: View {
                 
                 Button {
                     withAnimation { viewModel.selectedTab = .lockedNotes }
+                    HapticManager.instance.impact(style: .soft)
                 } label: {
                     lockedNotesTabLabel
                 }

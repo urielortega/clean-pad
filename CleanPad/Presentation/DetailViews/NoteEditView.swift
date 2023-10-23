@@ -58,7 +58,7 @@ struct NoteEditView: View {
     }
     
     var titleTextFieldView: some View {
-        TextField(note.title, text: $note.title, prompt: Text("Title it"))
+        TextField(note.title, text: $note.title, prompt: Text("Give it a title..."))
             .font(.title).bold()
             .padding()
             .onChange(of: note.title) { _ in
@@ -110,12 +110,8 @@ struct NoteEditView: View {
             viewModel.add(note: note)
             viewModel.saveAllNotes()
             dismiss()
-            successHapticFeedback()
+            
+            HapticManager.instance.notification(type: .success)
         }
-    }
-    
-    func successHapticFeedback() {
-        let generator = UINotificationFeedbackGenerator()
-        generator.notificationOccurred(.success)
     }
 }

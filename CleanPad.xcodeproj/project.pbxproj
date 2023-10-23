@@ -19,6 +19,7 @@
 		A49C7DEC2ADF5BB9005922FC /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49C7DEB2ADF5BB9005922FC /* ViewModifiers.swift */; };
 		A49C7DEE2ADF5C1D005922FC /* HelperViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49C7DED2ADF5C1D005922FC /* HelperViews.swift */; };
 		A49E2FE02AD61DA000D8EC6D /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49E2FDF2AD61DA000D8EC6D /* EmptyListView.swift */; };
+		A4C36C482AE73163001B4389 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C36C472AE73163001B4389 /* HapticManager.swift */; };
 		A4DB7B0A2ABB837D0008AF12 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DB7B092ABB837D0008AF12 /* ContentView.swift */; };
 		A4DB7B0E2ABB84910008AF12 /* MainNotesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DB7B0D2ABB84910008AF12 /* MainNotesListView.swift */; };
 		A4DB7B102ABB84B10008AF12 /* LockedNotesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DB7B0F2ABB84B10008AF12 /* LockedNotesListView.swift */; };
@@ -40,6 +41,7 @@
 		A49C7DEB2ADF5BB9005922FC /* ViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifiers.swift; sourceTree = "<group>"; };
 		A49C7DED2ADF5C1D005922FC /* HelperViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperViews.swift; sourceTree = "<group>"; };
 		A49E2FDF2AD61DA000D8EC6D /* EmptyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyListView.swift; sourceTree = "<group>"; };
+		A4C36C472AE73163001B4389 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		A4DB7B092ABB837D0008AF12 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = CleanPad/ContentView.swift; sourceTree = SOURCE_ROOT; };
 		A4DB7B0D2ABB84910008AF12 /* MainNotesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNotesListView.swift; sourceTree = "<group>"; };
 		A4DB7B0F2ABB84B10008AF12 /* LockedNotesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockedNotesListView.swift; sourceTree = "<group>"; };
@@ -76,11 +78,11 @@
 		A44E76942AB11E70004BBB21 /* CleanPad */ = {
 			isa = PBXGroup;
 			children = (
+				A4C36C462AE7314D001B4389 /* Helpers */,
 				A45FD7342ABDE57300CBF255 /* Info.plist */,
 				A465AB7C2ABB395E001CFFD9 /* Domain */,
 				A465AB7B2ABB2D50001CFFD9 /* App */,
 				A465AB742ABA704B001CFFD9 /* Presentation */,
-				A44E76A72AB13214004BBB21 /* FileManager-DocumentsDirectory.swift */,
 				A44E76992AB11E72004BBB21 /* Assets.xcassets */,
 				A44E769B2AB11E72004BBB21 /* Preview Content */,
 			);
@@ -133,6 +135,15 @@
 				A49C7DED2ADF5C1D005922FC /* HelperViews.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		A4C36C462AE7314D001B4389 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				A44E76A72AB13214004BBB21 /* FileManager-DocumentsDirectory.swift */,
+				A4C36C472AE73163001B4389 /* HapticManager.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		A4DB7B0C2ABB84860008AF12 /* ListViews */ = {
@@ -224,6 +235,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A44E76A62AB1307A004BBB21 /* NotesListViewModel.swift in Sources */,
+				A4C36C482AE73163001B4389 /* HapticManager.swift in Sources */,
 				A49C7DEC2ADF5BB9005922FC /* ViewModifiers.swift in Sources */,
 				A482F0DF2AC7D7CA0075A385 /* ButtonsViews.swift in Sources */,
 				A49C7DEE2ADF5C1D005922FC /* HelperViews.swift in Sources */,
