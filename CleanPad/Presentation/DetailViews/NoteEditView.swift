@@ -17,8 +17,14 @@ struct NoteEditView: View {
     /// Property to show Cancel and Save buttons, and handle `onChange` closures.
     var creatingNewNote: Bool
     
-    /// Property to show the OK button that dismisses keyboard.
-    @FocusState private var textEditorIsFocused: Bool
+    /// Enum for controlling the focus state when creating or editing a note.
+    enum FocusField: Hashable {
+        case titleTextField
+        case textEditorField
+    }
+    
+    /// Property that stores the focus of the current text field.
+    @FocusState private var focusedField: FocusField?
     
     @Environment(\.dismiss) var dismiss
     
@@ -38,10 +44,10 @@ struct NoteEditView: View {
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     HStack {
-                        if textEditorIsFocused {
+                        if !(focusedField == .none) {
                             // Button to dismiss keyboard when typing.
-                            Button("OK") { textEditorIsFocused = false }
-                        } else if !textEditorIsFocused {
+                            Button("OK") { focusedField = .none }
+                        } else {
                             Menu {
                                 isLockedToggleButtonView
                             } label: {
@@ -67,13 +73,20 @@ struct NoteEditView: View {
                     viewModel.update(note: note)
                 }
             }
+            .focused($focusedField, equals: .titleTextField)
+            .onAppear {
+                if creatingNewNote {
+                    self.focusedField = .titleTextField
+                }
+            }
+            .onSubmit { focusedField = .textEditorField }
     }
     
     var textContentTextEditorView: some View {
         TextEditor(text: $note.textContent)
             .ignoresSafeArea()
             .padding(.horizontal)
-            .focused($textEditorIsFocused)
+            .focused($focusedField, equals: .textEditorField)
             .onChange(of: note.textContent) { _ in
                 // When changing an existing note, save it while typing using update().
                 if !creatingNewNote {

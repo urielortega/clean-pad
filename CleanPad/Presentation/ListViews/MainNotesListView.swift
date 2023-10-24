@@ -39,10 +39,8 @@ struct CustomTabBar: View {
     var body: some View {
         VStack {
             Spacer() // To push the TabBar to the bottom.
-            
             HStack {
                 Spacer()
-                
                 Button {
                     withAnimation { viewModel.selectedTab = .nonLockedNotes }
                     HapticManager.instance.impact(style: .soft)
@@ -50,9 +48,7 @@ struct CustomTabBar: View {
                     nonLockedNotesTabLabel
                 }
                 .padding(.horizontal, 10)
-
                 CustomHStackDivider()
-                
                 Button {
                     withAnimation { viewModel.selectedTab = .lockedNotes }
                     HapticManager.instance.impact(style: .soft)
@@ -60,7 +56,6 @@ struct CustomTabBar: View {
                     lockedNotesTabLabel
                 }
                 .padding(.trailing, 10)
-                
                 Spacer()
             }
             .frame(height: 50)
