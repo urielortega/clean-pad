@@ -38,7 +38,7 @@ struct NonLockedNotesListView: View {
                                     Text(note.title)
                                     Text(note.date.formatted(date: .abbreviated, time: .shortened))
                                         .font(.caption)
-                                        .foregroundColor(.secondary)
+                                        .foregroundStyle(.secondary)
                                 }
                                 .contextMenu {
                                     MoveToPersonalSpaceButton(note: note, viewModel: viewModel)

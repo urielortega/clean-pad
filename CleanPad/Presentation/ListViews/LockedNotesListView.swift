@@ -43,7 +43,7 @@ struct LockedNotesListView: View {
                                             Text(note.title)
                                             Text(note.date.formatted(date: .abbreviated, time: .shortened))
                                                 .font(.caption)
-                                                .foregroundColor(.secondary)
+                                                .foregroundStyle(.secondary)
                                         }
                                         .contextMenu {
                                             RemoveFromPersonalSpaceButton(note: note, viewModel: viewModel)
@@ -102,7 +102,7 @@ struct LockedNotesListView: View {
                     .frame(width: 200, height: 50)
 
                 Text("Unlock Notes")
-                    .foregroundColor(.white)
+                    .foregroundStyle(.white)
                     .fontWeight(.medium)
             }
         }

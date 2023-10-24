@@ -59,7 +59,7 @@ struct WelcomeView: View {
             Text("Great!")
                 .frame(width: 300, height: 50)
                 .background(.brown)
-                .foregroundColor(.white)
+                .foregroundStyle(.white)
                 .clipShape(RoundedRectangle(cornerRadius: 15.0))
                 .padding(.bottom, 50)
         }

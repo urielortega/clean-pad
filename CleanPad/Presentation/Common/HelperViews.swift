@@ -11,7 +11,7 @@ struct CustomHStackDivider: View {
     var body: some View {
         Rectangle()
             .frame(width: 2, height: 30)
-            .foregroundColor(.secondary)
+            .foregroundStyle(.secondary)
             .padding(.vertical)
     }
 }
