@@ -26,6 +26,9 @@ final class NotesListViewModel: ObservableObject {
     var isNonLockedNotesTabSelected: Bool { selectedTab == .nonLockedNotes }
     var isLockedNotesTabSelected: Bool { selectedTab == .lockedNotes }
     
+    /// Property to check if the system keyboard is shown.
+    @Published var isKeyboardPresented = false
+    
     var lockedNotes: [Note] {
         notes.filter { $0.isLocked }
     }

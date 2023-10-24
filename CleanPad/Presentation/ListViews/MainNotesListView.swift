@@ -27,7 +27,15 @@ struct MainNotesListView: View {
                 )
             }
             
-            CustomTabBar(viewModel: viewModel)
+            // Hide the CustomTabBar when the system keyboard is shown.
+            if !viewModel.isKeyboardPresented {
+                CustomTabBar(viewModel: viewModel)
+            }
+        }
+        .onReceive(keyboardPublisher) { value in
+            withAnimation {
+                viewModel.isKeyboardPresented = value
+            }
         }
     }
 }

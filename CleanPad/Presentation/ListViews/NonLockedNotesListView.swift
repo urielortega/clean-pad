@@ -49,9 +49,12 @@ struct NonLockedNotesListView: View {
                     }
                 }
                 
-                // View to prevent CustomTabBar from hiding the List.
-                Color.clear
-                    .frame(height: 40)
+                if !viewModel.isKeyboardPresented {
+                    // View to prevent CustomTabBar from hiding the List.
+                    // Hidden when the system keyboard is shown.
+                    Color.clear
+                        .frame(height: 40)
+                }
             }
             .searchable(text: $searchText, prompt: "Look for a note...")
         }
