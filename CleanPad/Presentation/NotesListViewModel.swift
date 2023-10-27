@@ -29,6 +29,21 @@ final class NotesListViewModel: ObservableObject {
     /// Property to check if the system keyboard is shown.
     @Published var isKeyboardPresented = false
     
+    /// Property to check today's date.
+    @Published var today = Date()
+    
+    func getCurrentDateComponents() -> DateComponents {
+        return Calendar.current.dateComponents([.year, .month, .day], from: today)
+    }
+    
+    func getDateComponents(for date: Date) -> DateComponents {
+        return Calendar.current.dateComponents([.year, .month, .day], from: date)
+    }
+    
+    func isNoteDateEqualToToday(note: Note) -> Bool {
+        return getDateComponents(for: note.date) == getCurrentDateComponents()
+    }
+    
     var lockedNotes: [Note] {
         notes.filter { $0.isLocked }
     }

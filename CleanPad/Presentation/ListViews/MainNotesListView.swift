@@ -59,6 +59,7 @@ struct CustomTabBar: View {
                 .padding(.horizontal, 10)
                 
                 CustomHStackDivider()
+                    .padding(.vertical)
                 
                 Button {
                     withAnimation(.bouncy) { viewModel.selectedTab = .lockedNotes }

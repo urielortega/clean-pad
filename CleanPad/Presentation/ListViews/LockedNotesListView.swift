@@ -40,10 +40,24 @@ struct LockedNotesListView: View {
                                         NoteEditView(note: note, viewModel: viewModel, creatingNewNote: false)
                                     } label: {
                                         VStack(alignment: .leading) {
-                                            Text(note.title)
-                                            Text(note.date.formatted(date: .abbreviated, time: .shortened))
-                                                .font(.caption)
+                                            Text(note.title.isEmpty ? "New note" : note.title)
+                                            HStack {
+                                                Text(
+                                                    note.date.formatted(
+                                                        // Shows abbreviated date when note.date is different from today:
+                                                        date: viewModel.isNoteDateEqualToToday(note: note) ? .omitted : .abbreviated,
+                                                        time: .shortened
+                                                    )
+                                                )
                                                 .foregroundStyle(.secondary)
+                                                
+                                                CustomHStackDivider(width: 0.5, height: 14)
+                                                
+                                                Text(note.textContent.isEmpty ? "No content..." : note.textContent)
+                                                    .lineLimit(1)
+                                                    .foregroundStyle(.secondary)
+                                            }
+                                            .font(.caption2)
                                         }
                                         .contextMenu {
                                             RemoveFromPersonalSpaceButton(note: note, viewModel: viewModel)

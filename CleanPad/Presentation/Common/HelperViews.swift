@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct CustomHStackDivider: View {
+    var width: Double = 2
+    var height: Double = 30
+    
     var body: some View {
         Rectangle()
-            .frame(width: 2, height: 30)
+            .frame(width: width, height: height)
             .foregroundStyle(.secondary)
-            .padding(.vertical)
     }
 }
