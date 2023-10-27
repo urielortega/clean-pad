@@ -75,6 +75,7 @@ struct ContentView: View {
             withAnimation {
                 viewModel.lockNotes()
             }
+            HapticManager.instance.impact(style: .rigid)
         } label: {
             Label("Lock notes", systemImage: "lock.open.fill")
         }
@@ -86,6 +87,7 @@ struct ContentView: View {
             withAnimation {
                 if viewModel.isUnlocked {
                     viewModel.lockNotes()
+                    HapticManager.instance.impact(style: .rigid)
                 } else {
                     viewModel.authenticate(for: .viewNotes) { }
                 }
