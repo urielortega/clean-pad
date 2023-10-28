@@ -84,7 +84,6 @@ struct NoteEditView: View {
     
     var textContentTextEditorView: some View {
         TextEditor(text: $note.textContent)
-            .ignoresSafeArea()
             .padding(.horizontal)
             .focused($focusedField, equals: .textEditorField)
             .onChange(of: note.textContent) { _ in
