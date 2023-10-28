@@ -100,11 +100,13 @@ struct LockedNotesListView: View {
     /// Computed property that returns a Note array with all locked notes or the ones resulting from a search.
     var filteredNotes: [Note] {
         if searchText.isEmpty {
-            return viewModel.lockedNotes // All lockedNotes.
+            return viewModel.lockedNotes.sorted { $0.date > $1.date } // All lockedNotes, sorted by date.
         } else {
-            return viewModel.lockedNotes.filter {
-                $0.title.localizedCaseInsensitiveContains(searchText) || $0.textContent.localizedCaseInsensitiveContains(searchText)
-            }
+            return viewModel.lockedNotes
+                .sorted { $0.date > $1.date }
+                .filter { // Returns notes that match the search field with its title or content.
+                    $0.title.localizedCaseInsensitiveContains(searchText) || $0.textContent.localizedCaseInsensitiveContains(searchText)
+                }
         }
     }
     

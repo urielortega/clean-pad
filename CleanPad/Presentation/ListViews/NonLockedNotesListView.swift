@@ -91,11 +91,13 @@ struct NonLockedNotesListView: View {
     /// Computed property that returns a Note array with all non-locked notes or the ones resulting from a search.
     var filteredNotes: [Note] {
         if searchText.isEmpty {
-            return viewModel.nonLockedNotes // All nonLockedNotes.
+            return viewModel.nonLockedNotes.sorted { $0.date > $1.date } // All nonLockedNotes, sorted by date.
         } else {
-            return viewModel.nonLockedNotes.filter {
-                $0.title.localizedCaseInsensitiveContains(searchText) || $0.textContent.localizedCaseInsensitiveContains(searchText)
-            }
+            return viewModel.nonLockedNotes
+                .sorted { $0.date > $1.date }
+                .filter { // Returns notes that match the search field with its title or content.
+                    $0.title.localizedCaseInsensitiveContains(searchText) || $0.textContent.localizedCaseInsensitiveContains(searchText)
+                }
         }
     }
 }
