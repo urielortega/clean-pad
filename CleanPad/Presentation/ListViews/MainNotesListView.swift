@@ -16,7 +16,7 @@ struct MainNotesListView: View {
     var body: some View {
         ZStack {
             if viewModel.selectedTab == .nonLockedNotes {
-                NonLockedNotesListView(
+                NonLockedNotesView(
                     viewModel: viewModel,
                     showEditViewSheet: $showEditViewSheet
                 )

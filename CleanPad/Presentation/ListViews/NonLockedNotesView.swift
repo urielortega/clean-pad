@@ -1,5 +1,5 @@
 //
-//  NonLockedNotesListView.swift
+//  NonLockedNotesView.swift
 //  CleanPad
 //
 //  Created by Uriel Ortega on 20/09/23.
@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// View that contains non-locked notes, and let users tap a note to view and edit it.
-struct NonLockedNotesListView: View {
+struct NonLockedNotesView: View {
     @ObservedObject var viewModel: NotesListViewModel
     @Binding var showEditViewSheet: Bool
     
