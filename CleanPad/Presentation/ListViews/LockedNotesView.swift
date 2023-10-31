@@ -1,5 +1,5 @@
 //
-//  LockedNotesListView.swift
+//  LockedNotesView.swift
 //  CleanPad
 //
 //  Created by Uriel Ortega on 20/09/23.
@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// View that contains locked notes, and let users tap a note to view and edit it.
-struct LockedNotesListView: View {
+struct LockedNotesView: View {
     // Using the viewModel created in ContentView with @ObservedObject.
     @ObservedObject var viewModel: NotesListViewModel
     

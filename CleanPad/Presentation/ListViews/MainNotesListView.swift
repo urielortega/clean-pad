@@ -21,7 +21,7 @@ struct MainNotesListView: View {
                     showEditViewSheet: $showEditViewSheet
                 )
             } else {
-                LockedNotesListView(
+                LockedNotesView(
                     viewModel: viewModel,
                     showEditViewSheet: $showEditViewSheet
                 )
