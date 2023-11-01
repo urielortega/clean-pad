@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NoteLabel: View {
+struct ListNoteLabel: View {
     var note: Note
     @ObservedObject var viewModel: NotesListViewModel
     
@@ -71,7 +71,7 @@ struct GridNoteLabel: View {
 
 
 #Preview("List View") {
-    NoteLabel(note: .example, viewModel: NotesListViewModel())
+    ListNoteLabel(note: .example, viewModel: NotesListViewModel())
         .border(.white, width: 0.5)
 }
 

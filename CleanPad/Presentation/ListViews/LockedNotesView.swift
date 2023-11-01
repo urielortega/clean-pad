@@ -39,7 +39,7 @@ struct LockedNotesView: View {
                                         // Open NoteEditView with the tapped note.
                                         NoteEditView(note: note, viewModel: viewModel, creatingNewNote: false)
                                     } label: {
-                                        NoteLabel(note: note, viewModel: viewModel)
+                                        ListNoteLabel(note: note, viewModel: viewModel)
                                             .contextMenu {
                                                 RemoveFromPersonalSpaceButton(note: note, viewModel: viewModel)
                                             }
