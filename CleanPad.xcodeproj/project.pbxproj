@@ -13,19 +13,18 @@
 		A44E76A42AB12C0A004BBB21 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44E76A32AB12C0A004BBB21 /* Note.swift */; };
 		A44E76A62AB1307A004BBB21 /* NotesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44E76A52AB1307A004BBB21 /* NotesListViewModel.swift */; };
 		A44E76A82AB13214004BBB21 /* FileManager-DocumentsDirectory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44E76A72AB13214004BBB21 /* FileManager-DocumentsDirectory.swift */; };
+		A46117282AF56E31001C0087 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46117272AF56E31001C0087 /* MainScreenView.swift */; };
+		A461172A2AF56EB6001C0087 /* AllNotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46117292AF56EB6001C0087 /* AllNotesView.swift */; };
 		A465AB7A2ABA7149001CFFD9 /* NoteEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A465AB792ABA7149001CFFD9 /* NoteEditView.swift */; };
 		A475B9642ACCD7DE00BE6575 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A475B9632ACCD7DE00BE6575 /* WelcomeView.swift */; };
 		A482F0DF2AC7D7CA0075A385 /* ButtonsViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A482F0DE2AC7D7CA0075A385 /* ButtonsViews.swift */; };
 		A49C7DEC2ADF5BB9005922FC /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49C7DEB2ADF5BB9005922FC /* ViewModifiers.swift */; };
 		A49C7DEE2ADF5C1D005922FC /* HelperViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49C7DED2ADF5C1D005922FC /* HelperViews.swift */; };
 		A49E2FE02AD61DA000D8EC6D /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49E2FDF2AD61DA000D8EC6D /* EmptyListView.swift */; };
-		A4BF22A82AF08D4000FF535B /* NonLockedNotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BF22A72AF08D4000FF535B /* NonLockedNotesView.swift */; };
-		A4BF22AA2AF08DE500FF535B /* LockedNotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BF22A92AF08DE500FF535B /* LockedNotesView.swift */; };
 		A4BFFA5F2AF087F4005CD3DE /* LabelViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BFFA5E2AF087F4005CD3DE /* LabelViews.swift */; };
 		A4C36C482AE73163001B4389 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C36C472AE73163001B4389 /* HapticManager.swift */; };
 		A4C36C4A2AE74B80001B4389 /* KeyboardPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C36C492AE74B80001B4389 /* KeyboardPublisher.swift */; };
 		A4DB7B0A2ABB837D0008AF12 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DB7B092ABB837D0008AF12 /* ContentView.swift */; };
-		A4DB7B0E2ABB84910008AF12 /* MainNotesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DB7B0D2ABB84910008AF12 /* MainNotesListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,19 +36,18 @@
 		A44E76A52AB1307A004BBB21 /* NotesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesListViewModel.swift; sourceTree = "<group>"; };
 		A44E76A72AB13214004BBB21 /* FileManager-DocumentsDirectory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager-DocumentsDirectory.swift"; sourceTree = "<group>"; };
 		A45FD7342ABDE57300CBF255 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		A46117272AF56E31001C0087 /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
+		A46117292AF56EB6001C0087 /* AllNotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllNotesView.swift; sourceTree = "<group>"; };
 		A465AB792ABA7149001CFFD9 /* NoteEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEditView.swift; sourceTree = "<group>"; };
 		A475B9632ACCD7DE00BE6575 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		A482F0DE2AC7D7CA0075A385 /* ButtonsViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsViews.swift; sourceTree = "<group>"; };
 		A49C7DEB2ADF5BB9005922FC /* ViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifiers.swift; sourceTree = "<group>"; };
 		A49C7DED2ADF5C1D005922FC /* HelperViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperViews.swift; sourceTree = "<group>"; };
 		A49E2FDF2AD61DA000D8EC6D /* EmptyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyListView.swift; sourceTree = "<group>"; };
-		A4BF22A72AF08D4000FF535B /* NonLockedNotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonLockedNotesView.swift; sourceTree = "<group>"; };
-		A4BF22A92AF08DE500FF535B /* LockedNotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockedNotesView.swift; sourceTree = "<group>"; };
 		A4BFFA5E2AF087F4005CD3DE /* LabelViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelViews.swift; sourceTree = "<group>"; };
 		A4C36C472AE73163001B4389 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		A4C36C492AE74B80001B4389 /* KeyboardPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardPublisher.swift; sourceTree = "<group>"; };
 		A4DB7B092ABB837D0008AF12 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = CleanPad/ContentView.swift; sourceTree = SOURCE_ROOT; };
-		A4DB7B0D2ABB84910008AF12 /* MainNotesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNotesListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,9 +153,8 @@
 		A4DB7B0C2ABB84860008AF12 /* ListViews */ = {
 			isa = PBXGroup;
 			children = (
-				A4DB7B0D2ABB84910008AF12 /* MainNotesListView.swift */,
-				A4BF22A72AF08D4000FF535B /* NonLockedNotesView.swift */,
-				A4BF22A92AF08DE500FF535B /* LockedNotesView.swift */,
+				A46117272AF56E31001C0087 /* MainScreenView.swift */,
+				A46117292AF56EB6001C0087 /* AllNotesView.swift */,
 			);
 			path = ListViews;
 			sourceTree = "<group>";
@@ -246,14 +243,13 @@
 				A49C7DEC2ADF5BB9005922FC /* ViewModifiers.swift in Sources */,
 				A482F0DF2AC7D7CA0075A385 /* ButtonsViews.swift in Sources */,
 				A49C7DEE2ADF5C1D005922FC /* HelperViews.swift in Sources */,
+				A461172A2AF56EB6001C0087 /* AllNotesView.swift in Sources */,
 				A4DB7B0A2ABB837D0008AF12 /* ContentView.swift in Sources */,
-				A4BF22A82AF08D4000FF535B /* NonLockedNotesView.swift in Sources */,
 				A49E2FE02AD61DA000D8EC6D /* EmptyListView.swift in Sources */,
 				A44E76A82AB13214004BBB21 /* FileManager-DocumentsDirectory.swift in Sources */,
 				A465AB7A2ABA7149001CFFD9 /* NoteEditView.swift in Sources */,
 				A44E76962AB11E70004BBB21 /* CleanPadApp.swift in Sources */,
-				A4DB7B0E2ABB84910008AF12 /* MainNotesListView.swift in Sources */,
-				A4BF22AA2AF08DE500FF535B /* LockedNotesView.swift in Sources */,
+				A46117282AF56E31001C0087 /* MainScreenView.swift in Sources */,
 				A44E76A42AB12C0A004BBB21 /* Note.swift in Sources */,
 				A4BFFA5F2AF087F4005CD3DE /* LabelViews.swift in Sources */,
 				A475B9642ACCD7DE00BE6575 /* WelcomeView.swift in Sources */,

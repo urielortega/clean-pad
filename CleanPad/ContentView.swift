@@ -21,7 +21,7 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-            MainNotesListView(
+            MainScreenView(
                 viewModel: viewModel,
                 showEditViewSheet: $showEditViewSheet
             )

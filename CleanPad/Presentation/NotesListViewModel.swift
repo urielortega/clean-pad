@@ -52,6 +52,14 @@ final class NotesListViewModel: ObservableObject {
         notes.filter { $0.isLocked == false }
     }
     
+    var currentNotes: [Note] {
+        if isLockedNotesTabSelected {
+            notes.filter { $0.isLocked }
+        } else {
+            notes.filter { $0.isLocked == false }
+        }
+    }
+    
     enum AuthenticationReason {
         case viewNotes, changeLockStatus
     }
