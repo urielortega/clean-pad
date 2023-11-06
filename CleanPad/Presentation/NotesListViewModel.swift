@@ -52,6 +52,16 @@ final class NotesListViewModel: ObservableObject {
         notes.filter { $0.isLocked == false }
     }
     
+    var sortedByDateLockedNotes: [Note] {
+        lockedNotes
+            .sorted { $0.date > $1.date }
+    }
+    
+    var sortedByDateNonLockedNotes: [Note] {
+        nonLockedNotes
+            .sorted { $0.date > $1.date }
+    }
+    
     enum AuthenticationReason {
         case viewNotes, changeLockStatus
     }
@@ -196,19 +206,30 @@ final class NotesListViewModel: ObservableObject {
         saveAllNotes()
     }
     
-    /// Function to remove a locked note from the ``lockedNotes`` and ``notes`` array by using offsets.
+    /// Function to remove a locked note from the ``notes`` array by using offsets.
     func removeLockedNoteFromList(at offsets: IndexSet) {
-        var lockedNotes = notes.filter { $0.isLocked }
-        lockedNotes.remove(atOffsets: offsets)
-        notes = lockedNotes + notes.filter { $0.isLocked == false }
+        // Array used to locate and remove a specific note using offsets.
+        var sortedLockedNotes = sortedByDateLockedNotes
+        sortedLockedNotes.remove(atOffsets: offsets)
+        
+        // Merging the notes shown in the List and the rest of the notes (nonLockedNotes).
+        notes = sortedLockedNotes + nonLockedNotes
+        
+        saveAllNotes()
     }
     
-    /// Function to remove a non-locked note from the ``nonLockedNotes`` and ``notes`` array by using offsets.
+    /// Function to remove a non-locked note from the ``notes`` array by using offsets.
     func removeNonLockedNoteFromList(at offsets: IndexSet) {
-        var nonLockedNotes = notes.filter { $0.isLocked == false }
-        nonLockedNotes.remove(atOffsets: offsets)
-        notes = nonLockedNotes + notes.filter { $0.isLocked }
+        // Array used to locate and remove a specific note using offsets.
+        var sortedNonLockedNotes = sortedByDateNonLockedNotes
+        sortedNonLockedNotes.remove(atOffsets: offsets)
+        
+        // Merging the notes shown in the List and the rest of the notes (lockedNotes).
+        notes = sortedNonLockedNotes + lockedNotes
+        
+        saveAllNotes()
     }
+
     
     /// Function to save existing notes with documents directory.
     func saveAllNotes() {
