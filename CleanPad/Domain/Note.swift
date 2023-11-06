@@ -21,7 +21,6 @@ struct Note: Codable, Identifiable, Equatable {
     
     /// Example note for previews and testing.
     static let example = Note(
-        date: .now,
         title: "This is an example note",
         textContent: """
         Hello, world! 🌎

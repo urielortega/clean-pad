@@ -20,15 +20,7 @@ struct MainScreenView: View {
                 showEditViewSheet: $showEditViewSheet
             )
             
-            // Hide the CustomTabBar when the system keyboard is shown.
-            if !viewModel.isKeyboardPresented {
-                CustomTabBar(viewModel: viewModel)
-            }
-        }
-        .onReceive(keyboardPublisher) { value in
-            withAnimation {
-                viewModel.isKeyboardPresented = value
-            }
+            CustomTabBar(viewModel: viewModel)
         }
     }
 }

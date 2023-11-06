@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A4129AC72AF9AE1400518E1C /* KeyboardPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4129AC62AF9AE1400518E1C /* KeyboardPublisher.swift */; };
 		A44E76962AB11E70004BBB21 /* CleanPadApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44E76952AB11E70004BBB21 /* CleanPadApp.swift */; };
 		A44E769A2AB11E72004BBB21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A44E76992AB11E72004BBB21 /* Assets.xcassets */; };
 		A44E769D2AB11E72004BBB21 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A44E769C2AB11E72004BBB21 /* Preview Assets.xcassets */; };
@@ -23,11 +24,11 @@
 		A49E2FE02AD61DA000D8EC6D /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49E2FDF2AD61DA000D8EC6D /* EmptyListView.swift */; };
 		A4BFFA5F2AF087F4005CD3DE /* LabelViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BFFA5E2AF087F4005CD3DE /* LabelViews.swift */; };
 		A4C36C482AE73163001B4389 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C36C472AE73163001B4389 /* HapticManager.swift */; };
-		A4C36C4A2AE74B80001B4389 /* KeyboardPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C36C492AE74B80001B4389 /* KeyboardPublisher.swift */; };
 		A4DB7B0A2ABB837D0008AF12 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DB7B092ABB837D0008AF12 /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A4129AC62AF9AE1400518E1C /* KeyboardPublisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardPublisher.swift; sourceTree = "<group>"; };
 		A44E76922AB11E70004BBB21 /* CleanPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CleanPad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A44E76952AB11E70004BBB21 /* CleanPadApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanPadApp.swift; sourceTree = "<group>"; };
 		A44E76992AB11E72004BBB21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -46,7 +47,6 @@
 		A49E2FDF2AD61DA000D8EC6D /* EmptyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyListView.swift; sourceTree = "<group>"; };
 		A4BFFA5E2AF087F4005CD3DE /* LabelViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelViews.swift; sourceTree = "<group>"; };
 		A4C36C472AE73163001B4389 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
-		A4C36C492AE74B80001B4389 /* KeyboardPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardPublisher.swift; sourceTree = "<group>"; };
 		A4DB7B092ABB837D0008AF12 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = CleanPad/ContentView.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -145,7 +145,7 @@
 			children = (
 				A44E76A72AB13214004BBB21 /* FileManager-DocumentsDirectory.swift */,
 				A4C36C472AE73163001B4389 /* HapticManager.swift */,
-				A4C36C492AE74B80001B4389 /* KeyboardPublisher.swift */,
+				A4129AC62AF9AE1400518E1C /* KeyboardPublisher.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -238,7 +238,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A44E76A62AB1307A004BBB21 /* NotesListViewModel.swift in Sources */,
-				A4C36C4A2AE74B80001B4389 /* KeyboardPublisher.swift in Sources */,
+				A4129AC72AF9AE1400518E1C /* KeyboardPublisher.swift in Sources */,
 				A4C36C482AE73163001B4389 /* HapticManager.swift in Sources */,
 				A49C7DEC2ADF5BB9005922FC /* ViewModifiers.swift in Sources */,
 				A482F0DF2AC7D7CA0075A385 /* ButtonsViews.swift in Sources */,

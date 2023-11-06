@@ -15,8 +15,6 @@ struct AllNotesView: View {
     @Binding var showEditViewSheet: Bool
     @State private var isAnimating = false
 
-    @State private var searchText = ""
-
     var body: some View {
         Group {
             if viewModel.isLockedNotesTabSelected && !viewModel.isUnlocked {
@@ -44,7 +42,7 @@ struct AllNotesView: View {
         VStack {
             Form {
                 List {
-                    ForEach(filteredNotes) { note in
+                    ForEach(viewModel.filteredNotes) { note in
                         NavigationLink {
                             // Open NoteEditView with the tapped note.
                             NoteEditView(note: note, viewModel: viewModel, creatingNewNote: false)
@@ -55,7 +53,8 @@ struct AllNotesView: View {
                                 }
                         }
                     }
-                    .onDelete(perform: viewModel.removeNoteFromList)
+                    // To avoid unexpected list behavior, note removal is forbidden when making a search.
+                    .onDelete(perform: viewModel.searchText.isEmpty ? viewModel.removeNoteFromList : nil)
                 }
             }
             
@@ -66,7 +65,7 @@ struct AllNotesView: View {
                     .frame(height: 40)
             }
         }
-        .searchable(text: $searchText, prompt: "Look for a note...")
+        .searchable(text: $viewModel.searchText, prompt: "Look for a note...")
     }
     
     /// View that shows notes as a grid with multiple columns.
@@ -87,18 +86,6 @@ struct AllNotesView: View {
                     viewModel.isLockedNotesTabSelected ? "Remove from personal space" : "Move to personal space",
                     systemImage: viewModel.isLockedNotesTabSelected ? "lock.slash.fill" : "lock.fill")
             }
-        }
-    }
-    
-    /// Computed property that returns a Note array with all notes or the ones resulting from a search.
-    var filteredNotes: [Note] {
-        if searchText.isEmpty {
-            return viewModel.currentNotes // Locked or non-locked notes, sorted by date.
-        } else {
-            return viewModel.currentNotes
-                .filter { // Returns notes that match the search field with its title or content.
-                    $0.title.localizedCaseInsensitiveContains(searchText) || $0.textContent.localizedCaseInsensitiveContains(searchText)
-                }
         }
     }
     
