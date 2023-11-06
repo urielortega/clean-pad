@@ -64,9 +64,9 @@ final class NotesListViewModel: ObservableObject {
     
     var currentNotes: [Note] {
         if isLockedNotesTabSelected {
-            lockedNotes
+            sortedByDateLockedNotes
         } else {
-            nonLockedNotes
+            sortedByDateNonLockedNotes
         }
     }
     

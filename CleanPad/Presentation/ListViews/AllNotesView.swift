@@ -93,10 +93,9 @@ struct AllNotesView: View {
     /// Computed property that returns a Note array with all notes or the ones resulting from a search.
     var filteredNotes: [Note] {
         if searchText.isEmpty {
-            return viewModel.currentNotes.sorted { $0.date > $1.date } // Locked or non-locked notes, sorted by date.
+            return viewModel.currentNotes // Locked or non-locked notes, sorted by date.
         } else {
             return viewModel.currentNotes
-                .sorted { $0.date > $1.date }
                 .filter { // Returns notes that match the search field with its title or content.
                     $0.title.localizedCaseInsensitiveContains(searchText) || $0.textContent.localizedCaseInsensitiveContains(searchText)
                 }
