@@ -45,15 +45,21 @@ final class NotesListViewModel: ObservableObject {
     }
     
     var lockedNotes: [Note] {
-        notes
-            .sorted { $0.date > $1.date }
-            .filter { $0.isLocked }
+        notes.filter { $0.isLocked }
     }
     
     var nonLockedNotes: [Note] {
-        notes
+        notes.filter { $0.isLocked == false }
+    }
+    
+    var sortedByDateLockedNotes: [Note] {
+        lockedNotes
             .sorted { $0.date > $1.date }
-            .filter { $0.isLocked == false }
+    }
+    
+    var sortedByDateNonLockedNotes: [Note] {
+        nonLockedNotes
+            .sorted { $0.date > $1.date }
     }
     
     var currentNotes: [Note] {
@@ -161,7 +167,7 @@ final class NotesListViewModel: ObservableObject {
             let index = self.getNoteIndexFromNotesArray(note: note)!
             
             // Update isLocked property.
-            self.notes[index].isLocked.toggle() 
+            self.notes[index].isLocked.toggle()
             
             self.saveAllNotes()
             
@@ -208,18 +214,36 @@ final class NotesListViewModel: ObservableObject {
         saveAllNotes()
     }
     
-    /// Function to remove a locked note from the ``lockedNotes`` and ``notes`` array by using offsets.
+    /// Function to remove a locked note from the ``notes`` array by using offsets.
     func removeLockedNoteFromList(at offsets: IndexSet) {
-        var lockedNotes = notes.filter { $0.isLocked }
-        lockedNotes.remove(atOffsets: offsets)
-        notes = lockedNotes + notes.filter { $0.isLocked == false }
+        // Array used to locate and remove a specific note using offsets.
+        var sortedLockedNotes = sortedByDateLockedNotes
+        sortedLockedNotes.remove(atOffsets: offsets)
+        
+        // Merging the notes shown in the List and the rest of the notes (nonLockedNotes).
+        notes = sortedLockedNotes + nonLockedNotes
+        
+        saveAllNotes()
     }
     
-    /// Function to remove a non-locked note from the ``nonLockedNotes`` and ``notes`` array by using offsets.
+    /// Function to remove a non-locked note from the ``notes`` array by using offsets.
     func removeNonLockedNoteFromList(at offsets: IndexSet) {
-        var nonLockedNotes = notes.filter { $0.isLocked == false }
-        nonLockedNotes.remove(atOffsets: offsets)
-        notes = nonLockedNotes + notes.filter { $0.isLocked }
+        // Array used to locate and remove a specific note using offsets.
+        var sortedNonLockedNotes = sortedByDateNonLockedNotes
+        sortedNonLockedNotes.remove(atOffsets: offsets)
+        
+        // Merging the notes shown in the List and the rest of the notes (lockedNotes).
+        notes = sortedNonLockedNotes + lockedNotes
+        
+        saveAllNotes()
+    }
+
+    func removeNoteFromList(at offsets: IndexSet) {
+        if isNonLockedNotesTabSelected {
+            removeNonLockedNoteFromList(at: offsets)
+        } else {
+            removeLockedNoteFromList(at: offsets)
+        }
     }
     
     /// Function to save existing notes with documents directory.

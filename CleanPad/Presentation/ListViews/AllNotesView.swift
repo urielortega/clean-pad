@@ -55,13 +55,7 @@ struct AllNotesView: View {
                                 }
                         }
                     }
-                    /*
-                     FIXME: onDelete doesn't work as expected.
-                    .onDelete(
-                        perform:
-                            viewModel.isLockedNotesTabSelected ? viewModel.removeLockedNoteFromList : viewModel.removeNonLockedNoteFromList
-                    )
-                     */
+                    .onDelete(perform: viewModel.removeNoteFromList)
                 }
             }
             
