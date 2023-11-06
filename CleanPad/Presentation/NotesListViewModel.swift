@@ -45,18 +45,22 @@ final class NotesListViewModel: ObservableObject {
     }
     
     var lockedNotes: [Note] {
-        notes.filter { $0.isLocked }
+        notes
+            .sorted { $0.date > $1.date }
+            .filter { $0.isLocked }
     }
     
     var nonLockedNotes: [Note] {
-        notes.filter { $0.isLocked == false }
+        notes
+            .sorted { $0.date > $1.date }
+            .filter { $0.isLocked == false }
     }
     
     var currentNotes: [Note] {
         if isLockedNotesTabSelected {
-            notes.filter { $0.isLocked }
+            lockedNotes
         } else {
-            notes.filter { $0.isLocked == false }
+            nonLockedNotes
         }
     }
     
