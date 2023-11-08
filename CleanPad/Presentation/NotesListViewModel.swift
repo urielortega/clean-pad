@@ -62,6 +62,28 @@ final class NotesListViewModel: ObservableObject {
             .sorted { $0.date > $1.date }
     }
     
+    var currentNotes: [Note] {
+        if isLockedNotesTabSelected {
+            sortedByDateLockedNotes
+        } else {
+            sortedByDateNonLockedNotes
+        }
+    }
+    
+    @Published var searchText = ""
+
+    /// Computed property that returns a Note array with all notes or the ones resulting from a search.
+    var filteredNotes: [Note] {
+        if searchText.isEmpty {
+            return currentNotes // Locked or non-locked notes, sorted by date.
+        } else {
+            return currentNotes
+                .filter { // Returns notes that match the search field with its title or content.
+                    $0.title.localizedCaseInsensitiveContains(searchText) || $0.textContent.localizedCaseInsensitiveContains(searchText)
+                }
+        }
+    }
+    
     enum AuthenticationReason {
         case viewNotes, changeLockStatus
     }
@@ -76,7 +98,7 @@ final class NotesListViewModel: ObservableObject {
         "How's been your day?",
         "How are you feeling right now?",
         "It's OK. Write it down.",
-        "Make today a little bit better"
+        "Make today a little bit better."
     ]
     
     /// Path used to store ``notes`` with documents directory.
@@ -159,7 +181,7 @@ final class NotesListViewModel: ObservableObject {
             let index = self.getNoteIndexFromNotesArray(note: note)!
             
             // Update isLocked property.
-            self.notes[index].isLocked.toggle() 
+            self.notes[index].isLocked.toggle()
             
             self.saveAllNotes()
             
@@ -230,6 +252,13 @@ final class NotesListViewModel: ObservableObject {
         saveAllNotes()
     }
 
+    func removeNoteFromList(at offsets: IndexSet) {
+        if isNonLockedNotesTabSelected {
+            removeNonLockedNoteFromList(at: offsets)
+        } else {
+            removeLockedNoteFromList(at: offsets)
+        }
+    }
     
     /// Function to save existing notes with documents directory.
     func saveAllNotes() {

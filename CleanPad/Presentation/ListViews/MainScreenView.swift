@@ -1,41 +1,26 @@
 //
-//  MainNotesListView.swift
+//  MainScreenView.swift
 //  CleanPad
 //
-//  Created by Uriel Ortega on 20/09/23.
+//  Created by Uriel Ortega on 03/11/23.
 //
 
 import SwiftUI
 
-/// Main View that shows the list of non-locked notes, as well as buttons to access locked (personal) notes and create new notes.
-struct MainNotesListView: View {
+/// Main View that shows the list of notes, as well as buttons to access locked (personal) notes and create new notes, and a custom tab bar.
+struct MainScreenView: View {
     // Using the viewModel created in ContentView with @ObservedObject.
     @ObservedObject var viewModel: NotesListViewModel
     @Binding var showEditViewSheet: Bool
     
     var body: some View {
         ZStack {
-            if viewModel.selectedTab == .nonLockedNotes {
-                NonLockedNotesView(
-                    viewModel: viewModel,
-                    showEditViewSheet: $showEditViewSheet
-                )
-            } else {
-                LockedNotesView(
-                    viewModel: viewModel,
-                    showEditViewSheet: $showEditViewSheet
-                )
-            }
+            AllNotesView(
+                viewModel: viewModel, 
+                showEditViewSheet: $showEditViewSheet
+            )
             
-            // Hide the CustomTabBar when the system keyboard is shown.
-            if !viewModel.isKeyboardPresented {
-                CustomTabBar(viewModel: viewModel)
-            }
-        }
-        .onReceive(keyboardPublisher) { value in
-            withAnimation {
-                viewModel.isKeyboardPresented = value
-            }
+            CustomTabBar(viewModel: viewModel)
         }
     }
 }
