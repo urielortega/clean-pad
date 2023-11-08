@@ -50,6 +50,7 @@ struct AllNotesView: View {
                             ListNoteLabel(note: note, viewModel: viewModel)
                                 .contextMenu {
                                     isLockedToggleButton(note: note, viewModel: viewModel)
+                                    deleteNoteButton(note: note, viewModel: viewModel)
                                 }
                         }
                     }
@@ -86,6 +87,23 @@ struct AllNotesView: View {
                     viewModel.isLockedNotesTabSelected ? "Remove from personal space" : "Move to personal space",
                     systemImage: viewModel.isLockedNotesTabSelected ? "lock.slash.fill" : "lock.fill")
             }
+        }
+    }
+    
+    /// Button to definitely delete a note.
+    struct deleteNoteButton: View {
+        var note: Note
+        @ObservedObject var viewModel: NotesListViewModel
+        
+        var body: some View {
+            Button(role: .destructive) {
+                withAnimation {
+                    viewModel.delete(note: note)
+                }
+            } label: {
+                Label("Delete note", systemImage: "trash.fill")
+            }
+
         }
     }
     
