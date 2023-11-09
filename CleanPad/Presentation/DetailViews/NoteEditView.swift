@@ -50,6 +50,11 @@ struct NoteEditView: View {
                         } else {
                             Menu {
                                 isLockedToggleButtonView
+                                deleteNoteButton(
+                                    note: note, 
+                                    viewModel: viewModel,
+                                    dismissView: true
+                                )
                             } label: {
                                 Label("More options", systemImage: "ellipsis.circle")
                             }
@@ -94,7 +99,7 @@ struct NoteEditView: View {
             }
     }
     
-    /// Button to toggle `isLocked` property of a note, i.e., move it to the personal space.
+    /// Button to toggle `isLocked` property of a note, i.e., move it to or remove it from the personal space.
     var isLockedToggleButtonView: some View {
         Button {
             if creatingNewNote {

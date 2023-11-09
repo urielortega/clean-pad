@@ -45,17 +45,30 @@ struct AllNotesView: View {
                     ForEach(viewModel.filteredNotes) { note in
                         NavigationLink {
                             // Open NoteEditView with the tapped note.
-                            NoteEditView(note: note, viewModel: viewModel, creatingNewNote: false)
+                            NoteEditView(
+                                note: note,
+                                viewModel: viewModel, 
+                                creatingNewNote: false
+                            )
                         } label: {
                             ListNoteLabel(note: note, viewModel: viewModel)
                                 .contextMenu {
-                                    isLockedToggleButton(note: note, viewModel: viewModel)
-                                    deleteNoteButton(note: note, viewModel: viewModel)
+                                    isLockedToggleButton(
+                                        note: note, 
+                                        viewModel: viewModel
+                                    )
+                                    deleteNoteButton(
+                                        note: note, 
+                                        viewModel: viewModel,
+                                        dismissView: false
+                                    )
                                 }
                         }
                     }
                     // To avoid unexpected list behavior, note removal is forbidden when making a search.
-                    .onDelete(perform: viewModel.searchText.isEmpty ? viewModel.removeNoteFromList : nil)
+                    .onDelete(
+                        perform: viewModel.searchText.isEmpty ? viewModel.removeNoteFromList : nil
+                    )
                 }
             }
             
@@ -85,25 +98,9 @@ struct AllNotesView: View {
             } label: {
                 Label(
                     viewModel.isLockedNotesTabSelected ? "Remove from personal space" : "Move to personal space",
-                    systemImage: viewModel.isLockedNotesTabSelected ? "lock.slash.fill" : "lock.fill")
+                    systemImage: viewModel.isLockedNotesTabSelected ? "lock.slash.fill" : "lock.fill"
+                )
             }
-        }
-    }
-    
-    /// Button to definitely delete a note.
-    struct deleteNoteButton: View {
-        var note: Note
-        @ObservedObject var viewModel: NotesListViewModel
-        
-        var body: some View {
-            Button(role: .destructive) {
-                withAnimation {
-                    viewModel.delete(note: note)
-                }
-            } label: {
-                Label("Delete note", systemImage: "trash.fill")
-            }
-
         }
     }
     
