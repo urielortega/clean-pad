@@ -14,6 +14,8 @@ struct AllNotesView: View {
     
     @Binding var showEditViewSheet: Bool
     @State private var isAnimating = false
+    
+    @Environment(\.horizontalSizeClass) var sizeClass
 
     var body: some View {
         Group {
@@ -31,7 +33,8 @@ struct AllNotesView: View {
                     }
                     .padding(.bottom, 80)
                 } else {
-                    notesListView
+                    // notesListView
+                    notesGridView
                 }
             }
         }
@@ -52,17 +55,9 @@ struct AllNotesView: View {
                             )
                         } label: {
                             ListNoteLabel(note: note, viewModel: viewModel)
-                                .contextMenu {
-                                    isLockedToggleButton(
-                                        note: note, 
-                                        viewModel: viewModel
-                                    )
-                                    deleteNoteButton(
-                                        note: note, 
-                                        viewModel: viewModel,
-                                        dismissView: false
-                                    )
-                                }
+                        }
+                        .contextMenu {
+                            contextMenuButtons(note: note, viewModel: viewModel)
                         }
                     }
                     // To avoid unexpected list behavior, note removal is forbidden when making a search.
@@ -83,9 +78,53 @@ struct AllNotesView: View {
     }
     
     /// View that shows notes as a grid with multiple columns.
-    // var notesGridView: some View {
-        // TODO
-    // }
+     var notesGridView: some View {
+         let layout = [
+            GridItem(.adaptive(minimum: sizeClass == .compact ? 160 : 200))
+         ]
+         
+         return Group {
+             ScrollView {
+                 LazyVGrid(columns: layout) {
+                     ForEach(viewModel.filteredNotes) { note in
+                         NavigationLink {
+                             // Open NoteEditView with the tapped note.
+                             NoteEditView(
+                                 note: note,
+                                 viewModel: viewModel,
+                                 creatingNewNote: false
+                             )
+                         } label: {
+                             GridNoteLabel(note: note, viewModel: viewModel)
+                         }
+                         .contextMenu {
+                             contextMenuButtons(note: note, viewModel: viewModel)
+                         }
+                     }
+                 }
+                 .searchable(text: $viewModel.searchText, prompt: "Look for a note...")
+                 .padding()
+                 .padding(.bottom, 60) // Padding to prevent CustomTabBar from hiding the List.
+             }
+         }
+     }
+    
+    struct contextMenuButtons: View {
+        var note: Note
+        @ObservedObject var viewModel: NotesListViewModel
+        
+        var body: some View {
+            isLockedToggleButton(
+                note: note,
+                viewModel: viewModel
+            )
+            deleteNoteButton(
+                note: note,
+                viewModel: viewModel,
+                dismissView: false
+            )
+        }
+    }
     
     /// Button to change isLocked note property, i.e., remove it from or move it to personal space.
     struct isLockedToggleButton: View {

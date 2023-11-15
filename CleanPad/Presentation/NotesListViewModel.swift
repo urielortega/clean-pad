@@ -269,4 +269,19 @@ final class NotesListViewModel: ObservableObject {
             print("Unable to save data.")
         }
     }
+    
+    /// Function for testing purposes that adds twenty note examples to the ``notes`` array and saves the changes after the addition.
+    func addTwentyNoteExamples() {
+        if isLockedNotesTabSelected {
+            for index in 1...20 {
+                add(note: Note(isLocked: true, title: String(index)))
+            }
+            saveAllNotes()
+        } else {
+            for index in 1...20 {
+                add(note: Note(title: String(index)))
+            }
+            saveAllNotes()
+        }
+    }
 }

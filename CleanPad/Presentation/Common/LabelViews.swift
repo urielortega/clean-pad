@@ -17,7 +17,7 @@ struct ListNoteLabel: View {
             HStack {
                 Text(
                     note.date.formatted(
-                        // Shows abbreviated date when note.date is different from today:
+                        // Shows abbreviated date only when note.date is different from today:
                         date: viewModel.isNoteDateEqualToToday(note: note) ? .omitted : .abbreviated,
                         time: .shortened
                     )
@@ -50,21 +50,23 @@ struct GridNoteLabel: View {
                         time: .shortened
                     )
                 )
-                .foregroundStyle(.secondary)
                 .padding(.bottom, 1)
-                
                 
                 Text(note.textContent.isEmpty ? "No content..." : note.textContent)
                     .lineLimit(3)
-                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.leading)
             }
             .font(.caption2)
+            
+            Spacer()
         }
+        .foregroundStyle(Color(.label)) // To show an appropriate color in both light and dark mode.
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
         .padding()
         .clipShape(RoundedRectangle(cornerRadius: 10))
         .overlay(
             RoundedRectangle(cornerRadius: 10)
-                .stroke(.secondary)
+                .stroke(.gray.opacity(0.3), lineWidth: 2)
         )
     }
 }
