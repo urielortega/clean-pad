@@ -13,7 +13,7 @@ struct Dock: ViewModifier {
             .frame(maxWidth: .infinity)
             .background(.ultraThinMaterial)
             .clipShape(RoundedRectangle(cornerRadius: 20))
-            .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.30), radius: 15)
+            .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.20), radius: 10)
             .padding()
     }
 }

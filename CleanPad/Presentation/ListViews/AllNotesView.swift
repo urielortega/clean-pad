@@ -33,7 +33,7 @@ struct AllNotesView: View {
                     }
                     .padding(.bottom, 80)
                 } else {
-                    // notesListView
+//                    notesListView
                     notesGridView
                 }
             }
