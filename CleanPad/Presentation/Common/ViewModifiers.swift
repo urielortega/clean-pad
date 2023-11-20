@@ -23,3 +23,25 @@ extension View {
         modifier(Dock())
     }
 }
+
+struct NoteLabelAccessibilityModifiers: ViewModifier {
+    var note: Note
+    @ObservedObject var viewModel: NotesListViewModel
+    
+    func body(content: Content) -> some View {
+        content
+            .accessibilityElement()
+            .accessibilityLabel(note.isLocked ? "Personal note: \(note.title)" : "Note: \(note.title)")
+            .accessibilityHint(
+                viewModel.isNoteDateEqualToToday(note: note)
+                ? "Created at \(note.date.formatted(date: .omitted, time: .shortened))"
+                : "Created on \(note.date.formatted(date: .abbreviated, time: .omitted))"
+            )
+    }
+}
+
+extension View {    
+    func noteLabelAccessibilityModifiers(note: Note, viewModel: NotesListViewModel) -> some View {
+        modifier(NoteLabelAccessibilityModifiers(note: note, viewModel: viewModel))
+    }
+}

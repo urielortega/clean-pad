@@ -32,6 +32,7 @@ struct ListNoteLabel: View {
             }
             .font(.caption2)
         }
+        .noteLabelAccessibilityModifiers(note: note, viewModel: viewModel)
     }
 }
 
@@ -68,6 +69,7 @@ struct GridNoteLabel: View {
             RoundedRectangle(cornerRadius: 10)
                 .stroke(.gray.opacity(0.3), lineWidth: 2)
         )
+        .noteLabelAccessibilityModifiers(note: note, viewModel: viewModel)
     }
 }
 
