@@ -67,7 +67,7 @@ struct CustomTabBar: View {
                 .padding(.bottom, 4)
                 .tint(viewModel.isNonLockedNotesTabSelected ? .brown : .gray)
                 .bold(viewModel.isNonLockedNotesTabSelected ? true : false)
-                .scaleEffect(viewModel.isNonLockedNotesTabSelected ? 1.0 : 0.95)
+                .scaleEffect(viewModel.isNonLockedNotesTabSelected ? 1.0 : 0.9)
             Spacer()
         }
     }
