@@ -16,6 +16,7 @@ struct AllNotesView: View {
     @State private var isAnimating = false
     
     @Environment(\.horizontalSizeClass) var sizeClass
+    @Environment(\.accessibilityVoiceOverEnabled) var voiceOverEnabled
 
     var body: some View {
         Group {
@@ -23,15 +24,19 @@ struct AllNotesView: View {
                 unlockNotesButtonView
             } else {
                 if viewModel.currentNotes.isEmpty {
-                    EmptyListView(
-                        imageSystemName: "note.text",
-                        label: "This looks a little empty...",
-                        description: viewModel.placeholders.randomElement() ?? "Start writing...",
-                        buttonLabel: "Create a note!"
-                    ) {
-                        showEditViewSheet.toggle()
+                    if voiceOverEnabled {
+                        accessibilityEmptyListButton
+                    } else {
+                        EmptyListView(
+                            imageSystemName: "note.text",
+                            label: "This looks a little empty...",
+                            description: viewModel.placeholders.randomElement() ?? "Start writing...",
+                            buttonLabel: "Create a note!"
+                        ) {
+                            showEditViewSheet.toggle()
+                        }
+                        .padding(.bottom, 80)
                     }
-                    .padding(.bottom, 80)
                 } else {
 //                    notesListView
                     notesGridView
@@ -169,5 +174,19 @@ struct AllNotesView: View {
                 }
             }
         }
+    }
+    
+    var accessibilityEmptyListButton: some View {
+        Button {
+            showEditViewSheet.toggle()
+        } label: {
+            EmptyListView(
+                imageSystemName: "note.text",
+                label: "This looks a little empty...",
+                description: viewModel.placeholders.randomElement() ?? "Start writing...",
+                buttonLabel: "Create a note!"
+            ) {}
+        }
+        .accessibilityLabel("Empty list. Tap to create a note.")
     }
 }
