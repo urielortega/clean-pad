@@ -70,6 +70,7 @@ struct CustomTabBar: View {
                 .scaleEffect(viewModel.isNonLockedNotesTabSelected ? 1.0 : 0.9)
             Spacer()
         }
+        .accessibilityLabel("Your notes.")
     }
     
     var lockedNotesTabLabel: some View {
@@ -85,5 +86,6 @@ struct CustomTabBar: View {
             .scaleEffect(viewModel.isLockedNotesTabSelected ? 1.0 : 0.9)
             Spacer()
         }
+        .accessibilityLabel("Your personal notes.")
     }
 }
