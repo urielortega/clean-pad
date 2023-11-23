@@ -43,6 +43,8 @@ struct GridNoteLabel: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text(note.title.isEmpty ? "New note" : note.title)
+                .lineLimit(1)
+            
             VStack(alignment: .leading) {
                 Text(
                     note.date.formatted(
