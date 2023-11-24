@@ -27,20 +27,32 @@ struct ContentView: View {
             )
             .navigationTitle(viewModel.isNonLockedNotesTabSelected ? "Notes" : "Personal Notes")
             .toolbar {
-                HStack {
-                    if viewModel.isNonLockedNotesTabSelected {
-                        lockAndUnlockNotesButtonView
-                        if !(viewModel.nonLockedNotes.isEmpty) {
-                            CreateNoteButtonView(showEditViewSheet: $showEditViewSheet) // Only shown when the list isn't empty.
-                        }
-                    } else if viewModel.isLockedNotesTabSelected {
-                        if viewModel.isUnlocked {
-                            HStack {
-                                lockNotesButtonView
-                                if !(viewModel.lockedNotes.isEmpty) {
-                                    CreateNoteButtonView(showEditViewSheet: $showEditViewSheet) // Only shown when the list isn't empty.
+                ToolbarItem(placement: .topBarTrailing) {
+                    HStack {
+                        if viewModel.isNonLockedNotesTabSelected {
+                            lockAndUnlockNotesButtonView
+                            if !(viewModel.nonLockedNotes.isEmpty) {
+                                CreateNoteButtonView(showEditViewSheet: $showEditViewSheet) // Only shown when the list isn't empty.
+                            }
+                        } else if viewModel.isLockedNotesTabSelected {
+                            if viewModel.isUnlocked {
+                                HStack {
+                                    lockNotesButtonView
+                                    if !(viewModel.lockedNotes.isEmpty) {
+                                        CreateNoteButtonView(showEditViewSheet: $showEditViewSheet) // Only shown when the list isn't empty.
+                                    }
                                 }
                             }
+                        }
+                    }
+                }
+                
+                ToolbarItem(placement: .topBarLeading) {
+                    if viewModel.isNonLockedNotesTabSelected || (viewModel.isLockedNotesTabSelected && viewModel.isUnlocked) {
+                        Menu {
+                            switchViewsButtonView
+                        } label: {
+                            Label("More options", systemImage: "ellipsis.circle")
                         }
                     }
                 }
@@ -108,6 +120,18 @@ struct ContentView: View {
                 // Reset the animation when isUnlocked changes.
                 isAnimating = false
             }
+        }
+    }
+    
+    /// Button to switch between Grid and List view.
+    var switchViewsButtonView: some View {
+        Button {
+            withAnimation { viewModel.isGridViewSelected.toggle() }
+        } label: {
+            Label(
+                viewModel.isGridViewSelected ? "View as List" : "View as Grid",
+                systemImage: viewModel.isGridViewSelected ? "list.bullet" : "rectangle.grid.2x2"
+            )
         }
     }
 }

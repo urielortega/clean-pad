@@ -12,38 +12,14 @@ import SwiftUI
 final class NotesListViewModel: ObservableObject {
     /// Array saved in documents directory containing all user notes.
     @Published private(set) var notes: [Note] = []
-    
-    /// Property to control access to locked notes (personal space).
-    @Published private(set) var isUnlocked = false
-    
-    /// Property to control changes in notes.
-    @Published private(set) var areChangesAllowed = false
-    
-    @Published private(set) var authenticationError = "Unknown error"
-    @Published var isShowingAuthenticationError = false
-    
-    @Published var selectedTab: Tab = .nonLockedNotes
-    var isNonLockedNotesTabSelected: Bool { selectedTab == .nonLockedNotes }
-    var isLockedNotesTabSelected: Bool { selectedTab == .lockedNotes }
-    
+        
+    // MARK: Search properties.
+    @Published var searchText = ""
+
     /// Property to check if the system keyboard is shown.
     @Published var isKeyboardPresented = false
     
-    /// Property to check today's date.
-    @Published var today = Date()
-    
-    func getCurrentDateComponents() -> DateComponents {
-        return Calendar.current.dateComponents([.year, .month, .day], from: today)
-    }
-    
-    func getDateComponents(for date: Date) -> DateComponents {
-        return Calendar.current.dateComponents([.year, .month, .day], from: date)
-    }
-    
-    func isNoteDateEqualToToday(note: Note) -> Bool {
-        return getDateComponents(for: note.date) == getCurrentDateComponents()
-    }
-    
+    // MARK: Filtering and sorting properties.
     var lockedNotes: [Note] {
         notes.filter { $0.isLocked }
     }
@@ -62,16 +38,6 @@ final class NotesListViewModel: ObservableObject {
             .sorted { $0.date > $1.date }
     }
     
-    var currentNotes: [Note] {
-        if isLockedNotesTabSelected {
-            sortedByDateLockedNotes
-        } else {
-            sortedByDateNonLockedNotes
-        }
-    }
-    
-    @Published var searchText = ""
-
     /// Computed property that returns a Note array with all notes or the ones resulting from a search.
     var filteredNotes: [Note] {
         if searchText.isEmpty {
@@ -84,6 +50,48 @@ final class NotesListViewModel: ObservableObject {
         }
     }
     
+    // MARK: Access control properties.
+    /// Property to control access to locked notes (personal space).
+    @Published private(set) var isUnlocked = false
+    
+    /// Property to control changes in notes.
+    @Published private(set) var areChangesAllowed = false
+    
+    @Published private(set) var authenticationError = "Unknown error"
+    @Published var isShowingAuthenticationError = false
+    
+    // MARK: Navigation and presentation properties.
+    @Published var selectedTab: Tab = .nonLockedNotes
+    var isNonLockedNotesTabSelected: Bool { selectedTab == .nonLockedNotes }
+    var isLockedNotesTabSelected: Bool { selectedTab == .lockedNotes }
+    
+    var currentNotes: [Note] {
+        if isLockedNotesTabSelected {
+            sortedByDateLockedNotes
+        } else {
+            sortedByDateNonLockedNotes
+        }
+    }
+    
+    @Published var isGridViewSelected: Bool = false
+    
+    // MARK: Date properties.
+    /// Property to check today's date.
+    @Published var today = Date()
+    
+    func getCurrentDateComponents() -> DateComponents {
+        return Calendar.current.dateComponents([.year, .month, .day], from: today)
+    }
+    
+    func getDateComponents(for date: Date) -> DateComponents {
+        return Calendar.current.dateComponents([.year, .month, .day], from: date)
+    }
+    
+    func isNoteDateEqualToToday(note: Note) -> Bool {
+        return getDateComponents(for: note.date) == getCurrentDateComponents()
+    }
+    
+    // MARK: Constants.
     enum AuthenticationReason {
         case viewNotes, changeLockStatus
     }
@@ -107,6 +115,8 @@ final class NotesListViewModel: ObservableObject {
     init() {
         loadData()
     }
+    
+    // MARK: Data loading functions.
     
     /// Function responsible for loading user data with documents directory when launching app.
     func loadData() {
@@ -139,6 +149,8 @@ final class NotesListViewModel: ObservableObject {
         
         return self.notes[index]
     }
+    
+    // MARK: Access control functions.
     
     /// Function to authenticate with biometrics or passcode and allow access and changes to user notes.
     /// - Parameters:
@@ -197,7 +209,7 @@ final class NotesListViewModel: ObservableObject {
         areChangesAllowed = false
     }
     
-    // CRUD functions
+    // MARK: CRUD functions.
     
     /// Function to add a note to the ``notes`` array and save the changes after the addition.
     /// - Parameter note: A  new ``Note`` object to be added to the ``notes`` array.
@@ -269,6 +281,8 @@ final class NotesListViewModel: ObservableObject {
             print("Unable to save data.")
         }
     }
+    
+    // MARK: Testing functions.
     
     /// Function for testing purposes that adds twenty note examples to the ``notes`` array and saves the changes after the addition.
     func addTwentyNoteExamples() {

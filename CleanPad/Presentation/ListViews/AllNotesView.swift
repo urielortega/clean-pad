@@ -38,8 +38,11 @@ struct AllNotesView: View {
                         .padding(.bottom, 80)
                     }
                 } else {
-//                    notesListView
-                    notesGridView
+                    if viewModel.isGridViewSelected {
+                        notesGridView
+                    } else {
+                        notesListView
+                    }
                 }
             }
         }
