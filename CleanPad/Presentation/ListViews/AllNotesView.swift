@@ -30,7 +30,7 @@ struct AllNotesView: View {
                         EmptyListView(
                             imageSystemName: "note.text",
                             label: "This looks a little empty...",
-                            description: viewModel.placeholders.randomElement() ?? "Start writing...",
+                            description: Constants.placeholders.randomElement() ?? "Start writing...",
                             buttonLabel: "Create a note!"
                         ) {
                             showEditViewSheet.toggle()
@@ -186,7 +186,7 @@ struct AllNotesView: View {
             EmptyListView(
                 imageSystemName: "note.text",
                 label: "This looks a little empty...",
-                description: viewModel.placeholders.randomElement() ?? "Start writing...",
+                description: Constants.placeholders.randomElement() ?? "Start writing...",
                 buttonLabel: "Create a note!"
             ) {}
         }

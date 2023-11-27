@@ -61,7 +61,7 @@ final class NotesListViewModel: ObservableObject {
     @Published var isShowingAuthenticationError = false
     
     // MARK: Navigation and presentation properties.
-    @Published var selectedTab: Tab = .nonLockedNotes
+    @Published var selectedTab: Constants.Tab = .nonLockedNotes
     var isNonLockedNotesTabSelected: Bool { selectedTab == .nonLockedNotes }
     var isLockedNotesTabSelected: Bool { selectedTab == .lockedNotes }
     
@@ -91,27 +91,6 @@ final class NotesListViewModel: ObservableObject {
         return getDateComponents(for: note.date) == getCurrentDateComponents()
     }
     
-    // MARK: Constants.
-    enum AuthenticationReason {
-        case viewNotes, changeLockStatus
-    }
-    
-    enum Tab {
-        case nonLockedNotes, lockedNotes
-    }
-    
-    /// Strings shown when a list is empty to invite the user to create a note.
-    let placeholders = [
-        "What's on your mind?",
-        "How's been your day?",
-        "How are you feeling right now?",
-        "It's OK. Write it down.",
-        "Make today a little bit better."
-    ]
-    
-    /// Path used to store ``notes`` with documents directory.
-    let savePath = FileManager.documentsDirectory.appendingPathComponent("SavedNotes")
-    
     init() {
         loadData()
     }
@@ -121,7 +100,7 @@ final class NotesListViewModel: ObservableObject {
     /// Function responsible for loading user data with documents directory when launching app.
     func loadData() {
         do {
-            let data = try Data(contentsOf: savePath)
+            let data = try Data(contentsOf: Constants.savePath)
             notes = try JSONDecoder().decode([Note].self, from: data)
         } catch {
             notes = []
@@ -156,7 +135,7 @@ final class NotesListViewModel: ObservableObject {
     /// - Parameters:
     ///   - authenticationReason: Controls the flow involved in the modification of permissions.
     ///   - successAction: Closure called when authentication is successful.
-    func authenticate(for authenticationReason: AuthenticationReason, successAction: @escaping () -> Void) {
+    func authenticate(for authenticationReason: Constants.AuthenticationReason, successAction: @escaping () -> Void) {
         let context = LAContext()
         var error: NSError?
         
@@ -276,7 +255,7 @@ final class NotesListViewModel: ObservableObject {
     func saveAllNotes() {
         do {
             let data = try JSONEncoder().encode(notes)
-            try data.write(to: savePath, options: [.atomic, .completeFileProtection])
+            try data.write(to: Constants.savePath, options: [.atomic, .completeFileProtection])
         } catch {
             print("Unable to save data.")
         }
