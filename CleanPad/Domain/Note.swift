@@ -18,7 +18,9 @@ struct Note: Codable, Identifiable, Equatable {
     
     var noteTitle = ""
     var noteContent = ""
-    
+}
+
+extension Note {
     /// Example note for previews and testing.
     static let example = Note(
         noteTitle: "This is an example note",
