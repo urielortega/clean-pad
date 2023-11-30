@@ -55,6 +55,7 @@ struct NoteEditView: View {
                                     viewModel: viewModel,
                                     dismissView: true
                                 )
+
                             } label: {
                                 Label("More options", systemImage: "ellipsis.circle")
                             }
@@ -69,10 +70,10 @@ struct NoteEditView: View {
     }
     
     var titleTextFieldView: some View {
-        TextField(note.title, text: $note.title, prompt: Text("Give it a title..."))
+        TextField(note.noteTitle, text: $note.noteTitle, prompt: Text("Give it a title..."))
             .font(.title).bold()
             .padding()
-            .onChange(of: note.title) { _ in
+            .onChange(of: note.noteTitle) { _ in
                 // When changing an existing note, save it while typing using update().
                 if !creatingNewNote {
                     viewModel.update(note: note)
@@ -88,10 +89,10 @@ struct NoteEditView: View {
     }
     
     var textContentTextEditorView: some View {
-        TextEditor(text: $note.textContent)
+        TextEditor(text: $note.noteContent)
             .padding(.horizontal)
             .focused($focusedField, equals: .textEditorField)
-            .onChange(of: note.textContent) { _ in
+            .onChange(of: note.noteContent) { _ in
                 // When changing an existing note, save it while typing using update().
                 if !creatingNewNote {
                     viewModel.update(note: note)

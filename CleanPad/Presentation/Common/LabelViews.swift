@@ -13,7 +13,7 @@ struct ListNoteLabel: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text(note.title.isEmpty ? "New note" : note.title)
+            Text(note.noteTitle.isEmpty ? "New note" : note.noteTitle)
             HStack {
                 Text(
                     note.date.formatted(
@@ -26,7 +26,7 @@ struct ListNoteLabel: View {
                 
                 CustomHStackDivider(width: 0.5, height: 14)
                 
-                Text(note.textContent.isEmpty ? "No content..." : note.textContent)
+                Text(note.noteContent.isEmpty ? "No content..." : note.noteContent)
                     .lineLimit(1)
                     .foregroundStyle(.secondary)
             }
@@ -42,7 +42,7 @@ struct GridNoteLabel: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text(note.title.isEmpty ? "New note" : note.title)
+            Text(note.noteTitle.isEmpty ? "New note" : note.noteTitle)
                 .lineLimit(1)
             
             VStack(alignment: .leading) {
@@ -55,7 +55,7 @@ struct GridNoteLabel: View {
                 )
                 .padding(.bottom, 1)
                 
-                Text(note.textContent.isEmpty ? "No content..." : note.textContent)
+                Text(note.noteContent.isEmpty ? "No content..." : note.noteContent)
                     .lineLimit(3)
                     .multilineTextAlignment(.leading)
             }

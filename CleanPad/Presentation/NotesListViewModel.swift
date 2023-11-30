@@ -45,7 +45,7 @@ final class NotesListViewModel: ObservableObject {
         } else {
             return currentNotes
                 .filter { // Returns notes that match the search field with its title or content.
-                    $0.title.localizedCaseInsensitiveContains(searchText) || $0.textContent.localizedCaseInsensitiveContains(searchText)
+                    $0.noteTitle.localizedCaseInsensitiveContains(searchText) || $0.noteContent.localizedCaseInsensitiveContains(searchText)
                 }
         }
     }
@@ -267,12 +267,12 @@ final class NotesListViewModel: ObservableObject {
     func addTwentyNoteExamples() {
         if isLockedNotesTabSelected {
             for index in 1...20 {
-                add(note: Note(isLocked: true, title: String(index)))
+                add(note: Note(isLocked: true, noteTitle: String(index)))
             }
             saveAllNotes()
         } else {
             for index in 1...20 {
-                add(note: Note(title: String(index)))
+                add(note: Note(noteTitle: String(index)))
             }
             saveAllNotes()
         }
