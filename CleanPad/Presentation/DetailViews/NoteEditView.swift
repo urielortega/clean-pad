@@ -50,11 +50,13 @@ struct NoteEditView: View {
                         } else {
                             Menu {
                                 isLockedToggleButtonView
-                                deleteNoteButton(
-                                    note: note, 
-                                    viewModel: viewModel,
-                                    dismissView: true
-                                )
+                                if !creatingNewNote {
+                                    deleteNoteButton(
+                                        note: note, 
+                                        viewModel: viewModel,
+                                        dismissView: true
+                                    )
+                                }
 
                             } label: {
                                 Label("More options", systemImage: "ellipsis.circle")
