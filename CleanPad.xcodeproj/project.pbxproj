@@ -107,13 +107,12 @@
 		A465AB742ABA704B001CFFD9 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				A4D06FAF2B214AC10000D089 /* ViewModels */,
 				A482F0DB2AC7D4410075A385 /* Common */,
 				A4DB7B132ABB84F80008AF12 /* DetailViews */,
 				A4DB7B0C2ABB84860008AF12 /* ListViews */,
 				A4DB7B092ABB837D0008AF12 /* ContentView.swift */,
-				A44E76A52AB1307A004BBB21 /* NotesListViewModel.swift */,
 				A475B9632ACCD7DE00BE6575 /* WelcomeView.swift */,
-				A4D06FAD2B21428C0000D089 /* DateViewModel.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -154,6 +153,15 @@
 				A4129AC62AF9AE1400518E1C /* KeyboardPublisher.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		A4D06FAF2B214AC10000D089 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				A44E76A52AB1307A004BBB21 /* NotesListViewModel.swift */,
+				A4D06FAD2B21428C0000D089 /* DateViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		A4DB7B0C2ABB84860008AF12 /* ListViews */ = {
