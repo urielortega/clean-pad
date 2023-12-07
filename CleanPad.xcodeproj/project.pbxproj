@@ -25,6 +25,7 @@
 		A4ADAFDD2B15238B00C14010 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ADAFDC2B15238B00C14010 /* Constants.swift */; };
 		A4BFFA5F2AF087F4005CD3DE /* LabelViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BFFA5E2AF087F4005CD3DE /* LabelViews.swift */; };
 		A4C36C482AE73163001B4389 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C36C472AE73163001B4389 /* HapticManager.swift */; };
+		A4D06FAE2B21428C0000D089 /* DateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D06FAD2B21428C0000D089 /* DateViewModel.swift */; };
 		A4DB7B0A2ABB837D0008AF12 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DB7B092ABB837D0008AF12 /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +50,7 @@
 		A4ADAFDC2B15238B00C14010 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A4BFFA5E2AF087F4005CD3DE /* LabelViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelViews.swift; sourceTree = "<group>"; };
 		A4C36C472AE73163001B4389 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
+		A4D06FAD2B21428C0000D089 /* DateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateViewModel.swift; sourceTree = "<group>"; };
 		A4DB7B092ABB837D0008AF12 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = CleanPad/ContentView.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -111,6 +113,7 @@
 				A4DB7B092ABB837D0008AF12 /* ContentView.swift */,
 				A44E76A52AB1307A004BBB21 /* NotesListViewModel.swift */,
 				A475B9632ACCD7DE00BE6575 /* WelcomeView.swift */,
+				A4D06FAD2B21428C0000D089 /* DateViewModel.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -246,6 +249,7 @@
 				A4C36C482AE73163001B4389 /* HapticManager.swift in Sources */,
 				A49C7DEC2ADF5BB9005922FC /* ViewModifiers.swift in Sources */,
 				A482F0DF2AC7D7CA0075A385 /* ButtonsViews.swift in Sources */,
+				A4D06FAE2B21428C0000D089 /* DateViewModel.swift in Sources */,
 				A49C7DEE2ADF5C1D005922FC /* HelperViews.swift in Sources */,
 				A461172A2AF56EB6001C0087 /* AllNotesView.swift in Sources */,
 				A4DB7B0A2ABB837D0008AF12 /* ContentView.swift in Sources */,

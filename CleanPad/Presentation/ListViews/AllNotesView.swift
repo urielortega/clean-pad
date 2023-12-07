@@ -9,8 +9,9 @@ import SwiftUI
 
 /// View that shows non-locked and locked notes, and let users tap a note to view and edit it.
 struct AllNotesView: View {
-    // Using the viewModel created in ContentView with @ObservedObject.
+    // Using the viewModels created in ContentView with @ObservedObject.
     @ObservedObject var viewModel: NotesListViewModel
+    @ObservedObject var dateViewModel: DateViewModel
     
     @Binding var showEditViewSheet: Bool
     @State private var isAnimating = false
@@ -62,7 +63,7 @@ struct AllNotesView: View {
                                 creatingNewNote: false
                             )
                         } label: {
-                            ListNoteLabel(note: note, viewModel: viewModel)
+                            ListNoteLabel(note: note, viewModel: dateViewModel)
                         }
                         .contextMenu {
                             contextMenuButtons(note: note, viewModel: viewModel)
@@ -103,7 +104,7 @@ struct AllNotesView: View {
                                  creatingNewNote: false
                              )
                          } label: {
-                             GridNoteLabel(note: note, viewModel: viewModel)
+                             GridNoteLabel(note: note, viewModel: dateViewModel)
                          }
                          .contextMenu {
                              contextMenuButtons(note: note, viewModel: viewModel)

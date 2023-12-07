@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ListNoteLabel: View {
     var note: Note
-    @ObservedObject var viewModel: NotesListViewModel
+    @ObservedObject var viewModel: DateViewModel
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -38,7 +38,7 @@ struct ListNoteLabel: View {
 
 struct GridNoteLabel: View {
     var note: Note
-    @ObservedObject var viewModel: NotesListViewModel
+    @ObservedObject var viewModel: DateViewModel
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -77,10 +77,10 @@ struct GridNoteLabel: View {
 
 
 #Preview("List View") {
-    ListNoteLabel(note: .example, viewModel: NotesListViewModel())
+    ListNoteLabel(note: .example, viewModel: DateViewModel())
         .border(.white, width: 0.5)
 }
 
 #Preview("Grid View") {
-    GridNoteLabel(note: .example, viewModel: NotesListViewModel())
+    GridNoteLabel(note: .example, viewModel: DateViewModel())
 }

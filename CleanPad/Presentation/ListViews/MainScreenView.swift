@@ -9,14 +9,17 @@ import SwiftUI
 
 /// Main View that shows the list of notes, as well as buttons to access locked (personal) notes and create new notes, and a custom tab bar.
 struct MainScreenView: View {
-    // Using the viewModel created in ContentView with @ObservedObject.
+    // Using the viewModels created in ContentView with @ObservedObject.
     @ObservedObject var viewModel: NotesListViewModel
+    @ObservedObject var dateViewModel: DateViewModel
+    
     @Binding var showEditViewSheet: Bool
     
     var body: some View {
         ZStack {
             AllNotesView(
-                viewModel: viewModel, 
+                viewModel: viewModel,
+                dateViewModel: dateViewModel,
                 showEditViewSheet: $showEditViewSheet
             )
             

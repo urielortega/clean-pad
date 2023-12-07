@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
-    // Creating shared viewModel with @StateObject.
+    // Creating shared ViewModels with @StateObject.
     @StateObject var viewModel = NotesListViewModel()
+    @StateObject var dateViewModel = DateViewModel()
     
     @State private var showEditViewSheet = false
     @State private var isAnimating = false
@@ -23,6 +24,7 @@ struct ContentView: View {
         NavigationStack {
             MainScreenView(
                 viewModel: viewModel,
+                dateViewModel: dateViewModel,
                 showEditViewSheet: $showEditViewSheet
             )
             .navigationTitle(viewModel.isNonLockedNotesTabSelected ? "Notes" : "Personal Notes")

@@ -26,7 +26,7 @@ extension View {
 
 struct NoteLabelAccessibilityModifiers: ViewModifier {
     var note: Note
-    @ObservedObject var viewModel: NotesListViewModel
+    @ObservedObject var viewModel: DateViewModel
     
     func body(content: Content) -> some View {
         content
@@ -41,7 +41,7 @@ struct NoteLabelAccessibilityModifiers: ViewModifier {
 }
 
 extension View {    
-    func noteLabelAccessibilityModifiers(note: Note, viewModel: NotesListViewModel) -> some View {
+    func noteLabelAccessibilityModifiers(note: Note, viewModel: DateViewModel) -> some View {
         modifier(NoteLabelAccessibilityModifiers(note: note, viewModel: viewModel))
     }
 }
