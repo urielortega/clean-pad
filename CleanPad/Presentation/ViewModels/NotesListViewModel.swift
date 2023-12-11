@@ -173,33 +173,46 @@ extension NotesListViewModel {
     func authenticate(for authenticationReason: Constants.AuthenticationReason, successAction: @escaping () -> Void) {
         let context = LAContext()
         var error: NSError?
+        let reason = "Please authenticate yourself to lock and unlock your notes data." // Used for Touch ID.
         
-        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-            let reason = "Please authenticate yourself to lock and unlock your notes data." // Used for Touch ID
-            
-            context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { success, authenticationError in
-                Task { @MainActor in
-                    if success {
-                        if authenticationReason == .viewNotes {
-                            self.isUnlocked = true
-                        } else if authenticationReason == .changeLockStatus {
-                            self.areChangesAllowed = true
-                        }
-                        successAction()
-                    } else {
-                        // Error.
-                        self.authenticationError = "There was a problem authenticating you. Try again."
-                        self.isShowingAuthenticationError = true
-                    }
-                }
-            }
-        } else {
-            // No biometrics.
+        guard context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) else {
+            // Error handling for devices without biometrics.
             authenticationError = "Sorry, your device does not support biometrics."
             isShowingAuthenticationError = true
+            return
+        }
+        
+        context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { success, authenticationError in
+            Task { @MainActor in
+                if success {
+                    if authenticationReason == .viewNotes {
+                        self.isUnlocked = true
+                    } else if authenticationReason == .changeLockStatus {
+                        self.areChangesAllowed = true
+                    }
+                    successAction()
+                } else {
+                    // Error handling for authentication failure.
+                    let errorDescription: String
+                    
+                    switch authenticationError {
+                    case LAError.authenticationFailed?:
+                        errorDescription = "Authentication failed. Please try again."
+                    case LAError.userCancel?, LAError.userFallback?:
+                        errorDescription = "Authentication canceled."
+                    case LAError.biometryNotAvailable?, LAError.biometryNotEnrolled?:
+                        errorDescription = "Biometrics not available or not enrolled. Use passcode instead."
+                    default:
+                        errorDescription = "Authentication error. Try again later."
+                    }
+                    
+                    self.authenticationError = errorDescription
+                    self.isShowingAuthenticationError = true
+                }
+            }
         }
     }
-    
+
     /// Function to change the `isLocked` property of a ``Note`` object.
     /// - Parameter note: A ``Note`` object, whose `isLocked` property changes if authentication is successful.
     func updateLockStatus(for note: Note) {
