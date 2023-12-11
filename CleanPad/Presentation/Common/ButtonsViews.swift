@@ -22,7 +22,7 @@ struct CreateNoteButtonView: View {
 }
 
 /// Button to definitely delete a note, with optional view dismissal.
-struct deleteNoteButton: View {
+struct DeleteNoteButton: View {
     var note: Note
     @ObservedObject var viewModel: NotesListViewModel
     var dismissView: Bool

@@ -51,7 +51,7 @@ struct NoteEditView: View {
                             Menu {
                                 isLockedToggleButtonView
                                 if !creatingNewNote {
-                                    deleteNoteButton(
+                                    DeleteNoteButton(
                                         note: note, 
                                         viewModel: viewModel,
                                         dismissView: true

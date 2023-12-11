@@ -127,7 +127,7 @@ struct AllNotesView: View {
                 note: note,
                 viewModel: viewModel
             )
-            deleteNoteButton(
+            DeleteNoteButton(
                 note: note,
                 viewModel: viewModel,
                 dismissView: false
