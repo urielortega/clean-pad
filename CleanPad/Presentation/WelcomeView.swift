@@ -57,11 +57,11 @@ struct WelcomeView: View {
             dismiss()
         } label: {
             Text("Great!")
-                .frame(width: 300, height: 50)
+                .frame(maxWidth: .infinity, minHeight: 50)
                 .background(.brown)
                 .foregroundStyle(.white)
-                .clipShape(RoundedRectangle(cornerRadius: 15.0))
-                .padding(.bottom, 50)
+                .clipShape(RoundedRectangle(cornerRadius: 25))
+                .padding()
         }
     }
 }

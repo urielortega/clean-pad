@@ -17,8 +17,8 @@ struct ContentView: View {
     
     /// Property to show WelcomeView when launching app for the first time.
     @AppStorage("isFirstLaunch") var isFirstLaunch: Bool = true
-    
     @State private var showWelcomeSheet = false
+    @State private var showFeedbackSheet = false
     
     var body: some View {
         NavigationStack {
@@ -53,6 +53,8 @@ struct ContentView: View {
                     if viewModel.isNonLockedNotesTabSelected || (viewModel.isLockedNotesTabSelected && viewModel.isUnlocked) {
                         Menu {
                             switchViewsButtonView
+                            Divider()
+                            showFeedbackViewButtonView
                         } label: {
                             Label("More options", systemImage: "ellipsis.circle")
                         }
@@ -76,6 +78,7 @@ struct ContentView: View {
                 NoteEditView(note: Note(isLocked: true), viewModel: viewModel, creatingNewNote: true)
             }
         }
+        .sheet(isPresented: $showFeedbackSheet) { FeedbackView() }
         .alert("Authentication error", isPresented: $viewModel.isShowingAuthenticationError) {
             Button("OK") { }
         } message: {
@@ -134,6 +137,15 @@ struct ContentView: View {
                 viewModel.isGridViewSelected ? "View as List" : "View as Grid",
                 systemImage: viewModel.isGridViewSelected ? "list.bullet" : "rectangle.grid.2x2"
             )
+        }
+    }
+    
+    /// Button to show view for providing feedback.
+    var showFeedbackViewButtonView: some View {
+        Button {
+            showFeedbackSheet.toggle()
+        } label: {
+            Label("Feedback", systemImage: "ellipsis.message")
         }
     }
 }
