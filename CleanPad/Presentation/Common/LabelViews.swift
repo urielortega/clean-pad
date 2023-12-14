@@ -22,6 +22,7 @@ struct ListNoteLabel: View {
                         time: .shortened
                     )
                 )
+                .lineLimit(1)
                 .foregroundStyle(.secondary)
                 
                 CustomHStackDivider(width: 0.5, height: 14)
