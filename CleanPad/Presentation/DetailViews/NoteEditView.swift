@@ -51,12 +51,12 @@ struct NoteEditView: View {
                             Menu {
                                 isLockedToggleButtonView
                                 if !creatingNewNote {
+                                    ShareLink(item: "\(note.noteTitle)\n\(note.noteContent)")
                                     DeleteNoteButton(
                                         note: note, 
                                         viewModel: viewModel,
                                         dismissView: true
                                     )
-                                    ShareLink(item: "\(note.noteTitle)\n\(note.noteContent)")
                                 }
 
                             } label: {
