@@ -127,6 +127,7 @@ struct AllNotesView: View {
                 note: note,
                 viewModel: viewModel
             )
+            ShareLink(item: "\(note.noteTitle)\n\(note.noteContent)")
             DeleteNoteButton(
                 note: note,
                 viewModel: viewModel,

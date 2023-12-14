@@ -56,6 +56,7 @@ struct NoteEditView: View {
                                         viewModel: viewModel,
                                         dismissView: true
                                     )
+                                    ShareLink(item: "\(note.noteTitle)\n\(note.noteContent)")
                                 }
 
                             } label: {
