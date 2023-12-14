@@ -53,6 +53,7 @@ struct GridNoteLabel: View {
                         time: .shortened
                     )
                 )
+                .multilineTextAlignment(.leading)
                 .padding(.bottom, 1)
                 
                 Text(note.noteContent.isEmpty ? "No content..." : note.noteContent)
