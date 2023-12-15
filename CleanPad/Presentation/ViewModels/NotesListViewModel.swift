@@ -228,11 +228,11 @@ extension NotesListViewModel {
         }
     }
     
-    func lockNotes() { // 🟢
+    func lockNotes() {
         isUnlocked = false
     }
     
-    func forbidChanges() { // 🔵
+    func forbidChanges() {
         areChangesAllowed = false
     }
     
