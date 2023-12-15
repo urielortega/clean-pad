@@ -17,7 +17,7 @@ enum Constants {
     }
     
     /// Strings shown when a list is empty to invite the user to create a note.
-    static let placeholders = [
+    static let emptyListPlaceholders = [
         "What's on your mind?",
         "How's been your day?",
         "How are you feeling right now?",
