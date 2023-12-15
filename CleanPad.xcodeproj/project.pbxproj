@@ -407,6 +407,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CleanPad/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CleanPad;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "We need to lock and unlock your notes data.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -443,6 +444,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CleanPad/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CleanPad;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "We need to lock and unlock your notes data.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
