@@ -32,6 +32,10 @@ struct WelcomeView: View {
             
             Text("Welcome to CleanPad")
                 .font(.title).bold()
+            
+            Text("The home for your thoughts")
+                .font(.title2)
+                .foregroundStyle(.secondary)
                 .padding(.bottom, 20)
         }
     }
