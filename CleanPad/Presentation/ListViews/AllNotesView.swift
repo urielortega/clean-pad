@@ -39,7 +39,7 @@ struct AllNotesView: View {
                         .padding(.bottom, 80)
                     }
                 } else {
-                    if viewModel.isGridViewSelected {
+                    if viewModel.idiom == .pad || viewModel.isGridViewSelected {
                         notesGridView
                     } else {
                         notesListView
@@ -52,7 +52,7 @@ struct AllNotesView: View {
     /// View that shows notes as rows in a single column.
     var notesListView: some View {
         VStack {
-            Form {
+            // Form {
                 List {
                     ForEach(viewModel.filteredNotes) { note in
                         NavigationLink {
@@ -74,7 +74,7 @@ struct AllNotesView: View {
                         perform: viewModel.searchText.isEmpty ? viewModel.removeNoteFromList : nil
                     )
                 }
-            }
+            // }
             
             if !viewModel.isKeyboardPresented {
                 // View to prevent CustomTabBar from hiding the List.

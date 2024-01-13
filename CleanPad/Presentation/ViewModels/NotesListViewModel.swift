@@ -65,6 +65,8 @@ final class NotesListViewModel: ObservableObject {
     
     @Published var isGridViewSelected: Bool = false
     
+    var idiom: UIUserInterfaceIdiom { UIDevice.current.userInterfaceIdiom }
+    
     // MARK: Access control properties.
     /// Property to control access to locked notes (personal space).
     @Published private(set) var isUnlocked = false

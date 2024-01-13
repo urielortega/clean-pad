@@ -52,9 +52,13 @@ struct ContentView: View {
                 ToolbarItem(placement: .topBarLeading) {
                     if viewModel.isNonLockedNotesTabSelected || (viewModel.isLockedNotesTabSelected && viewModel.isUnlocked) {
                         Menu {
-                            switchViewsButtonView
-                            Divider()
-                            showFeedbackViewButtonView
+                            if viewModel.idiom == .pad {
+                                showFeedbackViewButtonView
+                            } else {
+                                switchViewsButtonView
+                                Divider()
+                                showFeedbackViewButtonView
+                            }
                         } label: {
                             Label("More options", systemImage: "ellipsis.circle")
                         }
