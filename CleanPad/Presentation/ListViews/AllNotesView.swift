@@ -16,7 +16,6 @@ struct AllNotesView: View {
     @Binding var showEditViewSheet: Bool
     @State private var isAnimating = false
     
-    @Environment(\.horizontalSizeClass) var sizeClass
     @Environment(\.accessibilityVoiceOverEnabled) var voiceOverEnabled
 
     var body: some View {
@@ -89,7 +88,7 @@ struct AllNotesView: View {
     /// View that shows notes as a grid with multiple columns.
      var notesGridView: some View {
          let layout = [
-            GridItem(.adaptive(minimum: sizeClass == .compact ? 160 : 200))
+            GridItem(.adaptive(minimum: 160))
          ]
          
          return Group {
@@ -105,6 +104,7 @@ struct AllNotesView: View {
                              )
                          } label: {
                              GridNoteLabel(note: note, viewModel: dateViewModel)
+                                 .padding(5)
                          }
                          .contextMenu {
                              contextMenuButtons(note: note, viewModel: viewModel)

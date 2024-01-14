@@ -10,7 +10,6 @@ import SwiftUI
 /// View shown on the first app launch, containing fundamental information about the purpose and operation of the app.
 struct FeedbackView: View {
     @Environment(\.dismiss) var dismiss
-    @Environment(\.horizontalSizeClass) var sizeClass
     
     var body: some View {
         VStack {

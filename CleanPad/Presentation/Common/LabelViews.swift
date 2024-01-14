@@ -68,11 +68,13 @@ struct GridNoteLabel: View {
         .foregroundStyle(Color(.label)) // To show an appropriate color in both light and dark mode.
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
         .padding()
+        .background(.gridLabelBackground)
         .clipShape(RoundedRectangle(cornerRadius: 10))
         .overlay(
             RoundedRectangle(cornerRadius: 10)
                 .stroke(.gray.opacity(0.3), lineWidth: 2)
         )
+        .shadow(color: .gridLabelShadow, radius: 2, x: 0, y: 6)
         .noteLabelAccessibilityModifiers(note: note, viewModel: viewModel)
     }
 }
