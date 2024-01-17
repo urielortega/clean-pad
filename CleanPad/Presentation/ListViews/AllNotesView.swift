@@ -51,35 +51,31 @@ struct AllNotesView: View {
     /// View that shows notes as rows in a single column.
     var notesListView: some View {
         VStack {
-            // Form {
-                List {
-                    ForEach(viewModel.filteredNotes) { note in
-                        NavigationLink {
-                            // Open NoteEditView with the tapped note.
-                            NoteEditView(
-                                note: note,
-                                viewModel: viewModel, 
-                                creatingNewNote: false
-                            )
-                        } label: {
-                            ListNoteLabel(note: note, viewModel: dateViewModel)
-                        }
-                        .contextMenu {
-                            contextMenuButtons(note: note, viewModel: viewModel)
-                        }
+            List {
+                ForEach(viewModel.filteredNotes) { note in
+                    NavigationLink {
+                        // Open NoteEditView with the tapped note.
+                        NoteEditView(
+                            note: note,
+                            viewModel: viewModel,
+                            creatingNewNote: false
+                        )
+                    } label: {
+                        ListNoteLabel(note: note, viewModel: dateViewModel)
                     }
-                    // To avoid unexpected list behavior, note removal is forbidden when making a search.
-                    .onDelete(
-                        perform: viewModel.searchText.isEmpty ? viewModel.removeNoteFromList : nil
-                    )
+                    .contextMenu {
+                        contextMenuButtons(note: note, viewModel: viewModel)
+                    }
                 }
-            // }
-            
-            if !viewModel.isKeyboardPresented {
+                // To avoid unexpected list behavior, note removal is forbidden when making a search.
+                .onDelete(
+                    perform: viewModel.searchText.isEmpty ? viewModel.removeNoteFromList : nil
+                )
+            }
+            .safeAreaInset(edge: .bottom) {
                 // View to prevent CustomTabBar from hiding the List.
-                // Hidden when the system keyboard is shown.
-                Color.clear
-                    .frame(height: 40)
+                Spacer()
+                    .frame(height: 80)
             }
         }
         .searchable(text: $viewModel.searchText, prompt: "Look for a note...")

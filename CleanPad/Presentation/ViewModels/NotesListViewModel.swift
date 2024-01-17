@@ -15,9 +15,6 @@ final class NotesListViewModel: ObservableObject {
         
     // MARK: Search properties.
     @Published var searchText = ""
-
-    /// Property to check if the system keyboard is shown.
-    @Published var isKeyboardPresented = false
     
     // MARK: Filtering and sorting properties.
     var lockedNotes: [Note] {
