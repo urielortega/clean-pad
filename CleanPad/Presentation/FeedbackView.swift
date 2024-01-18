@@ -25,9 +25,11 @@ struct FeedbackView: View {
                 
                 dismissButtonView
             }
+            .padding(.horizontal)
         }
         .presentationDetents([.fraction(0.8)])
         .presentationDragIndicator(.visible)
+        .presentationBackground(.thinMaterial)
     }
     
     var headerView: some View {
