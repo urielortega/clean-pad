@@ -12,7 +12,6 @@ struct CleanPadApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .tint(.brown) // Modifier used to change the accent color of the whole app.
         }
     }
 }

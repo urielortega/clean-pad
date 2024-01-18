@@ -62,7 +62,7 @@ struct WelcomeView: View {
         } label: {
             Text("Great!")
                 .frame(maxWidth: .infinity, minHeight: 50)
-                .background(.brown)
+                .background(.accent)
                 .foregroundStyle(.white)
                 .clipShape(RoundedRectangle(cornerRadius: 25))
                 .padding()

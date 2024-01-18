@@ -68,7 +68,7 @@ struct CustomTabBar: View {
             Spacer()
             Label("Notes", systemImage: "note.text")
                 .padding(.bottom, 4)
-                .tint(viewModel.isNonLockedNotesTabSelected ? .brown : .gray)
+                .tint(viewModel.isNonLockedNotesTabSelected ? .accentColor : .gray)
                 .bold(viewModel.isNonLockedNotesTabSelected ? true : false)
                 .scaleEffect(viewModel.isNonLockedNotesTabSelected ? 1.0 : 0.9)
             Spacer()
@@ -84,7 +84,7 @@ struct CustomTabBar: View {
                 systemImage: viewModel.isUnlocked ? "lock.open.fill" : "lock.fill"
             )
             .padding(.bottom, 4)
-            .tint(viewModel.isLockedNotesTabSelected ? .brown : .gray)
+            .tint(viewModel.isLockedNotesTabSelected ? .accentColor : .gray)
             .bold(viewModel.isLockedNotesTabSelected ? true : false)
             .scaleEffect(viewModel.isLockedNotesTabSelected ? 1.0 : 0.9)
             Spacer()

@@ -158,7 +158,7 @@ struct AllNotesView: View {
         } label: {
             ZStack {
                 Capsule()
-                    .foregroundStyle(.brown)
+                    .foregroundStyle(.accent)
                     .frame(width: 200, height: 50)
 
                 Text("Unlock Notes")
