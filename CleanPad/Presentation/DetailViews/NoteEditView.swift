@@ -73,22 +73,28 @@ struct NoteEditView: View {
     }
     
     var titleTextFieldView: some View {
-        TextField(note.noteTitle, text: $note.noteTitle, prompt: Text("Give it a title..."))
-            .font(.title).bold()
-            .padding()
-            .onChange(of: note.noteTitle) { _ in
-                // When changing an existing note, save it while typing using update().
-                if !creatingNewNote {
-                    viewModel.update(note: note)
-                }
+        TextField(
+            note.noteTitle,
+            text: $note.noteTitle,
+            prompt: Text(
+                Constants.untitledNotePlaceholders.randomElement() ?? "Title your note..."
+            )
+        )
+        .font(.title).bold()
+        .padding()
+        .onChange(of: note.noteTitle) { _ in
+            // When changing an existing note, save it while typing using update().
+            if !creatingNewNote {
+                viewModel.update(note: note)
             }
-            .focused($focusedField, equals: .titleTextField)
-            .onAppear {
-                if creatingNewNote {
-                    self.focusedField = .titleTextField
-                }
+        }
+        .focused($focusedField, equals: .titleTextField)
+        .onAppear {
+            if creatingNewNote {
+                self.focusedField = .titleTextField
             }
-            .onSubmit { focusedField = .textEditorField }
+        }
+        .onSubmit { focusedField = .textEditorField }
     }
     
     var textContentTextEditorView: some View {
