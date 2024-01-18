@@ -50,7 +50,7 @@ struct AllNotesView: View {
     
     /// View that shows notes as rows in a single column.
     var notesListView: some View {
-        VStack {
+        Group {
             List {
                 ForEach(viewModel.filteredNotes) { note in
                     NavigationLink {
