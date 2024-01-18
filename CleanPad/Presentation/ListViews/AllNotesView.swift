@@ -84,7 +84,9 @@ struct AllNotesView: View {
     /// View that shows notes as a grid with multiple columns.
      var notesGridView: some View {
          let layout = [
-            GridItem(.adaptive(minimum: 160))
+            GridItem(
+                .adaptive(minimum: viewModel.idiom == .pad ? 200 : 160)
+            )
          ]
          
          return Group {
