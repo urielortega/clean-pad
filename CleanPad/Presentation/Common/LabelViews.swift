@@ -13,7 +13,9 @@ struct ListNoteLabel: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text(note.noteTitle.isEmpty ? "New note" : note.noteTitle)
+            Text(note.noteTitle.isEmpty ? "Untitled" : note.noteTitle)
+                .foregroundStyle(note.noteTitle.isEmpty ? .secondary : .primary)
+            
             HStack {
                 Text(
                     note.date.formatted(
@@ -43,8 +45,9 @@ struct GridNoteLabel: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text(note.noteTitle.isEmpty ? "New note" : note.noteTitle)
+            Text(note.noteTitle.isEmpty ? "Untitled" : note.noteTitle)
                 .lineLimit(1)
+                .foregroundStyle(note.noteTitle.isEmpty ? .secondary : .primary)
             
             VStack(alignment: .leading) {
                 Text(
