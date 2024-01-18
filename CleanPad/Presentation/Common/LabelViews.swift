@@ -62,6 +62,7 @@ struct GridNoteLabel: View {
                 
                 Text(note.noteContent.isEmpty ? "No content..." : note.noteContent)
                     .lineLimit(3)
+                    .foregroundStyle(note.noteContent.isEmpty ? .secondary : .primary)
                     .multilineTextAlignment(.leading)
             }
             .font(.caption2)
