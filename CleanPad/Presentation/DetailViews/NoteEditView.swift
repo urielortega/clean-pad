@@ -95,6 +95,7 @@ struct NoteEditView: View {
             }
         }
         .onSubmit { focusedField = .textEditorField }
+        .submitLabel(.next)
     }
     
     var textContentTextEditorView: some View {
