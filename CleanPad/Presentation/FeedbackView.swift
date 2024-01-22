@@ -101,7 +101,7 @@ struct FeedbackView: View {
         Button {
             dismiss()
         } label: {
-            Text("Great!")
+            Text("OK")
                 .frame(maxWidth: .infinity, minHeight: 50)
                 .background(.accent)
                 .foregroundStyle(.white)

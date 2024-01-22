@@ -19,6 +19,7 @@ struct ContentView: View {
     @AppStorage("isFirstLaunch") var isFirstLaunch: Bool = true
     @State private var showWelcomeSheet = false
     @State private var showFeedbackSheet = false
+    @State private var showAboutSheet = false
     
     var body: some View {
         NavigationStack {
@@ -53,10 +54,12 @@ struct ContentView: View {
                     if viewModel.isNonLockedNotesTabSelected || (viewModel.isLockedNotesTabSelected && viewModel.isUnlocked) {
                         Menu {
                             if viewModel.idiom == .pad {
+                                showAboutViewButtonView
                                 showFeedbackViewButtonView
                             } else {
                                 switchViewsButtonView
                                 Divider()
+                                showAboutViewButtonView
                                 showFeedbackViewButtonView
                             }
                         } label: {
@@ -73,6 +76,7 @@ struct ContentView: View {
             }
         }
         .sheet(isPresented: $showWelcomeSheet) { WelcomeView() }
+        .sheet(isPresented: $showAboutSheet) { AboutView() }
         .sheet(isPresented: $showEditViewSheet) {
             if viewModel.isNonLockedNotesTabSelected {
                 // Open NoteEditView with a blank Note:
@@ -150,6 +154,15 @@ struct ContentView: View {
             showFeedbackSheet.toggle()
         } label: {
             Label("Feedback", systemImage: "ellipsis.message")
+        }
+    }
+    
+    /// Button to show view for providing feedback.
+    var showAboutViewButtonView: some View {
+        Button {
+            showAboutSheet.toggle()
+        } label: {
+            Label("About CleanPad", systemImage: "book.pages")
         }
     }
 }
