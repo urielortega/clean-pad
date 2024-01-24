@@ -15,6 +15,7 @@ struct ListNoteLabel: View {
         VStack(alignment: .leading) {
             Text(note.noteTitle.isEmpty ? "Untitled" : note.noteTitle)
                 .foregroundStyle(note.noteTitle.isEmpty ? .secondary : .primary)
+                .lineLimit(1)
             
             HStack {
                 Text(

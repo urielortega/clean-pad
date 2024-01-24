@@ -78,7 +78,8 @@ struct NoteEditView: View {
             text: $note.noteTitle,
             prompt: Text(
                 Constants.untitledNotePlaceholders.randomElement() ?? "Title your note..."
-            )
+            ),
+            axis: .vertical
         )
         .font(.title).bold()
         .padding()
