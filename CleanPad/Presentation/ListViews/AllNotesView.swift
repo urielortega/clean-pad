@@ -65,6 +65,8 @@ struct AllNotesView: View {
                     }
                     .contextMenu {
                         contextMenuButtons(note: note, viewModel: viewModel)
+                    } preview: {
+                        ContextMenuPreview(note: note)
                     }
                 }
                 // To avoid unexpected list behavior, note removal is forbidden when making a search.
@@ -106,6 +108,8 @@ struct AllNotesView: View {
                          }
                          .contextMenu {
                              contextMenuButtons(note: note, viewModel: viewModel)
+                         } preview: {
+                             ContextMenuPreview(note: note)
                          }
                      }
                  }

@@ -83,6 +83,32 @@ struct GridNoteLabel: View {
     }
 }
 
+struct ContextMenuPreview: View {
+    var note: Note
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text(note.noteTitle.isEmpty ? "Untitled" : note.noteTitle)
+                .lineLimit(2)
+                .foregroundStyle(note.noteTitle.isEmpty ? .secondary : .primary)
+                .multilineTextAlignment(.leading)
+                .bold()
+            
+            Divider()
+            
+            Text(note.noteContent.isEmpty ? "No content..." : note.noteContent)
+                .lineLimit(7)
+                .foregroundStyle(note.noteContent.isEmpty ? .secondary : .primary)
+                .multilineTextAlignment(.leading)
+                .font(.caption)
+            
+            Spacer()
+        }
+        .frame(width: 300, height: 150)
+        .padding()
+    }
+}
+
 
 #Preview("List View") {
     ListNoteLabel(note: .example, viewModel: DateViewModel())
@@ -92,3 +118,9 @@ struct GridNoteLabel: View {
 #Preview("Grid View") {
     GridNoteLabel(note: .example, viewModel: DateViewModel())
 }
+
+#Preview("Context Menu Preview") {
+    ContextMenuPreview(note: .example)
+        .border(.gray, width: 0.5)
+}
+
