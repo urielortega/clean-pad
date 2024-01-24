@@ -58,7 +58,7 @@ struct CustomTabBar: View {
                 .padding(.trailing, 10)
                 Spacer()
             }
-            .frame(height: 50)
+            .frame(height: 55)
             .dockStyle()
         }
     }
@@ -73,6 +73,7 @@ struct CustomTabBar: View {
                 .scaleEffect(viewModel.isNonLockedNotesTabSelected ? 1.0 : 0.9)
             Spacer()
         }
+        .frame(height: 50)
         .accessibilityLabel("Your notes.")
     }
     
@@ -89,6 +90,7 @@ struct CustomTabBar: View {
             .scaleEffect(viewModel.isLockedNotesTabSelected ? 1.0 : 0.9)
             Spacer()
         }
+        .frame(height: 50)
         .accessibilityLabel("Your personal notes.")
     }
 }
