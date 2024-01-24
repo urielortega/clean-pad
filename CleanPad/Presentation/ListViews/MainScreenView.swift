@@ -38,29 +38,39 @@ struct CustomTabBar: View {
             
             HStack {
                 Spacer()
-                Button {
-                    withAnimation(.bouncy) { viewModel.selectedTab = .nonLockedNotes }
-                    HapticManager.instance.impact(style: .soft)
-                } label: {
-                    nonLockedNotesTabLabel
-                }
-                .padding(.horizontal, 10)
+                
+                nonLockedNotesTabButton
                 
                 CustomHStackDivider()
                     .padding(.vertical)
                 
-                Button {
-                    withAnimation(.bouncy) { viewModel.selectedTab = .lockedNotes }
-                    HapticManager.instance.impact(style: .soft)
-                } label: {
-                    lockedNotesTabLabel
-                }
-                .padding(.trailing, 10)
+                lockedNotesTabButton
+                
                 Spacer()
             }
             .frame(height: 55)
             .dockStyle()
         }
+    }
+    
+    var nonLockedNotesTabButton: some View {
+        Button {
+            withAnimation(.bouncy) { viewModel.selectedTab = .nonLockedNotes }
+            HapticManager.instance.impact(style: .soft)
+        } label: {
+            nonLockedNotesTabLabel
+        }
+        .padding(.horizontal, 10)
+    }
+    
+    var lockedNotesTabButton: some View {
+        Button {
+            withAnimation(.bouncy) { viewModel.selectedTab = .lockedNotes }
+            HapticManager.instance.impact(style: .soft)
+        } label: {
+            lockedNotesTabLabel
+        }
+        .padding(.trailing, 10)
     }
     
     var nonLockedNotesTabLabel: some View {
