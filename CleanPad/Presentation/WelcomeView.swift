@@ -23,7 +23,7 @@ struct WelcomeView: View {
     
     var headerView: some View {
         Group {
-            Image("CleanPadIcon")
+            Image(decorative: "CleanPadIcon")
                 .resizable()
                 .frame(width: 150, height: 150)
                 .clipShape(RoundedRectangle(cornerRadius: 35.0))
