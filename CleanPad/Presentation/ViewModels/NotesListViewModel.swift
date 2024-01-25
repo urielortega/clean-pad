@@ -60,7 +60,7 @@ final class NotesListViewModel: ObservableObject {
         }
     }
     
-    @Published var isGridViewSelected: Bool = false
+    @AppStorage("isGridViewSelected") var isGridViewSelected = false
     
     var idiom: UIUserInterfaceIdiom { UIDevice.current.userInterfaceIdiom }
     

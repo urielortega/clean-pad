@@ -12,12 +12,13 @@ struct ContentView: View {
     @StateObject var viewModel = NotesListViewModel()
     @StateObject var dateViewModel = DateViewModel()
     
-    @State private var showEditViewSheet = false
     @State private var isAnimating = false
     
     /// Property to show WelcomeView when launching app for the first time.
     @AppStorage("isFirstLaunch") var isFirstLaunch: Bool = true
+    
     @State private var showWelcomeSheet = false
+    @State private var showEditViewSheet = false
     @State private var showFeedbackSheet = false
     @State private var showAboutSheet = false
     
