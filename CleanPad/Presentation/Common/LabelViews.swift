@@ -49,6 +49,7 @@ struct GridNoteLabel: View {
             Text(note.noteTitle.isEmpty ? "Untitled" : note.noteTitle)
                 .lineLimit(1)
                 .foregroundStyle(note.noteTitle.isEmpty ? .secondary : .primary)
+                .bold()
             
             VStack(alignment: .leading) {
                 Text(

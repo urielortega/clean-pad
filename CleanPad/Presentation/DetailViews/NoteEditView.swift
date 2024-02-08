@@ -78,11 +78,10 @@ struct NoteEditView: View {
             text: $note.noteTitle,
             prompt: Text(
                 Constants.untitledNotePlaceholders.randomElement() ?? "Title your note..."
-            ),
-            axis: .vertical
+            )
         )
-        .font(.title).bold()
-        .padding()
+        .font(.title2).bold()
+        .padding(.leading)
         .onChange(of: note.noteTitle) { _ in
             // When changing an existing note, save it while typing using update().
             if !creatingNewNote {
