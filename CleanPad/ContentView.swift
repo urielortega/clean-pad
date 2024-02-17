@@ -29,7 +29,7 @@ struct ContentView: View {
                 dateViewModel: dateViewModel,
                 showEditViewSheet: $showEditViewSheet
             )
-            .navigationTitle(viewModel.isNonLockedNotesTabSelected ? "Notes" : "Personal Notes")
+            .navigationTitle(viewModel.isNonLockedNotesTabSelected ? "Notes" : "Private Notes")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     HStack {
@@ -107,7 +107,7 @@ struct ContentView: View {
         }
     }
     
-    /// Button to allow and forbid access to the locked notes list (personal space).
+    /// Button to allow and forbid access to the locked notes list (private space).
     var lockAndUnlockNotesButtonView: some View {
         Button {
             withAnimation {

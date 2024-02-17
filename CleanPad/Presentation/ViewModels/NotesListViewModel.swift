@@ -65,7 +65,7 @@ final class NotesListViewModel: ObservableObject {
     var idiom: UIUserInterfaceIdiom { UIDevice.current.userInterfaceIdiom }
     
     // MARK: Access control properties.
-    /// Property to control access to locked notes (personal space).
+    /// Property to control access to locked notes (private space).
     @Published private(set) var isUnlocked = false
     
     /// Property to control changes in notes.

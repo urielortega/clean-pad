@@ -31,7 +31,7 @@ struct NoteLabelAccessibilityModifiers: ViewModifier {
     func body(content: Content) -> some View {
         content
             .accessibilityElement()
-            .accessibilityLabel(note.isLocked ? "Personal note: \(note.noteTitle)" : "Note: \(note.noteTitle)")
+            .accessibilityLabel(note.isLocked ? "Private note: \(note.noteTitle)" : "Note: \(note.noteTitle)")
             .accessibilityHint(
                 viewModel.isNoteDateEqualToToday(note: note)
                 ? "Created at \(note.date.formatted(date: .omitted, time: .shortened))"

@@ -11,7 +11,7 @@ import Foundation
 struct Note: Codable, Identifiable, Equatable {
     var id = UUID()
     
-    /// Property that indicates whether a note is personal (locked) or not.
+    /// Property that indicates whether a note is private (locked) or not.
     var isLocked = false
     
     var date = Date.now

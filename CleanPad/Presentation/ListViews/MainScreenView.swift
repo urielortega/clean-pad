@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-/// Main View that shows the list of notes, as well as buttons to access locked (personal) notes and create new notes, and a custom tab bar.
+/// Main View that shows the list of notes, as well as buttons to access locked (private) notes and create new notes, and a custom tab bar.
 struct MainScreenView: View {
     // Using the viewModels created in ContentView with @ObservedObject.
     @ObservedObject var viewModel: NotesListViewModel
@@ -91,7 +91,7 @@ struct CustomTabBar: View {
         HStack {
             Spacer()
             Label(
-                "Personal",
+                "Private",
                 systemImage: viewModel.isUnlocked ? "lock.open.fill" : "lock.fill"
             )
             .padding(.bottom, 4)
@@ -101,6 +101,6 @@ struct CustomTabBar: View {
             Spacer()
         }
         .frame(height: 50)
-        .accessibilityLabel("Your personal notes.")
+        .accessibilityLabel("Your private notes.")
     }
 }

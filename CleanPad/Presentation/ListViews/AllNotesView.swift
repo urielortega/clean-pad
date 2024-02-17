@@ -138,7 +138,7 @@ struct AllNotesView: View {
         }
     }
     
-    /// Button to change isLocked note property, i.e., remove it from or move it to personal space.
+    /// Button to change isLocked note property, i.e., remove it from or move it to private space.
     struct isLockedToggleButton: View {
         var note: Note
         @ObservedObject var viewModel: NotesListViewModel
@@ -148,7 +148,7 @@ struct AllNotesView: View {
                 viewModel.updateLockStatus(for: note)
             } label: {
                 Label(
-                    viewModel.isLockedNotesTabSelected ? "Remove from personal space" : "Move to personal space",
+                    viewModel.isLockedNotesTabSelected ? "Remove from private space" : "Move to private space",
                     systemImage: viewModel.isLockedNotesTabSelected ? "lock.slash.fill" : "lock.fill"
                 )
             }

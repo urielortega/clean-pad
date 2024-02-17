@@ -110,7 +110,7 @@ struct NoteEditView: View {
             }
     }
     
-    /// Button to toggle `isLocked` property of a note, i.e., move it to or remove it from the personal space.
+    /// Button to toggle `isLocked` property of a note, i.e., move it to or remove it from the private space.
     var isLockedToggleButtonView: some View {
         Button {
             if creatingNewNote {
@@ -121,12 +121,12 @@ struct NoteEditView: View {
         } label: {
             if creatingNewNote { // When creating a new note, Label responds to the State property.
                 Label(
-                    !note.isLocked ? "Move to personal space" : "Remove from personal space",
+                    !note.isLocked ? "Move to private space" : "Remove from private space",
                     systemImage: !note.isLocked ? "lock.fill" : "lock.slash.fill"
                 )
             } else {
                 Label( // When editing an existing note, Label responds to the value of notes array (persistent storage).
-                    !(viewModel.getNoteFromNotesArray(note: note)!.isLocked) ? "Move to personal space" : "Remove from personal space",
+                    !(viewModel.getNoteFromNotesArray(note: note)!.isLocked) ? "Move to private space" : "Remove from private space",
                     systemImage: !note.isLocked ? "lock.fill" : "lock.slash.fill"
                 )
             }
