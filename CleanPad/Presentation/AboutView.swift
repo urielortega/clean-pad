@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// View containing fundamental information about the purpose and operation of the app, accesible at anytime for the user.
 struct AboutView: View {
     @State private var greeting = "Good morning!"
     @State private var backgroundImage = "sunrise"
