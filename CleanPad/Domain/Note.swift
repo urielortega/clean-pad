@@ -18,6 +18,8 @@ struct Note: Codable, Identifiable, Equatable {
     
     var noteTitle = ""
     var noteContent = ""
+    
+    var category: Category?
 }
 
 extension Note {
