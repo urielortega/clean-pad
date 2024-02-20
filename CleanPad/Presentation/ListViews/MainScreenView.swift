@@ -37,19 +37,25 @@ struct CustomTabBar: View {
             Spacer() // To push the TabBar to the bottom.
             
             HStack {
-                Spacer()
+                manageCategoriesTabButton
                 
-                nonLockedNotesTabButton
+                HStack {
+                    Spacer()
+                    
+                    nonLockedNotesTabButton
+                    
+                    CustomHStackDivider()
+                        .padding(.vertical)
+                    
+                    lockedNotesTabButton
+                    
+                    Spacer()
+                }
+                .frame(height: 55)
+                .dockStyle()
                 
-                CustomHStackDivider()
-                    .padding(.vertical)
-                
-                lockedNotesTabButton
-                
-                Spacer()
+                createNoteTabButton
             }
-            .frame(height: 55)
-            .dockStyle()
         }
     }
     
@@ -77,6 +83,7 @@ struct CustomTabBar: View {
         HStack {
             Spacer()
             Label("Notes", systemImage: "note.text")
+                .font(.subheadline)
                 .padding(.bottom, 4)
                 .tint(viewModel.isNonLockedNotesTabSelected ? .accentColor : .gray)
                 .bold(viewModel.isNonLockedNotesTabSelected ? true : false)
@@ -94,6 +101,7 @@ struct CustomTabBar: View {
                 "Private",
                 systemImage: viewModel.isUnlocked ? "lock.open.fill" : "lock.fill"
             )
+            .font(.subheadline)
             .padding(.bottom, 4)
             .tint(viewModel.isLockedNotesTabSelected ? .accentColor : .gray)
             .bold(viewModel.isLockedNotesTabSelected ? true : false)
@@ -103,4 +111,30 @@ struct CustomTabBar: View {
         .frame(height: 50)
         .accessibilityLabel("Your private notes.")
     }
+    
+    var createNoteTabButton: some View {
+        Button {
+            // TODO: Toggle showEditViewSheet.
+        } label: {
+            Label("New note", systemImage: "plus")
+                .labelStyle(.iconOnly)
+        }
+        .frame(height: 55)
+        .dockButtonStyle(position: .right)
+    }
+    
+    var manageCategoriesTabButton: some View {
+        Button {
+            // TODO: Open menu to manage categories.
+        } label: {
+            Label("Categories", systemImage: "tag.fill")
+                .labelStyle(.iconOnly)
+        }
+        .frame(height: 55)
+        .dockButtonStyle(position: .left)
+    }
+}
+
+#Preview("CustomTabBar") {
+    CustomTabBar(viewModel: NotesListViewModel())
 }

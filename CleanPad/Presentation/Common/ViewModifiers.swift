@@ -13,8 +13,8 @@ struct Dock: ViewModifier {
             .frame(maxWidth: .infinity)
             .background(.ultraThinMaterial)
             .clipShape(RoundedRectangle(cornerRadius: 20))
-            .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.20), radius: 10)
-            .padding()
+            .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.14), radius: 8)
+            .padding(.vertical)
     }
 }
 
@@ -23,6 +23,30 @@ extension View {
         modifier(Dock())
     }
 }
+
+enum DockButtonPosition {
+    case left, right
+}
+
+struct DockButton: ViewModifier {
+    let position: DockButtonPosition
+
+    func body(content: Content) -> some View {
+        content
+            .frame(maxWidth: 55)
+            .background(.ultraThinMaterial)
+            .clipShape(RoundedRectangle(cornerRadius: 20))
+            .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.14), radius: 8)
+            .padding(((position == .left) ? .leading : .trailing), 10)
+    }
+}
+
+extension View {
+    func dockButtonStyle(position: DockButtonPosition) -> some View {
+        modifier(DockButton(position: position))
+    }
+}
+
 
 struct NoteLabelAccessibilityModifiers: ViewModifier {
     var note: Note
@@ -40,7 +64,7 @@ struct NoteLabelAccessibilityModifiers: ViewModifier {
     }
 }
 
-extension View {    
+extension View {
     func noteLabelAccessibilityModifiers(note: Note, viewModel: DateViewModel) -> some View {
         modifier(NoteLabelAccessibilityModifiers(note: note, viewModel: viewModel))
     }
