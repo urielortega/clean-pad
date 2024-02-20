@@ -13,10 +13,7 @@ struct Dock: ViewModifier {
             .frame(maxWidth: .infinity)
             .background(.ultraThinMaterial)
             .clipShape(RoundedRectangle(cornerRadius: 20))
-            .overlay {
-                RoundedRectangle(cornerRadius: 20)
-                    .stroke(.gray.gradient.opacity(0.1), lineWidth: 3)
-            }
+            .roundedRectangleOverlayStroke()
             .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.14), radius: 8)
             .padding(.vertical)
     }
@@ -40,10 +37,7 @@ struct DockButton: ViewModifier {
             .frame(maxWidth: 55)
             .background(.ultraThinMaterial)
             .clipShape(RoundedRectangle(cornerRadius: 20))
-            .overlay {
-                RoundedRectangle(cornerRadius: 20)
-                    .stroke(.gray.gradient.opacity(0.1), lineWidth: 3)
-            }
+            .roundedRectangleOverlayStroke()
             .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.14), radius: 8)
             .padding(((position == .left) ? .leading : .trailing), 10)
     }
@@ -55,6 +49,21 @@ extension View {
     }
 }
 
+struct RoundedRectangleOverlayStroke: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .overlay {
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(.gray.gradient.opacity(0.1), lineWidth: 3)
+            }
+    }
+}
+
+extension View {
+    func roundedRectangleOverlayStroke() -> some View {
+        modifier(RoundedRectangleOverlayStroke())
+    }
+}
 
 struct NoteLabelAccessibilityModifiers: ViewModifier {
     var note: Note
