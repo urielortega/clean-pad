@@ -14,7 +14,7 @@ final class NotesListViewModel: ObservableObject {
     @Published private(set) var notes: [Note] = []
     
     /// Array saved in documents directory containing note categories.
-    // @Published private(set) var categories: [Category] = [.general]
+    @Published private(set) var categories: [Category] = [.general]
         
     // MARK: Search properties.
     @Published var searchText = ""
@@ -162,13 +162,24 @@ extension NotesListViewModel {
         do {
             let data = try Data(contentsOf: Constants.savePath)
             notes = try JSONDecoder().decode([Note].self, from: data)
+            
+            setGeneralCategoryToUnassignedNotes()
         } catch {
             notes = []
         }
         
         // Print statements for testing.
         print(notes)
-        // print(categories)
+        print(categories)
+    }
+    
+    /// Function that sets General category to notes that are currently unassigned to any category.
+    func setGeneralCategoryToUnassignedNotes() {
+        for index in notes.indices {
+            if notes[index].category == nil {
+                notes[index].category = .general
+            }
+        }
     }
     
     // MARK: Access control functions.

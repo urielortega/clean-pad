@@ -36,6 +36,10 @@ struct ListNoteLabel: View {
                     .foregroundStyle(.secondary)
             }
             .font(.caption2)
+            
+            // View for testing Category display.
+            Text("Category: \(note.unwrappedCategoryName)")
+                .foregroundStyle(note.category?.color ?? .red) // Red means "unable to get category color".
         }
         .noteLabelAccessibilityModifiers(note: note, viewModel: viewModel)
     }

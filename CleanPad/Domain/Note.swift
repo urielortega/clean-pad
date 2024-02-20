@@ -20,6 +20,10 @@ struct Note: Codable, Identifiable, Equatable {
     var noteContent = ""
     
     var category: Category?
+    
+    var unwrappedCategoryName: String {
+        category?.name ?? "No category"
+    }
 }
 
 extension Note {
