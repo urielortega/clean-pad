@@ -12,6 +12,9 @@ import SwiftUI
 final class NotesListViewModel: ObservableObject {
     /// Array saved in documents directory containing all user notes.
     @Published private(set) var notes: [Note] = []
+    
+    /// Array saved in documents directory containing note categories.
+    // @Published private(set) var categories: [Category] = [.general]
         
     // MARK: Search properties.
     @Published var searchText = ""
@@ -162,6 +165,10 @@ extension NotesListViewModel {
         } catch {
             notes = []
         }
+        
+        // Print statements for testing.
+        print(notes)
+        // print(categories)
     }
     
     // MARK: Access control functions.
