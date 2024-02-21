@@ -8,19 +8,6 @@
 import Foundation
 import SwiftUI
 
-/// Button to show NoteEditView sheet.
-struct CreateNoteButtonView: View {
-    @Binding var showEditViewSheet: Bool
-    
-    var body: some View {
-        Button {
-            showEditViewSheet.toggle()
-        } label: {
-            Label("Create note", systemImage: "plus")
-        }
-    }
-}
-
 /// Button to definitely delete a note, with optional view dismissal.
 struct DeleteNoteButton: View {
     var note: Note

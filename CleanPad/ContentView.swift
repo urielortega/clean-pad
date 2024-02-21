@@ -32,21 +32,11 @@ struct ContentView: View {
             .navigationTitle(viewModel.isNonLockedNotesTabSelected ? "Notes" : "Private Notes")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    HStack {
-                        if viewModel.isNonLockedNotesTabSelected {
-                            lockAndUnlockNotesButtonView
-                            if !(viewModel.nonLockedNotes.isEmpty) {
-                                CreateNoteButtonView(showEditViewSheet: $showEditViewSheet) // Only shown when the list isn't empty.
-                            }
-                        } else if viewModel.isLockedNotesTabSelected {
-                            if viewModel.isUnlocked {
-                                HStack {
-                                    lockNotesButtonView
-                                    if !(viewModel.lockedNotes.isEmpty) {
-                                        CreateNoteButtonView(showEditViewSheet: $showEditViewSheet) // Only shown when the list isn't empty.
-                                    }
-                                }
-                            }
+                    if viewModel.isNonLockedNotesTabSelected {
+                        lockAndUnlockNotesButtonView
+                    } else { // Locked Notes Tab is selected.
+                        if viewModel.isUnlocked {
+                            lockNotesButtonView
                         }
                     }
                 }
@@ -82,7 +72,7 @@ struct ContentView: View {
             if viewModel.isNonLockedNotesTabSelected {
                 // Open NoteEditView with a blank Note:
                 NoteEditView(note: Note(), viewModel: viewModel, creatingNewNote: true)
-            } else if viewModel.isLockedNotesTabSelected {
+            } else { // Locked Notes Tab is selected.
                 // Open NoteEditView with a blank locked Note:
                 NoteEditView(note: Note(isLocked: true), viewModel: viewModel, creatingNewNote: true)
             }
