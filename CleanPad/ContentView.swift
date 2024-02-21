@@ -86,10 +86,10 @@ struct ContentView: View {
     /// Button to hide locked notes list.
     var lockNotesButtonView: some View {
         Button {
-            withAnimation {
+            withAnimation(.bouncy) {
                 viewModel.lockNotes()
+                HapticManager.instance.impact(style: .rigid)
             }
-            HapticManager.instance.impact(style: .rigid)
         } label: {
             Label("Lock notes", systemImage: "lock.open.fill")
         }
@@ -98,7 +98,7 @@ struct ContentView: View {
     /// Button to allow and forbid access to the locked notes list (private space).
     var lockAndUnlockNotesButtonView: some View {
         Button {
-            withAnimation {
+            withAnimation(.bouncy) {
                 if viewModel.isUnlocked {
                     viewModel.lockNotes()
                     HapticManager.instance.impact(style: .rigid)
