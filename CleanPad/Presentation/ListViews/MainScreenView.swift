@@ -23,7 +23,7 @@ struct MainScreenView: View {
                 showEditViewSheet: $showEditViewSheet
             )
             
-            CustomTabBar(viewModel: viewModel)
+            CustomTabBar(viewModel: viewModel, showEditViewSheet: $showEditViewSheet)
         }
     }
 }
@@ -31,6 +31,7 @@ struct MainScreenView: View {
 /// Tab Bar with two buttons to switch between non-locked notes list and locked notes list.
 struct CustomTabBar: View {
     @ObservedObject var viewModel: NotesListViewModel
+    @Binding var showEditViewSheet: Bool
 
     var body: some View {
         VStack {
@@ -114,7 +115,8 @@ struct CustomTabBar: View {
     
     var createNoteTabButton: some View {
         Button {
-            // TODO: Toggle showEditViewSheet.
+            showEditViewSheet.toggle()
+            HapticManager.instance.impact(style: .soft)
         } label: {
             Label("New note", systemImage: "plus")
                 .labelStyle(.iconOnly)
@@ -126,6 +128,7 @@ struct CustomTabBar: View {
     var manageCategoriesTabButton: some View {
         Button {
             // TODO: Open menu to manage categories.
+            HapticManager.instance.impact(style: .soft)
         } label: {
             Label("Categories", systemImage: "tag.fill")
                 .labelStyle(.iconOnly)
@@ -136,5 +139,5 @@ struct CustomTabBar: View {
 }
 
 #Preview("CustomTabBar") {
-    CustomTabBar(viewModel: NotesListViewModel())
+    CustomTabBar(viewModel: NotesListViewModel(), showEditViewSheet: .constant(false))
 }
