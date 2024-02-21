@@ -158,12 +158,19 @@ struct AllNotesView: View {
     /// Button to authenticate and show locked notes list.
     var unlockNotesButtonView: some View {
         Button {
-            viewModel.authenticate(for: .viewNotes) {  }
+            withAnimation {
+                HapticManager.instance.impact(style: .soft)
+                viewModel.authenticate(for: .viewNotes) {  }
+            }
         } label: {
             ZStack {
                 Capsule()
                     .foregroundStyle(.accent)
                     .frame(width: 200, height: 50)
+                    .overlay {
+                        Capsule()
+                            .stroke(.brown.gradient, lineWidth: 3)
+                    }
 
                 Text("Unlock Notes")
                     .foregroundStyle(.white)
@@ -176,7 +183,7 @@ struct AllNotesView: View {
         .onAppear {
             DispatchQueue.main.async {
                 // Using withAnimation() to avoid unintentional movement:
-                withAnimation(.easeInOut(duration: 1.5).repeatForever(autoreverses: true)) {
+                withAnimation(.easeInOut(duration: 2).repeatForever(autoreverses: true)) {
                     isAnimating.toggle()
                 }
             }
