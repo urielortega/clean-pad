@@ -12,8 +12,6 @@ struct ContentView: View {
     @StateObject var viewModel = NotesListViewModel()
     @StateObject var dateViewModel = DateViewModel()
     
-    @State private var isAnimating = false
-    
     /// Property to show WelcomeView when launching app for the first time.
     @AppStorage("isFirstLaunch") var isFirstLaunch: Bool = true
     
@@ -107,23 +105,12 @@ struct ContentView: View {
                 } else {
                     viewModel.authenticate(for: .viewNotes) { }
                 }
-                isAnimating.toggle()
             }
         } label: {
             Label(
                 viewModel.isUnlocked ? "Lock notes" : "Unlock notes",
                 systemImage: viewModel.isUnlocked ? "lock.open.fill" : "lock.fill"
             )
-            .scaleEffect(isAnimating ? 0.7 : 1.0)
-            .opacity(isAnimating ? 0.5 : 1.0)
-            .animation(
-                .snappy.repeatCount(1, autoreverses: true),
-                value: isAnimating
-            )
-            .onChange(of: viewModel.isUnlocked) { _ in
-                // Reset the animation when isUnlocked changes.
-                isAnimating = false
-            }
         }
     }
     
