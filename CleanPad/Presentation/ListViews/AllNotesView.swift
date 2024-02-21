@@ -171,6 +171,7 @@ struct AllNotesView: View {
                         Capsule()
                             .stroke(.brown.gradient, lineWidth: 3)
                     }
+                    .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.14), radius: 8)
 
                 Text("Unlock Notes")
                     .foregroundStyle(.white)
