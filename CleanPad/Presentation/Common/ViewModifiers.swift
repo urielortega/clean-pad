@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct Dock: ViewModifier {
+    @ObservedObject var viewModel: NotesListViewModel
+
     func body(content: Content) -> some View {
         content
             .frame(maxWidth: .infinity)
@@ -16,12 +18,13 @@ struct Dock: ViewModifier {
             .roundedRectangleOverlayStroke()
             .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.14), radius: 8)
             .padding(.vertical)
+            .padding(.horizontal, viewModel.showingTabButtons ? 0 : 10)
     }
 }
 
 extension View {
-    func dockStyle() -> some View {
-        modifier(Dock())
+    func dockStyle(viewModel: NotesListViewModel) -> some View {
+        modifier(Dock(viewModel: viewModel))
     }
 }
 

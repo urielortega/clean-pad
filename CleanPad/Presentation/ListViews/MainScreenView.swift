@@ -38,26 +38,34 @@ struct CustomTabBar: View {
             Spacer() // To push the TabBar to the bottom.
             
             HStack {
-                manageCategoriesTabButton
-                
-                HStack {
-                    Spacer()
-                    
-                    nonLockedNotesTabButton
-                    
-                    CustomHStackDivider()
-                        .padding(.vertical)
-                    
-                    lockedNotesTabButton
-                    
-                    Spacer()
+                if viewModel.showingTabButtons {
+                    manageCategoriesTabButton
                 }
-                .frame(height: 55)
-                .dockStyle()
                 
-                createNoteTabButton
+                tabBar
+                
+                if viewModel.showingTabButtons {
+                    createNoteTabButton
+                }
             }
         }
+    }
+    
+    var tabBar: some View {
+        HStack {
+            Spacer()
+            
+            nonLockedNotesTabButton
+            
+            CustomHStackDivider()
+                .padding(.vertical)
+            
+            lockedNotesTabButton
+            
+            Spacer()
+        }
+        .frame(height: 55)
+        .dockStyle(viewModel: viewModel)
     }
     
     var nonLockedNotesTabButton: some View {

@@ -63,6 +63,12 @@ final class NotesListViewModel: ObservableObject {
         }
     }
     
+    var showingTabButtons: Bool {
+        // Tab Buttons are shown only when the Non-Locked Notes Tab is selected...
+        // ...or the Locked Notes Tab is selected and access to it is granted.
+        isNonLockedNotesTabSelected || (isLockedNotesTabSelected && isUnlocked)
+    }
+    
     @AppStorage("isGridViewSelected") var isGridViewSelected = false
     
     var idiom: UIUserInterfaceIdiom { UIDevice.current.userInterfaceIdiom }
