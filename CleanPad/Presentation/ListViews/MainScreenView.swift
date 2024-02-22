@@ -128,21 +128,36 @@ struct CustomTabBar: View {
         } label: {
             Label("New note", systemImage: "plus")
                 .labelStyle(.iconOnly)
+                .frame(width: 55, height: 55) // Frame on Label so Menu Tap is better detected.
         }
-        .frame(height: 55)
         .dockButtonStyle(position: .right)
     }
     
     var manageCategoriesTabButton: some View {
-        Button {
-            // TODO: Open menu to manage categories.
-            HapticManager.instance.impact(style: .soft)
+        Menu {
+            Button("Check Selected Category") {
+                print("Selected Category: \(viewModel.selectedCategory.name) \(viewModel.selectedCategory.id)")
+            }
+            
+            Button("No category") {
+                viewModel.selectedCategory = .emptySelection
+                print("Selected Category: \(viewModel.selectedCategory.name)")
+            }
+            
+            Picker("Categories", selection: $viewModel.selectedCategory) {
+                ForEach(viewModel.categories) { category in
+                    Text(category.name).tag(category as Category)
+                }
+            }
         } label: {
-            Label("Categories", systemImage: "tag.fill")
+            Label("Select a Category", systemImage: "tag.fill")
                 .labelStyle(.iconOnly)
+                .frame(width: 55, height: 55) // Frame on Label so Menu Tap is better detected.
         }
-        .frame(height: 55)
         .dockButtonStyle(position: .left)
+        .onTapGesture {
+            HapticManager.instance.impact(style: .soft)
+        }
     }
 }
 
