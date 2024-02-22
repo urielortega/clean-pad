@@ -38,6 +38,8 @@ final class NotesListViewModel: ObservableObject {
             .sorted { $0.date > $1.date }
     }
     
+    @Published var selectedCategory: Category = .emptySelection
+    
     /// Computed property that returns a Note array with all notes or the ones resulting from a search.
     var filteredNotes: [Note] {
         if searchText.isEmpty {
@@ -333,7 +335,7 @@ extension NotesListViewModel {
     }
     
     func addTestNoteWithTestCategory() {
-        let testCategory = Category(name: "Test2", color: .green)
+        let testCategory = Category(id: UUID(), name: "Test2", color: .green)
         
         add(category: testCategory)
         saveAllCategories()
@@ -347,6 +349,13 @@ extension NotesListViewModel {
             )
         )
         saveAllNotes()
+    }
+    
+    func addTestCategory() {
+        let testCategory = Category(id: UUID(), name: "Test3", color: .pink)
+        
+        add(category: testCategory)
+        saveAllCategories()
     }
     
     // Deletes every category except the General category.
