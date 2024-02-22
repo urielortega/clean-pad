@@ -128,7 +128,7 @@ struct CustomTabBar: View {
         } label: {
             Label("New note", systemImage: "plus")
                 .labelStyle(.iconOnly)
-                .frame(width: 55, height: 55) // Frame on Label so Menu Tap is better detected.
+                .frame(width: 55, height: 55) // Frame on Label so tap is better detected.
         }
         .dockButtonStyle(position: .right)
     }
