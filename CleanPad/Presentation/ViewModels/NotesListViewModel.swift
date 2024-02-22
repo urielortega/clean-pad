@@ -90,7 +90,7 @@ final class NotesListViewModel: ObservableObject {
 
 /// ViewModel functions:
 extension NotesListViewModel {
-    // MARK: CRUD functions.
+    // MARK: Note CRUD functions.
     /// Function to add a note to the ``notes`` array and save the changes after the addition.
     /// - Parameter note: A  new ``Note`` object to be added to the ``notes`` array.
     func add(note: Note) {
@@ -162,16 +162,43 @@ extension NotesListViewModel {
         }
     }
     
+    // MARK: Category CRUD functions.
+    /// Function to add a category to the ``categories`` array and save the changes after the addition.
+    /// - Parameter category: A  new ``Category`` object to be added to the ``categories`` array.
+    func add(category: Category) {
+        categories.append(category)
+        saveAllCategories()
+    }
+    
+    /// Function to save existing categories with documents directory.
+    func saveAllCategories() {
+        do {
+            let data = try JSONEncoder().encode(categories)
+            try data.write(to: Constants.categoriesPath, options: [.atomic, .completeFileProtection])
+        } catch {
+            print("Unable to save data.")
+        }
+    }
+    
     // MARK: Data loading functions.
     /// Function responsible for loading user data with documents directory when launching app.
     func loadData() {
         do {
+            // Loading notes data:
             let data = try Data(contentsOf: Constants.savePath)
             notes = try JSONDecoder().decode([Note].self, from: data)
+        } catch {
+            notes = []
+        }
+        
+        do {
+            // Loading categories data:
+            let categoriesData = try Data(contentsOf: Constants.categoriesPath)
+            categories = try JSONDecoder().decode([Category].self, from: categoriesData)
             
             setGeneralCategoryToUnassignedNotes()
         } catch {
-            notes = []
+            categories = [.general]
         }
         
         // Print statements for testing.
@@ -303,5 +330,29 @@ extension NotesListViewModel {
         for note in Note.screenshotsExamples {
             add(note: note)
         }
+    }
+    
+    func addTestNoteWithTestCategory() {
+        let testCategory = Category(name: "Test2", color: .green)
+        
+        add(category: testCategory)
+        saveAllCategories()
+
+        add(
+            note: Note(
+                isLocked: false, 
+                noteTitle: "Test2 Category Note",
+                noteContent: "New Category!",
+                category: testCategory
+            )
+        )
+        saveAllNotes()
+    }
+    
+    // Deletes every category except the General category.
+    func dropAllCategories() {
+        categories = [.general]
+        saveAllCategories()
+        print(categories)
     }
 }

@@ -39,5 +39,5 @@ enum Constants {
     static let savePath = FileManager.documentsDirectory.appendingPathComponent("SavedNotes")
     
     /// Path used to store ``categories`` with documents directory.
-    // static let categoriesPath = FileManager.documentsDirectory.appendingPathComponent ("SavedCategories")
+    static let categoriesPath = FileManager.documentsDirectory.appendingPathComponent ("SavedCategories")
 }
