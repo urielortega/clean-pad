@@ -26,7 +26,7 @@ struct WelcomeView: View {
             Image(decorative: "CleanPadIcon")
                 .resizable()
                 .frame(width: 150, height: 150)
-                .clipShape(RoundedRectangle(cornerRadius: 35.0))
+                .clipShape(.rect(cornerRadius: 35))
                 .shadow(radius: 7)
                 .padding(.bottom, 40)
             
@@ -64,7 +64,7 @@ struct WelcomeView: View {
                 .frame(maxWidth: .infinity, minHeight: 50)
                 .background(.accent)
                 .foregroundStyle(.white)
-                .clipShape(RoundedRectangle(cornerRadius: 25))
+                .clipShape(.rect(cornerRadius: 25))
                 .padding()
         }
     }

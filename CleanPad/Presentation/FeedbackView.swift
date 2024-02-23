@@ -105,7 +105,7 @@ struct FeedbackView: View {
                 .frame(maxWidth: .infinity, minHeight: 50)
                 .background(.accent)
                 .foregroundStyle(.white)
-                .clipShape(RoundedRectangle(cornerRadius: 25))
+                .clipShape(.rect(cornerRadius: 25))
                 .padding()
         }
     }

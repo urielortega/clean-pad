@@ -53,7 +53,7 @@ struct AboutView: View {
             Image(decorative: "CleanPadIcon")
                 .resizable()
                 .frame(width: 100, height: 100)
-                .clipShape(RoundedRectangle(cornerRadius: 23.0))
+                .clipShape(.rect(cornerRadius: 23))
                 .shadow(radius: 7)
                 .padding()
                 .padding(.top, 50)
@@ -92,7 +92,7 @@ struct AboutView: View {
             Text("Great!")
                 .frame(maxWidth: .infinity, minHeight: 50)
                 .background(.ultraThinMaterial)
-                .clipShape(RoundedRectangle(cornerRadius: 25))
+                .clipShape(.rect(cornerRadius: 25))
                 .shadow(radius: 10)
                 .padding()
         }

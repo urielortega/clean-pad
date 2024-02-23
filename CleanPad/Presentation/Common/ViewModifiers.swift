@@ -14,7 +14,7 @@ struct Dock: ViewModifier {
         content
             .frame(maxWidth: .infinity)
             .background(.ultraThinMaterial)
-            .clipShape(RoundedRectangle(cornerRadius: 20))
+            .clipShape(.rect(cornerRadius: 20))
             .roundedRectangleOverlayStroke()
             .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.14), radius: 8)
             .padding(.vertical)
@@ -39,7 +39,7 @@ struct DockButton: ViewModifier {
         content
             .frame(maxWidth: 55)
             .background(.ultraThinMaterial)
-            .clipShape(RoundedRectangle(cornerRadius: 20))
+            .clipShape(.rect(cornerRadius: 20))
             .roundedRectangleOverlayStroke()
             .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.14), radius: 8)
             .padding(((position == .left) ? .leading : .trailing), 10)
