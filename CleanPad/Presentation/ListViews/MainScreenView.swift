@@ -125,7 +125,7 @@ struct CustomTabBar: View {
     var createNoteTabButton: some View {
         Button {
             showEditViewSheet.toggle()
-            HapticManager.instance.impact(style: .soft)
+            HapticManager.instance.impact(style: .light)
         } label: {
             Label("New note", systemImage: "plus")
                 .labelStyle(.iconOnly)
@@ -157,7 +157,7 @@ struct CustomTabBar: View {
         }
         .dockButtonStyle(position: .left)
         .onTapGesture {
-            HapticManager.instance.impact(style: .soft)
+            HapticManager.instance.impact(style: .light)
         }
     }
 }
