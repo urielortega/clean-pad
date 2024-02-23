@@ -51,33 +51,37 @@ struct AllNotesView: View {
     /// View that shows notes as rows in a single column.
     var notesListView: some View {
         Group {
-            List {
-                ForEach(viewModel.filteredNotes) { note in
-                    NavigationLink {
-                        // Open NoteEditView with the tapped note.
-                        NoteEditView(
-                            note: note,
-                            viewModel: viewModel,
-                            creatingNewNote: false
-                        )
-                    } label: {
-                        ListNoteLabel(note: note, viewModel: dateViewModel)
+            if viewModel.filteredNotes.isEmpty {
+                ContentUnavailableView.search
+            } else {
+                List {
+                    ForEach(viewModel.filteredNotes) { note in
+                        NavigationLink {
+                            // Open NoteEditView with the tapped note.
+                            NoteEditView(
+                                note: note,
+                                viewModel: viewModel,
+                                creatingNewNote: false
+                            )
+                        } label: {
+                            ListNoteLabel(note: note, viewModel: dateViewModel)
+                        }
+                        .contextMenu {
+                            contextMenuButtons(note: note, viewModel: viewModel)
+                        } preview: {
+                            ContextMenuPreview(note: note)
+                        }
                     }
-                    .contextMenu {
-                        contextMenuButtons(note: note, viewModel: viewModel)
-                    } preview: {
-                        ContextMenuPreview(note: note)
-                    }
+                    // To avoid unexpected list behavior, note removal is forbidden when making a search.
+                    .onDelete(
+                        perform: viewModel.searchText.isEmpty ? viewModel.removeNoteFromList : nil
+                    )
                 }
-                // To avoid unexpected list behavior, note removal is forbidden when making a search.
-                .onDelete(
-                    perform: viewModel.searchText.isEmpty ? viewModel.removeNoteFromList : nil
-                )
-            }
-            .safeAreaInset(edge: .bottom) {
-                // View to prevent CustomTabBar from hiding the List.
-                Spacer()
-                    .frame(height: 80)
+                .safeAreaInset(edge: .bottom) {
+                    // View to prevent CustomTabBar from hiding the List.
+                    Spacer()
+                        .frame(height: 80)
+                }
             }
         }
         .searchable(text: $viewModel.searchText, prompt: "Look for a note...")
@@ -92,32 +96,36 @@ struct AllNotesView: View {
          ]
          
          return Group {
-             ScrollView {
-                 LazyVGrid(columns: layout) {
-                     ForEach(viewModel.filteredNotes) { note in
-                         NavigationLink {
-                             // Open NoteEditView with the tapped note.
-                             NoteEditView(
-                                 note: note,
-                                 viewModel: viewModel,
-                                 creatingNewNote: false
-                             )
-                         } label: {
-                             GridNoteLabel(note: note, viewModel: dateViewModel)
-                                 .padding(5)
-                         }
-                         .contextMenu {
-                             contextMenuButtons(note: note, viewModel: viewModel)
-                         } preview: {
-                             ContextMenuPreview(note: note)
+             if viewModel.filteredNotes.isEmpty {
+                 ContentUnavailableView.search
+             } else {
+                 ScrollView {
+                     LazyVGrid(columns: layout) {
+                         ForEach(viewModel.filteredNotes) { note in
+                             NavigationLink {
+                                 // Open NoteEditView with the tapped note.
+                                 NoteEditView(
+                                    note: note,
+                                    viewModel: viewModel,
+                                    creatingNewNote: false
+                                 )
+                             } label: {
+                                 GridNoteLabel(note: note, viewModel: dateViewModel)
+                                     .padding(5)
+                             }
+                             .contextMenu {
+                                 contextMenuButtons(note: note, viewModel: viewModel)
+                             } preview: {
+                                 ContextMenuPreview(note: note)
+                             }
                          }
                      }
+                     .padding()
+                     .padding(.bottom, 60) // Padding to prevent CustomTabBar from hiding the List.
                  }
-                 .searchable(text: $viewModel.searchText, prompt: "Look for a note...")
-                 .padding()
-                 .padding(.bottom, 60) // Padding to prevent CustomTabBar from hiding the List.
              }
          }
+         .searchable(text: $viewModel.searchText, prompt: "Look for a note...")
      }
     
     struct contextMenuButtons: View {
