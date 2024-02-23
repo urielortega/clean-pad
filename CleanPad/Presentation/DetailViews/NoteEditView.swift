@@ -82,7 +82,7 @@ struct NoteEditView: View {
         )
         .font(.title2).bold()
         .padding(.leading)
-        .onChange(of: note.noteTitle) { _ in
+        .onChange(of: note.noteTitle) {
             // When changing an existing note, save it while typing using update().
             if !creatingNewNote {
                 viewModel.update(note: note)
@@ -102,7 +102,7 @@ struct NoteEditView: View {
         TextEditor(text: $note.noteContent)
             .padding(.horizontal)
             .focused($focusedField, equals: .textEditorField)
-            .onChange(of: note.noteContent) { _ in
+            .onChange(of: note.noteContent) {
                 // When changing an existing note, save it while typing using update().
                 if !creatingNewNote {
                     viewModel.update(note: note)
