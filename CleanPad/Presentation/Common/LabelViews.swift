@@ -68,7 +68,7 @@ struct GridNoteLabel: View {
                 .padding(.bottom, 1)
                 
                 Text(note.noteContent.isEmpty ? "No content..." : note.noteContent)
-                    .lineLimit(3)
+                    .lineLimit(3, reservesSpace: true)
                     .foregroundStyle(note.noteContent.isEmpty ? .secondary : .primary)
                     .multilineTextAlignment(.leading)
             }
