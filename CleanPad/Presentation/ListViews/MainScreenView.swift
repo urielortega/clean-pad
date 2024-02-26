@@ -157,6 +157,14 @@ struct CustomTabBar: View {
         }
         .dockButtonStyle(position: .left)
         .onTapGesture {
+            withAnimation(.easeInOut(duration: 1)) {
+                viewModel.isCustomTabBarGlowing.toggle()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    withAnimation(.easeInOut(duration: 1)) {
+                        viewModel.isCustomTabBarGlowing.toggle()
+                    }
+                }
+            }
             HapticManager.instance.impact(style: .light)
         }
     }

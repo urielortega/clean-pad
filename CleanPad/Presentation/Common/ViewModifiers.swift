@@ -16,7 +16,7 @@ struct Dock: ViewModifier {
             .background(.ultraThinMaterial)
             .clipShape(.rect(cornerRadius: 20))
             .roundedRectangleOverlayStroke()
-            .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.14), radius: 8)
+            .glowingShadow(viewModel: viewModel)
             .padding(.vertical)
             .padding(.horizontal, viewModel.showingTabButtons ? 0 : 10)
     }
@@ -65,6 +65,24 @@ struct RoundedRectangleOverlayStroke: ViewModifier {
 extension View {
     func roundedRectangleOverlayStroke() -> some View {
         modifier(RoundedRectangleOverlayStroke())
+    }
+}
+
+struct GlowingShadow: ViewModifier {
+    @ObservedObject var viewModel: NotesListViewModel
+
+    func body(content: Content) -> some View {
+        content
+            .shadow(
+                color: viewModel.isCustomTabBarGlowing ? .red.opacity(0.6) : Color(.sRGBLinear, white: 0, opacity: 0.14),
+                radius: 8
+            )
+    }
+}
+
+extension View {
+    func glowingShadow(viewModel: NotesListViewModel) -> some View {
+        modifier(GlowingShadow(viewModel: viewModel))
     }
 }
 
