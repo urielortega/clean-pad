@@ -214,7 +214,7 @@ extension NotesListViewModel {
     func setGeneralCategoryToUnassignedNotes() {
         for index in notes.indices {
             if notes[index].category == nil {
-                notes[index].category = .general
+                notes[index].category = categories[0] // Using General category of categories array.
             }
         }
     }
