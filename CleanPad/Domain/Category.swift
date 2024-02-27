@@ -20,7 +20,7 @@ extension Category {
     static var general = Category(
         id: UUID(uuidString: "6EDDFE8C-0489-4455-9010-75D2D2A7BD37")!, // Static id for the permanent General Category.
         name: "General",
-        color: .gray
+        color: .brown
     )
     
     static let example = Category(
@@ -32,6 +32,6 @@ extension Category {
     static let emptySelection = Category(
         id: UUID(), 
         name: "No selection",
-        color: .pink
+        color: .clear
     )
 }

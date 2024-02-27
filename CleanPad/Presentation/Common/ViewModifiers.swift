@@ -74,8 +74,8 @@ struct GlowingShadow: ViewModifier {
     func body(content: Content) -> some View {
         content
             .shadow(
-                color: viewModel.isCustomTabBarGlowing ? .red.opacity(0.6) : Color(.sRGBLinear, white: 0, opacity: 0.14),
-                radius: 8
+                color: viewModel.isCustomTabBarGlowing ? viewModel.selectedCategory.color.opacity(0.7) : Color(.sRGBLinear, white: 0, opacity: 0.14),
+                radius: viewModel.isCustomTabBarGlowing ? 12 : 8
             )
     }
 }

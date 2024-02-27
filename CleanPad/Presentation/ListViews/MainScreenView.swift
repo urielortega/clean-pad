@@ -70,6 +70,18 @@ struct CustomTabBar: View {
     
     var nonLockedNotesTabButton: some View {
         Button {
+            // Glow CustomTabBar when tapping nonLockedNotesTabButton and Non-Locked Notes Tab is selected:
+            if viewModel.isNonLockedNotesTabSelected {
+                withAnimation(.easeInOut(duration: 1)) {
+                    viewModel.isCustomTabBarGlowing.toggle()
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    withAnimation(.easeInOut(duration: 1)) {
+                        viewModel.isCustomTabBarGlowing.toggle()
+                    }
+                }
+            }
+            
             withAnimation(.bouncy) { viewModel.selectedTab = .nonLockedNotes }
             HapticManager.instance.impact(style: .soft)
         } label: {
@@ -80,6 +92,18 @@ struct CustomTabBar: View {
     
     var lockedNotesTabButton: some View {
         Button {
+            // Glow CustomTabBar when tapping lockedNotesTabButton and Locked Notes Tab is selected:
+            if viewModel.isLockedNotesTabSelected {
+                withAnimation(.easeInOut(duration: 1)) {
+                    viewModel.isCustomTabBarGlowing.toggle()
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    withAnimation(.easeInOut(duration: 1)) {
+                        viewModel.isCustomTabBarGlowing.toggle()
+                    }
+                }
+            }
+            
             withAnimation(.bouncy) { viewModel.selectedTab = .lockedNotes }
             HapticManager.instance.impact(style: .soft)
         } label: {
@@ -157,14 +181,6 @@ struct CustomTabBar: View {
         }
         .dockButtonStyle(position: .left)
         .onTapGesture {
-            withAnimation(.easeInOut(duration: 1)) {
-                viewModel.isCustomTabBarGlowing.toggle()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    withAnimation(.easeInOut(duration: 1)) {
-                        viewModel.isCustomTabBarGlowing.toggle()
-                    }
-                }
-            }
             HapticManager.instance.impact(style: .light)
         }
     }
