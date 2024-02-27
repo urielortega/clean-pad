@@ -98,7 +98,19 @@ extension NotesListViewModel {
     /// Function to add a note to the ``notes`` array and save the changes after the addition.
     /// - Parameter note: A  new ``Note`` object to be added to the ``notes`` array.
     func add(note: Note) {
-        notes.append(note)
+        if note.category == nil { // If 'note' has no category assigned...
+            let noteToAssignCategory = Note(
+                isLocked: isLockedNotesTabSelected ? true : false,
+                noteTitle: note.noteTitle,
+                noteContent: note.noteContent,
+                category: categories[0] // ..assign General category from 'categories' array.
+            )
+            
+            notes.append(noteToAssignCategory)
+        } else {
+            notes.append(note)
+        }
+        
         saveAllNotes()
     }
     
@@ -214,7 +226,7 @@ extension NotesListViewModel {
     func setGeneralCategoryToUnassignedNotes() {
         for index in notes.indices {
             if notes[index].category == nil {
-                notes[index].category = categories[0] // Using General category of categories array.
+                notes[index].category = categories[0] // Using General category from 'categories' array.
             }
         }
     }
