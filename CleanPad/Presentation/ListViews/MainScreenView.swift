@@ -14,6 +14,7 @@ struct MainScreenView: View {
     @ObservedObject var dateViewModel: DateViewModel
     
     @Binding var showEditViewSheet: Bool
+    @Binding var showCategoriesSheet: Bool
     
     var body: some View {
         ZStack {
@@ -23,7 +24,11 @@ struct MainScreenView: View {
                 showEditViewSheet: $showEditViewSheet
             )
             
-            CustomTabBar(viewModel: viewModel, showEditViewSheet: $showEditViewSheet)
+            CustomTabBar(
+                viewModel: viewModel, 
+                showEditViewSheet: $showEditViewSheet,
+                showCategoriesSheet: $showCategoriesSheet
+            )
         }
     }
 }
@@ -32,6 +37,7 @@ struct MainScreenView: View {
 struct CustomTabBar: View {
     @ObservedObject var viewModel: NotesListViewModel
     @Binding var showEditViewSheet: Bool
+    @Binding var showCategoriesSheet: Bool
 
     var body: some View {
         VStack {
@@ -159,34 +165,39 @@ struct CustomTabBar: View {
     }
     
     var manageCategoriesTabButton: some View {
-        Menu {
-            Button("Check Selected Category") {
-                print("Selected Category: \(viewModel.selectedCategory.name) \(viewModel.selectedCategory.id)")
-                print("isCategoryInCategoriesArray?: \(viewModel.isCategoryInCategoriesArray(category: viewModel.selectedCategory))")
-            }
-            
-            Button("No category") {
-                viewModel.selectedCategory = .emptySelection
-                print("Selected Category: \(viewModel.selectedCategory.name)")
-            }
-            
-            Picker("Categories", selection: $viewModel.selectedCategory) {
-                ForEach(viewModel.categories) { category in
-                    Text(category.name).tag(category as Category)
-                }
-            }
+//        Menu {
+//            Button("Check Selected Category") {
+//                print("Selected Category: \(viewModel.selectedCategory.name) \(viewModel.selectedCategory.id)")
+//                print("isCategoryInCategoriesArray?: \(viewModel.isCategoryInCategoriesArray(category: viewModel.selectedCategory))")
+//            }
+//            
+//            Button("No category") {
+//                viewModel.selectedCategory = .emptySelection
+//                print("Selected Category: \(viewModel.selectedCategory.name)")
+//            }
+//            
+//            Picker("Categories", selection: $viewModel.selectedCategory) {
+//                ForEach(viewModel.categories) { category in
+//                    Text(category.name).tag(category as Category)
+//                }
+//            }
+//        } label: {
+//            Label("Select a Category", systemImage: "tag.fill")
+//                .labelStyle(.iconOnly)
+//                .frame(width: 55, height: 55) // Frame on Label so Menu Tap is better detected.
+//        }
+        Button {
+            showCategoriesSheet.toggle()
+            HapticManager.instance.impact(style: .light)
         } label: {
             Label("Select a Category", systemImage: "tag.fill")
                 .labelStyle(.iconOnly)
                 .frame(width: 55, height: 55) // Frame on Label so Menu Tap is better detected.
         }
         .dockButtonStyle(position: .left)
-        .onTapGesture {
-            HapticManager.instance.impact(style: .light)
-        }
     }
 }
 
 #Preview("CustomTabBar") {
-    CustomTabBar(viewModel: NotesListViewModel(), showEditViewSheet: .constant(false))
+    CustomTabBar(viewModel: NotesListViewModel(), showEditViewSheet: .constant(false), showCategoriesSheet: .constant(false))
 }

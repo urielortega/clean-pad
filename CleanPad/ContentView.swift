@@ -19,13 +19,15 @@ struct ContentView: View {
     @State private var showEditViewSheet = false
     @State private var showFeedbackSheet = false
     @State private var showAboutSheet = false
+    @State private var showCategoriesSheet = false
     
     var body: some View {
         NavigationStack {
             MainScreenView(
                 viewModel: viewModel,
                 dateViewModel: dateViewModel,
-                showEditViewSheet: $showEditViewSheet
+                showEditViewSheet: $showEditViewSheet,
+                showCategoriesSheet: $showCategoriesSheet
             )
             .navigationTitle(viewModel.isNonLockedNotesTabSelected ? "Notes" : "Private Notes")
             .toolbar {
@@ -65,7 +67,6 @@ struct ContentView: View {
             }
         }
         .sheet(isPresented: $showWelcomeSheet) { WelcomeView() }
-        .sheet(isPresented: $showAboutSheet) { AboutView() }
         .sheet(isPresented: $showEditViewSheet) {
             if viewModel.isNonLockedNotesTabSelected {
                 // Open NoteEditView with a blank Note:
@@ -76,6 +77,8 @@ struct ContentView: View {
             }
         }
         .sheet(isPresented: $showFeedbackSheet) { FeedbackView() }
+        .sheet(isPresented: $showAboutSheet) { AboutView() }
+        .sheet(isPresented: $showCategoriesSheet) { CategoryManagementView() }
         .alert("Authentication error", isPresented: $viewModel.isShowingAuthenticationError) {
             Button("OK") { }
         } message: {
