@@ -325,6 +325,33 @@ extension NotesListViewModel {
         return self.notes[index]
     }
     
+    // MARK: Category retrieving functions.
+    /// Function to retrieve a category index from the global ``categories`` array.
+    /// - Parameter category: A ``Category`` object that might be in the ``categories`` array.
+    /// - Returns: An Integer index representing the position of the category in the ``categories`` array.
+    func getCategoryIndexFromNotesArray(category: Category) -> Int? {
+        // To find the given category.
+        guard let index = self.categories.firstIndex(where: {$0.id == category.id}) else {
+            print("Couldn't find category in the 'categories' array.")
+            return nil
+        }
+        
+        return index
+    }
+    
+    /// Function to retrieve a note from the global ``categories`` array.
+    /// - Parameter category: A ``Category`` object that might be in the ``categories`` array.
+    /// - Returns: A ``Category`` object, found in the ``categories`` array, with up to date data.
+    func getCategoryFromCategoriesArray(category: Category) -> Category? {
+        let index = getCategoryIndexFromNotesArray(category: category)!
+        
+        return self.categories[index]
+    }
+    
+    func isCategoryInCategoriesArray(category: Category) -> Bool {
+        categories.contains(category)
+    }
+    
     // MARK: Testing functions.
     /// Function for testing purposes that adds twenty note examples to the ``notes`` array and saves the changes after the addition.
     func addTwentyNoteExamples() {

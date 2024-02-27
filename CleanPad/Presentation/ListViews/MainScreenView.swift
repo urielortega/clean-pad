@@ -162,6 +162,7 @@ struct CustomTabBar: View {
         Menu {
             Button("Check Selected Category") {
                 print("Selected Category: \(viewModel.selectedCategory.name) \(viewModel.selectedCategory.id)")
+                print("isCategoryInCategoriesArray?: \(viewModel.isCategoryInCategoriesArray(category: viewModel.selectedCategory))")
             }
             
             Button("No category") {
