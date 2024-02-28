@@ -60,6 +60,7 @@ struct CategoryFilteringLabel: View {
         .padding()
         .background(.regularMaterial)
         .clipShape(.rect(cornerRadius: 10))
+        .shadow(color: .gridLabelShadow, radius: 2, x: 0, y: 6)
         .onTapGesture {
             withAnimation(.bouncy) {
                 viewModel.selectedCategory = category
