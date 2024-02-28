@@ -12,15 +12,27 @@ struct CategoryManagementView: View {
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        ScrollView {
-            LazyVStack {
-                CategoryFilteringLabel(category: .example, viewModel: viewModel)
-                CategoryFilteringLabel(category: .general, viewModel: viewModel)
-                CategoryFilteringLabel(category: .emptySelection, viewModel: viewModel)
+        VStack {
+            HStack {
+                Text("Your Categories")
+                    .font(.title)
+                    .bold()
+                
+                Spacer()
             }
-            .padding()
+            .padding(.horizontal)
+            
+            ScrollView {
+                LazyVStack {
+                    CategoryFilteringLabel(category: .example, viewModel: viewModel)
+                    CategoryFilteringLabel(category: .general, viewModel: viewModel)
+                    CategoryFilteringLabel(category: .emptySelection, viewModel: viewModel)
+                }
+                .padding()
+            }
         }
-        .presentationDetents([.fraction(0.3), .medium])
+        .padding(.top)
+        .presentationDetents([.fraction(0.4), .medium])
         .presentationDragIndicator(.visible)
         .presentationBackground(.ultraThinMaterial)
     }
