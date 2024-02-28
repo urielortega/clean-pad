@@ -193,6 +193,7 @@ struct CustomTabBar: View {
             Label("Select a Category", systemImage: "tag.fill")
                 .labelStyle(.iconOnly)
                 .frame(width: 55, height: 55) // Frame on Label so Menu Tap is better detected.
+                .tint(viewModel.selectedCategory.color.gradient)
         }
         .dockButtonStyle(position: .left)
     }
