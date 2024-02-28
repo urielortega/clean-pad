@@ -78,7 +78,7 @@ struct ContentView: View {
         }
         .sheet(isPresented: $showFeedbackSheet) { FeedbackView() }
         .sheet(isPresented: $showAboutSheet) { AboutView() }
-        .sheet(isPresented: $showCategoriesSheet) { CategoryManagementView() }
+        .sheet(isPresented: $showCategoriesSheet) { CategoryManagementView(viewModel: viewModel) }
         .alert("Authentication error", isPresented: $viewModel.isShowingAuthenticationError) {
             Button("OK") { }
         } message: {

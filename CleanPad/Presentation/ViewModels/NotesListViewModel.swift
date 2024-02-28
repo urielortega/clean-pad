@@ -218,8 +218,8 @@ extension NotesListViewModel {
         }
         
         // Print statements for testing.
-        print(notes)
-        print(categories)
+//        print(notes)
+//        print(categories)
     }
     
     /// Function that sets General category to notes that are currently unassigned to any category.
