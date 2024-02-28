@@ -47,7 +47,7 @@ struct CategoryFilteringLabel: View {
         HStack {
             Label("\(category.name)", systemImage: "tag.fill")
                 .imageScale(.medium)
-                .foregroundStyle(category.color)
+                .foregroundStyle(category.color.gradient)
             
             Spacer()
             
