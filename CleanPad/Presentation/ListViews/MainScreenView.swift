@@ -182,7 +182,7 @@ struct CustomTabBar: View {
 //                }
 //            }
 //        } label: {
-//            Label("Select a Category", systemImage: "tag.fill")
+//            Label("Select a Category", systemImage: "book.pages.fill")
 //                .labelStyle(.iconOnly)
 //                .frame(width: 55, height: 55) // Frame on Label so Menu Tap is better detected.
 //        }
@@ -190,7 +190,7 @@ struct CustomTabBar: View {
             showCategoriesSheet.toggle()
             HapticManager.instance.impact(style: .light)
         } label: {
-            Label("Select a Category", systemImage: "tag.fill")
+            Label("Select a Category", systemImage: "book.pages.fill")
                 .labelStyle(.iconOnly)
                 .frame(width: 55, height: 55) // Frame on Label so Menu Tap is better detected.
                 .tint(viewModel.selectedCategory.color.gradient)
