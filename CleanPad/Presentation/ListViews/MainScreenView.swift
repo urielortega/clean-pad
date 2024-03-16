@@ -122,6 +122,7 @@ struct CustomTabBar: View {
         HStack {
             Spacer()
             Label("Notes", systemImage: "note.text")
+                .labelStyle(.titleOnly)
                 .font(.subheadline)
                 .padding(.bottom, 4)
                 .tint(viewModel.isNonLockedNotesTabSelected ? .accentColor : .gray)
@@ -140,6 +141,7 @@ struct CustomTabBar: View {
                 "Private",
                 systemImage: viewModel.isUnlocked ? "lock.open.fill" : "lock.fill"
             )
+            .labelStyle(.titleOnly)
             .font(.subheadline)
             .padding(.bottom, 4)
             .tint(viewModel.isLockedNotesTabSelected ? .accentColor : .gray)
@@ -165,32 +167,11 @@ struct CustomTabBar: View {
     }
     
     var manageCategoriesTabButton: some View {
-//        Menu {
-//            Button("Check Selected Category") {
-//                print("Selected Category: \(viewModel.selectedCategory.name) \(viewModel.selectedCategory.id)")
-//                print("isCategoryInCategoriesArray?: \(viewModel.isCategoryInCategoriesArray(category: viewModel.selectedCategory))")
-//            }
-//            
-//            Button("No category") {
-//                viewModel.selectedCategory = .emptySelection
-//                print("Selected Category: \(viewModel.selectedCategory.name)")
-//            }
-//            
-//            Picker("Categories", selection: $viewModel.selectedCategory) {
-//                ForEach(viewModel.categories) { category in
-//                    Text(category.name).tag(category as Category)
-//                }
-//            }
-//        } label: {
-//            Label("Select a Category", systemImage: "book.pages.fill")
-//                .labelStyle(.iconOnly)
-//                .frame(width: 55, height: 55) // Frame on Label so Menu Tap is better detected.
-//        }
         Button {
             showCategoriesSheet.toggle()
             HapticManager.instance.impact(style: .light)
         } label: {
-            Label("Select a Category", systemImage: "book.pages.fill")
+            Label("Select a Category", systemImage: "note.text")
                 .labelStyle(.iconOnly)
                 .frame(width: 55, height: 55) // Frame on Label so Menu Tap is better detected.
                 .tint(viewModel.selectedCategory.color.gradient)

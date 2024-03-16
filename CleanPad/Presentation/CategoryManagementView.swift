@@ -45,7 +45,7 @@ struct CategoryFilteringLabel: View {
     
     var body: some View {
         HStack {
-            Label("\(category.name)", systemImage: "book.pages.fill")
+            Label("\(category.name)", systemImage: "note.text")
                 .imageScale(.medium)
                 .foregroundStyle(category.color.gradient)
             
