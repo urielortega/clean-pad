@@ -24,9 +24,12 @@ struct CategoryManagementView: View {
             
             ScrollView {
                 LazyVStack {
-                    CategoryFilteringLabel(category: .example, viewModel: viewModel)
-                    CategoryFilteringLabel(category: .general, viewModel: viewModel)
-                    CategoryFilteringLabel(category: .emptySelection, viewModel: viewModel)
+                    ForEach(viewModel.categories) { category in
+                        CategoryFilteringLabel(
+                            category: category,
+                            viewModel: viewModel
+                        )
+                    }
                 }
                 .padding()
             }
