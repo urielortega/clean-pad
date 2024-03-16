@@ -76,7 +76,9 @@ final class NotesListViewModel: ObservableObject {
     var idiom: UIUserInterfaceIdiom { UIDevice.current.userInterfaceIdiom }
     
     @Published var isCustomTabBarGlowing = false
-
+    
+    var isSomeCategorySelected: Bool { selectedCategory != .emptySelection }
+    
     // MARK: Access control properties.
     /// Property to control access to locked notes (private space).
     @Published private(set) var isUnlocked = false

@@ -32,6 +32,6 @@ extension Category {
     static let emptySelection = Category(
         id: UUID(), 
         name: "No selection",
-        color: .black // TODO: Change to .clear
+        color: .secondary
     )
 }
