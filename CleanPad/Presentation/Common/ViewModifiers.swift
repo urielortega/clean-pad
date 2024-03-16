@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+private let roundedRectCornerRadius: CGFloat = 22
+
 struct Dock: ViewModifier {
     @ObservedObject var viewModel: NotesListViewModel
 
@@ -14,7 +16,7 @@ struct Dock: ViewModifier {
         content
             .frame(maxWidth: .infinity)
             .background(.ultraThinMaterial)
-            .clipShape(.rect(cornerRadius: 20))
+            .clipShape(.rect(cornerRadius: roundedRectCornerRadius))
             .roundedRectangleOverlayStroke()
             .glowingShadow(viewModel: viewModel)
             .padding(.vertical)
@@ -39,7 +41,7 @@ struct DockButton: ViewModifier {
         content
             .frame(maxWidth: 55)
             .background(.ultraThinMaterial)
-            .clipShape(.rect(cornerRadius: 20))
+            .clipShape(.rect(cornerRadius: roundedRectCornerRadius))
             .roundedRectangleOverlayStroke()
             .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.14), radius: 8)
             .padding(((position == .left) ? .leading : .trailing), 10)
@@ -56,7 +58,7 @@ struct RoundedRectangleOverlayStroke: ViewModifier {
     func body(content: Content) -> some View {
         content
             .overlay {
-                RoundedRectangle(cornerRadius: 20)
+                RoundedRectangle(cornerRadius: roundedRectCornerRadius)
                     .stroke(.gray.gradient.opacity(0.1), lineWidth: 3)
             }
     }
