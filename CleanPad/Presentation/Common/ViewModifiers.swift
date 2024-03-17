@@ -80,7 +80,7 @@ struct GlowingShadow: ViewModifier {
                 color:
                     (viewModel.isCustomTabBarGlowing && viewModel.isSomeCategorySelected) ? viewModel.selectedCategory.color.opacity(0.7) : Color(.sRGBLinear, white: 0, opacity: shadowOpacity)
                 ,
-                radius: viewModel.isCustomTabBarGlowing ? 12 : 8
+                radius: viewModel.isCustomTabBarGlowing ? 16 : 8
             )
     }
 }
