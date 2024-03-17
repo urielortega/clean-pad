@@ -80,11 +80,8 @@ struct GridNoteLabel: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
         .padding()
         .background(.gridLabelBackground)
-        .clipShape(.rect(cornerRadius: 10))
-        .overlay(
-            RoundedRectangle(cornerRadius: 10)
-                .stroke(.gray.opacity(0.3), lineWidth: 2)
-        )
+        .clipShape(.rect(cornerRadius: roundedRectCornerRadius))
+        .roundedRectangleOverlayStroke()
         .shadow(color: .gridLabelShadow, radius: 2, x: 0, y: 6)
         .noteLabelAccessibilityModifiers(note: note, viewModel: viewModel)
     }

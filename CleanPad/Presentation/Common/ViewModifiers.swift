@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-private let roundedRectCornerRadius: CGFloat = 22
+let roundedRectCornerRadius: CGFloat = 22
 private let shadowOpacity: CGFloat = 0.1
 
 struct Dock: ViewModifier {
