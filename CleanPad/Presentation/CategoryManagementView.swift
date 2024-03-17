@@ -14,6 +14,20 @@ struct CategoryManagementView: View {
     var body: some View {
         VStack {
             HStack {
+                Spacer()
+                
+                Button(
+                    "Dismiss",
+                    systemImage: "xmark.circle.fill",
+                    action: { dismiss() }
+                )
+                .imageScale(.large)
+                .labelStyle(.iconOnly)
+                .tint(.secondary)
+                .padding(.horizontal)
+            }
+            
+            HStack {
                 Text("Your Categories")
                     .font(.title)
                     .bold()
@@ -30,6 +44,14 @@ struct CategoryManagementView: View {
                             viewModel: viewModel
                         )
                     }
+                    .padding(.bottom)
+                    
+                    CategoryFilteringLabel(category: .emptySelection, viewModel: viewModel)
+                    
+                    Divider()
+                        .padding(.vertical)
+                    
+                    ManageCategoriesButton()
                 }
                 .padding()
             }
@@ -82,6 +104,17 @@ struct CategoryFilteringLabel: View {
                     }
                 }
             }
+        }
+    }
+}
+
+struct ManageCategoriesButton: View {
+    var body: some View {
+        Button(
+            "Manage Categories",
+            systemImage: "pencil"
+        ) {
+            // TODO: Show View for Categories CRUD.
         }
     }
 }
