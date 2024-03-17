@@ -123,7 +123,6 @@ struct CustomTabBar: View {
             Spacer()
             Label("Notes", systemImage: "note.text")
                 .labelStyle(.titleOnly)
-                .font(.subheadline)
                 .padding(.bottom, 4)
                 .tint(viewModel.isNonLockedNotesTabSelected ? .accentColor : .gray)
                 .bold(viewModel.isNonLockedNotesTabSelected ? true : false)
@@ -142,7 +141,6 @@ struct CustomTabBar: View {
                 systemImage: viewModel.isUnlocked ? "lock.open.fill" : "lock.fill"
             )
             .labelStyle(.titleOnly)
-            .font(.subheadline)
             .padding(.bottom, 4)
             .tint(viewModel.isLockedNotesTabSelected ? .accentColor : .gray)
             .bold(viewModel.isLockedNotesTabSelected ? true : false)
