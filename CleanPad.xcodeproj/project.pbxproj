@@ -31,7 +31,7 @@
 		A4C36C482AE73163001B4389 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C36C472AE73163001B4389 /* HapticManager.swift */; };
 		A4D06FAE2B21428C0000D089 /* DateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D06FAD2B21428C0000D089 /* DateViewModel.swift */; };
 		A4DB7B0A2ABB837D0008AF12 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DB7B092ABB837D0008AF12 /* ContentView.swift */; };
-		A4F10F5B2B8D73360014C68B /* CategoryManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F10F5A2B8D73360014C68B /* CategoryManagementView.swift */; };
+		A4F10F5B2B8D73360014C68B /* CategorySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F10F5A2B8D73360014C68B /* CategorySelectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,7 +61,7 @@
 		A4C36C472AE73163001B4389 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		A4D06FAD2B21428C0000D089 /* DateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateViewModel.swift; sourceTree = "<group>"; };
 		A4DB7B092ABB837D0008AF12 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = CleanPad/ContentView.swift; sourceTree = SOURCE_ROOT; };
-		A4F10F5A2B8D73360014C68B /* CategoryManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryManagementView.swift; sourceTree = "<group>"; };
+		A4F10F5A2B8D73360014C68B /* CategorySelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,7 +125,7 @@
 				A475B9632ACCD7DE00BE6575 /* WelcomeView.swift */,
 				A4BB5F362B27D69600B509ED /* FeedbackView.swift */,
 				A4B86F1C2B59B04D00560C66 /* AboutView.swift */,
-				A4F10F5A2B8D73360014C68B /* CategoryManagementView.swift */,
+				A4F10F5A2B8D73360014C68B /* CategorySelectionView.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -270,7 +270,7 @@
 				A4ADAFDD2B15238B00C14010 /* Constants.swift in Sources */,
 				A489F7A52B8429B500CB44AE /* CodableColor.swift in Sources */,
 				A4129AC72AF9AE1400518E1C /* KeyboardPublisher.swift in Sources */,
-				A4F10F5B2B8D73360014C68B /* CategoryManagementView.swift in Sources */,
+				A4F10F5B2B8D73360014C68B /* CategorySelectionView.swift in Sources */,
 				A4C36C482AE73163001B4389 /* HapticManager.swift in Sources */,
 				A4B86F1D2B59B04D00560C66 /* AboutView.swift in Sources */,
 				A49C7DEC2ADF5BB9005922FC /* ViewModifiers.swift in Sources */,

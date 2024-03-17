@@ -1,5 +1,5 @@
 //
-//  CategoryManagementView.swift
+//  CategorySelectionView.swift
 //  CleanPad
 //
 //  Created by Uriel Ortega on 26/02/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CategoryManagementView: View {
+struct CategorySelectionView: View {
     @ObservedObject var viewModel: NotesListViewModel
     @Environment(\.dismiss) var dismiss
     
@@ -120,7 +120,7 @@ struct ManageCategoriesButton: View {
 }
 
 #Preview("CategoryManagementView Sheet") {
-    CategoryManagementView(viewModel: NotesListViewModel())
+    CategorySelectionView(viewModel: NotesListViewModel())
 }
 
 #Preview("CategoryFilteringLabel") {
