@@ -57,7 +57,7 @@ struct CategorySelectionView: View {
             }
         }
         .padding(.top)
-        .presentationDetents([.fraction(0.4), .medium])
+        .presentationDetents([.fraction(0.4), .medium, .large])    
         .presentationDragIndicator(.visible)
         .presentationBackground(.ultraThinMaterial)
     }
