@@ -1,5 +1,5 @@
 //
-//  AboutView.swift
+//  AboutCleanPadView.swift
 //  CleanPad
 //
 //  Created by Uriel Ortega on 18/01/24.
@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// View containing fundamental information about the purpose and operation of the app, accesible at anytime for the user.
-struct AboutView: View {
+struct AboutCleanPadView: View {
     @State private var greeting = "Good morning!"
     @State private var backgroundImage = "sunrise"
     @State private var textForegroundColor = Color.black
@@ -126,5 +126,5 @@ struct AboutView: View {
 
 
 #Preview {
-    AboutView()
+    AboutCleanPadView()
 }
