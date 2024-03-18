@@ -44,14 +44,15 @@ struct CategorySelectionView: View {
                             viewModel: viewModel
                         )
                     }
-                    .padding(.bottom)
-                    
-                    CategoryFilteringLabel(category: .emptySelection, viewModel: viewModel)
+                    // .padding(.bottom)
                     
                     Divider()
                         .padding(.vertical)
                     
+                    CategoryFilteringLabel(category: .emptySelection, viewModel: viewModel)
+                    
                     ManageCategoriesButton()
+                        .padding(.vertical)
                 }
                 .padding()
             }
