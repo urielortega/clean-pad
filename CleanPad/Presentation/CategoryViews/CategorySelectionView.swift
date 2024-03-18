@@ -113,7 +113,7 @@ struct CategoryFilteringLabel: View {
     }
 }
 
-/// View to open another View to edit categories.
+/// Button to show view for Categories Editing.
 struct EditCategoriesButton: View {
     @Binding var showEditableCategoriesSheet: Bool
 
