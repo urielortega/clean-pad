@@ -63,7 +63,7 @@ struct CategorySelectionView: View {
         .presentationDetents([.fraction(0.4), .medium, .large])    
         .presentationDragIndicator(.visible)
         .presentationBackground(.ultraThinMaterial)
-        .sheet(isPresented: $showEditableCategoriesSheet) { EditableCategoriesView() }
+        .sheet(isPresented: $showEditableCategoriesSheet) { EditableCategoriesView(viewModel: viewModel) }
     }
 }
 
