@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A40111B62BA8F249006C5639 /* EditableCategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40111B52BA8F249006C5639 /* EditableCategoriesView.swift */; };
 		A4129AC72AF9AE1400518E1C /* KeyboardPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4129AC62AF9AE1400518E1C /* KeyboardPublisher.swift */; };
 		A44E76962AB11E70004BBB21 /* CleanPadApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44E76952AB11E70004BBB21 /* CleanPadApp.swift */; };
 		A44E769A2AB11E72004BBB21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A44E76992AB11E72004BBB21 /* Assets.xcassets */; };
@@ -35,6 +36,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A40111B52BA8F249006C5639 /* EditableCategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableCategoriesView.swift; sourceTree = "<group>"; };
 		A4129AC62AF9AE1400518E1C /* KeyboardPublisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardPublisher.swift; sourceTree = "<group>"; };
 		A44E76922AB11E70004BBB21 /* CleanPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CleanPad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A44E76952AB11E70004BBB21 /* CleanPadApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanPadApp.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 				A4DB7B0C2ABB84860008AF12 /* ListViews */,
 				A40111B42BA8EE39006C5639 /* AboutViews */,
 				A4F10F5A2B8D73360014C68B /* CategorySelectionView.swift */,
+				A40111B52BA8F249006C5639 /* EditableCategoriesView.swift */,
 				A4DB7B092ABB837D0008AF12 /* ContentView.swift */,
 			);
 			path = Presentation;
@@ -292,6 +295,7 @@
 				A465AB7A2ABA7149001CFFD9 /* NoteEditView.swift in Sources */,
 				A44E76962AB11E70004BBB21 /* CleanPadApp.swift in Sources */,
 				A4BB5F372B27D69600B509ED /* FeedbackView.swift in Sources */,
+				A40111B62BA8F249006C5639 /* EditableCategoriesView.swift in Sources */,
 				A46117282AF56E31001C0087 /* MainScreenView.swift in Sources */,
 				A44E76A42AB12C0A004BBB21 /* Note.swift in Sources */,
 				A4BFFA5F2AF087F4005CD3DE /* LabelViews.swift in Sources */,
