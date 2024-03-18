@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// View that shows all user categories. User can filter notes by selecting one category or tap a button to edit categories.
 struct CategorySelectionView: View {
     @ObservedObject var viewModel: NotesListViewModel
     @Environment(\.dismiss) var dismiss
@@ -64,6 +65,7 @@ struct CategorySelectionView: View {
     }
 }
 
+/// A selectable View that shows a category name and color.
 struct CategoryFilteringLabel: View {
     var category: Category
     @ObservedObject var viewModel: NotesListViewModel
@@ -109,6 +111,7 @@ struct CategoryFilteringLabel: View {
     }
 }
 
+/// View to open another View to edit categories.
 struct EditCategoriesButton: View {
     var body: some View {
         Button("Edit", systemImage: "pencil") {
