@@ -133,6 +133,7 @@ struct ContentView: View {
     var showFeedbackViewButtonView: some View {
         Button {
             showFeedbackSheet.toggle()
+            HapticManager.instance.impact(style: .light)
         } label: {
             Label("Feedback", systemImage: "ellipsis.message")
         }
@@ -142,6 +143,7 @@ struct ContentView: View {
     var showAboutViewButtonView: some View {
         Button {
             showAboutSheet.toggle()
+            HapticManager.instance.impact(style: .light)
         } label: {
             Label("About CleanPad", systemImage: "book.pages")
         }

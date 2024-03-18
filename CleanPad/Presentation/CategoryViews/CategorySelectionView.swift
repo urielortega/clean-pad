@@ -120,6 +120,7 @@ struct EditCategoriesButton: View {
     var body: some View {
         Button("Edit", systemImage: "pencil") {
             showEditableCategoriesSheet.toggle()
+            HapticManager.instance.impact(style: .light)
         }
     }
 }
