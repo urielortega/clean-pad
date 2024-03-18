@@ -36,13 +36,13 @@ struct NoteEditView: View {
                 textContentTextEditorView
             }
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarItem(placement: .topBarLeading) {
                     if creatingNewNote {
                         Button("Cancel") { dismiss() }
                     }
                 }
                 
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem(placement: .topBarTrailing) {
                     HStack {
                         if !(focusedField == .none) {
                             // Button to dismiss keyboard when typing.
