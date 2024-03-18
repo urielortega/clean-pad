@@ -152,6 +152,7 @@ struct CustomTabBar: View {
         .accessibilityLabel("Your private notes.")
     }
     
+    /// Button View to create a new note from the Tab Bar.
     var createNoteTabButton: some View {
         Button {
             showEditViewSheet.toggle()
@@ -164,6 +165,7 @@ struct CustomTabBar: View {
         .dockButtonStyle(position: .right)
     }
     
+    /// Button View to show all user categories from the Tab Bar.
     var showCategoriesTabButton: some View {
         Button {
             showCategoriesSheet.toggle()
