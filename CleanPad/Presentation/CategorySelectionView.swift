@@ -51,7 +51,7 @@ struct CategorySelectionView: View {
                     
                     CategoryFilteringLabel(category: .emptySelection, viewModel: viewModel)
                     
-                    ManageCategoriesButton()
+                    EditCategoriesButton()
                         .padding(.vertical)
                 }
                 .padding()
@@ -109,18 +109,15 @@ struct CategoryFilteringLabel: View {
     }
 }
 
-struct ManageCategoriesButton: View {
+struct EditCategoriesButton: View {
     var body: some View {
-        Button(
-            "Manage Categories",
-            systemImage: "pencil"
-        ) {
+        Button("Edit", systemImage: "pencil") {
             // TODO: Show View for Categories CRUD.
         }
     }
 }
 
-#Preview("CategoryManagementView Sheet") {
+#Preview("CategorySelectionView Sheet") {
     CategorySelectionView(viewModel: NotesListViewModel())
 }
 
