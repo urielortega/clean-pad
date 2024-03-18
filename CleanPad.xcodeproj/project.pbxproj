@@ -75,6 +75,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A40111B42BA8EE39006C5639 /* AboutViews */ = {
+			isa = PBXGroup;
+			children = (
+				A475B9632ACCD7DE00BE6575 /* WelcomeView.swift */,
+				A4BB5F362B27D69600B509ED /* FeedbackView.swift */,
+				A4B86F1C2B59B04D00560C66 /* AboutCleanPadView.swift */,
+			);
+			path = AboutViews;
+			sourceTree = "<group>";
+		};
 		A44E76892AB11E70004BBB21 = {
 			isa = PBXGroup;
 			children = (
@@ -121,11 +131,9 @@
 				A482F0DB2AC7D4410075A385 /* Common */,
 				A4DB7B132ABB84F80008AF12 /* DetailViews */,
 				A4DB7B0C2ABB84860008AF12 /* ListViews */,
-				A4DB7B092ABB837D0008AF12 /* ContentView.swift */,
-				A475B9632ACCD7DE00BE6575 /* WelcomeView.swift */,
-				A4BB5F362B27D69600B509ED /* FeedbackView.swift */,
-				A4B86F1C2B59B04D00560C66 /* AboutCleanPadView.swift */,
+				A40111B42BA8EE39006C5639 /* AboutViews */,
 				A4F10F5A2B8D73360014C68B /* CategorySelectionView.swift */,
+				A4DB7B092ABB837D0008AF12 /* ContentView.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
