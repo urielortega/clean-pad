@@ -45,7 +45,7 @@ struct CustomTabBar: View {
             
             HStack {
                 if viewModel.showingTabButtons {
-                    manageCategoriesTabButton
+                    showCategoriesTabButton
                 }
                 
                 tabBar
@@ -164,7 +164,7 @@ struct CustomTabBar: View {
         .dockButtonStyle(position: .right)
     }
     
-    var manageCategoriesTabButton: some View {
+    var showCategoriesTabButton: some View {
         Button {
             showCategoriesSheet.toggle()
             HapticManager.instance.impact(style: .light)
