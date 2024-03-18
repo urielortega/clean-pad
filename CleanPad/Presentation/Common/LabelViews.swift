@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// View that shows a note title, date, category and some content when user selects List View in AlINotesView.
 struct ListNoteLabel: View {
     var note: Note
     @ObservedObject var viewModel: DateViewModel
@@ -45,6 +46,7 @@ struct ListNoteLabel: View {
     }
 }
 
+/// View that shows a note title, date, category and some content when user selects Grid View in AlINotesView.
 struct GridNoteLabel: View {
     var note: Note
     @ObservedObject var viewModel: DateViewModel
