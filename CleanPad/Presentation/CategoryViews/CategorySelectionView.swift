@@ -12,6 +12,8 @@ struct CategorySelectionView: View {
     @ObservedObject var viewModel: NotesListViewModel
     @Environment(\.dismiss) var dismiss
     
+    @State private var showEditableCategoriesSheet = false
+    
     var body: some View {
         VStack {
             HStack {
@@ -45,14 +47,13 @@ struct CategorySelectionView: View {
                             viewModel: viewModel
                         )
                     }
-                    // .padding(.bottom)
                     
                     Divider()
                         .padding(.vertical)
                     
                     CategoryFilteringLabel(category: .emptySelection, viewModel: viewModel)
                     
-                    EditCategoriesButton()
+                    EditCategoriesButton(showEditableCategoriesSheet: $showEditableCategoriesSheet)
                         .padding(.vertical)
                 }
                 .padding()
@@ -62,6 +63,7 @@ struct CategorySelectionView: View {
         .presentationDetents([.fraction(0.4), .medium, .large])    
         .presentationDragIndicator(.visible)
         .presentationBackground(.ultraThinMaterial)
+        .sheet(isPresented: $showEditableCategoriesSheet) { EditableCategoriesView() }
     }
 }
 
@@ -113,9 +115,11 @@ struct CategoryFilteringLabel: View {
 
 /// View to open another View to edit categories.
 struct EditCategoriesButton: View {
+    @Binding var showEditableCategoriesSheet: Bool
+
     var body: some View {
         Button("Edit", systemImage: "pencil") {
-            // TODO: Show View for Categories CRUD.
+            showEditableCategoriesSheet.toggle()
         }
     }
 }
