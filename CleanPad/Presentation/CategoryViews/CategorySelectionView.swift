@@ -12,8 +12,8 @@ struct CategorySelectionView: View {
     @ObservedObject var viewModel: NotesListViewModel
     @Environment(\.dismiss) var dismiss
     
-    @State private var showEditableCategoriesSheet = false
-    
+    @Binding var showEditableCategoriesSheet: Bool
+
     var body: some View {
         VStack {
             HStack {
@@ -51,7 +51,7 @@ struct CategorySelectionView: View {
                     Divider()
                         .padding(.vertical)
                     
-                    CategoryFilteringLabel(category: .emptySelection, viewModel: viewModel)
+                    CategoryFilteringLabel(category: .noSelection, viewModel: viewModel)
                     
                     EditCategoriesButton(showEditableCategoriesSheet: $showEditableCategoriesSheet)
                         .padding(.vertical)
@@ -60,10 +60,9 @@ struct CategorySelectionView: View {
             }
         }
         .padding(.top)
-        .presentationDetents([.fraction(0.4), .medium, .large])    
+        .presentationDetents([.medium, .large])
         .presentationDragIndicator(.visible)
         .presentationBackground(.ultraThinMaterial)
-        .sheet(isPresented: $showEditableCategoriesSheet) { EditableCategoriesView(viewModel: viewModel) }
     }
 }
 
@@ -92,9 +91,8 @@ struct CategoryFilteringLabel: View {
         .clipShape(.rect(cornerRadius: 10))
         .shadow(color: .gridLabelShadow, radius: 2, x: 0, y: 6)
         .onTapGesture {
-            withAnimation(.bouncy) {
-                viewModel.selectedCategory = category
-            }
+            withAnimation(.bouncy) { viewModel.changeSelectedCategory(with: category) }
+            
             HapticManager.instance.impact(style: .soft)
             dismiss()
             
@@ -126,7 +124,7 @@ struct EditCategoriesButton: View {
 }
 
 #Preview("CategorySelectionView Sheet") {
-    CategorySelectionView(viewModel: NotesListViewModel())
+    CategorySelectionView(viewModel: NotesListViewModel(), showEditableCategoriesSheet: .constant(false))
 }
 
 #Preview("CategoryFilteringLabel") {

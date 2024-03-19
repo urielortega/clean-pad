@@ -20,6 +20,7 @@ struct ContentView: View {
     @State private var showFeedbackSheet = false
     @State private var showAboutSheet = false
     @State private var showCategorySelectionSheet = false
+    @State private var showEditableCategoriesSheet = false
     
     var body: some View {
         NavigationStack {
@@ -78,7 +79,13 @@ struct ContentView: View {
         }
         .sheet(isPresented: $showFeedbackSheet) { FeedbackView() }
         .sheet(isPresented: $showAboutSheet) { AboutCleanPadView() }
-        .sheet(isPresented: $showCategorySelectionSheet) { CategorySelectionView(viewModel: viewModel) }
+        .sheet(isPresented: $showCategorySelectionSheet) {
+            CategorySelectionView(
+                viewModel: viewModel, 
+                showEditableCategoriesSheet: $showEditableCategoriesSheet
+            )
+            .sheet(isPresented: $showEditableCategoriesSheet) { EditableCategoriesView(viewModel: viewModel) }
+        }
         .alert("Authentication error", isPresented: $viewModel.isShowingAuthenticationError) {
             Button("OK") { }
         } message: {
