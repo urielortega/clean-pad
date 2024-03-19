@@ -38,7 +38,7 @@ final class NotesListViewModel: ObservableObject {
             .sorted { $0.date > $1.date }
     }
     
-    @Published var selectedCategory: Category = .emptySelection
+    @Published var selectedCategory: Category = .noSelection
     
     /// Computed property that returns a Note array with all notes or the ones resulting from a search.
     var filteredNotes: [Note] {
@@ -77,7 +77,7 @@ final class NotesListViewModel: ObservableObject {
     
     @Published var isCustomTabBarGlowing = false
     
-    var isSomeCategorySelected: Bool { selectedCategory != .emptySelection }
+    var isSomeCategorySelected: Bool { selectedCategory != .noSelection }
     
     // MARK: Access control properties.
     /// Property to control access to locked notes (private space).
@@ -196,6 +196,11 @@ extension NotesListViewModel {
         } catch {
             print("Unable to save data.")
         }
+    }
+    
+    /// Function to change the value of the selectedCategory property.
+    func changeSelectedCategory(with category: Category) {
+        selectedCategory = category
     }
     
     // MARK: Data loading functions.
