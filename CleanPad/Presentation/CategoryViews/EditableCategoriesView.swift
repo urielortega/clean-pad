@@ -23,8 +23,8 @@ struct EditableCategoriesView: View {
                 }
             }
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button("OK") { dismiss() }
+                ToolbarItem(placement: .topBarLeading) {
+                    Button("Cancel") { dismiss() }
                 }
             }
         }
