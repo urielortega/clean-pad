@@ -102,7 +102,7 @@ extension NotesListViewModel {
     func add(note: Note) {
         if note.category == nil { // If 'note' has no category assigned...
             let noteToAssignCategory = Note(
-                isLocked: isLockedNotesTabSelected ? true : false,
+                isLocked: note.isLocked,
                 noteTitle: note.noteTitle,
                 noteContent: note.noteContent,
                 category: categories[0] // ..assign General category from 'categories' array.
