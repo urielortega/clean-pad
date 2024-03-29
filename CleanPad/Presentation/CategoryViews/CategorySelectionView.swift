@@ -26,7 +26,8 @@ struct CategorySelectionView: View {
                 )
                 .imageScale(.large)
                 .labelStyle(.iconOnly)
-                .tint(.secondary)
+                // .tint(.secondary)
+                .foregroundStyle(.accent, .regularMaterial)
                 .padding(.horizontal)
             }
             
@@ -52,15 +53,15 @@ struct CategorySelectionView: View {
                         .padding(.vertical)
                     
                     CategoryFilteringLabel(category: .noSelection, viewModel: viewModel)
-                    
-                    EditCategoriesButton(showEditableCategoriesSheet: $showEditableCategoriesSheet)
-                        .padding(.vertical)
                 }
                 .padding()
             }
+            
+            EditCategoriesButton(showEditableCategoriesSheet: $showEditableCategoriesSheet)
+                .padding(.vertical)
         }
         .padding(.top)
-        .presentationDetents([.medium, .large])
+        .presentationDetents([.fraction(0.5), .large])
         .presentationDragIndicator(.visible)
         .presentationBackground(.ultraThinMaterial)
     }
