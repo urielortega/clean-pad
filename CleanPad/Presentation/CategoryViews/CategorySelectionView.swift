@@ -73,6 +73,10 @@ struct CategoryFilteringLabel: View {
     @ObservedObject var viewModel: NotesListViewModel
     @Environment(\.dismiss) var dismiss
     
+    var strokeColorGradient: AnyGradient {
+        viewModel.selectedCategory == category ? category.color.gradient : Color.gray.gradient
+    }
+    
     var body: some View {
         HStack {
             Label("\(category.name)", systemImage: "note.text")
@@ -90,6 +94,15 @@ struct CategoryFilteringLabel: View {
         .padding()
         .background(.regularMaterial)
         .clipShape(.rect(cornerRadius: 10))
+        .overlay {
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(
+                    strokeColorGradient.opacity(
+                        viewModel.selectedCategory == category ? 0.5 : 0.1
+                    ),
+                    lineWidth: 3
+                )
+        }
         .shadow(color: .gridLabelShadow, radius: 2, x: 0, y: 6)
         .onTapGesture {
             withAnimation(.bouncy) { viewModel.changeSelectedCategory(with: category) }
