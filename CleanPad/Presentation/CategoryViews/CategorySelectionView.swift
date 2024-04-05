@@ -19,16 +19,7 @@ struct CategorySelectionView: View {
             HStack {
                 Spacer()
                 
-                Button(
-                    "Dismiss",
-                    systemImage: "xmark.circle.fill",
-                    action: { dismiss() }
-                )
-                .imageScale(.large)
-                .labelStyle(.iconOnly)
-                // .tint(.secondary)
-                .foregroundStyle(.accent, .regularMaterial)
-                .padding(.horizontal)
+                dismissButton
             }
             
             HStack {
@@ -64,6 +55,19 @@ struct CategorySelectionView: View {
         .presentationDetents([.fraction(0.5), .large])
         .presentationDragIndicator(.visible)
         .presentationBackground(.ultraThinMaterial)
+    }
+    
+    var dismissButton: some View {
+        Button(
+            "Dismiss",
+            systemImage: "xmark.circle.fill",
+            action: { dismiss() }
+        )
+        .frame(height: 40)
+        .imageScale(.large)
+        .labelStyle(.iconOnly)
+        .foregroundStyle(.accent, .regularMaterial)
+        .padding(.horizontal)
     }
 }
 
