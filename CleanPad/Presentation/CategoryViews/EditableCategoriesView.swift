@@ -28,6 +28,7 @@ struct EditableCategoriesView: View {
                 }
             }
         }
+        // .presentationDetents([.fraction(0.5), .large])
     }
 }
 
