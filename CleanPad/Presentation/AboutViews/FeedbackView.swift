@@ -25,7 +25,6 @@ struct FeedbackView: View {
                 
                 dismissButtonView
             }
-            .padding(.horizontal)
         }
         .presentationDetents([.fraction(0.8)])
         .presentationDragIndicator(.visible)
@@ -33,33 +32,37 @@ struct FeedbackView: View {
     }
     
     var headerView: some View {
-        Group {
-            Image("memoji")
-                .resizable()
-                .frame(width: 100, height: 100)
-                .shadow(radius: 10)
-                .padding(.top)
+        HStack {
+            VStack(alignment: .leading) {
+                Text("Hello! 👋🏼")
+                    .font(.title)
+                    .bold()
+                
+                Text("I'm Uriel Ortega.")
+                    .font(.title)
+                    .fontWeight(.semibold)
+                    .foregroundStyle(.secondary)
+            }
             
-            Text("Hello! This is Uriel.")
-                .font(.title).bold()
-                .padding()
+            Spacer()
         }
+        .padding()
     }
     
     var detailsView: some View {
-        Group {
+        VStack(alignment: .leading) {
             Text("Feel free to reach out and share your thoughts with me!")
                 .bold()
-                .multilineTextAlignment(.center)
+                .multilineTextAlignment(.leading)
             
             Text("Whether it's a bug report, a suggestion, or just a friendly chat—I'm here for you.")
                 .bold()
-                .multilineTextAlignment(.center)
+                .multilineTextAlignment(.leading)
                 .padding(.bottom, 10)
 
             Text("If you enjoy using the app and would like to support my work, you can also buy me a coffee. Every sip fuels more improvements for this and future apps. Thank you! ☕️✨")
                 .font(.caption)
-                .multilineTextAlignment(.center)
+                .multilineTextAlignment(.leading)
                 .padding(.bottom, 10)
         }
         .padding(.horizontal)
