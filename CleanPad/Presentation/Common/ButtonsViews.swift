@@ -37,3 +37,19 @@ struct DeleteNoteButton: View {
         }
     }
 }
+
+struct DismissViewButton: View {
+    @Environment(\.dismiss) var dismiss
+    
+    var body: some View {
+        Button(
+            "Dismiss",
+            systemImage: "xmark.circle.fill",
+            action: { dismiss() }
+        )
+        .imageScale(.large)
+        .labelStyle(.iconOnly)
+        .foregroundStyle(.background, .primary.opacity(0.4))
+        .padding(.horizontal)
+    }
+}

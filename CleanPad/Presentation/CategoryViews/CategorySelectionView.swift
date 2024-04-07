@@ -19,15 +19,7 @@ struct CategorySelectionView: View {
             HStack {
                 Spacer()
                 
-                Button(
-                    "Dismiss",
-                    systemImage: "xmark.circle.fill",
-                    action: { dismiss() }
-                )
-                .imageScale(.large)
-                .labelStyle(.iconOnly)
-                .foregroundStyle(.background, .primary.opacity(0.4))
-                .padding(.horizontal)
+                DismissViewButton()
             }
             
             HStack {
@@ -62,7 +54,7 @@ struct CategorySelectionView: View {
         .padding(.top)
         .presentationDetents([.fraction(0.5), .large])
         .presentationDragIndicator(.visible)
-        .presentationBackground(.ultraThinMaterial)
+        .presentationBackground(.regularMaterial)
     }
 }
 
