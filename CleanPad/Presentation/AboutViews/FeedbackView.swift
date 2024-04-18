@@ -12,23 +12,51 @@ struct FeedbackView: View {
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        VStack {
-            headerView
-            detailsView
-            
-            VStack {
-                HStack {
-                    iMessageButtonView
-                    buyMeACoffeeButtonView
+        GeometryReader { geometry in
+            ZStack(alignment: .center) {
+                ScrollView {
+                    HStack {
+                        VStack {
+                            Spacer()
+                            headerView
+                                .padding()
+                            detailsView
+                                .padding(.horizontal)
+                            Spacer()
+                            Spacer()
+                        }
+                        
+                        Spacer()
+                    }
+                    .frame(
+                        maxWidth: geometry.size.width,
+                        minHeight: geometry.size.height
+                    )
                 }
-                .padding(.horizontal)
                 
-                dismissButtonView
+                // View for Support and Dismiss buttons:
+                VStack {
+                    HStack {
+                        Spacer()
+                        
+                        DismissViewButton()
+                            .padding(.top)
+                    }
+                    
+                    Spacer()
+                    
+                    VStack {
+                        iMessageButtonView
+                        buyMeACoffeeButtonView
+                    }
+                    .padding()
+                }
             }
         }
-        .presentationDetents([.fraction(0.8)])
+        .presentationDetents([.medium])
         .presentationDragIndicator(.visible)
-        .presentationBackground(.thinMaterial)
+        .presentationBackground(.regularMaterial)
+        .presentationCornerRadius(roundedRectCornerRadius)
     }
     
     var headerView: some View {
@@ -43,10 +71,10 @@ struct FeedbackView: View {
                     .fontWeight(.semibold)
                     .foregroundStyle(.secondary)
             }
+            .fontDesign(.monospaced)
             
             Spacer()
         }
-        .padding()
     }
     
     var detailsView: some View {
@@ -59,13 +87,12 @@ struct FeedbackView: View {
                 .bold()
                 .multilineTextAlignment(.leading)
                 .padding(.bottom, 10)
-
+            
             Text("If you enjoy using the app and would like to support my work, you can also buy me a coffee. Every sip fuels more improvements for this and future apps. Thank you! ☕️✨")
                 .font(.caption)
                 .multilineTextAlignment(.leading)
                 .padding(.bottom, 10)
         }
-        .padding(.horizontal)
     }
     
     var iMessageButtonView: some View {
@@ -75,7 +102,7 @@ struct FeedbackView: View {
             }
         } label: {
             Label("iMessage Me", systemImage: "message.fill")
-                .labelStyle(.iconOnly)
+                .labelStyle(.automatic)
                 .frame(minWidth: 0, maxWidth: .infinity)
                 .padding()
                 .foregroundColor(.primary)
@@ -89,7 +116,7 @@ struct FeedbackView: View {
     var buyMeACoffeeButtonView: some View {
         Link(destination: URL(string: "https://www.buymeacoffee.com/urielortega")!) {
             Label("Buy Me A Coffee", systemImage: "cup.and.saucer.fill")
-                .labelStyle(.iconOnly)
+                .labelStyle(.automatic)
                 .frame(minWidth: 0, maxWidth: .infinity)
                 .padding()
                 .foregroundColor(.primary)
@@ -97,19 +124,6 @@ struct FeedbackView: View {
                     RoundedRectangle(cornerRadius: 25)
                         .stroke(Color.primary, lineWidth: 2)
                 )
-        }
-    }
-    
-    var dismissButtonView: some View {
-        Button {
-            dismiss()
-        } label: {
-            Text("OK")
-                .frame(maxWidth: .infinity, minHeight: 50)
-                .background(.accent)
-                .foregroundStyle(.white)
-                .clipShape(.rect(cornerRadius: 25))
-                .padding()
         }
     }
 }
