@@ -19,6 +19,7 @@
 		A461172A2AF56EB6001C0087 /* AllNotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46117292AF56EB6001C0087 /* AllNotesView.swift */; };
 		A465AB7A2ABA7149001CFFD9 /* NoteEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A465AB792ABA7149001CFFD9 /* NoteEditView.swift */; };
 		A475B9642ACCD7DE00BE6575 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A475B9632ACCD7DE00BE6575 /* WelcomeView.swift */; };
+		A480F7D52BD1A9F200B93BD3 /* ColorfulX in Frameworks */ = {isa = PBXBuildFile; productRef = A480F7D42BD1A9F200B93BD3 /* ColorfulX */; };
 		A482F0DF2AC7D7CA0075A385 /* ButtonsViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A482F0DE2AC7D7CA0075A385 /* ButtonsViews.swift */; };
 		A489F7A32B84290F00CB44AE /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = A489F7A22B84290F00CB44AE /* Category.swift */; };
 		A489F7A52B8429B500CB44AE /* CodableColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A489F7A42B8429B500CB44AE /* CodableColor.swift */; };
@@ -71,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A480F7D52BD1A9F200B93BD3 /* ColorfulX in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,6 +103,7 @@
 			children = (
 				A44E76942AB11E70004BBB21 /* CleanPad */,
 				A44E76932AB11E70004BBB21 /* Products */,
+				A480F7D22BD1A9C200B93BD3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -164,6 +167,13 @@
 				A489F7A22B84290F00CB44AE /* Category.swift */,
 			);
 			path = Domain;
+			sourceTree = "<group>";
+		};
+		A480F7D22BD1A9C200B93BD3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		A482F0DB2AC7D4410075A385 /* Common */ = {
@@ -231,6 +241,9 @@
 			dependencies = (
 			);
 			name = CleanPad;
+			packageProductDependencies = (
+				A480F7D42BD1A9F200B93BD3 /* ColorfulX */,
+			);
 			productName = CleanPad;
 			productReference = A44E76922AB11E70004BBB21 /* CleanPad.app */;
 			productType = "com.apple.product-type.application";
@@ -259,6 +272,9 @@
 				Base,
 			);
 			mainGroup = A44E76892AB11E70004BBB21;
+			packageReferences = (
+				A480F7D32BD1A9F200B93BD3 /* XCRemoteSwiftPackageReference "ColorfulX" */,
+			);
 			productRefGroup = A44E76932AB11E70004BBB21 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -530,6 +546,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A480F7D32BD1A9F200B93BD3 /* XCRemoteSwiftPackageReference "ColorfulX" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Lakr233/ColorfulX.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.4.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A480F7D42BD1A9F200B93BD3 /* ColorfulX */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A480F7D32BD1A9F200B93BD3 /* XCRemoteSwiftPackageReference "ColorfulX" */;
+			productName = ColorfulX;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A44E768A2AB11E70004BBB21 /* Project object */;
 }

@@ -1,0 +1,24 @@
+{
+  "originHash" : "c68659839fffa3118f0bdc926514a33f1d21b15b0a088ea54000727b67544538",
+  "pins" : [
+    {
+      "identity" : "colorfulx",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Lakr233/ColorfulX.git",
+      "state" : {
+        "revision" : "24bbc2f4b27c853f2be5ebed144252d9bcd27ee0",
+        "version" : "2.4.5"
+      }
+    },
+    {
+      "identity" : "springinterpolation",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Lakr233/SpringInterpolation.git",
+      "state" : {
+        "revision" : "be8721cffc87ec514fa13ba5dab586a2730f51c9",
+        "version" : "1.1.2"
+      }
+    }
+  ],
+  "version" : 3
+}
