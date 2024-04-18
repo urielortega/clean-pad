@@ -5,19 +5,24 @@
 //  Created by Uriel Ortega on 18/01/24.
 //
 
+import ColorfulX
 import SwiftUI
 
 /// View containing fundamental information about the purpose and operation of the app, accesible at anytime for the user.
 struct AboutCleanPadView: View {
-    @State private var greeting = "Good morning!"
-    @State private var backgroundImage = "sunrise"
-    @State private var textForegroundColor = Color.black
     @Environment(\.dismiss) var dismiss
+
+    @State private var greeting = "Hello!"
+    @State private var textForegroundColor = Color.white
+    @State var gradientColors: [Color] = ColorfulPreset.aurora.colors
+    @State var gradientSpeed: Double = 0.3
     
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .center) {
-                backgroundView
+                ColorfulView(color: $gradientColors, speed: $gradientSpeed)
+                    .opacity(0.8)
+                    .ignoresSafeArea()
                 
                 ScrollView {
                     VStack {
@@ -50,18 +55,9 @@ struct AboutCleanPadView: View {
             .frame(maxWidth: geometry.size.width)
             .multilineTextAlignment(.center)
             .foregroundStyle(textForegroundColor)
-            .fontDesign(.rounded)
-            .onAppear(perform: updateBackgroundImageAndGreeting)
+            .onAppear(perform: updateBackgroundAndGreeting)
             .presentationDragIndicator(.visible)
         }
-    }
-    
-    var backgroundView: some View {
-        Image(decorative: backgroundImage)
-            .resizable()
-            .scaledToFill()
-            .ignoresSafeArea()
-            .blur(radius: 20, opaque: true)
     }
     
     var headerView: some View {
@@ -77,6 +73,7 @@ struct AboutCleanPadView: View {
             Text(greeting)
                 .font(.largeTitle)
                 .fontWeight(.bold)
+                .fontDesign(.serif)
                 .padding(.bottom)
         }
     }
@@ -86,7 +83,7 @@ struct AboutCleanPadView: View {
             VStack {
                 Text("CleanPad is the home for any of your thoughts.")
                     .font(.title2)
-                    .bold()
+                    .fontDesign(.serif)
                     .padding(.bottom)
                 
                 Text("It’s your space to capture it all. Feel free to express yourself.")
@@ -98,28 +95,29 @@ struct AboutCleanPadView: View {
                 .padding(.bottom)
         }
         .fixedSize(horizontal: false, vertical: true)
+        .fontWeight(.semibold)
         .padding(.horizontal)
     }
     
-    private func updateBackgroundImageAndGreeting() {
+    private func updateBackgroundAndGreeting() {
         let hour = Calendar.current.component(.hour, from: Date())
         
         switch hour {
         case 6..<12:
             greeting = "Good morning!"
-            backgroundImage = "sunrise"
+            gradientColors = ColorfulPreset.sunrise.colors
             textForegroundColor = .black
         case 12..<17:
             greeting = "Good afternoon!"
-            backgroundImage = "daylight"
+            gradientColors = ColorfulPreset.lemon.colors
             textForegroundColor = .black
         case 17..<20:
             greeting = "Good evening!"
-            backgroundImage = "sunset"
-            textForegroundColor = .white
+            gradientColors = ColorfulPreset.sunrise.colors
+            textForegroundColor = .black
         default:
             greeting = "Good night!"
-            backgroundImage = "night"
+            gradientColors = ColorfulPreset.jelly.colors
             textForegroundColor = .white
         }
     }
