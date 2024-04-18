@@ -25,10 +25,26 @@ struct AboutCleanPadView: View {
                         headerView
                         detailsView
                         Spacer()
-                        dismissButtonView
+                        Spacer()
                     }
-                    .frame(maxWidth: geometry.size.width, minHeight: geometry.size.height)
-                    .padding()
+                    .frame(
+                        maxWidth: geometry.size.width, 
+                        minHeight: geometry.size.height
+                    )
+                    .padding(.horizontal)
+                }
+                
+                // View for Dismiss Button:
+                VStack {
+                    HStack {
+                        Spacer()
+                        
+                        DismissViewButton()
+                            .padding(.top)
+                    }
+                    .frame(maxWidth: geometry.size.width)
+                    
+                    Spacer()
                 }
             }
             .frame(maxWidth: geometry.size.width)
@@ -83,20 +99,6 @@ struct AboutCleanPadView: View {
         }
         .fixedSize(horizontal: false, vertical: true)
         .padding(.horizontal)
-    }
-    
-    var dismissButtonView: some View {
-        Button {
-            dismiss()
-        } label: {
-            Text("Great!")
-                .frame(maxWidth: .infinity, minHeight: 50)
-                .background(.ultraThinMaterial)
-                .clipShape(.rect(cornerRadius: 25))
-                .shadow(radius: 10)
-                .padding()
-        }
-        .padding(.bottom, 100)
     }
     
     private func updateBackgroundImageAndGreeting() {
