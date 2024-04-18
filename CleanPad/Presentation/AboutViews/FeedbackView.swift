@@ -101,29 +101,21 @@ struct FeedbackView: View {
                 UIApplication.shared.open(url)
             }
         } label: {
-            Label("iMessage Me", systemImage: "message.fill")
-                .labelStyle(.automatic)
-                .frame(minWidth: 0, maxWidth: .infinity)
-                .padding()
-                .foregroundColor(.primary)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 25)
-                        .stroke(Color.primary, lineWidth: 2)
-                )
+            BorderedButtonLabel(
+                color: .green, 
+                labelText: "iMessage Me",
+                systemImageString: "message.fill"
+            )
         }
     }
     
     var buyMeACoffeeButtonView: some View {
         Link(destination: URL(string: "https://www.buymeacoffee.com/urielortega")!) {
-            Label("Buy Me A Coffee", systemImage: "cup.and.saucer.fill")
-                .labelStyle(.automatic)
-                .frame(minWidth: 0, maxWidth: .infinity)
-                .padding()
-                .foregroundColor(.primary)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 25)
-                        .stroke(Color.primary, lineWidth: 2)
-                )
+            BorderedButtonLabel(
+                color: .black.opacity(0.8),
+                labelText: "Buy Me A Coffee",
+                systemImageString: "cup.and.saucer.fill"
+            )
         }
     }
 }
