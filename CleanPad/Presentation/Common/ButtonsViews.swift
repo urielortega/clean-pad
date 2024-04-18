@@ -53,3 +53,28 @@ struct DismissViewButton: View {
         .padding(.horizontal)
     }
 }
+
+struct BorderedButtonLabel: View {
+    let color: Color
+    let labelText: String
+    let systemImageString: String
+    
+    var body: some View {
+        ZStack {
+            Capsule()
+                .foregroundStyle(color)
+                .frame(height: 50)
+                .frame(minWidth: 300, maxWidth: .infinity)
+                .overlay {
+                    Capsule()
+                        .stroke(color.gradient, lineWidth: 3)
+                }
+                .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.14), radius: 8)
+
+            Label(labelText, systemImage: systemImageString)
+                .labelStyle(.automatic)
+                .foregroundStyle(.white)
+                .fontWeight(.medium)
+        }
+    }
+}
