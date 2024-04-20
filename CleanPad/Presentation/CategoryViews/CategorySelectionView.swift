@@ -50,6 +50,7 @@ struct CategorySelectionView: View {
             
             EditCategoriesButton(showEditableCategoriesSheet: $showEditableCategoriesSheet)
                 .padding(.vertical)
+                .padding(.bottom)
         }
         .padding(.top)
         .presentationDetents([.fraction(0.5), .large])
