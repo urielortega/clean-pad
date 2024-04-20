@@ -78,3 +78,38 @@ struct BorderedButtonLabel: View {
         }
     }
 }
+
+struct ContextMenuButtons: View {
+    var note: Note
+    @ObservedObject var viewModel: NotesListViewModel
+    
+    var body: some View {
+        IsLockedToggleButton(
+            note: note,
+            viewModel: viewModel
+        )
+        ShareLink(item: "\(note.noteTitle)\n\(note.noteContent)")
+        DeleteNoteButton(
+            note: note,
+            viewModel: viewModel,
+            dismissView: false
+        )
+    }
+}
+
+/// Button to change isLocked note property, i.e., remove it from or move it to private space.
+struct IsLockedToggleButton: View {
+    var note: Note
+    @ObservedObject var viewModel: NotesListViewModel
+    
+    var body: some View {
+        Button {
+            viewModel.updateLockStatus(for: note)
+        } label: {
+            Label(
+                viewModel.isLockedNotesTabSelected ? "Remove from private space" : "Move to private space",
+                systemImage: viewModel.isLockedNotesTabSelected ? "lock.slash.fill" : "lock.fill"
+            )
+        }
+    }
+}

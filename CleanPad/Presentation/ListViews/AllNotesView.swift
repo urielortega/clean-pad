@@ -67,7 +67,7 @@ struct AllNotesView: View {
                             ListNoteLabel(note: note, viewModel: dateViewModel)
                         }
                         .contextMenu {
-                            contextMenuButtons(note: note, viewModel: viewModel)
+                            ContextMenuButtons(note: note, viewModel: viewModel)
                         } preview: {
                             ContextMenuPreview(note: note)
                         }
@@ -114,7 +114,7 @@ struct AllNotesView: View {
                                      .padding(5)
                              }
                              .contextMenu {
-                                 contextMenuButtons(note: note, viewModel: viewModel)
+                                 ContextMenuButtons(note: note, viewModel: viewModel)
                              } preview: {
                                  ContextMenuPreview(note: note)
                              }
@@ -127,41 +127,6 @@ struct AllNotesView: View {
          }
          .searchable(text: $viewModel.searchText, prompt: "Look for a note...")
      }
-    
-    struct contextMenuButtons: View {
-        var note: Note
-        @ObservedObject var viewModel: NotesListViewModel
-        
-        var body: some View {
-            isLockedToggleButton(
-                note: note,
-                viewModel: viewModel
-            )
-            ShareLink(item: "\(note.noteTitle)\n\(note.noteContent)")
-            DeleteNoteButton(
-                note: note,
-                viewModel: viewModel,
-                dismissView: false
-            )
-        }
-    }
-    
-    /// Button to change isLocked note property, i.e., remove it from or move it to private space.
-    struct isLockedToggleButton: View {
-        var note: Note
-        @ObservedObject var viewModel: NotesListViewModel
-        
-        var body: some View {
-            Button {
-                viewModel.updateLockStatus(for: note)
-            } label: {
-                Label(
-                    viewModel.isLockedNotesTabSelected ? "Remove from private space" : "Move to private space",
-                    systemImage: viewModel.isLockedNotesTabSelected ? "lock.slash.fill" : "lock.fill"
-                )
-            }
-        }
-    }
     
     /// Button to authenticate and show locked notes list.
     var unlockNotesButtonView: some View {
