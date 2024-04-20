@@ -10,6 +10,7 @@ import SwiftUI
 /// View that shows all user categories that can be edited by tapping one of them.
 struct EditableCategoriesView: View {
     @ObservedObject var viewModel: NotesListViewModel
+    
     @Environment(\.dismiss) var dismiss
 
     var body: some View {

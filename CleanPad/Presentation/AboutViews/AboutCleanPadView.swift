@@ -10,12 +10,12 @@ import SwiftUI
 
 /// View containing fundamental information about the purpose and operation of the app, accesible at anytime for the user.
 struct AboutCleanPadView: View {
-    @Environment(\.dismiss) var dismiss
-
     @State private var greeting = "Hello!"
     @State private var textForegroundColor = Color.white
     @State var gradientColors: [Color] = ColorfulPreset.aurora.colors
     @State var gradientSpeed: Double = 0.3
+    
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         GeometryReader { geometry in
