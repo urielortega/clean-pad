@@ -63,7 +63,7 @@ struct FeedbackView: View {
         HStack {
             VStack(alignment: .leading) {
                 Text("Hello! 👋🏼")
-                    .font(.title)
+                    .font(.largeTitle)
                     .bold()
                 
                 Text("I'm Uriel Ortega.")
@@ -71,7 +71,6 @@ struct FeedbackView: View {
                     .fontWeight(.semibold)
                     .foregroundStyle(.secondary)
             }
-            .fontDesign(.monospaced)
             
             Spacer()
         }
