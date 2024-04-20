@@ -25,13 +25,11 @@ struct EmptyListView: View {
                 .padding(.bottom)
             
             Text(label)
-                .font(.system(size: 20))
-                .fontWeight(.bold)
+                .font(.title2)
+                .bold()
                 .padding(.bottom, 3)
             
             Text(description)
-                .font(.system(size: 18))
-                .fontWeight(.semibold)
                 .foregroundStyle(.secondary)
                 .padding(.bottom, 15)
             
