@@ -38,6 +38,8 @@ struct CustomTabBar: View {
     @ObservedObject var viewModel: NotesListViewModel
     @Binding var showEditViewSheet: Bool
     @Binding var showCategoriesSheet: Bool
+    
+    @Environment(\.horizontalSizeClass) var sizeClass
 
     var body: some View {
         VStack {
@@ -54,6 +56,10 @@ struct CustomTabBar: View {
                     createNoteTabButton
                 }
             }
+            .padding(
+                .horizontal, 
+                (viewModel.idiom == .pad && sizeClass == .regular) ? 20 : 0
+            )
         }
     }
     
@@ -72,6 +78,11 @@ struct CustomTabBar: View {
         }
         .frame(height: 55)
         .dockStyle(viewModel: viewModel)
+        .padding(.horizontal, viewModel.showingTabButtons ? 0 : 10)
+        .padding(
+            .horizontal,
+            (viewModel.idiom == .pad && sizeClass == .regular) ? 10 : 0
+        )
     }
     
     var nonLockedNotesTabButton: some View {
@@ -88,7 +99,7 @@ struct CustomTabBar: View {
                 }
             }
             
-            withAnimation(.bouncy) { viewModel.selectedTab = .nonLockedNotes }
+            withAnimation(.bouncy(extraBounce: 0.2)) { viewModel.selectedTab = .nonLockedNotes }
             HapticManager.instance.impact(style: .soft)
         } label: {
             nonLockedNotesTabLabel
@@ -110,7 +121,7 @@ struct CustomTabBar: View {
                 }
             }
             
-            withAnimation(.bouncy) { viewModel.selectedTab = .lockedNotes }
+            withAnimation(.bouncy(extraBounce: 0.2)) { viewModel.selectedTab = .lockedNotes }
             HapticManager.instance.impact(style: .soft)
         } label: {
             lockedNotesTabLabel
