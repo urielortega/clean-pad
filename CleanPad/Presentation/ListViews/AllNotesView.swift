@@ -14,14 +14,14 @@ struct AllNotesView: View {
     @ObservedObject var dateViewModel: DateViewModel
     
     @Binding var showEditViewSheet: Bool
-    @State private var isAnimating = false
     
     @Environment(\.accessibilityVoiceOverEnabled) var voiceOverEnabled
 
     var body: some View {
         Group {
             if viewModel.isLockedNotesTabSelected && !viewModel.isUnlocked {
-                unlockNotesButtonView
+                unlockNotesView
+                    .padding(.bottom, 80)
             } else {
                 if viewModel.currentNotes.isEmpty {
                     if voiceOverEnabled {
@@ -129,38 +129,26 @@ struct AllNotesView: View {
      }
     
     /// Button to authenticate and show locked notes list.
-    var unlockNotesButtonView: some View {
-        Button {
-            withAnimation {
-                HapticManager.instance.impact(style: .soft)
-                viewModel.authenticate(for: .viewNotes) {  }
-            }
-        } label: {
-            ZStack {
-                Capsule()
-                    .foregroundStyle(.accent)
-                    .frame(width: 200, height: 50)
-                    .overlay {
-                        Capsule()
-                            .stroke(.brown.gradient, lineWidth: 3)
-                    }
-                    .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.14), radius: 8)
-
-                Text("Unlock Notes")
-                    .foregroundStyle(.white)
-                    .fontWeight(.medium)
-            }
-        }
-        .padding()
-        .opacity(isAnimating ? 0.8 : 1.0)
-        .scaleEffect(isAnimating ? 0.95 : 1.0)
-        .onAppear {
-            DispatchQueue.main.async {
-                // Using withAnimation() to avoid unintentional movement:
-                withAnimation(.easeInOut(duration: 2).repeatForever(autoreverses: true)) {
-                    isAnimating.toggle()
+    var unlockNotesView: some View {
+        VStack {
+            Image(systemName: "lock.circle.fill")
+                .foregroundStyle(.accent.gradient)
+                .font(.system(size: 50))
+                .padding()
+            
+            Text("These notes are protected")
+                .font(.title2)
+                .bold()
+            
+            Text("Unlock to enable access")
+                .foregroundStyle(.secondary)
+            
+            Button("Unlock") {
+                withAnimation {
+                    viewModel.authenticate(for: .viewNotes) {  }
                 }
             }
+            .padding()
         }
     }
     
