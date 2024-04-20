@@ -13,7 +13,7 @@ struct AboutCleanPadView: View {
     @State private var greeting = "Hello!"
     @State private var textForegroundColor = Color.white
     @State var gradientColors: [Color] = ColorfulPreset.aurora.colors
-    @State var gradientSpeed: Double = 0.3
+    @State var gradientSpeed: Double = 0.4
     
     @Environment(\.dismiss) var dismiss
     
