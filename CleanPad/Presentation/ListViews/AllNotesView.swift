@@ -144,9 +144,7 @@ struct AllNotesView: View {
                 .foregroundStyle(.secondary)
             
             Button("Unlock") {
-                withAnimation {
-                    viewModel.authenticate(for: .viewNotes) {  }
-                }
+                viewModel.authenticate(for: .viewNotes) {  }
             }
             .padding()
         }

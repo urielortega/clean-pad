@@ -258,12 +258,14 @@ extension NotesListViewModel {
         context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { success, authenticationError in
             Task { @MainActor in
                 if success {
-                    if authenticationReason == .viewNotes {
-                        self.isUnlocked = true
-                    } else if authenticationReason == .changeLockStatus {
-                        self.areChangesAllowed = true
+                    withAnimation(.bouncy(extraBounce: 0.2)) {
+                        if authenticationReason == .viewNotes {
+                            self.isUnlocked = true
+                        } else if authenticationReason == .changeLockStatus {
+                            self.areChangesAllowed = true
+                        }
+                        successAction()
                     }
-                    successAction()
                 } else {
                     // Error handling for authentication failure.
                     let errorDescription: String
