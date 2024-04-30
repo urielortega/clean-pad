@@ -14,6 +14,7 @@ struct AboutCleanPadView: View {
     @State private var textForegroundColor = Color.white
     @State var gradientColors: [Color] = ColorfulPreset.aurora.colors
     @State var gradientSpeed: Double = 0.4
+    let shadowRadius: CGFloat = 8
     
     @Environment(\.dismiss) var dismiss
     
@@ -21,7 +22,6 @@ struct AboutCleanPadView: View {
         GeometryReader { geometry in
             ZStack(alignment: .center) {
                 ColorfulView(color: $gradientColors, speed: $gradientSpeed)
-                    .opacity(0.8)
                     .ignoresSafeArea()
                 
                 ScrollView {
@@ -66,15 +66,15 @@ struct AboutCleanPadView: View {
                 .resizable()
                 .frame(width: 100, height: 100)
                 .clipShape(.rect(cornerRadius: 23))
-                .shadow(radius: 7)
+                .shadow(radius: shadowRadius)
                 .padding()
                 .padding(.top, 50)
             
             Text(greeting)
                 .font(.largeTitle)
-                .fontWeight(.bold)
-                .fontDesign(.serif)
-                .padding(.bottom)
+                .bold()
+                .foregroundStyle(Material.thick)
+                .shadow(radius: shadowRadius)
         }
     }
     
@@ -82,20 +82,25 @@ struct AboutCleanPadView: View {
         VStack {
             VStack {
                 Text("CleanPad is the home for any of your thoughts.")
-                    .font(.title2)
-                    .fontDesign(.serif)
+                    .font(.title)
+                    .foregroundStyle(Material.regular)
                     .padding(.bottom)
                 
-                Text("It’s your space to capture it all. Feel free to express yourself.")
-                Text("Your notes are yours alone, securely stored on your device and optionally protected with authentication.")
+                Group {
+                    Text("It’s your space to capture it all. Feel free to express yourself.")
+                    Text("Your notes are yours alone, securely stored on your device and optionally protected with authentication.")
+                }
+                .foregroundStyle(Material.thick)
             }
             .padding(.bottom)
             
             Text("Thank you for choosing CleanPad as your trusted companion. Here's to a clutter-free, inspired note-taking journey!")
+                .foregroundStyle(Material.thick)
                 .padding(.bottom)
         }
         .fixedSize(horizontal: false, vertical: true)
         .fontWeight(.semibold)
+        .shadow(radius: shadowRadius)
         .padding(.horizontal)
     }
     
