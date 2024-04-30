@@ -8,7 +8,7 @@
 import ColorfulX
 import SwiftUI
 
-/// View containing fundamental information about the purpose and operation of the app, accesible at anytime for the user.
+/// View containing fundamental information about the purpose and operation of the app, accessible at anytime for the user.
 struct AboutCleanPadView: View {
     @State private var greeting = "Hello!"
     @State private var textForegroundColor = Color.white
