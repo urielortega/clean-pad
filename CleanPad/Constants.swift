@@ -40,4 +40,7 @@ enum Constants {
     
     /// Path used to store ``categories`` with documents directory.
     static let categoriesPath = FileManager.documentsDirectory.appendingPathComponent ("SavedCategories")
+    
+    static let textShadowRadius: CGFloat = 8
+    static let iconShadowRadius: CGFloat = 8
 }
