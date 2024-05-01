@@ -14,7 +14,6 @@ struct AboutCleanPadView: View {
     @State private var textForegroundColor = Color.white
     @State var gradientColors: [Color] = ColorfulPreset.aurora.colors
     @State var gradientSpeed: Double = 0.4
-    let shadowRadius: CGFloat = 8
     
     @Environment(\.dismiss) var dismiss
     
@@ -66,7 +65,7 @@ struct AboutCleanPadView: View {
                 .resizable()
                 .frame(width: 100, height: 100)
                 .clipShape(.rect(cornerRadius: 23))
-                .shadow(radius: shadowRadius)
+                .shadow(radius: Constants.iconShadowRadius)
                 .padding()
                 .padding(.top, 50)
             
@@ -74,7 +73,7 @@ struct AboutCleanPadView: View {
                 .font(.largeTitle)
                 .bold()
                 .foregroundStyle(Material.thick)
-                .shadow(radius: shadowRadius)
+                .shadow(radius: Constants.textShadowRadius)
         }
     }
     
@@ -100,7 +99,7 @@ struct AboutCleanPadView: View {
         }
         .fixedSize(horizontal: false, vertical: true)
         .fontWeight(.semibold)
-        .shadow(radius: shadowRadius)
+        .shadow(radius: Constants.textShadowRadius)
         .padding(.horizontal)
     }
     
