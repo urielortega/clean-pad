@@ -57,8 +57,8 @@ struct DismissViewButton: View {
 struct BorderedButtonLabel: View {
     let color: Color
     let labelText: String
-    let systemImageString: String?
-    
+    var systemImageString: String? = nil
+
     var body: some View {
         ZStack {
             Capsule()
@@ -79,6 +79,39 @@ struct BorderedButtonLabel: View {
                 Label(labelText, systemImage: systemImageString!)
                     .labelStyle(.automatic)
                     .foregroundStyle(.white)
+                    .fontWeight(.medium)
+            }
+        }
+    }
+}
+
+struct MaterialButtonLabel: View {
+    let labelText: String
+    var systemImageString: String? = nil
+    
+    var body: some View {
+        ZStack {
+            Capsule()
+                .foregroundStyle(Material.thin)
+                .frame(height: 50)
+                .frame(minWidth: 300, maxWidth: .infinity)
+                .overlay {
+                    Capsule()
+                        .stroke(
+                            Color.gray.gradient.opacity(0.3),
+                            lineWidth: 3
+                        )
+                }
+                .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.14), radius: 8)
+
+            if systemImageString == nil { // When no systemImage is provided...
+                Text(labelText) // ...use a Text View.
+                    .foregroundStyle(Color(.label))
+                    .fontWeight(.medium)
+            } else {
+                Label(labelText, systemImage: systemImageString!)
+                    .labelStyle(.automatic)
+                    .foregroundStyle(Color(.label))
                     .fontWeight(.medium)
             }
         }
