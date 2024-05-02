@@ -5,19 +5,28 @@
 //  Created by Uriel Ortega on 03/10/23.
 //
 
+import ColorfulX
 import SwiftUI
 
 /// View shown on the first app launch, containing fundamental information about the purpose and operation of the app.
 struct WelcomeView: View {
     @Environment(\.dismiss) var dismiss
+    @State var gradientColors: [Color] = [.brown, .white, .gray]
+    @State var gradientSpeed: Double = 0.4
     
     var body: some View {
-        VStack {
-            Spacer()
-            headerView
-            detailsView
-            Spacer()
-            dismissButtonView
+        ZStack(alignment: .center) {
+            ColorfulView(color: $gradientColors, speed: $gradientSpeed)
+                .opacity(0.8)
+                .ignoresSafeArea()
+            
+            VStack {
+                Spacer()
+                headerView
+                detailsView
+                Spacer()
+                dismissButtonView
+            }
         }
     }
     
@@ -25,18 +34,24 @@ struct WelcomeView: View {
         Group {
             Image(decorative: "CleanPadIcon")
                 .resizable()
-                .frame(width: 150, height: 150)
-                .clipShape(.rect(cornerRadius: 35))
-                .shadow(radius: 7)
+                .frame(width: 100, height: 100)
+                .clipShape(.rect(cornerRadius: 23))
+                .shadow(radius: Constants.iconShadowRadius)
                 .padding(.bottom, 40)
             
-            Text("Welcome to CleanPad")
-                .font(.title).bold()
-            
-            Text("The home for your thoughts")
-                .font(.title2)
-                .foregroundStyle(.secondary)
-                .padding(.bottom, 20)
+            Group {
+                Text("Welcome to CleanPad")
+                    .font(.largeTitle)
+                    .bold()
+                    .foregroundStyle(.black)
+                
+                Text("The home for your thoughts")
+                    .font(.title)
+                    .fontWeight(.semibold)
+                    .foregroundStyle(.black.opacity(0.7))
+                    .padding(.bottom, 20)
+            }
+            .shadow(radius: Constants.textShadowRadius)
         }
     }
     
@@ -53,20 +68,20 @@ struct WelcomeView: View {
             Text("Enjoy it! 🫶🏼")
 
         }
+        .fontWeight(.semibold)
+        .foregroundStyle(.black)
+        .shadow(radius: Constants.textShadowRadius)
         .padding(.horizontal)
     }
     
     var dismissButtonView: some View {
         Button {
+            HapticManager.instance.impact(style: .soft)
             dismiss()
         } label: {
-            Text("Great!")
-                .frame(maxWidth: .infinity, minHeight: 50)
-                .background(.accent)
-                .foregroundStyle(.white)
-                .clipShape(.rect(cornerRadius: 25))
-                .padding()
+            MaterialButtonLabel(labelText: "Great!")
         }
+        .padding()
     }
 }
 
