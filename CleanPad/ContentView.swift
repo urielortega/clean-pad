@@ -84,9 +84,6 @@ struct ContentView: View {
                 viewModel: viewModel, 
                 showEditableCategoriesSheet: $showEditableCategoriesSheet
             )
-//            .sheet(isPresented: $showEditableCategoriesSheet) { // To display EditableCategoriesView sheet on top of CategorySelectionView sheet.
-//                EditableCategoriesView(viewModel: viewModel)
-//            }
         }
         .alert("Authentication error", isPresented: $viewModel.isShowingAuthenticationError) {
             Button("OK") { }
