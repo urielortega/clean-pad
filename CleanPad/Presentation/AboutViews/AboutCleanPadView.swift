@@ -11,7 +11,6 @@ import SwiftUI
 /// View containing fundamental information about the purpose and operation of the app, accessible at anytime for the user.
 struct AboutCleanPadView: View {
     @State private var greeting = "Hello!"
-    @State private var textForegroundColor = Color.white
     @State var gradientColors: [Color] = ColorfulPreset.aurora.colors
     @State var gradientSpeed: Double = 0.4
     
@@ -53,7 +52,6 @@ struct AboutCleanPadView: View {
             }
             .frame(maxWidth: geometry.size.width)
             .multilineTextAlignment(.center)
-            .foregroundStyle(textForegroundColor)
             .onAppear(perform: updateBackgroundAndGreeting)
             .presentationDragIndicator(.visible)
         }
@@ -110,19 +108,15 @@ struct AboutCleanPadView: View {
         case 6..<12:
             greeting = "Good morning!"
             gradientColors = ColorfulPreset.sunrise.colors
-            textForegroundColor = .black
         case 12..<17:
             greeting = "Good afternoon!"
             gradientColors = ColorfulPreset.lemon.colors
-            textForegroundColor = .black
         case 17..<20:
             greeting = "Good evening!"
             gradientColors = ColorfulPreset.sunrise.colors
-            textForegroundColor = .black
         default:
             greeting = "Good night!"
             gradientColors = ColorfulPreset.jelly.colors
-            textForegroundColor = .white
         }
     }
 }
