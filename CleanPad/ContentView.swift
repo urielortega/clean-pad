@@ -116,10 +116,8 @@ struct ContentView: View {
                 }
             }
         } label: {
-            Label(
-                viewModel.isUnlocked ? "Lock notes" : "Unlock notes",
-                systemImage: viewModel.isUnlocked ? "lock.open.fill" : "lock.fill"
-            )
+            Image(systemName: viewModel.isUnlocked ? "lock.open.fill" : "lock.fill")
+                .contentTransition(.symbolEffect(.replace))
         }
     }
     
