@@ -20,8 +20,14 @@ struct AllNotesView: View {
     var body: some View {
         Group {
             if viewModel.isLockedNotesTabSelected && !viewModel.isUnlocked {
-                unlockNotesView
-                    .padding(.bottom, 80)
+                Group {
+                    if voiceOverEnabled {
+                        accessibilityUnlockNotesView
+                    } else {
+                        unlockNotesView
+                    }
+                }
+                .padding(.bottom, 80)
             } else {
                 if viewModel.currentNotes.isEmpty {
                     if voiceOverEnabled {
@@ -148,6 +154,7 @@ struct AllNotesView: View {
             }
             .padding()
         }
+        .accessibilityElement()
     }
     
     var accessibilityEmptyListButton: some View {
@@ -163,4 +170,14 @@ struct AllNotesView: View {
         }
         .accessibilityLabel("Empty list. Tap to create a note.")
     }
+    
+    var accessibilityUnlockNotesView: some View {
+        Button {
+            viewModel.authenticate(for: .viewNotes) {  }
+        } label: {
+            unlockNotesView
+        }
+        .accessibilityLabel("These notes are protected. Tap to enable access.")
+    }
+
 }
