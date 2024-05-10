@@ -102,6 +102,7 @@ struct ContentView: View {
         } label: {
             Label("Lock notes", systemImage: "lock.open.fill")
         }
+        .accessibilityLabel("Lock access to private notes")
     }
     
     /// Button to allow and forbid access to the locked notes list (private space).
@@ -119,6 +120,11 @@ struct ContentView: View {
             Image(systemName: viewModel.isUnlocked ? "lock.open.fill" : "lock.fill")
                 .contentTransition(.symbolEffect(.replace))
         }
+        .accessibilityLabel(
+            viewModel.isUnlocked ? "Your private notes are currently accessible" : "Your private notes are currently locked"
+        )
+        .accessibilityHint(viewModel.isUnlocked ? "Tap to lock access" : "Tap to unlock access")
+        .accessibilityAddTraits(.isButton)
     }
     
     /// Button to switch between Grid and List view.
