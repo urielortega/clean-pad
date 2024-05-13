@@ -182,9 +182,10 @@ struct CustomTabBar: View {
             showCategoriesSheet.toggle()
             HapticManager.instance.impact(style: .light)
         } label: {
-            Label("Select a Category", systemImage: "note.text")
+            Label("Select a Category", systemImage: "line.3.horizontal.decrease.circle")
                 .labelStyle(.iconOnly)
                 .frame(width: 55, height: 55) // Frame on Label so Menu Tap is better detected.
+                .imageScale(.large)
                 .tint(viewModel.selectedCategory.color.gradient)
         }
         .dockButtonStyle(position: .left)
