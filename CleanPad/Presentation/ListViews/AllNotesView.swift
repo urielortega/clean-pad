@@ -15,6 +15,7 @@ struct AllNotesView: View {
     
     @Binding var showEditViewSheet: Bool
     
+    /// Property to adapt the UI for VoiceOver users.
     @Environment(\.accessibilityVoiceOverEnabled) var voiceOverEnabled
 
     var body: some View {

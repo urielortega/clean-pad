@@ -39,6 +39,7 @@ struct CustomTabBar: View {
     @Binding var showEditViewSheet: Bool
     @Binding var showCategoriesSheet: Bool
     
+    /// Property to adapt the UI according to the available space.
     @Environment(\.horizontalSizeClass) var sizeClass
 
     var body: some View {
