@@ -11,24 +11,18 @@ struct ContentView: View {
     // Creating shared ViewModels with @StateObject.
     @StateObject var viewModel = NotesListViewModel()
     @StateObject var dateViewModel = DateViewModel()
+    @StateObject var sheetsViewModel = SheetsViewModel()
     
     /// Property to show WelcomeView when launching app for the first time.
     @AppStorage("isFirstLaunch") var isFirstLaunch: Bool = true
-    
-    @State private var showWelcomeSheet = false
-    @State private var showEditViewSheet = false
-    @State private var showFeedbackSheet = false
-    @State private var showAboutSheet = false
-    @State private var showCategorySelectionSheet = false
-    @State private var showEditableCategoriesSheet = false
     
     var body: some View {
         NavigationStack {
             MainScreenView(
                 viewModel: viewModel,
                 dateViewModel: dateViewModel,
-                showEditViewSheet: $showEditViewSheet,
-                showCategoriesSheet: $showCategorySelectionSheet
+                showEditViewSheet: $sheetsViewModel.showEditViewSheet,
+                showCategoriesSheet: $sheetsViewModel.showCategorySelectionSheet
             )
             .navigationTitle(viewModel.isNonLockedNotesTabSelected ? "Notes" : "Private Notes")
             .toolbar {
@@ -63,12 +57,12 @@ struct ContentView: View {
         }
         .onAppear {
             if isFirstLaunch {
-                showWelcomeSheet = true
+                sheetsViewModel.showWelcomeSheet = true
                 isFirstLaunch = false // Setting the flag to false so WelcomeView won't show again.
             }
         }
-        .sheet(isPresented: $showWelcomeSheet) { WelcomeView() }
-        .sheet(isPresented: $showEditViewSheet) {
+        .sheet(isPresented: $sheetsViewModel.showWelcomeSheet) { WelcomeView() }
+        .sheet(isPresented: $sheetsViewModel.showEditViewSheet) {
             if viewModel.isNonLockedNotesTabSelected {
                 // Open NoteEditView with a blank Note:
                 NoteEditView(note: Note(), viewModel: viewModel, creatingNewNote: true)
@@ -77,12 +71,12 @@ struct ContentView: View {
                 NoteEditView(note: Note(isLocked: true), viewModel: viewModel, creatingNewNote: true)
             }
         }
-        .sheet(isPresented: $showFeedbackSheet) { FeedbackView() }
-        .sheet(isPresented: $showAboutSheet) { AboutCleanPadView() }
-        .sheet(isPresented: $showCategorySelectionSheet) {
+        .sheet(isPresented: $sheetsViewModel.showFeedbackSheet) { FeedbackView() }
+        .sheet(isPresented: $sheetsViewModel.showAboutSheet) { AboutCleanPadView() }
+        .sheet(isPresented: $sheetsViewModel.showCategorySelectionSheet) {
             CategorySelectionView(
                 viewModel: viewModel, 
-                showEditableCategoriesSheet: $showEditableCategoriesSheet
+                showEditableCategoriesSheet: $sheetsViewModel.showEditableCategoriesSheet
             )
         }
         .alert("Authentication error", isPresented: $viewModel.isShowingAuthenticationError) {
@@ -142,7 +136,7 @@ struct ContentView: View {
     /// Button to show view for providing feedback.
     var showFeedbackViewButtonView: some View {
         Button {
-            showFeedbackSheet.toggle()
+            sheetsViewModel.showFeedbackSheet.toggle()
             HapticManager.instance.impact(style: .light)
         } label: {
             Label("Feedback", systemImage: "ellipsis.message")
@@ -152,7 +146,7 @@ struct ContentView: View {
     /// Button to show view for providing feedback.
     var showAboutViewButtonView: some View {
         Button {
-            showAboutSheet.toggle()
+            sheetsViewModel.showAboutSheet.toggle()
             HapticManager.instance.impact(style: .light)
         } label: {
             Label("About CleanPad", systemImage: "book.pages")
