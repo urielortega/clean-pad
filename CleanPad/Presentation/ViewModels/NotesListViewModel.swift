@@ -81,7 +81,7 @@ final class NotesListViewModel: ObservableObject {
     
     // MARK: Access control properties.
     /// Property to control access to locked notes (private space).
-    @Published private(set) var isUnlocked = false
+    @Published var isUnlocked = false
     
     /// Property to control changes in notes.
     @Published private(set) var areChangesAllowed = false
