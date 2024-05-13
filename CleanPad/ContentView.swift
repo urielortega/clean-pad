@@ -87,6 +87,11 @@ struct ContentView: View {
         } message: {
             Text(viewModel.authenticationError)
         }
+        .onChange(of: scenePhase) { phase, _ in
+            if phase == ScenePhase.background {
+                viewModel.isUnlocked = false
+            }
+        }
     }
     
     /// Button to hide locked notes list.
