@@ -258,7 +258,7 @@ extension NotesListViewModel {
         context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { success, authenticationError in
             Task { @MainActor in
                 if success {
-                    withAnimation(.bouncy(extraBounce: 0.2)) {
+                    withAnimation(.bouncy) {
                         if authenticationReason == .viewNotes {
                             self.isUnlocked = true
                         } else if authenticationReason == .changeLockStatus {

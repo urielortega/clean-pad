@@ -23,12 +23,12 @@ struct DeleteNoteButton: View {
                 
                 // Delete note after delay.
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                    withAnimation(.easeInOut(duration: 0.5)) {
+                    withAnimation(.bouncy) {
                         viewModel.delete(note: note)
                     }
                 }
             } else {
-                withAnimation(.easeInOut(duration: 0.5)) {
+                withAnimation(.bouncy) {
                     viewModel.delete(note: note)
                 }
             }

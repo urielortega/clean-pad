@@ -99,7 +99,7 @@ struct CustomTabBar: View {
                 }
             }
             
-            withAnimation(.bouncy(extraBounce: 0.2)) { viewModel.selectedTab = .nonLockedNotes }
+            withAnimation(.bouncy) { viewModel.selectedTab = .nonLockedNotes }
             HapticManager.instance.impact(style: .soft)
         } label: {
             nonLockedNotesTabLabel
@@ -121,7 +121,7 @@ struct CustomTabBar: View {
                 }
             }
             
-            withAnimation(.bouncy(extraBounce: 0.2)) { viewModel.selectedTab = .lockedNotes }
+            withAnimation(.bouncy) { viewModel.selectedTab = .lockedNotes }
             HapticManager.instance.impact(style: .soft)
         } label: {
             lockedNotesTabLabel
