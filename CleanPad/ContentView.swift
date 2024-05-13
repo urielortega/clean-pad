@@ -16,6 +16,9 @@ struct ContentView: View {
     /// Property to show WelcomeView when launching app for the first time.
     @AppStorage("isFirstLaunch") var isFirstLaunch: Bool = true
     
+    /// Property to modify access to locked notes when phase changes.
+    @Environment(\.scenePhase) private var scenePhase
+    
     var body: some View {
         NavigationStack {
             MainScreenView(
