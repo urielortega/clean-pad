@@ -90,8 +90,10 @@ struct FeedbackView: View {
             Text("If you enjoy using the app and would like to support my work, you can also buy me a coffee. Every sip fuels more improvements for this and future apps. Thank you! ☕️✨")
                 .font(.caption)
                 .multilineTextAlignment(.leading)
-                .padding(.bottom, 10)
+                .padding(.bottom, 40)
         }
+        .accessibilityElement()
+        .accessibilityLabel("Feel free to provide feedback or support my work by using the buttons below.")
     }
     
     var iMessageButtonView: some View {
