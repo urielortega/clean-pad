@@ -28,42 +28,56 @@ struct NoteEditView: View {
     
     @Environment(\.dismiss) var dismiss
     
+    /// Property to adapt the UI for VoiceOver users.
+    @Environment(\.accessibilityVoiceOverEnabled) var voiceOverEnabled
+    
     var body: some View {
         NavigationStack {
-            VStack {
-                titleTextFieldView
-                Divider()
-                textContentTextEditorView
-            }
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    if creatingNewNote {
-                        Button("Cancel") { dismiss() }
+            if (!viewModel.isUnlocked && note.isLocked == true) {
+                Group {
+                    if voiceOverEnabled {
+                        UnlockNotesView(viewModel: viewModel).accessibilityUnlockNotesView
+                    } else {
+                        UnlockNotesView(viewModel: viewModel)
                     }
                 }
-                
-                ToolbarItem(placement: .topBarTrailing) {
-                    HStack {
-                        if !(focusedField == .none) {
-                            // Button to dismiss keyboard when typing.
-                            Button("OK") { focusedField = .none }
-                        } else {
-                            Menu {
-                                isLockedToggleButtonView
-                                if !creatingNewNote {
-                                    ShareLink(item: "\(note.noteTitle)\n\(note.noteContent)")
-                                    DeleteNoteButton(
-                                        note: note, 
-                                        viewModel: viewModel,
-                                        dismissView: true
-                                    )
+                .padding(.bottom, 80)
+           } else {
+                VStack {
+                    titleTextFieldView
+                    Divider()
+                    textContentTextEditorView
+                }
+                .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        if creatingNewNote {
+                            Button("Cancel") { dismiss() }
+                        }
+                    }
+                    
+                    ToolbarItem(placement: .topBarTrailing) {
+                        HStack {
+                            if !(focusedField == .none) {
+                                // Button to dismiss keyboard when typing.
+                                Button("OK") { focusedField = .none }
+                            } else {
+                                Menu {
+                                    isLockedToggleButtonView
+                                    if !creatingNewNote {
+                                        ShareLink(item: "\(note.noteTitle)\n\(note.noteContent)")
+                                        DeleteNoteButton(
+                                            note: note,
+                                            viewModel: viewModel,
+                                            dismissView: true
+                                        )
+                                    }
+                                    
+                                } label: {
+                                    Label("More options", systemImage: "ellipsis.circle")
                                 }
-
-                            } label: {
-                                Label("More options", systemImage: "ellipsis.circle")
-                            }
-                            if creatingNewNote {
-                                saveNoteButtonView
+                                if creatingNewNote {
+                                    saveNoteButtonView
+                                }
                             }
                         }
                     }
