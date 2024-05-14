@@ -11,7 +11,7 @@ import SwiftUI
 /// View meant to be used when a list is empty, inviting the user to add an item.
 /// Can be personalized modifying its default parameters values.
 struct EmptyListView: View {
-    @Binding var showEditViewSheet: Bool
+    @Binding var showNoteEditViewSheet: Bool
     var imageSystemName: String = "questionmark"
     var label: String = "No Items"
     var description: String = "Start adding items to your list."
@@ -45,10 +45,10 @@ extension EmptyListView {
     /// Adapted EmptyListView for VoiceOver users.
     var accessibilityEmptyListButton: some View {
         Button {
-            showEditViewSheet.toggle()
+            showNoteEditViewSheet.toggle()
         } label: {
             EmptyListView(
-                showEditViewSheet: $showEditViewSheet,
+                showNoteEditViewSheet: $showNoteEditViewSheet,
                 imageSystemName: "note.text",
                 label: "This looks a little empty...",
                 description: Constants.emptyListPlaceholders.randomElement() ?? "Start writing...",
@@ -61,6 +61,6 @@ extension EmptyListView {
 
 struct EmptyListView_Previews: PreviewProvider {
     static var previews: some View {
-        EmptyListView(showEditViewSheet: .constant(false)) { }
+        EmptyListView(showNoteEditViewSheet: .constant(false)) { }
     }
 }

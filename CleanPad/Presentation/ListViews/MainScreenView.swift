@@ -13,7 +13,7 @@ struct MainScreenView: View {
     @ObservedObject var viewModel: NotesListViewModel
     @ObservedObject var dateViewModel: DateViewModel
     
-    @Binding var showEditViewSheet: Bool
+    @Binding var showNoteEditViewSheet: Bool
     @Binding var showCategoriesSheet: Bool
     
     var body: some View {
@@ -21,12 +21,12 @@ struct MainScreenView: View {
             AllNotesView(
                 viewModel: viewModel,
                 dateViewModel: dateViewModel,
-                showEditViewSheet: $showEditViewSheet
+                showNoteEditViewSheet: $showNoteEditViewSheet
             )
             
             CustomTabBar(
                 viewModel: viewModel, 
-                showEditViewSheet: $showEditViewSheet,
+                showNoteEditViewSheet: $showNoteEditViewSheet,
                 showCategoriesSheet: $showCategoriesSheet
             )
         }
@@ -36,7 +36,7 @@ struct MainScreenView: View {
 /// Tab Bar with two buttons to switch between non-locked notes list and locked notes list.
 struct CustomTabBar: View {
     @ObservedObject var viewModel: NotesListViewModel
-    @Binding var showEditViewSheet: Bool
+    @Binding var showNoteEditViewSheet: Bool
     @Binding var showCategoriesSheet: Bool
     
     /// Property to adapt the UI according to the available space.
@@ -167,7 +167,7 @@ struct CustomTabBar: View {
     /// Button View to create a new note from the Tab Bar.
     var createNoteTabButton: some View {
         Button {
-            showEditViewSheet.toggle()
+            showNoteEditViewSheet.toggle()
             HapticManager.instance.impact(style: .light)
         } label: {
             Label("New note", systemImage: "plus")
@@ -197,5 +197,5 @@ struct CustomTabBar: View {
 }
 
 #Preview("CustomTabBar") {
-    CustomTabBar(viewModel: NotesListViewModel(), showEditViewSheet: .constant(false), showCategoriesSheet: .constant(false))
+    CustomTabBar(viewModel: NotesListViewModel(), showNoteEditViewSheet: .constant(false), showCategoriesSheet: .constant(false))
 }

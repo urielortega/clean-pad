@@ -24,7 +24,7 @@ struct ContentView: View {
             MainScreenView(
                 viewModel: viewModel,
                 dateViewModel: dateViewModel,
-                showEditViewSheet: $sheetsViewModel.showNoteEditViewSheet,
+                showNoteEditViewSheet: $sheetsViewModel.showNoteEditViewSheet,
                 showCategoriesSheet: $sheetsViewModel.showCategorySelectionSheet
             )
             .navigationTitle(viewModel.isNonLockedNotesTabSelected ? "Notes" : "Private Notes")

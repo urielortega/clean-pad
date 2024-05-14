@@ -13,7 +13,7 @@ struct AllNotesView: View {
     @ObservedObject var viewModel: NotesListViewModel
     @ObservedObject var dateViewModel: DateViewModel
     
-    @Binding var showEditViewSheet: Bool
+    @Binding var showNoteEditViewSheet: Bool
     
     /// Property to adapt the UI for VoiceOver users.
     @Environment(\.accessibilityVoiceOverEnabled) var voiceOverEnabled
@@ -33,15 +33,15 @@ struct AllNotesView: View {
                 if viewModel.currentNotes.isEmpty {
                     Group {
                         if voiceOverEnabled {
-                            EmptyListView(showEditViewSheet: $showEditViewSheet, buttonActions: { }).accessibilityEmptyListButton
+                            EmptyListView(showNoteEditViewSheet: $showNoteEditViewSheet, buttonActions: { }).accessibilityEmptyListButton
                         } else {
                             EmptyListView(
-                                showEditViewSheet: $showEditViewSheet,
+                                showNoteEditViewSheet: $showNoteEditViewSheet,
                                 imageSystemName: "note.text",
                                 label: "This looks a little empty...",
                                 description: Constants.emptyListPlaceholders.randomElement() ?? "Start writing...",
                                 buttonLabel: "Create a note!"
-                            ) { showEditViewSheet.toggle() }
+                            ) { showNoteEditViewSheet.toggle() }
                         }
                     }
                     .padding(.bottom, 80)
