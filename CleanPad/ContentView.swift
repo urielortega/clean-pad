@@ -77,10 +77,7 @@ struct ContentView: View {
         .sheet(isPresented: $sheetsViewModel.showFeedbackSheet) { FeedbackView() }
         .sheet(isPresented: $sheetsViewModel.showAboutSheet) { AboutCleanPadView() }
         .sheet(isPresented: $sheetsViewModel.showCategorySelectionSheet) {
-            CategorySelectionView(
-                viewModel: viewModel, 
-                showEditableCategoriesSheet: $sheetsViewModel.showEditableCategoriesSheet
-            )
+            CategorySelectionView(viewModel: viewModel, sheetsViewModel: sheetsViewModel)
         }
         .alert("Authentication error", isPresented: $viewModel.isShowingAuthenticationError) {
             Button("OK") { }
