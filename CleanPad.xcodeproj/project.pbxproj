@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A40111B62BA8F249006C5639 /* EditableCategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40111B52BA8F249006C5639 /* EditableCategoriesView.swift */; };
+		A40111B62BA8F249006C5639 /* CategoryEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40111B52BA8F249006C5639 /* CategoryEditView.swift */; };
 		A4129AC72AF9AE1400518E1C /* KeyboardPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4129AC62AF9AE1400518E1C /* KeyboardPublisher.swift */; };
 		A41F0F562BF2A4500090E84C /* SheetsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41F0F552BF2A4500090E84C /* SheetsViewModel.swift */; };
 		A41F0F582BF2E2280090E84C /* UnlockNotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41F0F572BF2E2280090E84C /* UnlockNotesView.swift */; };
@@ -39,7 +39,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A40111B52BA8F249006C5639 /* EditableCategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableCategoriesView.swift; sourceTree = "<group>"; };
+		A40111B52BA8F249006C5639 /* CategoryEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEditView.swift; sourceTree = "<group>"; };
 		A4129AC62AF9AE1400518E1C /* KeyboardPublisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardPublisher.swift; sourceTree = "<group>"; };
 		A41F0F552BF2A4500090E84C /* SheetsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetsViewModel.swift; sourceTree = "<group>"; };
 		A41F0F572BF2E2280090E84C /* UnlockNotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockNotesView.swift; sourceTree = "<group>"; };
@@ -97,7 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				A4F10F5A2B8D73360014C68B /* CategorySelectionView.swift */,
-				A40111B52BA8F249006C5639 /* EditableCategoriesView.swift */,
+				A40111B52BA8F249006C5639 /* CategoryEditView.swift */,
 			);
 			path = CategoryViews;
 			sourceTree = "<group>";
@@ -327,7 +327,7 @@
 				A465AB7A2ABA7149001CFFD9 /* NoteEditView.swift in Sources */,
 				A44E76962AB11E70004BBB21 /* CleanPadApp.swift in Sources */,
 				A4BB5F372B27D69600B509ED /* FeedbackView.swift in Sources */,
-				A40111B62BA8F249006C5639 /* EditableCategoriesView.swift in Sources */,
+				A40111B62BA8F249006C5639 /* CategoryEditView.swift in Sources */,
 				A46117282AF56E31001C0087 /* MainScreenView.swift in Sources */,
 				A44E76A42AB12C0A004BBB21 /* Note.swift in Sources */,
 				A4BFFA5F2AF087F4005CD3DE /* LabelViews.swift in Sources */,

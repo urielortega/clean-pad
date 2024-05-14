@@ -61,7 +61,7 @@ struct CategorySelectionView: View {
 }
 
 /// A selectable View that shows a category name and color.
-struct CategoryFilteringLabel: View {
+struct SelectableCategoryButton: View {
     var category: Category
     @ObservedObject var viewModel: NotesListViewModel
     @Environment(\.dismiss) var dismiss
@@ -135,6 +135,6 @@ struct EditCategoriesButton: View {
 }
 
 #Preview("CategoryFilteringLabel") {
-    CategoryFilteringLabel(category: .example, viewModel: NotesListViewModel())
+    SelectableCategoryButton(category: .example, viewModel: NotesListViewModel(), sheetsViewModel: SheetsViewModel(), isEditModeActive: true)
         .padding()
 }
