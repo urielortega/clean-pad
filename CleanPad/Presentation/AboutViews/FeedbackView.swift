@@ -53,7 +53,7 @@ struct FeedbackView: View {
                 }
             }
         }
-        .presentationDetents([.medium])
+        .presentationDetents([.fraction(0.6)])
         .presentationDragIndicator(.visible)
         .presentationBackground(.regularMaterial)
         .presentationCornerRadius(roundedRectCornerRadius)
@@ -90,7 +90,7 @@ struct FeedbackView: View {
             Text("If you enjoy using the app and would like to support my work, you can also buy me a coffee. Every sip fuels more improvements for this and future apps. Thank you! ☕️✨")
                 .font(.caption)
                 .multilineTextAlignment(.leading)
-                .padding(.bottom, 40)
+                .padding(.bottom, 60)
         }
         .accessibilityElement()
         .accessibilityLabel("Feel free to provide feedback or support my work by using the buttons below.")
