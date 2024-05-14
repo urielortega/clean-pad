@@ -35,7 +35,7 @@ struct CategorySelectionView: View {
                 LazyVStack {
                     ForEach(viewModel.categories) { category in
                         if isEditModeActive {
-                            Button("Editable Category Button") { }
+                            Button("Editable Category Button") { sheetsViewModel.showEditableCategorySheet.toggle() }
                         } else {
                             SelectableCategoryButton(
                                 category: category,
