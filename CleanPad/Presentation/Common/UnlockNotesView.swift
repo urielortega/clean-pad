@@ -7,12 +7,44 @@
 
 import SwiftUI
 
+/// Button to authenticate and show locked notes list.
 struct UnlockNotesView: View {
+    @ObservedObject var viewModel: NotesListViewModel
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Image(systemName: "lock.circle.fill")
+                .foregroundStyle(.accent.gradient)
+                .font(.system(size: 50))
+                .padding()
+            
+            Text("Private notes are protected")
+                .font(.title2)
+                .bold()
+            
+            Text("Unlock to enable access")
+                .foregroundStyle(.secondary)
+            
+            Button("Unlock") {
+                viewModel.authenticate(for: .viewNotes) {  }
+            }
+            .padding()
+        }
+        .accessibilityElement()
+    }
+}
+
+extension UnlockNotesView {
+    var accessibilityUnlockNotesView: some View {
+        Button {
+            viewModel.authenticate(for: .viewNotes) {  }
+        } label: {
+            UnlockNotesView(viewModel: viewModel)
+        }
+        .accessibilityLabel("Private notes are protected. Tap to enable access.")
     }
 }
 
 #Preview {
-    UnlockNotesView()
+    UnlockNotesView(viewModel: NotesListViewModel())
 }
