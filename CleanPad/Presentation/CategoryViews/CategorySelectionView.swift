@@ -14,16 +14,15 @@ struct CategorySelectionView: View {
     @State var isEditModeActive = false
     
     @Environment(\.dismiss) var dismiss
-
+    
     var body: some View {
         VStack {
-            HStack {
+            HStack { // View to place Dismiss Button at the top of the sheet.
                 Spacer()
-                
                 DismissViewButton()
             }
             
-            HStack {
+            HStack { // View to place title at the top of the sheet.
                 Text("Your Categories")
                     .font(.title)
                     .bold()
@@ -35,16 +34,27 @@ struct CategorySelectionView: View {
             ScrollView {
                 LazyVStack {
                     ForEach(viewModel.categories) { category in
-                        CategoryFilteringLabel(
-                            category: category,
-                            viewModel: viewModel
-                        )
+                        if isEditModeActive {
+                            Button("Editable Category Button") { }
+                        } else {
+                            SelectableCategoryButton(
+                                category: category,
+                                viewModel: viewModel,
+                                sheetsViewModel: sheetsViewModel
+                            )
+                        }
                     }
                     
-                    Divider()
-                        .padding(.vertical)
-                    
-                    CategoryFilteringLabel(category: .noSelection, viewModel: viewModel)
+                    if !isEditModeActive {
+                        Divider()
+                            .padding(.vertical)
+                        
+                        SelectableCategoryButton(
+                            category: .noSelection,
+                            viewModel: viewModel,
+                            sheetsViewModel: sheetsViewModel
+                        )
+                    }
                 }
                 .padding()
             }
@@ -75,8 +85,9 @@ struct CategorySelectionView: View {
 struct SelectableCategoryButton: View {
     var category: Category
     @ObservedObject var viewModel: NotesListViewModel
+    @ObservedObject var sheetsViewModel: SheetsViewModel
     @Environment(\.dismiss) var dismiss
-    
+        
     var strokeColorGradient: AnyGradient {
         viewModel.selectedCategory == category ? category.color.gradient : Color.gray.gradient
     }
@@ -134,6 +145,6 @@ struct SelectableCategoryButton: View {
 }
 
 #Preview("CategoryFilteringLabel") {
-    SelectableCategoryButton(category: .example, viewModel: NotesListViewModel(), sheetsViewModel: SheetsViewModel(), isEditModeActive: true)
+    SelectableCategoryButton(category: .example, viewModel: NotesListViewModel(), sheetsViewModel: SheetsViewModel())
         .padding()
 }
