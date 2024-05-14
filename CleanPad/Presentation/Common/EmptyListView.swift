@@ -1,5 +1,5 @@
 //
-//  ContentUnavailableView.swift
+//  EmptyListView.swift
 //  CleanPad
 //
 //  Created by Uriel Ortega on 10/10/23.
