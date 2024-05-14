@@ -23,27 +23,28 @@ struct AllNotesView: View {
             if viewModel.isLockedNotesTabSelected && !viewModel.isUnlocked {
                 Group {
                     if voiceOverEnabled {
-                        accessibilityUnlockNotesView
+                        UnlockNotesView(viewModel: viewModel).accessibilityUnlockNotesView
                     } else {
-                        unlockNotesView
+                        UnlockNotesView(viewModel: viewModel)
                     }
                 }
                 .padding(.bottom, 80)
             } else {
                 if viewModel.currentNotes.isEmpty {
-                    if voiceOverEnabled {
-                        accessibilityEmptyListButton
-                    } else {
-                        EmptyListView(
-                            imageSystemName: "note.text",
-                            label: "This looks a little empty...",
-                            description: Constants.emptyListPlaceholders.randomElement() ?? "Start writing...",
-                            buttonLabel: "Create a note!"
-                        ) {
-                            showEditViewSheet.toggle()
+                    Group {
+                        if voiceOverEnabled {
+                            EmptyListView(showEditViewSheet: $showEditViewSheet, buttonActions: { }).accessibilityEmptyListButton
+                        } else {
+                            EmptyListView(
+                                showEditViewSheet: $showEditViewSheet,
+                                imageSystemName: "note.text",
+                                label: "This looks a little empty...",
+                                description: Constants.emptyListPlaceholders.randomElement() ?? "Start writing...",
+                                buttonLabel: "Create a note!"
+                            ) { showEditViewSheet.toggle() }
                         }
-                        .padding(.bottom, 80)
                     }
+                    .padding(.bottom, 80)
                 } else {
                     if viewModel.idiom == .pad || viewModel.isGridViewSelected {
                         notesGridView
@@ -95,90 +96,43 @@ struct AllNotesView: View {
     }
     
     /// View that shows notes as a grid with multiple columns.
-     var notesGridView: some View {
-         let layout = [
+    var notesGridView: some View {
+        let layout = [
             GridItem(
                 .adaptive(minimum: viewModel.idiom == .pad ? 200 : 160)
             )
-         ]
-         
-         return Group {
-             if viewModel.filteredNotes.isEmpty {
-                 ContentUnavailableView.search
-             } else {
-                 ScrollView {
-                     LazyVGrid(columns: layout) {
-                         ForEach(viewModel.filteredNotes) { note in
-                             NavigationLink {
-                                 // Open NoteEditView with the tapped note.
-                                 NoteEditView(
+        ]
+        
+        return Group {
+            if viewModel.filteredNotes.isEmpty {
+                ContentUnavailableView.search
+            } else {
+                ScrollView {
+                    LazyVGrid(columns: layout) {
+                        ForEach(viewModel.filteredNotes) { note in
+                            NavigationLink {
+                                // Open NoteEditView with the tapped note.
+                                NoteEditView(
                                     note: note,
                                     viewModel: viewModel,
                                     creatingNewNote: false
-                                 )
-                             } label: {
-                                 GridNoteLabel(note: note, viewModel: dateViewModel)
-                                     .padding(5)
-                             }
-                             .contextMenu {
-                                 ContextMenuButtons(note: note, viewModel: viewModel)
-                             } preview: {
-                                 ContextMenuPreview(note: note)
-                             }
-                         }
-                     }
-                     .padding()
-                     .padding(.bottom, 60) // Padding to prevent CustomTabBar from hiding the List.
-                 }
-             }
-         }
-         .searchable(text: $viewModel.searchText, prompt: "Look for a note...")
-     }
-    
-    /// Button to authenticate and show locked notes list.
-    var unlockNotesView: some View {
-        VStack {
-            Image(systemName: "lock.circle.fill")
-                .foregroundStyle(.accent.gradient)
-                .font(.system(size: 50))
-                .padding()
-            
-            Text("These notes are protected")
-                .font(.title2)
-                .bold()
-            
-            Text("Unlock to enable access")
-                .foregroundStyle(.secondary)
-            
-            Button("Unlock") {
-                viewModel.authenticate(for: .viewNotes) {  }
+                                )
+                            } label: {
+                                GridNoteLabel(note: note, viewModel: dateViewModel)
+                                    .padding(5)
+                            }
+                            .contextMenu {
+                                ContextMenuButtons(note: note, viewModel: viewModel)
+                            } preview: {
+                                ContextMenuPreview(note: note)
+                            }
+                        }
+                    }
+                    .padding()
+                    .padding(.bottom, 60) // Padding to prevent CustomTabBar from hiding the List.
+                }
             }
-            .padding()
         }
-        .accessibilityElement()
+        .searchable(text: $viewModel.searchText, prompt: "Look for a note...")
     }
-    
-    var accessibilityEmptyListButton: some View {
-        Button {
-            showEditViewSheet.toggle()
-        } label: {
-            EmptyListView(
-                imageSystemName: "note.text",
-                label: "This looks a little empty...",
-                description: Constants.emptyListPlaceholders.randomElement() ?? "Start writing...",
-                buttonLabel: "Create a note!"
-            ) {}
-        }
-        .accessibilityLabel("Empty list. Tap to create a note.")
-    }
-    
-    var accessibilityUnlockNotesView: some View {
-        Button {
-            viewModel.authenticate(for: .viewNotes) {  }
-        } label: {
-            unlockNotesView
-        }
-        .accessibilityLabel("These notes are protected. Tap to enable access.")
-    }
-
 }
