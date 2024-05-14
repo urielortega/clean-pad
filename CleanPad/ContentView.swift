@@ -24,7 +24,7 @@ struct ContentView: View {
             MainScreenView(
                 viewModel: viewModel,
                 dateViewModel: dateViewModel,
-                showEditViewSheet: $sheetsViewModel.showEditViewSheet,
+                showEditViewSheet: $sheetsViewModel.showNoteEditViewSheet,
                 showCategoriesSheet: $sheetsViewModel.showCategorySelectionSheet
             )
             .navigationTitle(viewModel.isNonLockedNotesTabSelected ? "Notes" : "Private Notes")
@@ -65,7 +65,7 @@ struct ContentView: View {
             }
         }
         .sheet(isPresented: $sheetsViewModel.showWelcomeSheet) { WelcomeView() }
-        .sheet(isPresented: $sheetsViewModel.showEditViewSheet) {
+        .sheet(isPresented: $sheetsViewModel.showNoteEditViewSheet) {
             if viewModel.isNonLockedNotesTabSelected {
                 // Open NoteEditView with a blank Note:
                 NoteEditView(note: Note(), viewModel: viewModel, creatingNewNote: true)
@@ -78,7 +78,7 @@ struct ContentView: View {
         .sheet(isPresented: $sheetsViewModel.showAboutSheet) { AboutCleanPadView() }
         .sheet(isPresented: $sheetsViewModel.showCategorySelectionSheet) {
             CategorySelectionView(viewModel: viewModel, sheetsViewModel: sheetsViewModel)
-                .sheet(isPresented: $sheetsViewModel.showEditableCategorySheet) {
+                .sheet(isPresented: $sheetsViewModel.showCategoryEditViewSheet) {
                     CategoryEditView(viewModel: viewModel)
                 }
         }
