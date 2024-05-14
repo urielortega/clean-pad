@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-/// Button to authenticate and show locked notes list.
+/// View to authenticate and show locked notes.
 struct UnlockNotesView: View {
     @ObservedObject var viewModel: NotesListViewModel
     
@@ -35,6 +35,7 @@ struct UnlockNotesView: View {
 }
 
 extension UnlockNotesView {
+    /// Adapted UnlockNotesView for VoiceOver users.
     var accessibilityUnlockNotesView: some View {
         Button {
             viewModel.authenticate(for: .viewNotes) {  }
