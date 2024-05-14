@@ -10,7 +10,8 @@ import SwiftUI
 /// View that shows all user categories. User can filter notes by selecting one category or tap a button to edit categories.
 struct CategorySelectionView: View {
     @ObservedObject var viewModel: NotesListViewModel
-    @Binding var showEditableCategoriesSheet: Bool
+    @ObservedObject var sheetsViewModel: SheetsViewModel
+    @State var isEditModeActive = false
     
     @Environment(\.dismiss) var dismiss
 
@@ -48,7 +49,7 @@ struct CategorySelectionView: View {
                 .padding()
             }
             
-            EditCategoriesButton(showEditableCategoriesSheet: $showEditableCategoriesSheet)
+            editCategoriesButton
                 .padding(.vertical)
                 .padding(.bottom)
         }
@@ -57,6 +58,16 @@ struct CategorySelectionView: View {
         .presentationDragIndicator(.visible)
         .presentationBackground(.regularMaterial)
         .presentationCornerRadius(roundedRectCornerRadius)
+    }
+    
+    /// Button to show view for Categories Editing.
+    var editCategoriesButton: some View {
+        Button("Edit", systemImage: "pencil") {
+            withAnimation(.bouncy) {
+                isEditModeActive.toggle()
+                HapticManager.instance.impact(style: .light)
+            }
+        }
     }
 }
 
@@ -118,20 +129,8 @@ struct SelectableCategoryButton: View {
     }
 }
 
-/// Button to show view for Categories Editing.
-struct EditCategoriesButton: View {
-    @Binding var showEditableCategoriesSheet: Bool
-
-    var body: some View {
-        Button("Edit", systemImage: "pencil") {
-            showEditableCategoriesSheet.toggle()
-            HapticManager.instance.impact(style: .light)
-        }
-    }
-}
-
 #Preview("CategorySelectionView Sheet") {
-    CategorySelectionView(viewModel: NotesListViewModel(), showEditableCategoriesSheet: .constant(false))
+    CategorySelectionView(viewModel: NotesListViewModel(), sheetsViewModel: SheetsViewModel())
 }
 
 #Preview("CategoryFilteringLabel") {
