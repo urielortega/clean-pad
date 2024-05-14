@@ -42,6 +42,7 @@ struct EmptyListView: View {
 }
 
 extension EmptyListView {
+    /// Adapted EmptyListView for VoiceOver users.
     var accessibilityEmptyListButton: some View {
         Button {
             showEditViewSheet.toggle()
