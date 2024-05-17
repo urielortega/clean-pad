@@ -76,6 +76,8 @@ final class NotesListViewModel: ObservableObject {
     var idiom: UIUserInterfaceIdiom { UIDevice.current.userInterfaceIdiom }
     
     var isSomeCategorySelected: Bool { selectedCategory != .noSelection }
+    
+    @Published var isEditModeActive = false
 
     // MARK: Tab Bar properties and functions.
     @Published var isCustomTabBarGlowing = false

@@ -11,7 +11,6 @@ import SwiftUI
 struct CategorySelectionView: View {
     @ObservedObject var viewModel: NotesListViewModel
     @ObservedObject var sheetsViewModel: SheetsViewModel
-    @State var isEditModeActive = false
     
     @Environment(\.dismiss) var dismiss
     
@@ -38,10 +37,10 @@ struct CategorySelectionView: View {
                             viewModel: viewModel,
                             sheetsViewModel: sheetsViewModel,
                             category: category,
-                            role: isEditModeActive ? .edition : .selection
+                            role: viewModel.isEditModeActive ? .edition : .selection
                         ) {
                             // TODO: Refactor and move to VM:
-                            if isEditModeActive {
+                            if viewModel.isEditModeActive {
                                 sheetsViewModel.showCategoryEditViewSheet.toggle()
                             } else {
                                 withAnimation(.bouncy) {
@@ -54,14 +53,14 @@ struct CategorySelectionView: View {
                             }
                         }
                         
-                        if !isEditModeActive {
+                        if !viewModel.isEditModeActive {
                             Divider()
                             
                             CategoryButton(
                                 viewModel: viewModel,
                                 sheetsViewModel: sheetsViewModel,
                                 category: .noSelection,
-                                role: isEditModeActive ? .edition : .selection
+                                role: viewModel.isEditModeActive ? .edition : .selection
                             ) {
                                 // TODO: Refactor and move to VM:
                                 withAnimation(.bouncy) {
@@ -92,7 +91,7 @@ struct CategorySelectionView: View {
     var editCategoriesButton: some View {
         Button("Edit", systemImage: "pencil") {
             withAnimation(.bouncy) {
-                isEditModeActive.toggle()
+                viewModel.isEditModeActive.toggle()
                 HapticManager.instance.impact(style: .light)
             }
         }
