@@ -55,25 +55,7 @@ struct CategorySelectionView: View {
                         
                         Divider()
 
-                        if viewModel.isEditModeActive {
-                            CreateCategoryButton()
-                        } else {
-                            CategoryButton(
-                                viewModel: viewModel,
-                                sheetsViewModel: sheetsViewModel,
-                                category: .noSelection,
-                                role: viewModel.isEditModeActive ? .edition : .selection
-                            ) {
-                                // TODO: Refactor and move to VM:
-                                withAnimation(.bouncy) {
-                                    viewModel.changeSelectedCategory(with: .noSelection)
-                                }
-                                HapticManager.instance.impact(style: .soft)
-                                
-                                dismiss()
-                                viewModel.customTabBarGlow()
-                            }
-                        }
+                        bottomSheetButton
                     }
                     .padding()
                 }
@@ -95,6 +77,29 @@ struct CategorySelectionView: View {
             withAnimation(.bouncy) {
                 viewModel.isEditModeActive.toggle()
                 HapticManager.instance.impact(style: .light)
+            }
+        }
+    }
+    
+    @ViewBuilder
+    var bottomSheetButton: some View {
+        if viewModel.isEditModeActive {
+            CreateCategoryButton()
+        } else {
+            CategoryButton(
+                viewModel: viewModel,
+                sheetsViewModel: sheetsViewModel,
+                category: .noSelection,
+                role: viewModel.isEditModeActive ? .edition : .selection
+            ) {
+                // TODO: Refactor and move to VM:
+                withAnimation(.bouncy) {
+                    viewModel.changeSelectedCategory(with: .noSelection)
+                }
+                HapticManager.instance.impact(style: .soft)
+                
+                dismiss()
+                viewModel.customTabBarGlow()
             }
         }
     }
