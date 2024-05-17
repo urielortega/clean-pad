@@ -140,6 +140,71 @@ struct SelectableCategoryButton: View {
     }
 }
 
+
+enum CategoryButtonRole {
+    case selection
+    case edition
+}
+
+/// View to be used as label for buttons that adapt for Category Edition and Selection modes.
+struct CategoryButtonLabel: View {
+    @ObservedObject var viewModel: NotesListViewModel
+    @ObservedObject var sheetsViewModel: SheetsViewModel
+    @Environment(\.dismiss) var dismiss
+    
+    var category: Category
+    var role: CategoryButtonRole
+    var buttonActions: () -> Void
+    
+    var strokeColorGradient: AnyGradient {
+        viewModel.selectedCategory == category ? category.color.gradient : Color.gray.gradient
+    }
+    
+    var body: some View {
+        HStack {
+            Label("\(category.name)", systemImage: "note.text")
+                .imageScale(.medium)
+                .foregroundStyle(category.color.gradient)
+            
+            Spacer()
+            
+            Group {
+                if (viewModel.selectedCategory == category && role == .selection) {
+                    Image(systemName: "checkmark")
+                        .foregroundStyle(category.color)
+                        .bold()
+                } else if role == .edition {
+                    Image(systemName: "chevron.right")
+                        .foregroundStyle(category.color)
+                        .bold()
+                }
+            }
+            .contentTransition(.symbolEffect(.replace))
+        }
+        .padding()
+        .background(.regularMaterial)
+        .clipShape(.rect(cornerRadius: 10))
+        .overlay {
+            if role == .selection {
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(
+                        strokeColorGradient.opacity(
+                            viewModel.selectedCategory == category ? 0.5 : 0.1
+                        ),
+                        lineWidth: 3
+                    )
+            } else {
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color.gray.gradient.opacity(0.1), lineWidth: 3)
+            }
+        }
+        .shadow(color: .gridLabelShadow, radius: 2, x: 0, y: 6)
+        .onTapGesture {
+            buttonActions()
+        }
+    }
+}
+
 #Preview("CategorySelectionView Sheet") {
     CategorySelectionView(viewModel: NotesListViewModel(), sheetsViewModel: SheetsViewModel())
 }
