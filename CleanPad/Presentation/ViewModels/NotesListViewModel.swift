@@ -77,6 +77,20 @@ final class NotesListViewModel: ObservableObject {
     
     @Published var isCustomTabBarGlowing = false
     
+    /// Function to trigger delayed Custom Tab Bar Glow.
+    func customTabBarGlow() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            withAnimation(.easeInOut(duration: 1)) {
+                self.isCustomTabBarGlowing.toggle()
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                withAnimation(.easeInOut(duration: 1)) {
+                    self.isCustomTabBarGlowing.toggle()
+                }
+            }
+        }
+    }
+    
     var isSomeCategorySelected: Bool { selectedCategory != .noSelection }
     
     // MARK: Access control properties.
