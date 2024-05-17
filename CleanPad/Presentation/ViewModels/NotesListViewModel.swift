@@ -75,6 +75,9 @@ final class NotesListViewModel: ObservableObject {
     
     var idiom: UIUserInterfaceIdiom { UIDevice.current.userInterfaceIdiom }
     
+    var isSomeCategorySelected: Bool { selectedCategory != .noSelection }
+
+    // MARK: Tab Bar properties and functions.
     @Published var isCustomTabBarGlowing = false
     
     /// Function to trigger delayed Custom Tab Bar Glow.
@@ -90,9 +93,7 @@ final class NotesListViewModel: ObservableObject {
             }
         }
     }
-    
-    var isSomeCategorySelected: Bool { selectedCategory != .noSelection }
-    
+        
     // MARK: Access control properties.
     /// Property to control access to locked notes (private space).
     @Published var isUnlocked = false
