@@ -53,9 +53,11 @@ struct CategorySelectionView: View {
                             }
                         }
                         
-                        if !viewModel.isEditModeActive {
-                            Divider()
-                            
+                        Divider()
+
+                        if viewModel.isEditModeActive {
+                            CreateCategoryButton()
+                        } else {
                             CategoryButton(
                                 viewModel: viewModel,
                                 sheetsViewModel: sheetsViewModel,
@@ -157,6 +159,28 @@ struct CategoryButton: View {
         }
         .shadow(color: .gridLabelShadow, radius: 2, x: 0, y: 6)
         .onTapGesture { buttonActions() }
+    }
+}
+
+struct CreateCategoryButton: View {
+    var body: some View {
+        HStack {
+            Text("Create New Category")
+            Spacer()
+            Image(systemName: "plus")
+                .bold()
+        }
+        .padding()
+        .background(.regularMaterial)
+        .clipShape(.rect(cornerRadius: 10))
+        .overlay {
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(Color.gray.gradient.opacity(0.1), lineWidth: 3)
+        }
+        .shadow(color: .gridLabelShadow, radius: 2, x: 0, y: 6)
+        .onTapGesture { 
+            // TODO: Launch View to create new category.
+        }
     }
 }
 
