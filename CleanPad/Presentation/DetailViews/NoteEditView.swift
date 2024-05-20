@@ -42,7 +42,7 @@ struct NoteEditView: View {
                     }
                 }
                 .padding(.bottom, 80)
-           } else {
+            } else {
                 VStack {
                     titleTextFieldView
                     Divider()

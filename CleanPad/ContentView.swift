@@ -24,6 +24,7 @@ struct ContentView: View {
             MainScreenView(
                 viewModel: viewModel,
                 dateViewModel: dateViewModel,
+                sheetsViewModel: sheetsViewModel,
                 showNoteEditViewSheet: $sheetsViewModel.showNoteEditViewSheet,
                 showCategoriesSheet: $sheetsViewModel.showCategorySelectionSheet
             )
@@ -76,12 +77,6 @@ struct ContentView: View {
         }
         .sheet(isPresented: $sheetsViewModel.showFeedbackSheet) { FeedbackView() }
         .sheet(isPresented: $sheetsViewModel.showAboutSheet) { AboutCleanPadView() }
-        .sheet(isPresented: $sheetsViewModel.showCategorySelectionSheet) {
-            CategorySelectionView(viewModel: viewModel, sheetsViewModel: sheetsViewModel)
-//                .sheet(isPresented: $sheetsViewModel.showCategoryEditViewSheet) {
-//                    CategoryEditView(viewModel: viewModel)
-//                }
-        }
         .alert("Authentication error", isPresented: $viewModel.isShowingAuthenticationError) {
             Button("OK") { }
         } message: {

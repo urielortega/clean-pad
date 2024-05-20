@@ -12,6 +12,7 @@ struct MainScreenView: View {
     // Using the viewModels created in ContentView with @ObservedObject.
     @ObservedObject var viewModel: NotesListViewModel
     @ObservedObject var dateViewModel: DateViewModel
+    @ObservedObject var sheetsViewModel: SheetsViewModel
     
     @Binding var showNoteEditViewSheet: Bool
     @Binding var showCategoriesSheet: Bool
@@ -26,6 +27,7 @@ struct MainScreenView: View {
             
             CustomTabBar(
                 viewModel: viewModel, 
+                sheetsViewModel: sheetsViewModel,
                 showNoteEditViewSheet: $showNoteEditViewSheet,
                 showCategoriesSheet: $showCategoriesSheet
             )
@@ -36,6 +38,7 @@ struct MainScreenView: View {
 /// Tab Bar with two buttons to switch between non-locked notes list and locked notes list.
 struct CustomTabBar: View {
     @ObservedObject var viewModel: NotesListViewModel
+    @ObservedObject var sheetsViewModel: SheetsViewModel
     @Binding var showNoteEditViewSheet: Bool
     @Binding var showCategoriesSheet: Bool
     
@@ -193,9 +196,19 @@ struct CustomTabBar: View {
             .tint(viewModel.selectedCategory.color.gradient)
         }
         .dockButtonStyle(position: .left)
+        .sheet(isPresented: $sheetsViewModel.showCategorySelectionSheet) {
+            CategorySelectionView(viewModel: viewModel, sheetsViewModel: sheetsViewModel)
+        }
     }
 }
 
 #Preview("CustomTabBar") {
-    CustomTabBar(viewModel: NotesListViewModel(), showNoteEditViewSheet: .constant(false), showCategoriesSheet: .constant(false))
+    CustomTabBar(
+        viewModel: NotesListViewModel(),
+        sheetsViewModel: SheetsViewModel(),
+        showNoteEditViewSheet: .constant(
+            false
+        ),
+        showCategoriesSheet: .constant(false)
+    )
 }
