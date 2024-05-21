@@ -109,7 +109,6 @@ struct CategorySelectionView: View {
 struct CategoryButton: View {
     @ObservedObject var viewModel: NotesListViewModel
     @ObservedObject var sheetsViewModel: SheetsViewModel
-    @Environment(\.dismiss) var dismiss
     
     var category: Category
     var role: CategoryButtonRole
@@ -133,19 +132,19 @@ struct CategoryButton: View {
                 
                 Spacer()
                 
-                Group {
-                    if (viewModel.selectedCategory == category && role == .selection) {
-                        Image(systemName: "checkmark")
-                            .foregroundStyle(category.color)
-                            .bold()
-                    } else if role == .edition {
-                        Image(systemName: "chevron.right")
-                            .foregroundStyle(category.color)
-                            .bold()
-                    }
-                }
-                .contentTransition(.symbolEffect(.replace))
+                Image(
+                    systemName:
+                        // In Selection Mode, when the category is selected, show a "circle.fill" image.
+                        (role == .selection && viewModel.selectedCategory == category) ? "circle.fill" :
+                        // In Edition Mode...
+                            // ...show a "chevron.right" image.
+                                    // Otherwise, show a "circle" image, i.e. in Selection Mode, when the category is not selected.
+                        (role == .edition ? "chevron.right" : "circle")
+                )
+                .foregroundStyle(category.color)
+                .bold()
             }
+            .contentTransition(.symbolEffect(.automatic))
         }
         .buttonStyle(MaterialRoundedButtonStyle())
         .overlay { roleDependentOverlay }
