@@ -15,4 +15,5 @@ final class SheetsViewModel: ObservableObject {
     @Published var showAboutSheet = false
     @Published var showCategorySelectionSheet = false
     @Published var showCategoryEditSheet = false
+    @Published var showCategoryCreationSheet = false
 }
