@@ -149,7 +149,11 @@ struct CategoryButton: View {
         .buttonStyle(MaterialRoundedButtonStyle())
         .overlay { roleDependentOverlay }
         .sheet(isPresented: $sheetsViewModel.showCategoryEditSheet) {
-            CategoryEditView(viewModel: viewModel)
+            CategoryEditView(
+                category: category,
+                viewModel: viewModel,
+                creatingNewCategory: false
+            )
         }
     }
     
