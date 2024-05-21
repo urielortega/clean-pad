@@ -33,7 +33,10 @@ struct NoteEditView: View {
     
     var body: some View {
         NavigationStack {
-            if (!viewModel.isUnlocked && note.isLocked == true) {
+            // Show UnlockNotesView only when...
+            if ( // ...access is locked, the note is private and it isn't a new one.
+                !viewModel.isUnlocked && (note.isLocked == true) && !creatingNewNote
+            ) {
                 Group {
                     if voiceOverEnabled {
                         UnlockNotesView(viewModel: viewModel).accessibilityUnlockNotesView
