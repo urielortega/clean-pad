@@ -170,22 +170,20 @@ struct CategoryButton: View {
 
 struct CreateCategoryButton: View {
     var body: some View {
-        HStack {
-            Text("Create New Category")
-            Spacer()
-            Image(systemName: "plus")
-                .bold()
+        Button {
+            // TODO: Launch View to create new category.
+        } label: {
+            HStack {
+                Text("Create New Category")
+                Spacer()
+                Image(systemName: "plus")
+                    .bold()
+            }
         }
-        .padding()
-        .background(.regularMaterial)
-        .clipShape(.rect(cornerRadius: 10))
+        .buttonStyle(MaterialRoundedButtonStyle())
         .overlay {
             RoundedRectangle(cornerRadius: 10)
                 .stroke(Color.gray.gradient.opacity(0.1), lineWidth: 3)
-        }
-        .shadow(color: .gridLabelShadow, radius: 2, x: 0, y: 6)
-        .onTapGesture { 
-            // TODO: Launch View to create new category.
         }
     }
 }
