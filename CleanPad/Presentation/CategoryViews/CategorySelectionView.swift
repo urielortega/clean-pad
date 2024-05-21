@@ -164,6 +164,9 @@ struct CategoryButton: View {
         }
         .shadow(color: .gridLabelShadow, radius: 2, x: 0, y: 6)
         .onTapGesture { buttonActions() }
+        .sheet(isPresented: $sheetsViewModel.showCategoryEditViewSheet) {
+            CategoryEditView(viewModel: viewModel)
+        }
     }
 }
 
