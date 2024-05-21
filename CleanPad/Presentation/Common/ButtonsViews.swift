@@ -156,3 +156,14 @@ struct IsLockedToggleButton: View {
         }
     }
 }
+
+// MARK: ButtonStyles.
+struct MaterialRoundedButtonStyle: ButtonStyle {
+    func makeBody(configuration: Self.Configuration) -> some View {
+        configuration.label
+            .padding()
+            .background(.regularMaterial)
+            .clipShape(.rect(cornerRadius: 10))
+            .shadow(color: .gridLabelShadow, radius: 2, x: 0, y: 6)
+    }
+}

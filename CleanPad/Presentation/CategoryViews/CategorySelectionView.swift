@@ -125,29 +125,29 @@ struct CategoryButton: View {
     }
 
     var body: some View {
-        HStack {
-            Label("\(category.name)", systemImage: "note.text")
-                .imageScale(.medium)
-                .foregroundStyle(category.color.gradient)
-            
-            Spacer()
-            
-            Group {
-                if (viewModel.selectedCategory == category && role == .selection) {
-                    Image(systemName: "checkmark")
-                        .foregroundStyle(category.color)
-                        .bold()
-                } else if role == .edition {
-                    Image(systemName: "chevron.right")
-                        .foregroundStyle(category.color)
-                        .bold()
+        Button { buttonActions() } label: {
+            HStack {
+                Label("\(category.name)", systemImage: "note.text")
+                    .imageScale(.medium)
+                    .foregroundStyle(category.color.gradient)
+                
+                Spacer()
+                
+                Group {
+                    if (viewModel.selectedCategory == category && role == .selection) {
+                        Image(systemName: "checkmark")
+                            .foregroundStyle(category.color)
+                            .bold()
+                    } else if role == .edition {
+                        Image(systemName: "chevron.right")
+                            .foregroundStyle(category.color)
+                            .bold()
+                    }
                 }
+                .contentTransition(.symbolEffect(.replace))
             }
-            .contentTransition(.symbolEffect(.replace))
         }
-        .padding()
-        .background(.regularMaterial)
-        .clipShape(.rect(cornerRadius: 10))
+        .buttonStyle(MaterialRoundedButtonStyle())
         .overlay {
             if role == .selection {
                 RoundedRectangle(cornerRadius: 10)
@@ -162,8 +162,6 @@ struct CategoryButton: View {
                     .stroke(Color.gray.gradient.opacity(0.1), lineWidth: 3)
             }
         }
-        .shadow(color: .gridLabelShadow, radius: 2, x: 0, y: 6)
-        .onTapGesture { buttonActions() }
         .sheet(isPresented: $sheetsViewModel.showCategoryEditViewSheet) {
             CategoryEditView(viewModel: viewModel)
         }
