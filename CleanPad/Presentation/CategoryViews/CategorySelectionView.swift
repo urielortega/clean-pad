@@ -41,7 +41,7 @@ struct CategorySelectionView: View {
                         ) {
                             // TODO: Refactor and move to VM:
                             if viewModel.isEditModeActive {
-                                sheetsViewModel.showCategoryEditViewSheet.toggle()
+                                sheetsViewModel.showCategoryEditSheet.toggle()
                             } else {
                                 withAnimation(.bouncy) {
                                     viewModel.changeSelectedCategory(with: category)
@@ -148,7 +148,7 @@ struct CategoryButton: View {
         }
         .buttonStyle(MaterialRoundedButtonStyle())
         .overlay { roleDependentOverlay }
-        .sheet(isPresented: $sheetsViewModel.showCategoryEditViewSheet) {
+        .sheet(isPresented: $sheetsViewModel.showCategoryEditSheet) {
             CategoryEditView(viewModel: viewModel)
         }
     }
