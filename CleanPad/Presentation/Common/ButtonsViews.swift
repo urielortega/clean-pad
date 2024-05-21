@@ -38,6 +38,7 @@ struct DeleteNoteButton: View {
     }
 }
 
+/// 'X' Button to dismiss a View.
 struct DismissViewButton: View {
     @Environment(\.dismiss) var dismiss
     
@@ -54,6 +55,7 @@ struct DismissViewButton: View {
     }
 }
 
+/// Bordered Capsule Button with customizable color, label and systemImage.
 struct BorderedButtonLabel: View {
     let color: Color
     let labelText: String
@@ -85,6 +87,7 @@ struct BorderedButtonLabel: View {
     }
 }
 
+/// Thin Material Capsule Button with customizable label and systemImage.
 struct MaterialButtonLabel: View {
     let labelText: String
     var systemImageString: String? = nil
@@ -118,6 +121,7 @@ struct MaterialButtonLabel: View {
     }
 }
 
+/// Buttons to show when ContextMenu appears over a Note Label.
 struct ContextMenuButtons: View {
     var note: Note
     @ObservedObject var viewModel: NotesListViewModel
