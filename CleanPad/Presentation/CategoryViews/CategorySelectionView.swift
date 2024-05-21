@@ -148,22 +148,24 @@ struct CategoryButton: View {
             }
         }
         .buttonStyle(MaterialRoundedButtonStyle())
-        .overlay {
-            if role == .selection {
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(
-                        strokeColorGradient.opacity(
-                            viewModel.selectedCategory == category ? 0.5 : 0.1
-                        ),
-                        lineWidth: 3
-                    )
-            } else {
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.gray.gradient.opacity(0.1), lineWidth: 3)
-            }
-        }
+        .overlay { roleDependentOverlay }
         .sheet(isPresented: $sheetsViewModel.showCategoryEditViewSheet) {
             CategoryEditView(viewModel: viewModel)
+        }
+    }
+    
+    var roleDependentOverlay: some View {
+        if role == .selection {
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(
+                    strokeColorGradient.opacity(
+                        viewModel.selectedCategory == category ? 0.5 : 0.1
+                    ),
+                    lineWidth: 3
+                )
+        } else {
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(Color.gray.gradient.opacity(0.1), lineWidth: 3)
         }
     }
 }
