@@ -84,7 +84,10 @@ struct CategorySelectionView: View {
     @ViewBuilder
     var bottomSheetButton: some View {
         if viewModel.isEditModeActive {
-            CreateCategoryButton()
+            CreateCategoryButton(
+                viewModel: viewModel,
+                sheetsViewModel: sheetsViewModel
+            )
         } else {
             CategoryButton(
                 viewModel: viewModel,
@@ -174,9 +177,12 @@ struct CategoryButton: View {
 }
 
 struct CreateCategoryButton: View {
+    @ObservedObject var viewModel: NotesListViewModel
+    @ObservedObject var sheetsViewModel: SheetsViewModel
+    
     var body: some View {
         Button {
-            // TODO: Launch View to create new category.
+            sheetsViewModel.showCategoryCreationSheet.toggle()
         } label: {
             HStack {
                 Text("Create New Category")
@@ -189,6 +195,13 @@ struct CreateCategoryButton: View {
         .overlay {
             RoundedRectangle(cornerRadius: 10)
                 .stroke(Color.gray.gradient.opacity(0.1), lineWidth: 3)
+        }
+        .sheet(isPresented: $sheetsViewModel.showCategoryCreationSheet) {
+            CategoryEditView(
+                category: Category(id: UUID(), name: "", color: .blue),
+                viewModel: viewModel,
+                creatingNewCategory: true
+            )
         }
     }
 }
