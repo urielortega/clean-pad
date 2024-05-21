@@ -178,6 +178,15 @@ struct CustomTabBar: View {
                 .frame(width: 55, height: 55) // Frame on Label so tap is better detected.
         }
         .dockButtonStyle(position: .right)
+        .sheet(isPresented: $sheetsViewModel.showNoteEditViewSheet) {
+            if viewModel.isNonLockedNotesTabSelected {
+                // Open NoteEditView with a blank Note:
+                NoteEditView(note: Note(), viewModel: viewModel, creatingNewNote: true)
+            } else { // Locked Notes Tab is selected.
+                // Open NoteEditView with a blank locked Note:
+                NoteEditView(note: Note(isLocked: true), viewModel: viewModel, creatingNewNote: true)
+            }
+        }
     }
     
     /// Button View to show all user categories from the Tab Bar.

@@ -66,15 +66,6 @@ struct ContentView: View {
             }
         }
         .sheet(isPresented: $sheetsViewModel.showWelcomeSheet) { WelcomeView() }
-        .sheet(isPresented: $sheetsViewModel.showNoteEditViewSheet) {
-            if viewModel.isNonLockedNotesTabSelected {
-                // Open NoteEditView with a blank Note:
-                NoteEditView(note: Note(), viewModel: viewModel, creatingNewNote: true)
-            } else { // Locked Notes Tab is selected.
-                // Open NoteEditView with a blank locked Note:
-                NoteEditView(note: Note(isLocked: true), viewModel: viewModel, creatingNewNote: true)
-            }
-        }
         .sheet(isPresented: $sheetsViewModel.showFeedbackSheet) { FeedbackView() }
         .sheet(isPresented: $sheetsViewModel.showAboutSheet) { AboutCleanPadView() }
         .alert("Authentication error", isPresented: $viewModel.isShowingAuthenticationError) {
