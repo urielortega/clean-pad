@@ -23,14 +23,21 @@ struct CategoryEditView: View {
         
     var body: some View {
         NavigationStack {
-            Group {
-                if creatingNewCategory {
-                    Text("I'm about to be a new category!")
-                } else {
-                    Text("I'm an editable category called \(category.name)")
-                }
+            HStack {
+                TextField(
+                    "Name your category...",
+                    text: $category.name
+                )
+                .padding()
+                
+                ColorPicker(
+                    "Set the category color", 
+                    selection: $category.color,
+                    supportsOpacity: false
+                )
+                .labelsHidden()
             }
-            .foregroundStyle(category.color)
+            .padding(.horizontal)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button("Cancel") { dismiss() }
@@ -43,7 +50,7 @@ struct CategoryEditView: View {
                 }
             }
         }
-        .presentationDetents([.fraction(0.5), .large])
+        .presentationBackground(.thinMaterial)
     }
 }
 
