@@ -65,9 +65,8 @@ struct CategorySelectionView: View {
                 .padding(.vertical)
         }
         .padding(.top)
-        .presentationDetents([.fraction(0.5), .large])
         .presentationDragIndicator(.visible)
-        .presentationBackground(.regularMaterial)
+        .presentationBackground(.thinMaterial)
         .presentationCornerRadius(roundedRectCornerRadius)
     }
     
