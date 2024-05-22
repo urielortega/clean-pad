@@ -74,7 +74,7 @@ struct CategorySelectionView: View {
     /// Button to show view for Categories Editing.
     var editCategoriesButton: some View {
         Button("Edit", systemImage: "pencil") {
-            withAnimation(.bouncy) {
+            withAnimation(.easeInOut(duration: 0.2)) {
                 viewModel.isEditModeActive.toggle()
                 HapticManager.instance.impact(style: .light)
             }
