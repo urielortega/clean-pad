@@ -22,14 +22,28 @@ struct CategoryEditView: View {
     @Environment(\.accessibilityVoiceOverEnabled) var voiceOverEnabled
         
     var body: some View {
-        Group {
-            if creatingNewCategory {
-                Text("I'm about to be a new category!")
-            } else {
-                Text("I'm an editable category called \(category.name)")
+        NavigationStack {
+            Group {
+                if creatingNewCategory {
+                    Text("I'm about to be a new category!")
+                } else {
+                    Text("I'm an editable category called \(category.name)")
+                }
+            }
+            .foregroundStyle(category.color)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button("Cancel") { dismiss() }
+                }
+                
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(
+                        creatingNewCategory ? "Save" : "Update"
+                    ) { dismiss() }
+                }
             }
         }
-        .foregroundStyle(category.color)
+        .presentationDetents([.fraction(0.5), .large])
     }
 }
 
