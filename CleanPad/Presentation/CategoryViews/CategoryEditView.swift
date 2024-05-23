@@ -29,7 +29,12 @@ struct CategoryEditView: View {
                         "Name your category...",
                         text: $category.name
                     )
-                    .padding()
+                    .textFieldStyle(
+                        GradientTextFieldStyle(
+                            startColor: .clear,
+                            endColor: category.color
+                        )
+                    )
                     
                     ColorPicker(
                         "Set the category color",
