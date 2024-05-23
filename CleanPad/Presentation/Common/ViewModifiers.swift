@@ -112,3 +112,18 @@ extension View {
         modifier(NoteLabelAccessibilityModifiers(note: note, viewModel: viewModel))
     }
 }
+
+struct SoftShadow: ViewModifier {
+    var color: Color
+    
+    func body(content: Content) -> some View {
+        content
+            .shadow(color: color, radius: 2, x: 0, y: 6)
+    }
+}
+
+extension View {
+    func softShadow(color: Color) -> some View {
+        modifier(SoftShadow(color: color))
+    }
+}
