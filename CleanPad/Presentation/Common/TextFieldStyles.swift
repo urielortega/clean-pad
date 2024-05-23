@@ -23,12 +23,7 @@ struct GradientTextFieldStyle: TextFieldStyle {
                 )
             )
             .clipShape(.rect(cornerRadius: 10))
-            .shadow(
-                color: .customTextFieldShadow,
-                radius: 2,
-                x: 0,
-                y: 6
-            )
+            .softShadow(color: .customTextFieldShadow)
             .overlay {
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(
