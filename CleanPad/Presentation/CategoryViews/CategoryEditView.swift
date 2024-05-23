@@ -23,19 +23,23 @@ struct CategoryEditView: View {
         
     var body: some View {
         NavigationStack {
-            HStack {
-                TextField(
-                    "Name your category...",
-                    text: $category.name
-                )
-                .padding()
+            VStack {
+                HStack {
+                    TextField(
+                        "Name your category...",
+                        text: $category.name
+                    )
+                    .padding()
+                    
+                    ColorPicker(
+                        "Set the category color",
+                        selection: $category.color,
+                        supportsOpacity: false
+                    )
+                    .labelsHidden()
+                }
                 
-                ColorPicker(
-                    "Set the category color", 
-                    selection: $category.color,
-                    supportsOpacity: false
-                )
-                .labelsHidden()
+                Spacer()
             }
             .padding(.horizontal)
             .toolbar {
