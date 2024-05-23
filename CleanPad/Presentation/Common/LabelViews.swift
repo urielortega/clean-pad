@@ -84,7 +84,7 @@ struct GridNoteLabel: View {
         .background(.gridLabelBackground)
         .clipShape(.rect(cornerRadius: roundedRectCornerRadius))
         .roundedRectangleOverlayStroke()
-        .shadow(color: .gridLabelShadow, radius: 2, x: 0, y: 6)
+        .softShadow(color: .gridLabelShadow)
         .noteLabelAccessibilityModifiers(note: note, viewModel: viewModel)
     }
 }
