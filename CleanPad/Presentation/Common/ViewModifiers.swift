@@ -135,3 +135,19 @@ extension View {
         modifier(SoftShadow(color: color))
     }
 }
+
+struct GeneralButtonShadow: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .shadow(
+                color: Color(.sRGBLinear, white: 0, opacity: 0.14),
+                radius: Constants.generalButtonShadowRadius
+            )
+    }
+}
+
+extension View {
+    func generalButtonShadow() -> some View {
+        modifier(GeneralButtonShadow())
+    }
+}
