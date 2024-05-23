@@ -23,7 +23,20 @@ struct GradientTextFieldStyle: TextFieldStyle {
                 )
             )
             .clipShape(.rect(cornerRadius: 10))
-            .shadow(color: .gridLabelShadow, radius: 2, x: 0, y: 6)
+            .shadow(
+                color: .gridLabelShadow,
+                radius: 2,
+                x: 0,
+                y: 6
+            )
+            .overlay {
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(
+                        Material.ultraThinMaterial,
+                        lineWidth: 3
+                    )
+                    .allowsHitTesting(false)
+            }
     }
 }
 
@@ -32,8 +45,8 @@ struct GradientTextFieldStyle: TextFieldStyle {
         .padding()
         .textFieldStyle(
             GradientTextFieldStyle(
-                startColor: .blue,
-                endColor: .red
+                startColor: .clear,
+                endColor: .brown
             )
         )
 }
