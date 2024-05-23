@@ -25,24 +25,12 @@ struct CategoryEditView: View {
         NavigationStack {
             VStack {
                 HStack {
-                    TextField(
-                        "Name your category...",
-                        text: $category.name
-                    )
-                    .textFieldStyle(
-                        GradientTextFieldStyle(
-                            startColor: .clear,
-                            endColor: category.color
-                        )
-                    )
+                    categoryNameTextField
                     
-                    ColorPicker(
-                        "Set the category color",
-                        selection: $category.color,
-                        supportsOpacity: false
-                    )
-                    .labelsHidden()
+                    categoryColorPicker
+                        .padding(.leading)
                 }
+                .padding()
                 
                 Spacer()
             }
@@ -60,6 +48,25 @@ struct CategoryEditView: View {
             }
         }
         .presentationBackground(.thinMaterial)
+    }
+    
+    var categoryNameTextField: some View {
+        TextField( "Name your category...", text: $category.name)
+            .textFieldStyle(
+                GradientTextFieldStyle(
+                    startColor: .clear,
+                    endColor: category.color
+                )
+            )
+    }
+    
+    var categoryColorPicker: some View {
+        ColorPicker(
+            "Set the category color",
+            selection: $category.color,
+            supportsOpacity: false
+        )
+        .labelsHidden()
     }
 }
 
