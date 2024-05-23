@@ -24,7 +24,7 @@ struct GradientTextFieldStyle: TextFieldStyle {
             )
             .clipShape(.rect(cornerRadius: 10))
             .shadow(
-                color: .gridLabelShadow,
+                color: .customTextFieldShadow,
                 radius: 2,
                 x: 0,
                 y: 6
