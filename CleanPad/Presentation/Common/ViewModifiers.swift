@@ -8,7 +8,6 @@
 import SwiftUI
 
 let roundedRectCornerRadius: CGFloat = 22
-private let shadowOpacity: CGFloat = 0.1
 
 struct Dock: ViewModifier {
     @ObservedObject var viewModel: NotesListViewModel
@@ -45,7 +44,7 @@ struct DockButton: ViewModifier {
             .clipShape(.rect(cornerRadius: roundedRectCornerRadius))
             .roundedRectangleOverlayStroke()
             .shadow(
-                color: Color(.sRGBLinear, white: 0, opacity: shadowOpacity),
+                color: Color(.sRGBLinear, white: 0, opacity: 0.14),
                 radius: Constants.generalButtonShadowRadius
             )
             .padding(((position == .left) ? .leading : .trailing), 10)
@@ -89,7 +88,7 @@ struct GlowingShadow: ViewModifier {
         if (viewModel.isCustomTabBarGlowing && viewModel.isSomeCategorySelected) {
             viewModel.selectedCategory.color.opacity(0.7)
         } else {
-            Color(.sRGBLinear, white: 0, opacity: shadowOpacity)
+            Color(.sRGBLinear, white: 0, opacity: 0.14)
         }
     }
 }
