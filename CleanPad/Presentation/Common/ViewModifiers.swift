@@ -43,10 +43,7 @@ struct DockButton: ViewModifier {
             .background(.ultraThinMaterial)
             .clipShape(.rect(cornerRadius: roundedRectCornerRadius))
             .roundedRectangleOverlayStroke()
-            .shadow(
-                color: Color(.sRGBLinear, white: 0, opacity: 0.14),
-                radius: Constants.generalButtonShadowRadius
-            )
+            .generalButtonShadow()
             .padding(((position == .left) ? .leading : .trailing), 10)
     }
 }
