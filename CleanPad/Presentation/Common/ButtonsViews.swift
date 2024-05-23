@@ -71,7 +71,7 @@ struct BorderedButtonLabel: View {
                     Capsule()
                         .stroke(color.gradient, lineWidth: 3)
                 }
-                .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.14), radius: 8)
+                .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.14), radius: Constants.generalButtonShadowRadius)
 
             if systemImageString == nil { // When no systemImage is provided...
                 Text(labelText) // ...use a Text View.
