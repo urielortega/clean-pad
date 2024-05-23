@@ -44,7 +44,10 @@ struct DockButton: ViewModifier {
             .background(.ultraThinMaterial)
             .clipShape(.rect(cornerRadius: roundedRectCornerRadius))
             .roundedRectangleOverlayStroke()
-            .shadow(color: Color(.sRGBLinear, white: 0, opacity: shadowOpacity), radius: Constants.generalButtonShadowRadius)
+            .shadow(
+                color: Color(.sRGBLinear, white: 0, opacity: shadowOpacity),
+                radius: Constants.generalButtonShadowRadius
+            )
             .padding(((position == .left) ? .leading : .trailing), 10)
     }
 }
@@ -77,11 +80,17 @@ struct GlowingShadow: ViewModifier {
     func body(content: Content) -> some View {
         content
             .shadow(
-                color:
-                    (viewModel.isCustomTabBarGlowing && viewModel.isSomeCategorySelected) ? viewModel.selectedCategory.color.opacity(0.7) : Color(.sRGBLinear, white: 0, opacity: shadowOpacity)
-                ,
+                color: getGlowingShadowColor(),
                 radius: viewModel.isCustomTabBarGlowing ? 16 : 8
             )
+    }
+    
+    func getGlowingShadowColor() -> Color {
+        if (viewModel.isCustomTabBarGlowing && viewModel.isSomeCategorySelected) {
+            viewModel.selectedCategory.color.opacity(0.7)
+        } else {
+            Color(.sRGBLinear, white: 0, opacity: shadowOpacity)
+        }
     }
 }
 
