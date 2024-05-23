@@ -84,7 +84,7 @@ struct GridNoteLabel: View {
         .background(.gridLabelBackground)
         .clipShape(.rect(cornerRadius: roundedRectCornerRadius))
         .roundedRectangleOverlayStroke()
-        .shadow(color: .gridLabelShadow, radius: 4, x: 0, y: 6)
+        .shadow(color: .gridLabelShadow, radius: 2, x: 0, y: 6)
         .noteLabelAccessibilityModifiers(note: note, viewModel: viewModel)
     }
 }
@@ -123,6 +123,7 @@ struct ContextMenuPreview: View {
 
 #Preview("Grid View") {
     GridNoteLabel(note: .example, viewModel: DateViewModel())
+        .frame(width: 200, height: 100)
 }
 
 #Preview("Context Menu Preview") {
