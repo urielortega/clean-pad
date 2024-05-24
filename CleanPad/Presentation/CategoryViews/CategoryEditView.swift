@@ -53,6 +53,7 @@ struct CategoryEditView: View {
             }
         }
         .presentationBackground(.regularMaterial)
+        .presentationCornerRadius(roundedRectCornerRadius)
     }
     
     var categoryNameTextField: some View {
