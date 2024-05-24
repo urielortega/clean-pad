@@ -32,3 +32,13 @@ struct CustomTopTitle: View {
         }
     }
 }
+
+/// View to place Dismiss Button at the top trailing corner.
+struct TopDismissViewButton: View {
+    var body: some View {
+        HStack {
+            Spacer()
+            DismissViewButton()
+        }
+    }
+}
