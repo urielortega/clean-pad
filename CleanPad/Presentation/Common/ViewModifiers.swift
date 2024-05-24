@@ -123,7 +123,7 @@ struct SoftShadow: ViewModifier {
     
     func body(content: Content) -> some View {
         content
-            .shadow(color: color, radius: 2, x: 0, y: 6)
+            .shadow(color: color, radius: 2, x: 0, y: 4)
     }
 }
 
