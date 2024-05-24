@@ -47,14 +47,14 @@ struct CategoryEditView: View {
                 }
             }
         }
-        .presentationBackground(.thinMaterial)
+        .presentationBackground(.regularMaterial)
     }
     
     var categoryNameTextField: some View {
         TextField( "Name your category...", text: $category.name)
             .textFieldStyle(
                 GradientTextFieldStyle(
-                    startColor: .clear,
+                    startColor: .gridLabelBackground.opacity(0.8),
                     endColor: category.color
                 )
             )
