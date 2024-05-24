@@ -21,14 +21,8 @@ struct CategorySelectionView: View {
                 DismissViewButton()
             }
             
-            HStack { // View to place title at the top of the sheet.
-                Text("Your Categories")
-                    .font(.title)
-                    .bold()
-                
-                Spacer()
-            }
-            .padding(.horizontal)
+            CustomTopTitle(text: "Your Categories")
+                .padding(.horizontal)
             
             ScrollView {
                 LazyVStack {
