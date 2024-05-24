@@ -24,6 +24,17 @@ struct CategoryEditView: View {
     var body: some View {
         NavigationStack {
             VStack {
+                HStack { // View to place title at the top of the sheet.
+                    Text(
+                        creatingNewCategory ? "Create New Category" : "Update Category"
+                    )
+                    .font(.title)
+                    .bold()
+                    
+                    Spacer()
+                }
+                .padding([.horizontal, .top])
+                
                 HStack {
                     categoryNameTextField
                     
@@ -31,10 +42,10 @@ struct CategoryEditView: View {
                         .padding(.leading)
                 }
                 .padding()
+                .padding(.trailing)
                 
                 Spacer()
             }
-            .padding(.horizontal)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button("Cancel") { dismiss() }
