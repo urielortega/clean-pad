@@ -24,15 +24,9 @@ struct CategoryEditView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                HStack { // View to place title at the top of the sheet.
-                    Text(
-                        creatingNewCategory ? "Create New Category" : "Update Category"
-                    )
-                    .font(.title)
-                    .bold()
-                    
-                    Spacer()
-                }
+                CustomTopTitle(
+                    text: creatingNewCategory ? "Create New Category" : "Update Category"
+                )
                 .padding([.horizontal, .top])
                 
                 HStack {
