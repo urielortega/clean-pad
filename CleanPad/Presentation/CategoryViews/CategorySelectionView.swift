@@ -16,10 +16,7 @@ struct CategorySelectionView: View {
     
     var body: some View {
         VStack {
-            HStack { // View to place Dismiss Button at the top of the sheet.
-                Spacer()
-                DismissViewButton()
-            }
+            TopDismissViewButton()
             
             CustomTopTitle(text: "Your Categories")
                 .padding(.horizontal)
