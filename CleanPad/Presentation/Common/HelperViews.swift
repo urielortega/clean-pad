@@ -18,6 +18,7 @@ struct CustomHStackDivider: View {
     }
 }
 
+/// View to display a Custom Title at the top leading corner.
 struct CustomTopTitle: View {
     var text: String
     
