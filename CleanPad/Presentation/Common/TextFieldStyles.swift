@@ -15,9 +15,12 @@ struct GradientTextFieldStyle: TextFieldStyle {
     func _body(configuration: TextField<Self._Label>) -> some View {
         configuration
             .padding()
+            .fontWeight(.medium)
             .background(
                 LinearGradient(
-                    gradient: Gradient(colors: [startColor, endColor]),
+                    gradient: Gradient(
+                        colors: [startColor, endColor.opacity(0.8)]
+                    ),
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing
                 )
@@ -27,7 +30,7 @@ struct GradientTextFieldStyle: TextFieldStyle {
             .overlay {
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(
-                        Material.ultraThinMaterial,
+                        endColor.gradient.opacity(0.5),
                         lineWidth: 3
                     )
                     .allowsHitTesting(false)
