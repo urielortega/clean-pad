@@ -17,3 +17,17 @@ struct CustomHStackDivider: View {
             .foregroundStyle(.secondary)
     }
 }
+
+struct CustomTopTitle: View {
+    var text: String
+    
+    var body: some View {
+        HStack {
+            Text(text)
+                .font(.title)
+                .bold()
+            
+            Spacer()
+        }
+    }
+}
