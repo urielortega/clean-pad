@@ -188,7 +188,7 @@ struct CreateCategoryButton: View {
         }
         .sheet(isPresented: $sheetsViewModel.showCategoryCreationSheet) {
             CategoryEditView(
-                category: Category(id: UUID(), name: "", color: .secondary),
+                category: Category(id: UUID(), name: "", color: .gray),
                 viewModel: viewModel,
                 creatingNewCategory: true
             )
