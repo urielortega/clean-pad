@@ -52,7 +52,18 @@ struct CategoryEditView: View {
                 }
             }
         }
-        .presentationBackground(.regularMaterial)
+        .presentationBackground(
+            LinearGradient(
+                gradient: Gradient(
+                    stops: [
+                        .init(color: .generalBackground, location: 0.2),
+                        .init(color: category.color, location: 1.2)
+                    ]
+                ),
+                startPoint: .top,
+                endPoint: .bottom
+            )
+        )
         .presentationCornerRadius(roundedRectCornerRadius)
     }
     
