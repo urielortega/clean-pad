@@ -7,6 +7,12 @@
 
 import SwiftUI
 
+/// Enum for controlling the focus state when creating or editing a note.
+fileprivate enum FocusField: Hashable {
+    case titleTextField
+    case textEditorField
+}
+
 /// View that shows a note content allowing the user to modify it, update it, save it and lock the note itself.
 struct NoteEditView: View {
     @State var note: Note
@@ -16,12 +22,6 @@ struct NoteEditView: View {
     
     /// Property to show Cancel and Save buttons, and handle `onChange` closures.
     var creatingNewNote: Bool
-    
-    /// Enum for controlling the focus state when creating or editing a note.
-    fileprivate enum FocusField: Hashable {
-        case titleTextField
-        case textEditorField
-    }
     
     /// Property that stores the focus of the current text field.
     @FocusState private var focusedField: FocusField?
