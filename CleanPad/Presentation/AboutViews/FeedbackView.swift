@@ -56,7 +56,7 @@ struct FeedbackView: View {
         .presentationDetents([.fraction(0.6)])
         .presentationDragIndicator(.visible)
         .presentationBackground(.regularMaterial)
-        .presentationCornerRadius(roundedRectCornerRadius)
+        .presentationCornerRadius(Constants.roundedRectCornerRadius)
     }
     
     var headerView: some View {

@@ -64,7 +64,7 @@ struct CategoryEditView: View {
                 endPoint: .bottom
             )
         )
-        .presentationCornerRadius(roundedRectCornerRadius)
+        .presentationCornerRadius(Constants.roundedRectCornerRadius)
     }
     
     var categoryNameTextField: some View {

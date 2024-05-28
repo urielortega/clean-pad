@@ -58,7 +58,7 @@ struct CategorySelectionView: View {
         .padding(.top)
         .presentationDragIndicator(.visible)
         .presentationBackground(.thinMaterial)
-        .presentationCornerRadius(roundedRectCornerRadius)
+        .presentationCornerRadius(Constants.roundedRectCornerRadius)
     }
     
     /// Button to show view for Categories Editing.

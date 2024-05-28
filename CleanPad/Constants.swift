@@ -44,4 +44,5 @@ enum Constants {
     static let textShadowRadius: CGFloat = 8
     static let iconShadowRadius: CGFloat = 8
     static let generalButtonShadowRadius: CGFloat = 8
+    static let roundedRectCornerRadius: CGFloat = 22
 }
