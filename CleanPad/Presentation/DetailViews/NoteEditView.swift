@@ -18,7 +18,7 @@ struct NoteEditView: View {
     var creatingNewNote: Bool
     
     /// Enum for controlling the focus state when creating or editing a note.
-    enum FocusField: Hashable {
+    fileprivate enum FocusField: Hashable {
         case titleTextField
         case textEditorField
     }
