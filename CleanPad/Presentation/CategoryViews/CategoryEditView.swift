@@ -7,6 +7,11 @@
 
 import SwiftUI
 
+/// Enum for controlling the focus state when creating or editing a category.
+fileprivate enum FocusField: Hashable {
+    case categoryNameTextField
+}
+
 /// View that shows all user categories that can be edited by tapping one of them.
 struct CategoryEditView: View {
     @State var category: Category
@@ -15,6 +20,9 @@ struct CategoryEditView: View {
     
     /// Property to show Cancel and Save buttons, and handle `onChange` closures.
     var creatingNewCategory: Bool
+    
+    /// Property that stores the focus of the current text field.
+    @FocusState private var focusedField: FocusField?
     
     @Environment(\.dismiss) var dismiss
     
