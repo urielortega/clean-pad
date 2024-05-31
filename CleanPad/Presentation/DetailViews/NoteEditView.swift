@@ -154,7 +154,6 @@ struct NoteEditView: View {
     var saveNoteButtonView: some View {
         Button("Save") {
             viewModel.add(note: note)
-            viewModel.saveAllNotes()
             dismiss()
             
             HapticManager.instance.notification(type: .success)
