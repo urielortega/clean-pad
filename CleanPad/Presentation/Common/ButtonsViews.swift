@@ -38,6 +38,34 @@ struct DeleteNoteButton: View {
     }
 }
 
+/// Button to definitely delete a category, with optional view dismissal.
+struct DeleteCategoryButton: View {
+    var dismissView: Bool
+
+    @Environment(\.dismiss) var dismiss
+    
+    var body: some View {
+        Button(role: .destructive) {
+            if dismissView {
+                dismiss()
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                    withAnimation(.bouncy) {
+                        // TODO: Delete category after delay.
+                    }
+                }
+            } else {
+                withAnimation(.bouncy) {
+                    // TODO: Delete category.
+                }
+            }
+        } label: {
+            Label("Delete category", systemImage: "trash.fill")
+        }
+    }
+}
+
+
 /// 'X' Button to dismiss a View.
 struct DismissViewButton: View {
     @Environment(\.dismiss) var dismiss
