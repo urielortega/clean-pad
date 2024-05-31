@@ -54,9 +54,28 @@ struct CategoryEditView: View {
                 }
                 
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button(
-                        creatingNewCategory ? "Save" : "Update"
-                    ) { dismiss() }
+                    if !(focusedField == .none) {
+                        // Button to dismiss keyboard when typing.
+                        Button("OK") { focusedField = .none }
+                    } else if creatingNewCategory {
+                        Button("Save") {
+                            // TODO: Save new category.
+                        }
+                    } else {
+                        HStack {
+                            Menu {
+                                Button("Delete", role: .destructive) {
+                                    // TODO: Delete existing category.
+                                }
+                            } label: {
+                                Label("More options", systemImage: "ellipsis.circle")
+                            }
+                            
+                            Button("Save") {
+                                // TODO: Update existing category.
+                            }
+                        }
+                    }
                 }
             }
         }
