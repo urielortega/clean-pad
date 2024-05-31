@@ -108,9 +108,7 @@ struct NoteEditView: View {
         }
         .focused($focusedField, equals: .titleTextField)
         .onAppear {
-            if creatingNewNote {
-                self.focusedField = .titleTextField
-            }
+            if creatingNewNote { focusedField = .titleTextField }
         }
         .onSubmit { focusedField = .textEditorField }
         .submitLabel(.next)
