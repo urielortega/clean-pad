@@ -51,7 +51,6 @@ struct WelcomeView: View {
                     .foregroundStyle(.black.opacity(0.7))
                     .padding(.bottom, 20)
             }
-            .shadow(radius: Constants.textShadowRadius)
         }
     }
     
@@ -66,11 +65,9 @@ struct WelcomeView: View {
                 .padding(.bottom, 10)
             
             Text("Enjoy it! 🫶🏼")
-
         }
         .fontWeight(.semibold)
         .foregroundStyle(.black)
-        .shadow(radius: Constants.textShadowRadius)
         .padding(.horizontal)
     }
     
