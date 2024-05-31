@@ -64,9 +64,7 @@ struct CategoryEditView: View {
                     } else {
                         HStack {
                             Menu {
-                                Button("Delete", role: .destructive) {
-                                    // TODO: Delete existing category.
-                                }
+                                DeleteCategoryButton(dismissView: true)
                             } label: {
                                 Label("More options", systemImage: "ellipsis.circle")
                             }
