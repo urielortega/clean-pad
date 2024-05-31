@@ -87,9 +87,7 @@ struct CategoryEditView: View {
         )
         .presentationCornerRadius(Constants.roundedRectCornerRadius)
         .onAppear {
-            if creatingNewCategory {
-                focusedField = .categoryNameTextField
-            }
+            if creatingNewCategory { focusedField = .categoryNameTextField }
         }
     }
     
