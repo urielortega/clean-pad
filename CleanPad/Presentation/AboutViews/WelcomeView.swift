@@ -28,6 +28,7 @@ struct WelcomeView: View {
                 dismissButtonView
             }
         }
+        .presentationCornerRadius(Constants.roundedRectCornerRadius)
     }
     
     var headerView: some View {
