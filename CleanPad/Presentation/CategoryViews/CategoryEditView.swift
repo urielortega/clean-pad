@@ -57,21 +57,17 @@ struct CategoryEditView: View {
                     if !(focusedField == .none) {
                         // Button to dismiss keyboard when typing.
                         Button("OK") { focusedField = .none }
-                    } else if creatingNewCategory {
-                        Button("Save") {
-                            // TODO: Save new category.
-                        }
                     } else {
                         HStack {
-                            Menu {
-                                DeleteCategoryButton(dismissView: true)
-                            } label: {
-                                Label("More options", systemImage: "ellipsis.circle")
+                            if !creatingNewCategory {
+                                Menu {
+                                    DeleteCategoryButton(dismissView: true)
+                                } label: {
+                                    Label("More options", systemImage: "ellipsis.circle")
+                                }
                             }
                             
-                            Button("Save") {
-                                // TODO: Update existing category.
-                            }
+                            saveCategoryButtonView
                         }
                     }
                 }
@@ -110,6 +106,15 @@ struct CategoryEditView: View {
             supportsOpacity: false
         )
         .labelsHidden()
+    }
+    
+    var saveCategoryButtonView: some View {
+        Button("Save") {
+            // TODO: Save category.
+            dismiss()
+            
+            HapticManager.instance.notification(type: .success)
+        }
     }
 }
 
