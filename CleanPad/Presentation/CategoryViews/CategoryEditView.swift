@@ -83,6 +83,7 @@ struct CategoryEditView: View {
                     endColor: category.color
                 )
             )
+            .focused($focusedField, equals: .categoryNameTextField)
     }
     
     var categoryColorPicker: some View {
