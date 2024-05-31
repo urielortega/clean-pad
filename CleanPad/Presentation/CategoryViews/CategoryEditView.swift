@@ -65,7 +65,7 @@ struct CategoryEditView: View {
                 gradient: Gradient(
                     stops: [
                         .init(color: .generalBackground, location: 0.2),
-                        .init(color: category.color, location: 1.2)
+                        .init(color: category.color, location: 1.5)
                     ]
                 ),
                 startPoint: .top,
