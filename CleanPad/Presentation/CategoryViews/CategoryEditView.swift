@@ -110,7 +110,12 @@ struct CategoryEditView: View {
     
     var saveCategoryButtonView: some View {
         Button("Save") {
-            // TODO: Save category.
+            if creatingNewCategory {
+                // TODO: Save new category.
+            } else {
+                // TODO: Update existing category.
+            }
+            
             dismiss()
             
             HapticManager.instance.notification(type: .success)
