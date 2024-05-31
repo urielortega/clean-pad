@@ -87,6 +87,7 @@ struct NoteEditView: View {
                 }
             }
         }
+        .presentationCornerRadius(Constants.roundedRectCornerRadius)
     }
     
     var titleTextFieldView: some View {
