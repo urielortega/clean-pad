@@ -75,7 +75,7 @@ struct AllNotesView: View {
                             ListNoteLabel(note: note, viewModel: dateViewModel)
                         }
                         .contextMenu {
-                            ContextMenuButtons(note: note, viewModel: viewModel)
+                            NoteContextMenuButtons(note: note, viewModel: viewModel)
                         } preview: {
                             ContextMenuPreview(note: note)
                         }
@@ -122,7 +122,7 @@ struct AllNotesView: View {
                                     .padding(5)
                             }
                             .contextMenu {
-                                ContextMenuButtons(note: note, viewModel: viewModel)
+                                NoteContextMenuButtons(note: note, viewModel: viewModel)
                             } preview: {
                                 ContextMenuPreview(note: note)
                             }

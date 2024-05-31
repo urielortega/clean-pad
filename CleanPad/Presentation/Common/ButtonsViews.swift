@@ -122,7 +122,7 @@ struct MaterialButtonLabel: View {
 }
 
 /// Buttons to show when ContextMenu appears over a Note Label.
-struct ContextMenuButtons: View {
+struct NoteContextMenuButtons: View {
     var note: Note
     @ObservedObject var viewModel: NotesListViewModel
     
