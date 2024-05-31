@@ -43,9 +43,12 @@ struct CategorySelectionView: View {
                                 viewModel.customTabBarGlow()
                             }
                         }
-                        
+                        .padding(.vertical, 5)
+                    }
+                    .padding(.horizontal)
+                    
+                    Group {
                         Divider()
-
                         bottomSheetButton
                     }
                     .padding()
