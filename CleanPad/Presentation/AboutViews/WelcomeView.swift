@@ -11,13 +11,13 @@ import SwiftUI
 /// View shown on the first app launch, containing fundamental information about the purpose and operation of the app.
 struct WelcomeView: View {
     @Environment(\.dismiss) var dismiss
-    @State var gradientColors: [Color] = [.brown, .white, .gray]
+    @State var gradientColors: [Color] = [.white, .cleanPadIconBackground, .white]
     @State var gradientSpeed: Double = 0.4
     
     var body: some View {
         ZStack(alignment: .center) {
             ColorfulView(color: $gradientColors, speed: $gradientSpeed)
-                .opacity(0.8)
+                .opacity(0.9)
                 .ignoresSafeArea()
             
             VStack {
