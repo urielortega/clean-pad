@@ -114,7 +114,7 @@ struct CategoryEditView: View {
     var saveCategoryButtonView: some View {
         Button("Save") {
             if creatingNewCategory {
-                // TODO: Save new category.
+                viewModel.add(category: category)
             } else {
                 // TODO: Update existing category.
             }
