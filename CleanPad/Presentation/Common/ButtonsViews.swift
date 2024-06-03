@@ -51,6 +51,7 @@ struct DeleteCategoryButton: View {
             if dismissView {
                 dismiss()
                 
+                // Delete category after delay.
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
                     withAnimation(.bouncy) {
                         viewModel.delete(category: category)
