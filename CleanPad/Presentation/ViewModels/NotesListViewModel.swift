@@ -217,6 +217,14 @@ extension NotesListViewModel {
         saveAllCategories()
     }
     
+    /// Function to delete a category and save the changes in the ``categories`` array.
+    /// - Parameter category: An existing ``Category`` object to be deleted from the ``categories`` array.
+    func delete(category: Category) {
+        let index = self.getCategoryIndexFromCategoriesArray(category: category)!
+        categories.remove(at: index)
+        saveAllCategories()
+    }
+    
     /// Function to save existing categories with documents directory.
     func saveAllCategories() {
         do {
