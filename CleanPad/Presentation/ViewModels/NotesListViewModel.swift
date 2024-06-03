@@ -361,7 +361,7 @@ extension NotesListViewModel {
     /// Function to retrieve a category index from the global ``categories`` array.
     /// - Parameter category: A ``Category`` object that might be in the ``categories`` array.
     /// - Returns: An Integer index representing the position of the category in the ``categories`` array.
-    func getCategoryIndexFromNotesArray(category: Category) -> Int? {
+    func getCategoryIndexFromCategoriesArray(category: Category) -> Int? {
         // To find the given category.
         guard let index = self.categories.firstIndex(where: {$0.id == category.id}) else {
             print("Couldn't find category in the 'categories' array.")
@@ -375,7 +375,7 @@ extension NotesListViewModel {
     /// - Parameter category: A ``Category`` object that might be in the ``categories`` array.
     /// - Returns: A ``Category`` object, found in the ``categories`` array, with up to date data.
     func getCategoryFromCategoriesArray(category: Category) -> Category? {
-        let index = getCategoryIndexFromNotesArray(category: category)!
+        let index = getCategoryIndexFromCategoriesArray(category: category)!
         
         return self.categories[index]
     }
