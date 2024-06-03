@@ -206,6 +206,8 @@ struct CustomTabBar: View {
         }
         .dockButtonStyle(position: .left)
         .sheet(isPresented: $sheetsViewModel.showCategorySelectionSheet) {
+            viewModel.isEditModeActive = false // When dismissing the sheet.
+        } content: {
             CategorySelectionView(viewModel: viewModel, sheetsViewModel: sheetsViewModel)
         }
     }
