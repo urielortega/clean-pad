@@ -206,6 +206,17 @@ extension NotesListViewModel {
         saveAllCategories()
     }
     
+    /// Function to update a category and save the changes in the ``categories`` array.
+    /// - Parameter category: An existing ``Category`` object to be updated in the ``categories`` array.
+    func update(category: Category) {
+        let index = self.getCategoryIndexFromCategoriesArray(category: category)!
+        
+        // Replace the original category with the updated one:
+        categories[index] = category
+        
+        saveAllCategories()
+    }
+    
     /// Function to save existing categories with documents directory.
     func saveAllCategories() {
         do {
