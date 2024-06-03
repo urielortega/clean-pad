@@ -39,6 +39,7 @@ final class NotesListViewModel: ObservableObject {
     }
     
     @Published var selectedCategory: Category = .noSelection
+    @Published var currentEditableCategory: Category = .noSelection
     
     /// Computed property that returns a Note array with all notes or the ones resulting from a search.
     var filteredNotes: [Note] {
@@ -218,6 +219,11 @@ extension NotesListViewModel {
     /// Function to change the value of the selectedCategory property.
     func changeSelectedCategory(with category: Category) {
         selectedCategory = category
+    }
+    
+    /// Function to change the value of the currentEditableCategory property.
+    func changeCurrentEditableCategory(with category: Category) {
+        currentEditableCategory = category
     }
     
     // MARK: Data loading functions.
