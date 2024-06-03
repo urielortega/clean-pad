@@ -40,6 +40,8 @@ struct DeleteNoteButton: View {
 
 /// Button to definitely delete a category, with optional view dismissal.
 struct DeleteCategoryButton: View {
+    var category: Category
+    @ObservedObject var viewModel: NotesListViewModel
     var dismissView: Bool
 
     @Environment(\.dismiss) var dismiss
@@ -49,14 +51,14 @@ struct DeleteCategoryButton: View {
             if dismissView {
                 dismiss()
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
                     withAnimation(.bouncy) {
-                        // TODO: Delete category after delay.
+                        viewModel.delete(category: category)
                     }
                 }
             } else {
                 withAnimation(.bouncy) {
-                    // TODO: Delete category.
+                    viewModel.delete(category: category)
                 }
             }
         } label: {

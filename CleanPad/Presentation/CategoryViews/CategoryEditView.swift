@@ -61,7 +61,11 @@ struct CategoryEditView: View {
                         HStack {
                             if !creatingNewCategory {
                                 Menu {
-                                    DeleteCategoryButton(dismissView: true)
+                                    DeleteCategoryButton(
+                                        category: category,
+                                        viewModel: viewModel,
+                                        dismissView: true
+                                    )
                                 } label: {
                                     Label("More options", systemImage: "ellipsis.circle")
                                 }
