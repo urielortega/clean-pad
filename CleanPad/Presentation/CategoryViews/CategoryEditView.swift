@@ -116,7 +116,7 @@ struct CategoryEditView: View {
             if creatingNewCategory {
                 viewModel.add(category: category)
             } else {
-                // TODO: Update existing category.
+                viewModel.update(category: category)
             }
             
             dismiss()
