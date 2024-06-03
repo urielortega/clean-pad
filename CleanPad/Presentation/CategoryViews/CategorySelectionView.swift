@@ -147,7 +147,7 @@ struct CategoryButton: View {
         .overlay { roleDependentOverlay }
         .sheet(isPresented: $sheetsViewModel.showCategoryEditSheet) {
             CategoryEditView(
-                category: category,
+                category: viewModel.currentEditableCategory,
                 viewModel: viewModel,
                 creatingNewCategory: false
             )
