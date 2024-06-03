@@ -32,6 +32,7 @@ struct CategorySelectionView: View {
                         ) {
                             // TODO: Refactor and move to VM:
                             if viewModel.isEditModeActive {
+                                viewModel.changeCurrentEditableCategory(with: category)
                                 sheetsViewModel.showCategoryEditSheet.toggle()
                             } else {
                                 withAnimation(.bouncy) {
