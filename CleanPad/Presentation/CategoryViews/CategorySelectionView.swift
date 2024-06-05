@@ -18,7 +18,7 @@ struct CategorySelectionView: View {
         VStack {
             TopDismissViewButton()
             
-            CustomTopTitle(text: "Your Categories")
+            CustomTopTitle(text: viewModel.isEditModeActive ? "Edit your Categories" : "Select a Category")
                 .padding(.horizontal)
             
             ScrollView {
