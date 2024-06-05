@@ -214,6 +214,11 @@ extension NotesListViewModel {
         // Replace the original category with the updated one:
         categories[index] = category
         
+        if currentEditableCategory == selectedCategory {
+            // Assign the updated category to selectedCategory.
+            selectedCategory = categories[index]
+        }
+        
         saveAllCategories()
     }
     
