@@ -123,7 +123,7 @@ struct CategoryButton: View {
     var body: some View {
         Button { buttonActions() } label: {
             HStack {
-                Label("\(category.name)", systemImage: "note.text")
+                Text(category.name)
                     .imageScale(.medium)
                     .foregroundStyle(category.color.gradient)
                 
