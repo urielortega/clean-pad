@@ -100,7 +100,7 @@ struct CategoryEditView: View {
             .textFieldStyle(
                 GradientTextFieldStyle(
                     startColor: .gridLabelBackground.opacity(0.8),
-                    endColor: category.color
+                    endColor: category.color.opacity(0.8)
                 )
             )
             .focused($focusedField, equals: .categoryNameTextField)
