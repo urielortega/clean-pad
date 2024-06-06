@@ -31,7 +31,7 @@ struct GradientTextFieldStyle: TextFieldStyle {
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(
                         endColor.gradient.opacity(0.5),
-                        lineWidth: 3
+                        lineWidth: 4
                     )
                     .allowsHitTesting(false)
             }
