@@ -138,6 +138,7 @@ struct CategoryButton: View {
                 )
                 .foregroundStyle(category.color)
                 .bold()
+                .subtleShadow(color: .black.opacity(0.2))
             }
             .contentTransition(.symbolEffect(.automatic))
         }
