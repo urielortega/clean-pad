@@ -199,3 +199,26 @@ struct MaterialRoundedButtonStyle: ButtonStyle {
             .opacity(configuration.isPressed ? 0.7 : 1)
     }
 }
+
+struct GradientButtonStyle: ButtonStyle {
+    var startColor: Color
+    var endColor: Color
+    
+    func makeBody(configuration: Self.Configuration) -> some View {
+        configuration.label
+            .padding()
+            .fontWeight(.medium)
+            .background(
+                LinearGradient(
+                    gradient: Gradient(
+                        colors: [startColor, endColor.opacity(0.8)]
+                    ),
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+            )
+            .clipShape(.rect(cornerRadius: 10))
+            .softShadow(color: .gradientButtonShadow)
+    }
+}
+
