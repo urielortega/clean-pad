@@ -227,6 +227,12 @@ extension NotesListViewModel {
     func delete(category: Category) {
         let index = self.getCategoryIndexFromCategoriesArray(category: category)!
         categories.remove(at: index)
+        
+        if currentEditableCategory == selectedCategory {
+            // No Category selected when deleting the selectedCategory.
+            selectedCategory = .noSelection
+        }
+        
         saveAllCategories()
     }
     
