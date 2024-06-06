@@ -125,7 +125,6 @@ struct CategoryButton: View {
             HStack {
                 Text(category.name)
                     .imageScale(.medium)
-                    .foregroundStyle(category.color.gradient)
                 
                 Spacer()
                 
