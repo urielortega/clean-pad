@@ -124,7 +124,6 @@ struct CategoryButton: View {
         Button { buttonActions() } label: {
             HStack {
                 Text(category.name)
-                    .imageScale(.medium)
                 
                 Spacer()
                 
