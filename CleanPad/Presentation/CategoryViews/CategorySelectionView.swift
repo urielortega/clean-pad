@@ -160,7 +160,7 @@ struct CategoryButton: View {
                     strokeColorGradient.opacity(
                         viewModel.selectedCategory == category ? 0.5 : 0.1
                     ),
-                    lineWidth: 3
+                    lineWidth: 4
                 )
         } else {
             RoundedRectangle(cornerRadius: 10)
