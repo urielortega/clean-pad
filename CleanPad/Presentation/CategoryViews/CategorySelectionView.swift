@@ -141,7 +141,12 @@ struct CategoryButton: View {
             }
             .contentTransition(.symbolEffect(.automatic))
         }
-        .buttonStyle(MaterialRoundedButtonStyle())
+        .buttonStyle(
+            GradientButtonStyle(
+                startColor: .gridLabelBackground.opacity(0.8),
+                endColor: category.color.opacity(0.8)
+            )
+        )
         .overlay { roleDependentOverlay }
         .sheet(isPresented: $sheetsViewModel.showCategoryEditSheet) {
             CategoryEditView(
