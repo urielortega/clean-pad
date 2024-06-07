@@ -67,11 +67,15 @@ struct CategorySelectionView: View {
     
     /// Button to show view for Categories Editing.
     var editCategoriesButton: some View {
-        Button("Edit", systemImage: "pencil") {
-            withAnimation(.easeInOut(duration: 0.2)) {
-                viewModel.isEditModeActive.toggle()
-                HapticManager.instance.impact(style: .light)
-            }
+        Toggle(
+            viewModel.isEditModeActive ? "Done Editing" : "Edit Categories",
+            systemImage: "pencil",
+            isOn: $viewModel.isEditModeActive.animation(.easeInOut(duration: 0.3))
+        )
+        .toggleStyle(.button)
+        .contentTransition(.symbolEffect)
+        .onChange(of: viewModel.isEditModeActive) {
+            HapticManager.instance.impact(style: .light)
         }
     }
     
