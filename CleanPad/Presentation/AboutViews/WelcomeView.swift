@@ -33,11 +33,7 @@ struct WelcomeView: View {
     
     var headerView: some View {
         Group {
-            Image(decorative: "CleanPadIcon")
-                .resizable()
-                .frame(width: 100, height: 100)
-                .clipShape(.rect(cornerRadius: Constants.appIconCornerRadius))
-                .shadow(radius: Constants.iconShadowRadius)
+            AppIconView()
                 .padding(.bottom, 40)
             
             Group {
