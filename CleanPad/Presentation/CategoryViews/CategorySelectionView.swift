@@ -226,7 +226,7 @@ struct CategoryButton: View {
     
     var roleDependentOverlay: some View {
         if role == .selection {
-            RoundedRectangle(cornerRadius: 10)
+            RoundedRectangle(cornerRadius: Constants.materialButtonCornerRadius)
                 .stroke(
                     strokeColorGradient.opacity(
                         viewModel.selectedCategory == category ? 0.5 : 0.1
@@ -234,7 +234,7 @@ struct CategoryButton: View {
                     lineWidth: 4
                 )
         } else {
-            RoundedRectangle(cornerRadius: 10)
+            RoundedRectangle(cornerRadius: Constants.materialButtonCornerRadius)
                 .stroke(Color.gray.gradient.opacity(0.1), lineWidth: 3)
         }
     }
@@ -257,7 +257,7 @@ struct CreateCategoryButton: View {
         }
         .buttonStyle(MaterialRoundedButtonStyle())
         .overlay {
-            RoundedRectangle(cornerRadius: 10)
+            RoundedRectangle(cornerRadius: Constants.materialButtonCornerRadius)
                 .stroke(Color.gray.gradient.opacity(0.1), lineWidth: 3)
         }
     }

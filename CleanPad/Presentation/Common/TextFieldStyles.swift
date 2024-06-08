@@ -25,10 +25,10 @@ struct GradientTextFieldStyle: TextFieldStyle {
                     endPoint: .bottomTrailing
                 )
             )
-            .clipShape(.rect(cornerRadius: 10))
+            .clipShape(.rect(cornerRadius: Constants.materialButtonCornerRadius))
             .softShadow(color: .customTextFieldShadow)
             .overlay {
-                RoundedRectangle(cornerRadius: 10)
+                RoundedRectangle(cornerRadius: Constants.materialButtonCornerRadius)
                     .stroke(
                         endColor.gradient.opacity(0.5),
                         lineWidth: 4

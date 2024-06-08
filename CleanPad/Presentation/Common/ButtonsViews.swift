@@ -194,7 +194,7 @@ struct MaterialRoundedButtonStyle: ButtonStyle {
         configuration.label
             .padding()
             .background(.regularMaterial)
-            .clipShape(.rect(cornerRadius: 10))
+            .clipShape(.rect(cornerRadius: Constants.materialButtonCornerRadius))
             .softShadow(color: .gridLabelShadow)
             .opacity(configuration.isPressed ? 0.7 : 1)
     }
@@ -217,7 +217,7 @@ struct GradientButtonStyle: ButtonStyle {
                     endPoint: .bottomTrailing
                 )
             )
-            .clipShape(.rect(cornerRadius: 10))
+            .clipShape(.rect(cornerRadius: Constants.materialButtonCornerRadius))
             .softShadow(color: .gradientButtonShadow)
     }
 }
