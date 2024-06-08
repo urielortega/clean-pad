@@ -46,6 +46,7 @@ struct CategorySelectionView: View {
         }
     }
     
+    /// View that shows either CreateCategoryButton or CategoryButton with no selection, depending on the status of Edit Mode.
     @ViewBuilder
     var bottomSheetButton: some View {
         if viewModel.isEditModeActive {
@@ -72,6 +73,7 @@ struct CategorySelectionView: View {
         }
     }
     
+    /// View that shows categories as rows in a single column.
     var categoriesListView: some View {
         ScrollView {
             LazyVStack {
@@ -105,6 +107,7 @@ struct CategorySelectionView: View {
         }
     }
     
+    /// View that shows categories as a grid with multiple columns.
     var categoriesGridView: some View {
         let layout = [
             GridItem(
@@ -147,6 +150,7 @@ struct CategorySelectionView: View {
         }
     }
     
+    /// View that holds bottomSheetButton with its scaffold.
     var categoriesBottomView: some View {
         Group {
             Divider()
