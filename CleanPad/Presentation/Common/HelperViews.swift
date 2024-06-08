@@ -42,3 +42,13 @@ struct TopDismissViewButton: View {
         }
     }
 }
+
+struct AppIconView: View {
+    var body: some View {
+        Image(decorative: "CleanPadIcon")
+            .resizable()
+            .frame(width: 100, height: 100)
+            .clipShape(.rect(cornerRadius: Constants.appIconCornerRadius))
+            .shadow(radius: Constants.iconShadowRadius)
+    }
+}
