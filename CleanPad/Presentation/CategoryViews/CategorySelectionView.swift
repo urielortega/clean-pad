@@ -141,6 +141,12 @@ struct CategorySelectionView: View {
                     }
                 }
                 .padding()
+                
+                Group {
+                    Divider()
+                    bottomSheetButton
+                }
+                .padding()
             }
         }
     }
