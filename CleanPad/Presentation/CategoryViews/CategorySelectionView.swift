@@ -133,11 +133,7 @@ struct CategorySelectionView: View {
                 }
                 .padding(.horizontal)
                 
-                Group {
-                    Divider()
-                    bottomSheetButton
-                }
-                .padding()
+                categoriesBottomView
             }
         }
     }
@@ -179,13 +175,17 @@ struct CategorySelectionView: View {
                 }
                 .padding()
                 
-                Group {
-                    Divider()
-                    bottomSheetButton
-                }
-                .padding()
+                categoriesBottomView
             }
         }
+    }
+    
+    var categoriesBottomView: some View {
+        Group {
+            Divider()
+            bottomSheetButton
+        }
+        .padding()
     }
 }
 
