@@ -21,40 +21,7 @@ struct CategorySelectionView: View {
             CustomTopTitle(text: viewModel.isEditModeActive ? "Edit your Categories" : "Select a Category")
                 .padding(.horizontal)
             
-            ScrollView {
-                LazyVStack {
-                    ForEach(viewModel.categories) { category in
-                        CategoryButton(
-                            viewModel: viewModel,
-                            sheetsViewModel: sheetsViewModel,
-                            category: category,
-                            role: viewModel.isEditModeActive ? .edition : .selection
-                        ) {
-                            // TODO: Refactor and move to VM:
-                            if viewModel.isEditModeActive {
-                                viewModel.changeCurrentEditableCategory(with: category)
-                                sheetsViewModel.showCategoryEditSheet.toggle()
-                            } else {
-                                withAnimation(.bouncy) {
-                                    viewModel.changeSelectedCategory(with: category)
-                                }
-                                HapticManager.instance.impact(style: .soft)
-                                
-                                dismiss()
-                                viewModel.customTabBarGlow()
-                            }
-                        }
-                        .padding(.vertical, 5)
-                    }
-                    .padding(.horizontal)
-                    
-                    Group {
-                        Divider()
-                        bottomSheetButton
-                    }
-                    .padding()
-                }
-            }
+            categoriesGridView
             
             editCategoriesButton
                 .padding(.vertical)
