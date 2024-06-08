@@ -160,6 +160,13 @@ struct CategoryButton: View {
                 creatingNewCategory: false
             )
         }
+        .sheet(isPresented: $sheetsViewModel.showCategoryCreationSheet) { // Category Creation sheet must be at the same level as Category Edit sheet.
+            CategoryEditView(
+                category: Category(id: UUID(), name: "", color: .gray),
+                viewModel: viewModel,
+                creatingNewCategory: true
+            )
+        }
     }
     
     var roleDependentOverlay: some View {
@@ -197,13 +204,6 @@ struct CreateCategoryButton: View {
         .overlay {
             RoundedRectangle(cornerRadius: 10)
                 .stroke(Color.gray.gradient.opacity(0.1), lineWidth: 3)
-        }
-        .sheet(isPresented: $sheetsViewModel.showCategoryCreationSheet) {
-            CategoryEditView(
-                category: Category(id: UUID(), name: "", color: .gray),
-                viewModel: viewModel,
-                creatingNewCategory: true
-            )
         }
     }
 }
