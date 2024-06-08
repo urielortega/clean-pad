@@ -127,7 +127,8 @@ struct CategoryButton: View {
     var body: some View {
         Button { buttonActions() } label: {
             HStack {
-                Text(category.name)
+                Text(category.name.isEmpty ? "Unnamed Category" : category.name)
+                    .foregroundStyle(category.name.isEmpty ? .secondary : .primary)
                 
                 Spacer()
                 
