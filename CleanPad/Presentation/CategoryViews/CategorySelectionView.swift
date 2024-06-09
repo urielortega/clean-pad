@@ -213,6 +213,7 @@ struct CategoryButton: View {
         }
     }
     
+    /// View that dynamically displays either a gray or a colorful stroke based on the current mode (Selection Mode or Edit Mode) and the category that is currently selected.
     var roleDependentOverlay: some View {
         if role == .selection {
             RoundedRectangle(cornerRadius: Constants.materialButtonCornerRadius)
