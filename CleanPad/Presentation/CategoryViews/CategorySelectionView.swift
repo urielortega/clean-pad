@@ -183,6 +183,7 @@ struct CategoryButton: View {
             HStack {
                 Text(category.name.isEmpty ? "Unnamed Category" : category.name)
                     .foregroundStyle(category.name.isEmpty ? .secondary : .primary)
+                    .lineLimit(role == .selection ? 1 : 2)
                 
                 Spacer()
                 
