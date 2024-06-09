@@ -59,7 +59,7 @@ struct DeleteCategoryButton: View {
                 withAnimation(.bouncy) { viewModel.delete(category: category) }
             }
         } label: {
-            Label("Delete Category", systemImage: "trash")
+            Label("Yes, delete this category", systemImage: "trash")
         }
     }
 }
