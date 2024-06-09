@@ -15,6 +15,7 @@ fileprivate enum FocusField: Hashable {
 /// View that shows all user categories that can be edited by tapping one of them.
 struct CategoryEditView: View {
     @State var category: Category
+    @State private var showingConfirmation = false
     
     @ObservedObject var viewModel: NotesListViewModel
     
@@ -60,11 +61,9 @@ struct CategoryEditView: View {
                     } else {
                         HStack {
                             if !creatingNewCategory {
-                                DeleteCategoryButton(
-                                    category: category,
-                                    viewModel: viewModel,
-                                    dismissView: true
-                                )
+                                Button("Delete Category", systemImage: "trash", role: .destructive) {
+                                    showingConfirmation = true
+                                }
                             }
                             
                             saveCategoryButtonView
@@ -89,6 +88,13 @@ struct CategoryEditView: View {
         .onAppear {
             if creatingNewCategory { focusedField = .categoryNameTextField }
         }
+        .confirmationDialog("Confirm Category Deletion", isPresented: $showingConfirmation) {
+            Button("Delete Category", role: .destructive) { }
+            Button("Cancel", role: .cancel) { }
+        } message: {
+            Text("Do you want to delete this Category?")
+        }
+
     }
     
     var categoryNameTextField: some View {
