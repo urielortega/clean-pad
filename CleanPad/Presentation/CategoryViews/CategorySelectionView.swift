@@ -186,18 +186,7 @@ struct CategoryButton: View {
                 
                 Spacer()
                 
-                Image(
-                    systemName:
-                        // In Selection Mode, when the category is selected, show a "circle.fill" image.
-                        (role == .selection && viewModel.selectedCategory == category) ? "circle.fill" :
-                        // In Edition Mode...
-                            // ...show a "chevron.right" image.
-                                    // Otherwise, show a "circle" image, i.e. in Selection Mode, when the category is not selected.
-                        (role == .edition ? "chevron.right" : "circle")
-                )
-                .foregroundStyle(category.color)
-                .bold()
-                .subtleShadow(color: .black.opacity(0.2))
+                dynamicIndicator
             }
             .contentTransition(.symbolEffect(.automatic))
         }
@@ -237,6 +226,22 @@ struct CategoryButton: View {
             RoundedRectangle(cornerRadius: Constants.materialButtonCornerRadius)
                 .stroke(Color.gray.gradient.opacity(0.1), lineWidth: 3)
         }
+    }
+    
+    /// View that dynamically displays either a "Radio Button" or a "Disclosure Indicator" based on the current mode (Selection Mode or Edit Mode).
+    var dynamicIndicator: some View {
+        Image(
+            systemName:
+                // In Selection Mode, when the category is selected, show a "circle.fill" image.
+                (role == .selection && viewModel.selectedCategory == category) ? "circle.fill" :
+                // In Edition Mode...
+                    // ...show a "chevron.right" image.
+                            // Otherwise, show a "circle" image, i.e. in Selection Mode, when the category is not selected.
+                (role == .edition ? "chevron.right" : "circle")
+        )
+        .foregroundStyle(category.color)
+        .bold()
+        .subtleShadow(color: .black.opacity(0.2))
     }
 }
 
