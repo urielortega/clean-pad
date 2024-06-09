@@ -89,10 +89,17 @@ struct CategoryEditView: View {
             if creatingNewCategory { focusedField = .categoryNameTextField }
         }
         .confirmationDialog("Confirm Category Deletion", isPresented: $showingConfirmation) {
-            Button("Delete Category", role: .destructive) { }
+            DeleteCategoryButton(
+                category: category,
+                viewModel: viewModel,
+                dismissView: true
+            )
             Button("Cancel", role: .cancel) { }
         } message: {
-            Text("Do you want to delete this Category?")
+            Text("""
+                Are you sure you want to delete this category?
+                All notes in the "\(category.name)" category will be moved to the General category.
+            """)
         }
 
     }
