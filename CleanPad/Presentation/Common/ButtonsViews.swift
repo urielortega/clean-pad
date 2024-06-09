@@ -51,19 +51,15 @@ struct DeleteCategoryButton: View {
             if dismissView {
                 dismiss()
                 
-                // Delete category after delay.
+                // Delete category after delay:
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                    withAnimation(.bouncy) {
-                        viewModel.delete(category: category)
-                    }
+                    withAnimation(.bouncy) { viewModel.delete(category: category) }
                 }
             } else {
-                withAnimation(.bouncy) {
-                    viewModel.delete(category: category)
-                }
+                withAnimation(.bouncy) { viewModel.delete(category: category) }
             }
         } label: {
-            Label("Delete category", systemImage: "trash")
+            Label("Delete Category", systemImage: "trash")
         }
     }
 }
