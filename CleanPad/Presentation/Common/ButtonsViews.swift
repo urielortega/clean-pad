@@ -63,7 +63,7 @@ struct DeleteCategoryButton: View {
                 }
             }
         } label: {
-            Label("Delete category", systemImage: "trash.fill")
+            Label("Delete category", systemImage: "trash")
         }
     }
 }
