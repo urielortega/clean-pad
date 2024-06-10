@@ -106,6 +106,15 @@
 			path = CategoryViews;
 			sourceTree = "<group>";
 		};
+		A41324332C17C99D005B478C /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				A48192E22BFFB03F00CA6412 /* TextFieldStyles.swift */,
+				A41324312C17C8AF005B478C /* ButtonStyles.swift */,
+			);
+			path = Styles;
+			sourceTree = "<group>";
+		};
 		A44E76892AB11E70004BBB21 = {
 			isa = PBXGroup;
 			children = (
@@ -193,8 +202,7 @@
 				A49C7DED2ADF5C1D005922FC /* HelperViews.swift */,
 				A4BFFA5E2AF087F4005CD3DE /* LabelViews.swift */,
 				A41F0F572BF2E2280090E84C /* UnlockNotesView.swift */,
-				A48192E22BFFB03F00CA6412 /* TextFieldStyles.swift */,
-				A41324312C17C8AF005B478C /* ButtonStyles.swift */,
+				A41324332C17C99D005B478C /* Styles */,
 			);
 			path = Common;
 			sourceTree = "<group>";
