@@ -1,5 +1,5 @@
 //
-//  ButtonsViews.swift
+//  ButtonViews.swift
 //  CleanPad
 //
 //  Created by Uriel Ortega on 29/09/23.

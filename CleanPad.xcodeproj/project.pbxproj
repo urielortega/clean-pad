@@ -24,7 +24,7 @@
 		A475B9642ACCD7DE00BE6575 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A475B9632ACCD7DE00BE6575 /* WelcomeView.swift */; };
 		A480F7D52BD1A9F200B93BD3 /* ColorfulX in Frameworks */ = {isa = PBXBuildFile; productRef = A480F7D42BD1A9F200B93BD3 /* ColorfulX */; };
 		A48192E32BFFB03F00CA6412 /* TextFieldStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48192E22BFFB03F00CA6412 /* TextFieldStyles.swift */; };
-		A482F0DF2AC7D7CA0075A385 /* ButtonsViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A482F0DE2AC7D7CA0075A385 /* ButtonsViews.swift */; };
+		A482F0DF2AC7D7CA0075A385 /* ButtonViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A482F0DE2AC7D7CA0075A385 /* ButtonViews.swift */; };
 		A489F7A32B84290F00CB44AE /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = A489F7A22B84290F00CB44AE /* Category.swift */; };
 		A489F7A52B8429B500CB44AE /* CodableColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A489F7A42B8429B500CB44AE /* CodableColor.swift */; };
 		A49C7DEC2ADF5BB9005922FC /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49C7DEB2ADF5BB9005922FC /* ViewModifiers.swift */; };
@@ -59,7 +59,7 @@
 		A465AB792ABA7149001CFFD9 /* NoteEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEditView.swift; sourceTree = "<group>"; };
 		A475B9632ACCD7DE00BE6575 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		A48192E22BFFB03F00CA6412 /* TextFieldStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldStyles.swift; sourceTree = "<group>"; };
-		A482F0DE2AC7D7CA0075A385 /* ButtonsViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsViews.swift; sourceTree = "<group>"; };
+		A482F0DE2AC7D7CA0075A385 /* ButtonViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonViews.swift; sourceTree = "<group>"; };
 		A489F7A22B84290F00CB44AE /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		A489F7A42B8429B500CB44AE /* CodableColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodableColor.swift; sourceTree = "<group>"; };
 		A49C7DEB2ADF5BB9005922FC /* ViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifiers.swift; sourceTree = "<group>"; };
@@ -187,7 +187,7 @@
 		A482F0DB2AC7D4410075A385 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				A482F0DE2AC7D7CA0075A385 /* ButtonsViews.swift */,
+				A482F0DE2AC7D7CA0075A385 /* ButtonViews.swift */,
 				A49E2FDF2AD61DA000D8EC6D /* EmptyListView.swift */,
 				A49C7DEB2ADF5BB9005922FC /* ViewModifiers.swift */,
 				A49C7DED2ADF5C1D005922FC /* HelperViews.swift */,
@@ -322,7 +322,7 @@
 				A4B86F1D2B59B04D00560C66 /* AboutCleanPadView.swift in Sources */,
 				A48192E32BFFB03F00CA6412 /* TextFieldStyles.swift in Sources */,
 				A49C7DEC2ADF5BB9005922FC /* ViewModifiers.swift in Sources */,
-				A482F0DF2AC7D7CA0075A385 /* ButtonsViews.swift in Sources */,
+				A482F0DF2AC7D7CA0075A385 /* ButtonViews.swift in Sources */,
 				A4D06FAE2B21428C0000D089 /* DateViewModel.swift in Sources */,
 				A49C7DEE2ADF5C1D005922FC /* HelperViews.swift in Sources */,
 				A461172A2AF56EB6001C0087 /* AllNotesView.swift in Sources */,
