@@ -207,7 +207,7 @@ struct GradientButtonStyle: ButtonStyle {
             .background(
                 LinearGradient(
                     gradient: Gradient(
-                        colors: [startColor, endColor.opacity(0.8)]
+                        colors: [startColor, endColor.opacity(Constants.gradientEndColorOpacity)]
                     ),
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing
