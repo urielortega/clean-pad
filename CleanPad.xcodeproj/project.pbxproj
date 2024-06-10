@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A40111B62BA8F249006C5639 /* CategoryEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40111B52BA8F249006C5639 /* CategoryEditView.swift */; };
 		A4129AC72AF9AE1400518E1C /* KeyboardPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4129AC62AF9AE1400518E1C /* KeyboardPublisher.swift */; };
+		A41324322C17C8AF005B478C /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41324312C17C8AF005B478C /* ButtonStyles.swift */; };
 		A41F0F562BF2A4500090E84C /* SheetsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41F0F552BF2A4500090E84C /* SheetsViewModel.swift */; };
 		A41F0F582BF2E2280090E84C /* UnlockNotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41F0F572BF2E2280090E84C /* UnlockNotesView.swift */; };
 		A44E76962AB11E70004BBB21 /* CleanPadApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44E76952AB11E70004BBB21 /* CleanPadApp.swift */; };
@@ -42,6 +43,7 @@
 /* Begin PBXFileReference section */
 		A40111B52BA8F249006C5639 /* CategoryEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEditView.swift; sourceTree = "<group>"; };
 		A4129AC62AF9AE1400518E1C /* KeyboardPublisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardPublisher.swift; sourceTree = "<group>"; };
+		A41324312C17C8AF005B478C /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
 		A41F0F552BF2A4500090E84C /* SheetsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetsViewModel.swift; sourceTree = "<group>"; };
 		A41F0F572BF2E2280090E84C /* UnlockNotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockNotesView.swift; sourceTree = "<group>"; };
 		A44E76922AB11E70004BBB21 /* CleanPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CleanPad.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -192,6 +194,7 @@
 				A4BFFA5E2AF087F4005CD3DE /* LabelViews.swift */,
 				A41F0F572BF2E2280090E84C /* UnlockNotesView.swift */,
 				A48192E22BFFB03F00CA6412 /* TextFieldStyles.swift */,
+				A41324312C17C8AF005B478C /* ButtonStyles.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -335,6 +338,7 @@
 				A46117282AF56E31001C0087 /* MainScreenView.swift in Sources */,
 				A44E76A42AB12C0A004BBB21 /* Note.swift in Sources */,
 				A4BFFA5F2AF087F4005CD3DE /* LabelViews.swift in Sources */,
+				A41324322C17C8AF005B478C /* ButtonStyles.swift in Sources */,
 				A475B9642ACCD7DE00BE6575 /* WelcomeView.swift in Sources */,
 				A489F7A32B84290F00CB44AE /* Category.swift in Sources */,
 			);
