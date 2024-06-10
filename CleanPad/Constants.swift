@@ -46,6 +46,7 @@ enum Constants {
     static let iconShadowRadius: CGFloat = 8
     static let generalButtonShadowRadius: CGFloat = 8
     static let roundedRectCornerRadius: CGFloat = 22
-    static let materialButtonCornerRadius: CGFloat = 16 // Used in Buttons and TextFields related to Categories.
     static let appIconCornerRadius: CGFloat = 22
+    static let materialButtonCornerRadius: CGFloat = 16 // Used in Buttons and TextFields related to Categories.
+    static let gradientEndColorOpacity: Double = 0.5 // Used in Buttons and TextFields related to Categories.
 }
