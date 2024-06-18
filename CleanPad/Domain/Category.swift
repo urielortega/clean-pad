@@ -13,6 +13,10 @@ struct Category: Codable, Identifiable, Equatable, Hashable {
     var id: UUID
     var name: String
     var color: Color
+    
+    var displayName: String {
+        name.isEmpty ? "Unnamed" : name
+    }
 }
 
 extension Category {
