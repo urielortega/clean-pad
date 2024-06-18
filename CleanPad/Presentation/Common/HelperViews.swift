@@ -40,6 +40,7 @@ struct TopDismissViewButton: View {
             Spacer()
             DismissViewButton()
         }
+        .padding(.horizontal)
     }
 }
 

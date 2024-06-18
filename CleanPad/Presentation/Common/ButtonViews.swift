@@ -78,7 +78,6 @@ struct DismissViewButton: View {
         .imageScale(.large)
         .labelStyle(.iconOnly)
         .foregroundStyle(.background, .primary.opacity(0.4))
-        .padding(.horizontal)
     }
 }
 
