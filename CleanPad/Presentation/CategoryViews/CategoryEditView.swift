@@ -98,7 +98,7 @@ struct CategoryEditView: View {
         } message: {
             Text("""
                 Are you sure you want to delete this category?
-                All notes in the "\(category.name)" category will be moved to the General category.
+                All notes in the "\(category.displayName)" category will be moved to the General category.
             """)
         }
 

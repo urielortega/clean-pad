@@ -182,7 +182,7 @@ struct CategoryButton: View {
     var body: some View {
         Button { buttonActions() } label: {
             HStack {
-                Text(category.name.isEmpty ? "Unnamed Category" : category.name)
+                Text(category.displayName)
                     .foregroundStyle(category.name.isEmpty ? .secondary : .primary)
                     .lineLimit(role == .selection ? 1 : 2)
                 
