@@ -79,32 +79,41 @@ struct CategorySelectionView: View {
     
     /// View that shows categories as rows in a single column.
     var categoriesListView: some View {
-        ScrollView {
-            LazyVStack {
-                ForEach(viewModel.categories) { category in
-                    CategoryButton(
-                        viewModel: viewModel,
-                        sheetsViewModel: sheetsViewModel,
-                        category: category,
-                        role: viewModel.isEditModeActive ? .edition : .selection
-                    ) {
-                        // TODO: Refactor and move to VM:
-                        if viewModel.isEditModeActive {
-                            viewModel.changeCurrentEditableCategory(with: category)
-                            sheetsViewModel.showCategoryEditSheet.toggle()
-                        } else {
-                            withAnimation(.bouncy) {
-                                viewModel.changeSelectedCategory(with: category)
+        ZStack {
+            ScrollView {
+                LazyVStack {
+                    ForEach(viewModel.categories) { category in
+                        CategoryButton(
+                            viewModel: viewModel,
+                            sheetsViewModel: sheetsViewModel,
+                            category: category,
+                            role: viewModel.isEditModeActive ? .edition : .selection
+                        ) {
+                            // TODO: Refactor and move to VM:
+                            if viewModel.isEditModeActive {
+                                viewModel.changeCurrentEditableCategory(with: category)
+                                sheetsViewModel.showCategoryEditSheet.toggle()
+                            } else {
+                                withAnimation(.bouncy) {
+                                    viewModel.changeSelectedCategory(with: category)
+                                }
+                                HapticManager.instance.impact(style: .soft)
+                                
+                                dismiss()
+                                viewModel.customTabBarGlow()
                             }
-                            HapticManager.instance.impact(style: .soft)
-                            
-                            dismiss()
-                            viewModel.customTabBarGlow()
                         }
+                        .padding(.vertical, 5)
                     }
-                    .padding(.vertical, 5)
+                    .padding(.horizontal)
                 }
-                .padding(.horizontal)
+                .padding(.bottom, 80) // To avoid hiding the list behind the bottomSheetButton.
+            }
+            
+            VStack {
+                Spacer()
+                bottomSheetButton
+                    .padding()
             }
         }
     }
