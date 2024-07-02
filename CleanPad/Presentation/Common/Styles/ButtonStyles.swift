@@ -19,6 +19,17 @@ struct MaterialRoundedButtonStyle: ButtonStyle {
     }
 }
 
+struct MaterialCircleButtonStyle: ButtonStyle {
+    func makeBody(configuration: Self.Configuration) -> some View {
+        configuration.label
+            .padding()
+            .background(.thinMaterial)
+            .clipShape(Circle())
+            .softShadow(color: .gridLabelShadow)
+            .opacity(configuration.isPressed ? 0.7 : 1)
+    }
+}
+
 struct GradientButtonStyle: ButtonStyle {
     var startColor: Color
     var endColor: Color
