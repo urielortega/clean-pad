@@ -155,7 +155,7 @@ struct CategorySelectionView: View {
                     }
                 }
                 .padding()
-                .padding(.bottom, 80)
+                .padding(.bottom, 80) // To avoid hiding the list behind the bottomSheetButton.
             }
             
             VStack {
