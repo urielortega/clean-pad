@@ -22,6 +22,8 @@ struct MaterialRoundedButtonStyle: ButtonStyle {
 struct GradientButtonStyle: ButtonStyle {
     var startColor: Color
     var endColor: Color
+    var startColorOpacity = 1.0
+    var endColorOpacity = Constants.gradientEndColorOpacity
     
     func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
@@ -30,7 +32,10 @@ struct GradientButtonStyle: ButtonStyle {
             .background(
                 LinearGradient(
                     gradient: Gradient(
-                        colors: [startColor, endColor.opacity(Constants.gradientEndColorOpacity)]
+                        colors: [
+                            startColor.opacity(startColorOpacity),
+                            endColor.opacity(endColorOpacity)
+                        ]
                     ),
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing
