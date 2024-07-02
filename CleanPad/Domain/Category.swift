@@ -36,6 +36,6 @@ extension Category {
     static let noSelection = Category(
         id: UUID(uuidString: "0F8F3075-DCC8-4AC9-8FF4-19068D272AB8")!, // Static id for the permanent No Selection Category.
         name: "Show all notes",
-        color: .secondary
+        color: .gray
     )
 }
