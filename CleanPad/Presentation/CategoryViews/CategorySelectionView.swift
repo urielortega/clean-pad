@@ -35,16 +35,7 @@ struct CategorySelectionView: View {
     
     var editAndDismissTopView: some View {
         HStack {
-            Button(
-                viewModel.isEditModeActive ? "Done" : "Edit"
-            ) {
-                HapticManager.instance.impact(style: .light)
-                
-                withAnimation(.easeInOut(duration: 0.3)) {
-                    viewModel.isEditModeActive.toggle()
-                }
-            }
-
+            editCategoriesButton
             Spacer()
             DismissViewButton()
         }
@@ -53,15 +44,12 @@ struct CategorySelectionView: View {
     
     /// Button to show view for Categories Editing.
     var editCategoriesButton: some View {
-        Toggle(
-            viewModel.isEditModeActive ? "Done Editing" : "Edit Categories",
-            systemImage: "pencil",
-            isOn: $viewModel.isEditModeActive.animation(.easeInOut(duration: 0.3))
-        )
-        .toggleStyle(.button)
-        .contentTransition(.symbolEffect)
-        .onChange(of: viewModel.isEditModeActive) {
+        Button(viewModel.isEditModeActive ? "Done" : "Edit") {
             HapticManager.instance.impact(style: .light)
+            
+            withAnimation(.easeInOut(duration: 0.3)) {
+                viewModel.isEditModeActive.toggle()
+            }
         }
     }
     
