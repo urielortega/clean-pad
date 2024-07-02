@@ -16,21 +16,39 @@ struct CategorySelectionView: View {
     
     var body: some View {
         VStack {
-            TopDismissViewButton()
+            editAndDismissTopView
             
             CustomTopTitle(text: viewModel.isEditModeActive ? "Edit your Categories" : "Select a Category")
                 .padding(.horizontal)
             
             categoriesGridView
             
-            editCategoriesButton
-                .padding(.vertical)
+//            editCategoriesButton
+//                .padding(.vertical)
         }
         .padding(.top)
         .presentationDragIndicator(.visible)
         .presentationBackground(.ultraThinMaterial)
         .presentationCornerRadius(Constants.roundedRectCornerRadius)
         .presentationDetents([.fraction(0.6)])
+    }
+    
+    var editAndDismissTopView: some View {
+        HStack {
+            Button(
+                viewModel.isEditModeActive ? "Done" : "Edit"
+            ) {
+                HapticManager.instance.impact(style: .light)
+                
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    viewModel.isEditModeActive.toggle()
+                }
+            }
+
+            Spacer()
+            DismissViewButton()
+        }
+        .padding([.horizontal, .bottom])
     }
     
     /// Button to show view for Categories Editing.
