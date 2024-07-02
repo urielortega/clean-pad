@@ -22,9 +22,6 @@ struct CategorySelectionView: View {
                 .padding(.horizontal)
             
             categoriesGridView
-            
-//            editCategoriesButton
-//                .padding(.vertical)
         }
         .padding(.top)
         .presentationDragIndicator(.visible)
@@ -123,36 +120,42 @@ struct CategorySelectionView: View {
         ]
         
         return Group {
-            ScrollView {
-                LazyVGrid(columns: layout) {
-                    ForEach(viewModel.categories) { category in
-                        CategoryButton(
-                            viewModel: viewModel,
-                            sheetsViewModel: sheetsViewModel,
-                            category: category,
-                            role: viewModel.isEditModeActive ? .edition : .selection
-                        ) {
-                            // TODO: Refactor and move to VM:
-                            if viewModel.isEditModeActive {
-                                viewModel.changeCurrentEditableCategory(with: category)
-                                sheetsViewModel.showCategoryEditSheet.toggle()
-                            } else {
-                                withAnimation(.bouncy) {
-                                    viewModel.changeSelectedCategory(with: category)
+            ZStack {
+                ScrollView {
+                    LazyVGrid(columns: layout) {
+                        ForEach(viewModel.categories) { category in
+                            CategoryButton(
+                                viewModel: viewModel,
+                                sheetsViewModel: sheetsViewModel,
+                                category: category,
+                                role: viewModel.isEditModeActive ? .edition : .selection
+                            ) {
+                                // TODO: Refactor and move to VM:
+                                if viewModel.isEditModeActive {
+                                    viewModel.changeCurrentEditableCategory(with: category)
+                                    sheetsViewModel.showCategoryEditSheet.toggle()
+                                } else {
+                                    withAnimation(.bouncy) {
+                                        viewModel.changeSelectedCategory(with: category)
+                                    }
+                                    HapticManager.instance.impact(style: .soft)
+                                    
+                                    dismiss()
+                                    viewModel.customTabBarGlow()
                                 }
-                                HapticManager.instance.impact(style: .soft)
-                                
-                                dismiss()
-                                viewModel.customTabBarGlow()
                             }
+                            .padding(.vertical, 5)
+                            .padding(.horizontal, 5)
                         }
-                        .padding(.vertical, 5)
-                        .padding(.horizontal, 5)
                     }
+                    .padding()
+                    .padding(.bottom, 80)
                 }
-                .padding()
                 
-                categoriesBottomView
+                VStack {
+                    Spacer()
+                    categoriesBottomView
+                }
             }
         }
     }
@@ -160,7 +163,6 @@ struct CategorySelectionView: View {
     /// View that holds bottomSheetButton with its scaffold.
     var categoriesBottomView: some View {
         Group {
-            Divider()
             bottomSheetButton
         }
         .padding()
