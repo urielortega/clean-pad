@@ -174,6 +174,7 @@ struct CategoryButton: View {
     
     var category: Category
     var role: CategoryButtonRole
+    var gradientOpacity = 0.8
     var buttonActions: () -> Void
     
     var strokeColorGradient: AnyGradient {
@@ -200,8 +201,8 @@ struct CategoryButton: View {
         }
         .buttonStyle(
             GradientButtonStyle(
-                startColor: .gridLabelBackground.opacity(0.8),
-                endColor: category.color.opacity(0.8)
+                startColor: .gridLabelBackground.opacity(gradientOpacity),
+                endColor: category.color
             )
         )
         .overlay { roleDependentOverlay }
