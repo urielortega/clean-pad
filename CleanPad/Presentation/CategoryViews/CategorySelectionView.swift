@@ -105,8 +105,6 @@ struct CategorySelectionView: View {
                     .padding(.vertical, 5)
                 }
                 .padding(.horizontal)
-                
-                categoriesBottomView
             }
         }
     }
@@ -159,14 +157,6 @@ struct CategorySelectionView: View {
                 }
             }
         }
-    }
-    
-    /// View that holds bottomSheetButton with its scaffold.
-    var categoriesBottomView: some View {
-        Group {
-            bottomSheetButton
-        }
-        .padding()
     }
 }
 
