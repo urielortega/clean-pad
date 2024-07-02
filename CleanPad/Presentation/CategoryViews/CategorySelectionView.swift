@@ -117,44 +117,42 @@ struct CategorySelectionView: View {
             )
         ]
         
-        return Group {
-            ZStack {
-                ScrollView {
-                    LazyVGrid(columns: layout) {
-                        ForEach(viewModel.categories) { category in
-                            CategoryButton(
-                                viewModel: viewModel,
-                                sheetsViewModel: sheetsViewModel,
-                                category: category,
-                                role: viewModel.isEditModeActive ? .edition : .selection
-                            ) {
-                                // TODO: Refactor and move to VM:
-                                if viewModel.isEditModeActive {
-                                    viewModel.changeCurrentEditableCategory(with: category)
-                                    sheetsViewModel.showCategoryEditSheet.toggle()
-                                } else {
-                                    withAnimation(.bouncy) {
-                                        viewModel.changeSelectedCategory(with: category)
-                                    }
-                                    HapticManager.instance.impact(style: .soft)
-                                    
-                                    dismiss()
-                                    viewModel.customTabBarGlow()
+        return ZStack {
+            ScrollView {
+                LazyVGrid(columns: layout) {
+                    ForEach(viewModel.categories) { category in
+                        CategoryButton(
+                            viewModel: viewModel,
+                            sheetsViewModel: sheetsViewModel,
+                            category: category,
+                            role: viewModel.isEditModeActive ? .edition : .selection
+                        ) {
+                            // TODO: Refactor and move to VM:
+                            if viewModel.isEditModeActive {
+                                viewModel.changeCurrentEditableCategory(with: category)
+                                sheetsViewModel.showCategoryEditSheet.toggle()
+                            } else {
+                                withAnimation(.bouncy) {
+                                    viewModel.changeSelectedCategory(with: category)
                                 }
+                                HapticManager.instance.impact(style: .soft)
+                                
+                                dismiss()
+                                viewModel.customTabBarGlow()
                             }
-                            .padding(.vertical, 5)
-                            .padding(.horizontal, 5)
                         }
+                        .padding(.vertical, 5)
+                        .padding(.horizontal, 5)
                     }
+                }
+                .padding()
+                .padding(.bottom, 80)
+            }
+            
+            VStack {
+                Spacer()
+                bottomSheetButton
                     .padding()
-                    .padding(.bottom, 80)
-                }
-                
-                VStack {
-                    Spacer()
-                    bottomSheetButton
-                        .padding()
-                }
             }
         }
     }
