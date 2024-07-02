@@ -266,16 +266,12 @@ struct CreateCategoryButton: View {
         Button {
             sheetsViewModel.showCategoryCreationSheet.toggle()
         } label: {
-            HStack {
-                Text("Create New Category")
-                Spacer()
-                Image(systemName: "plus")
-                    .bold()
-            }
+            Image(systemName: "plus")
+                .padding(5)
         }
-        .buttonStyle(MaterialRoundedButtonStyle())
+        .buttonStyle(MaterialCircleButtonStyle())
         .overlay {
-            RoundedRectangle(cornerRadius: Constants.materialButtonCornerRadius)
+            Circle()
                 .stroke(Color.gray.gradient.opacity(0.1), lineWidth: 3)
         }
     }
