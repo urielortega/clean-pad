@@ -154,7 +154,8 @@ struct CategorySelectionView: View {
                 
                 VStack {
                     Spacer()
-                    categoriesBottomView
+                    bottomSheetButton
+                        .padding()
                 }
             }
         }
