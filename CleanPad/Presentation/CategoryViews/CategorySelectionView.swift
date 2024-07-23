@@ -59,21 +59,22 @@ struct CategorySelectionView: View {
                 sheetsViewModel: sheetsViewModel
             )
         } else {
-            CategoryButton(
-                viewModel: viewModel,
-                sheetsViewModel: sheetsViewModel,
-                category: .noSelection,
-                role: viewModel.isEditModeActive ? .edition : .selection
-            ) {
-                // TODO: Refactor and move to VM:
-                withAnimation(.bouncy) {
-                    viewModel.changeSelectedCategory(with: .noSelection)
-                }
-                HapticManager.instance.impact(style: .soft)
-                
-                dismiss()
-                viewModel.customTabBarGlow()
-            }
+//            CategoryButton(
+//                viewModel: viewModel,
+//                sheetsViewModel: sheetsViewModel,
+//                category: .noSelection,
+//                role: viewModel.isEditModeActive ? .edition : .selection
+//            ) {
+//                // TODO: Refactor and move to VM:
+//                withAnimation(.bouncy) {
+//                    viewModel.changeSelectedCategory(with: .noSelection)
+//                }
+//                HapticManager.instance.impact(style: .soft)
+//                
+//                dismiss()
+//                viewModel.customTabBarGlow()
+//            }
+            NoCategoryButton(viewModel: viewModel, sheetsViewModel: sheetsViewModel)
         }
     }
     
@@ -257,6 +258,51 @@ struct CategoryButton: View {
         .subtleShadow(color: .black.opacity(0.2))
     }
 }
+
+struct NoCategoryButton: View {
+    @ObservedObject var viewModel: NotesListViewModel
+    @ObservedObject var sheetsViewModel: SheetsViewModel
+    
+    @Environment(\.dismiss) var dismiss
+        
+    var strokeColorGradient: AnyGradient {
+        viewModel.selectedCategory == Category.noSelection ? Color(.label).gradient : Color.gray.gradient
+    }
+
+    var body: some View {
+        Button {
+            // TODO: Refactor and move to VM:
+            withAnimation(.bouncy) {
+                viewModel.changeSelectedCategory(with: .noSelection)
+            }
+            HapticManager.instance.impact(style: .soft)
+            
+            dismiss()
+            viewModel.customTabBarGlow()
+        } label: {
+            Text("All notes")
+                .foregroundStyle(Color(.label).gradient)
+        }
+        .padding()
+        .fontWeight(.medium)
+        .background(.thinMaterial)
+        .clipShape(.rect(cornerRadius: Constants.materialButtonCornerRadius))
+        .largeShadow(color: .gradientButtonShadow)
+        .overlay { adaptableOverlay }
+    }
+    
+    /// View that adapts the stroke if the category is currently selected.
+    var adaptableOverlay: some View {
+        RoundedRectangle(cornerRadius: Constants.materialButtonCornerRadius)
+            .stroke(
+                strokeColorGradient.opacity(
+                    viewModel.selectedCategory == Category.noSelection ? 0.4 : 0.1
+                ),
+                lineWidth: 4
+            )
+    }
+}
+
 
 struct CreateCategoryButton: View {
     @ObservedObject var viewModel: NotesListViewModel
