@@ -146,6 +146,21 @@ extension View {
     }
 }
 
+struct LargeShadow: ViewModifier {
+    var color: Color
+    
+    func body(content: Content) -> some View {
+        content
+            .shadow(color: color, radius: 8, x: 0, y: 4)
+    }
+}
+
+extension View {
+    func largeShadow(color: Color) -> some View {
+        modifier(LargeShadow(color: color))
+    }
+}
+
 struct GeneralButtonShadow: ViewModifier {
     func body(content: Content) -> some View {
         content
