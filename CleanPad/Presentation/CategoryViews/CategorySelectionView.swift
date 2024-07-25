@@ -210,6 +210,8 @@ struct CategoryButton: View {
                 creatingNewCategory: true
             )
         }
+        .disabled(isButtonDisabled)
+        .opacity(isButtonDisabled ? 0.3 : 1.0)
     }
     
     /// View that dynamically displays either a gray or a colorful stroke based on the current mode (Selection Mode or Edit Mode) and the category that is currently selected.
