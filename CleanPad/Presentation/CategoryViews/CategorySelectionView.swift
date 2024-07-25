@@ -121,7 +121,7 @@ struct CategorySelectionView: View {
                             sheetsViewModel: sheetsViewModel,
                             category: category,
                             role: viewModel.isEditModeActive ? .edition : .selection,
-                            isButtonDisabled: viewModel.isEditModeActive && category.id == Category.general.id
+                            isButtonDisabled: viewModel.isEditModeActive && (category.id == Category.general.id) // Disable General Category Button when Edit Mode is active.
                         ) {
                             // TODO: Refactor and move to VM:
                             if viewModel.isEditModeActive {
