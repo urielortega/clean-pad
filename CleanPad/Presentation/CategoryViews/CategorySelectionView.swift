@@ -44,7 +44,7 @@ struct CategorySelectionView: View {
         Button(viewModel.isEditModeActive ? "Done" : "Edit") {
             HapticManager.instance.impact(style: .light)
             
-            withAnimation(.easeInOut(duration: 0.3)) {
+            withAnimation(.bouncy) {
                 viewModel.isEditModeActive.toggle()
             }
         }
