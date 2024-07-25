@@ -175,7 +175,9 @@ struct CategoryButton: View {
     }
 
     var body: some View {
-        Button { buttonActions() } label: {
+        Button {
+            isButtonDisabled ? HapticManager.instance.notification(type: .error) : buttonActions()
+        } label: {
             HStack {
                 Text(category.displayName)
                     .foregroundStyle(category.name.isEmpty ? .secondary : .primary)
