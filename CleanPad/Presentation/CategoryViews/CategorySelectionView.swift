@@ -59,21 +59,6 @@ struct CategorySelectionView: View {
                 sheetsViewModel: sheetsViewModel
             )
         } else {
-//            CategoryButton(
-//                viewModel: viewModel,
-//                sheetsViewModel: sheetsViewModel,
-//                category: .noSelection,
-//                role: viewModel.isEditModeActive ? .edition : .selection
-//            ) {
-//                // TODO: Refactor and move to VM:
-//                withAnimation(.bouncy) {
-//                    viewModel.changeSelectedCategory(with: .noSelection)
-//                }
-//                HapticManager.instance.impact(style: .soft)
-//                
-//                dismiss()
-//                viewModel.customTabBarGlow()
-//            }
             NoCategoryButton(viewModel: viewModel, sheetsViewModel: sheetsViewModel)
         }
     }
