@@ -210,7 +210,6 @@ struct CategoryButton: View {
                 creatingNewCategory: true
             )
         }
-        .disabled(isButtonDisabled)
         .opacity(isButtonDisabled ? 0.3 : 1.0)
     }
     
