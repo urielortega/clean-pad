@@ -120,7 +120,8 @@ struct CategorySelectionView: View {
                             viewModel: viewModel,
                             sheetsViewModel: sheetsViewModel,
                             category: category,
-                            role: viewModel.isEditModeActive ? .edition : .selection
+                            role: viewModel.isEditModeActive ? .edition : .selection,
+                            isButtonDisabled: viewModel.isEditModeActive && category.id == Category.general.id
                         ) {
                             // TODO: Refactor and move to VM:
                             if viewModel.isEditModeActive {
