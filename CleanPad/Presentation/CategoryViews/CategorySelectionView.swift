@@ -160,6 +160,7 @@ struct CategoryButton: View {
     
     var category: Category
     var role: CategoryButtonRole
+    var isButtonDisabled: Bool = false
     var gradientStartColorOpacity = Constants.gradientStartColorOpacity
     var gradientEndColorOpacity = Constants.gradientEndColorOpacity
     var buttonActions: () -> Void
