@@ -272,6 +272,7 @@ struct NoCategoryButton: View {
         } label: {
             Text("All notes")
                 .foregroundStyle(Color(.label).gradient)
+                .frame(width: 100, height: 16) // Frame on Label so tap is better detected.
         }
         .padding()
         .fontWeight(.medium)
