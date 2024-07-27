@@ -305,6 +305,7 @@ struct CreateCategoryButton: View {
             HapticManager.instance.impact(style: .light)
         } label: {
             Image(systemName: "plus")
+                .bold()
                 .padding(5)
         }
         .buttonStyle(MaterialCircleButtonStyle())
