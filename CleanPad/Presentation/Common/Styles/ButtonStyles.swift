@@ -25,7 +25,7 @@ struct MaterialCircleButtonStyle: ButtonStyle {
             .padding()
             .background(.thinMaterial)
             .clipShape(Circle())
-            .largeShadow(color: .gridLabelShadow)
+            .largeShadow(color: .black.opacity(0.3))
             .opacity(configuration.isPressed ? 0.7 : 1)
     }
 }
