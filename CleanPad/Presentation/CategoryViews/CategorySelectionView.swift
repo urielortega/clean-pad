@@ -278,7 +278,7 @@ struct NoCategoryButton: View {
         .fontWeight(.medium)
         .background(.thinMaterial)
         .clipShape(.rect(cornerRadius: Constants.materialButtonCornerRadius))
-        .largeShadow(color: .gradientButtonShadow)
+        .largeShadow(color: .black.opacity(0.3))
         .overlay { adaptableOverlay }
     }
     
