@@ -78,6 +78,7 @@ final class NotesListViewModel: ObservableObject {
     
     var isSomeCategorySelected: Bool { selectedCategory != .noSelection }
     
+    /// Property to control the status of Category Edit Mode.
     @Published var isEditModeActive = false
 
     // MARK: Tab Bar properties and functions.
