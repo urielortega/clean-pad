@@ -302,6 +302,7 @@ struct CreateCategoryButton: View {
     var body: some View {
         Button {
             sheetsViewModel.showCategoryCreationSheet.toggle()
+            HapticManager.instance.impact(style: .light)
         } label: {
             Image(systemName: "plus")
                 .padding(5)
