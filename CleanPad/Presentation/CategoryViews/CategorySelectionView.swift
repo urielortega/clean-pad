@@ -311,7 +311,7 @@ struct CreateCategoryButton: View {
         .buttonStyle(MaterialCircleButtonStyle())
         .overlay {
             Circle()
-                .stroke(Color.gray.gradient.opacity(0.1), lineWidth: 3)
+                .stroke(Color.gray.gradient.opacity(0.1), lineWidth: 4)
         }
     }
 }
