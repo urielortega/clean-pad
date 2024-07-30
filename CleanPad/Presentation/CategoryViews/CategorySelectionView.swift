@@ -306,6 +306,7 @@ struct CreateCategoryButton: View {
         } label: {
             Image(systemName: "plus")
                 .bold()
+                .foregroundStyle(.accent.gradient)
                 .padding(5)
         }
         .buttonStyle(MaterialCircleButtonStyle())
