@@ -48,7 +48,7 @@ final class NotesListViewModel: ObservableObject {
         } else {
             return currentNotes
                 .filter { // Returns notes that match the search field with its title or content.
-                    $0.noteTitle.localizedCaseInsensitiveContains(searchText) || $0.noteContent.localizedCaseInsensitiveContains(searchText)
+                    $0.noteTitle.localizedStandardContains(searchText) || $0.noteContent.localizedStandardContains(searchText)
                 }
         }
     }
