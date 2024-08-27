@@ -105,7 +105,6 @@
 			isa = PBXGroup;
 			children = (
 				A4ED50E52C7E5F310077CB36 /* CategorySelectionViewComponents */,
-				A4F10F5A2B8D73360014C68B /* CategorySelectionView.swift */,
 				A40111B52BA8F249006C5639 /* CategoryEditView.swift */,
 			);
 			path = CategoryViews;
@@ -254,6 +253,7 @@
 		A4ED50E52C7E5F310077CB36 /* CategorySelectionViewComponents */ = {
 			isa = PBXGroup;
 			children = (
+				A4F10F5A2B8D73360014C68B /* CategorySelectionView.swift */,
 				A4ED50E62C7E5F830077CB36 /* CategorySelectionViewButtons.swift */,
 			);
 			path = CategorySelectionViewComponents;
