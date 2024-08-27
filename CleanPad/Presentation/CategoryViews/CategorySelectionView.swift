@@ -29,7 +29,10 @@ struct CategorySelectionView: View {
         .presentationCornerRadius(Constants.roundedRectCornerRadius)
         .presentationDetents([.fraction(0.6)])
     }
-    
+}
+
+// MARK: - Extension to group secondary views in CategorySelectionView.
+extension CategorySelectionView {
     var editAndDismissTopView: some View {
         HStack {
             editCategoriesButton
@@ -62,7 +65,10 @@ struct CategorySelectionView: View {
             NoCategoryButton(viewModel: viewModel, sheetsViewModel: sheetsViewModel)
         }
     }
-    
+}
+
+// MARK: - Extension to group the two different types of views for CategorySelectionView.
+extension CategorySelectionView {
     /// View that shows categories as rows in a single column.
     var categoriesListView: some View {
         ZStack {
