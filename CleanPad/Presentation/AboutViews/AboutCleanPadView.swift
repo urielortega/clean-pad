@@ -57,7 +57,11 @@ struct AboutCleanPadView: View {
             .presentationCornerRadius(Constants.roundedRectCornerRadius)
         }
     }
-    
+}
+
+// MARK: - Extension to group secondary views in AboutCleanPadView.
+extension AboutCleanPadView {
+    /// Header view displaying the app icon and a dynamic greeting based on the time of day.
     var headerView: some View {
         Group {
             AppIconView()
@@ -72,6 +76,7 @@ struct AboutCleanPadView: View {
         }
     }
     
+    /// Detailed view providing an overview of CleanPad's purpose and a thank-you message to users.
     var detailsView: some View {
         VStack {
             VStack {
@@ -98,6 +103,7 @@ struct AboutCleanPadView: View {
         .padding(.horizontal)
     }
     
+    /// Method for updating the background gradient and greeting text based on the current time of day.
     private func updateBackgroundAndGreeting() {
         let hour = Calendar.current.component(.hour, from: Date())
         
