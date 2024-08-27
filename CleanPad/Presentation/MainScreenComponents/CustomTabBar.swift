@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-/// Tab Bar with two buttons to switch between non-locked notes list and locked notes list.
+/// Tab Bar with buttons to switch between the non-locked notes list and the locked notes list, show categories and create a new note.
 struct CustomTabBar: View {
     @ObservedObject var viewModel: NotesListViewModel
     @ObservedObject var sheetsViewModel: SheetsViewModel
