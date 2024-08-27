@@ -160,8 +160,8 @@
 			children = (
 				A4D06FAF2B214AC10000D089 /* ViewModels */,
 				A482F0DB2AC7D4410075A385 /* Common */,
+				A4DB7B0C2ABB84860008AF12 /* MainScreenComponents */,
 				A4DB7B132ABB84F80008AF12 /* DetailViews */,
-				A4DB7B0C2ABB84860008AF12 /* ListViews */,
 				A40111B42BA8EE39006C5639 /* AboutViews */,
 				A40111B72BA8F2C2006C5639 /* CategoryViews */,
 				A4DB7B092ABB837D0008AF12 /* ContentView.swift */,
@@ -228,13 +228,13 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		A4DB7B0C2ABB84860008AF12 /* ListViews */ = {
+		A4DB7B0C2ABB84860008AF12 /* MainScreenComponents */ = {
 			isa = PBXGroup;
 			children = (
 				A46117272AF56E31001C0087 /* MainScreenView.swift */,
 				A46117292AF56EB6001C0087 /* AllNotesView.swift */,
 			);
-			path = ListViews;
+			path = MainScreenComponents;
 			sourceTree = "<group>";
 		};
 		A4DB7B132ABB84F80008AF12 /* DetailViews */ = {
