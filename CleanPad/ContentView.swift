@@ -79,8 +79,11 @@ struct ContentView: View {
             }
         }
     }
-    
-    /// Button to hide locked notes list.
+}
+
+// MARK: - Extension to group secondary views in ContentView.
+extension ContentView {
+    /// Button for hiding locked notes list.
     var lockNotesButtonView: some View {
         Button {
             withAnimation(.bouncy) {
@@ -115,7 +118,7 @@ struct ContentView: View {
         .accessibilityAddTraits(.isButton)
     }
     
-    /// Button to switch between Grid and List view.
+    /// Button for switching between Grid and List view.
     var switchViewsButtonView: some View {
         Button {
             withAnimation { viewModel.isGridViewSelected.toggle() }
@@ -127,7 +130,7 @@ struct ContentView: View {
         }
     }
     
-    /// Button to show view for providing feedback.
+    /// Button for showing View for providing feedback.
     var showFeedbackViewButtonView: some View {
         Button {
             sheetsViewModel.showFeedbackSheet.toggle()
@@ -137,7 +140,7 @@ struct ContentView: View {
         }
     }
     
-    /// Button to show view for providing feedback.
+    /// Button for showing View for providing feedback.
     var showAboutViewButtonView: some View {
         Button {
             sheetsViewModel.showAboutSheet.toggle()
@@ -146,6 +149,7 @@ struct ContentView: View {
             Label("About CleanPad", systemImage: "book.pages")
         }
     }
+
 }
 
 struct ContentView_Previews: PreviewProvider {
