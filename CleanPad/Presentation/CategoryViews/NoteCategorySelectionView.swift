@@ -9,6 +9,11 @@ import Foundation
 import SwiftUI
 
 struct NoteCategorySelectionView: View {
+    @ObservedObject var viewModel: NotesListViewModel
+    @ObservedObject var sheetsViewModel: SheetsViewModel
+    
+    @Environment(\.dismiss) var dismiss
+    
     var body: some View {
         EmptyView()
     }
