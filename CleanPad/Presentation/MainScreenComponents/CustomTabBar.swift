@@ -43,6 +43,7 @@ struct CustomTabBar: View {
 
 // MARK: - Extension to group secondary views in CustomTabBar.
 extension CustomTabBar {
+    /// View that holds the nonLockedNotesTabButton and the lockedNotesTabButton with a Dock style.
     var tabBar: some View {
         HStack {
             Spacer()
@@ -65,6 +66,7 @@ extension CustomTabBar {
         )
     }
     
+    /// Button for accessing the non-locked notes list.
     var nonLockedNotesTabButton: some View {
         Button {
             // Glow CustomTabBar when tapping nonLockedNotesTabButton and Non-Locked Notes Tab is selected:
@@ -87,6 +89,7 @@ extension CustomTabBar {
         .padding(.horizontal, 10)
     }
     
+    /// Button for accessing the locked notes list.
     var lockedNotesTabButton: some View {
         Button {
             // Glow CustomTabBar when tapping lockedNotesTabButton and Locked Notes Tab is selected:
@@ -109,6 +112,7 @@ extension CustomTabBar {
         .padding(.trailing, 10)
     }
     
+    /// Label for nonLockedNotesTabButton.
     var nonLockedNotesTabLabel: some View {
         HStack {
             Spacer()
@@ -124,6 +128,7 @@ extension CustomTabBar {
         .accessibilityLabel("Your notes.")
     }
     
+    /// Label for lockedNotesTabButton.
     var lockedNotesTabLabel: some View {
         HStack {
             Spacer()
@@ -143,7 +148,7 @@ extension CustomTabBar {
         .accessibilityLabel("Your private notes.")
     }
     
-    /// Button View to create a new note from the Tab Bar.
+    /// Button for creating a new note from the Tab Bar.
     var createNoteTabButton: some View {
         Button {
             showNoteEditViewSheet.toggle()
@@ -165,7 +170,7 @@ extension CustomTabBar {
         }
     }
     
-    /// Button View to show all user categories from the Tab Bar.
+    /// Button for showing all user categories from the Tab Bar.
     var showCategoriesTabButton: some View {
         Button {
             showCategoriesSheet.toggle()
