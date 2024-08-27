@@ -19,6 +19,7 @@ struct NoteEditView: View {
     
     // Using the viewModel created in ContentView with @ObservedObject.
     @ObservedObject var viewModel: NotesListViewModel
+    @ObservedObject var sheetsViewModel: SheetsViewModel
     
     /// Property to show Cancel and Save buttons, and handle `onChange` closures.
     var creatingNewNote: Bool
@@ -50,6 +51,8 @@ struct NoteEditView: View {
                     titleTextFieldView
                     Divider()
                     textContentTextEditorView
+                    Divider()
+                    Button("Show categories") { sheetsViewModel.showNoteCategorySheet.toggle() }
                 }
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
@@ -84,6 +87,9 @@ struct NoteEditView: View {
                             }
                         }
                     }
+                }
+                .sheet(isPresented: $sheetsViewModel.showNoteCategorySheet) {
+                    // TODO: NoteCategorySelectionView(viewModel: viewModel, sheetsViewModel: sheetsViewModel)
                 }
             }
         }
