@@ -102,6 +102,7 @@
 		A40111B72BA8F2C2006C5639 /* CategoryViews */ = {
 			isa = PBXGroup;
 			children = (
+				A4ED50E52C7E5F310077CB36 /* CategorySelectionViewComponents */,
 				A4F10F5A2B8D73360014C68B /* CategorySelectionView.swift */,
 				A40111B52BA8F249006C5639 /* CategoryEditView.swift */,
 			);
@@ -246,6 +247,13 @@
 				A465AB792ABA7149001CFFD9 /* NoteEditView.swift */,
 			);
 			path = DetailViews;
+			sourceTree = "<group>";
+		};
+		A4ED50E52C7E5F310077CB36 /* CategorySelectionViewComponents */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CategorySelectionViewComponents;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
