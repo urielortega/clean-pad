@@ -22,6 +22,7 @@ struct MainScreenView: View {
             AllNotesView(
                 viewModel: viewModel,
                 dateViewModel: dateViewModel,
+                sheetsViewModel: sheetsViewModel,
                 showNoteEditViewSheet: $showNoteEditViewSheet
             )
             
