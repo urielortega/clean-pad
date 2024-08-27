@@ -12,6 +12,7 @@ struct AllNotesView: View {
     // Using the viewModels created in ContentView with @ObservedObject.
     @ObservedObject var viewModel: NotesListViewModel
     @ObservedObject var dateViewModel: DateViewModel
+    @ObservedObject var sheetsViewModel: SheetsViewModel
     
     @Binding var showNoteEditViewSheet: Bool
     
@@ -72,6 +73,7 @@ extension AllNotesView {
                             NoteEditView(
                                 note: note,
                                 viewModel: viewModel,
+                                sheetsViewModel: sheetsViewModel,
                                 creatingNewNote: false
                             )
                         } label: {
@@ -118,6 +120,7 @@ extension AllNotesView {
                                 NoteEditView(
                                     note: note,
                                     viewModel: viewModel,
+                                    sheetsViewModel: sheetsViewModel,
                                     creatingNewNote: false
                                 )
                             } label: {
