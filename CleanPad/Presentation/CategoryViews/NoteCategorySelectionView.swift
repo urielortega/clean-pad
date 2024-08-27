@@ -42,9 +42,24 @@ extension NoteCategorySelectionView {
     }
     
     var categoriesGridView: some View {
-        // TODO: Replace with a grid that shows all user categories:
-        GeometryReader { _ in
-            EmptyView()
+        let layout = [
+            GridItem(
+                .adaptive(minimum: viewModel.idiom == .pad ? 200 : 160)
+            )
+        ]
+        
+        return ZStack {
+            ScrollView {
+                LazyVGrid(columns: layout) {
+                    ForEach(viewModel.categories) { category in
+                        // TODO: Replace with a new NoteCategoryButton.
+                        Button(category.name) { }
+                            .padding()
+                            .border(Color.black)
+                    }
+                }
+                .padding()
+            }
         }
     }
 }
