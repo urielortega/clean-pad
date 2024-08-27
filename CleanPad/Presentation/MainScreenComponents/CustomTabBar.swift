@@ -39,7 +39,10 @@ struct CustomTabBar: View {
             )
         }
     }
-    
+}
+
+// MARK: - Extension to group secondary views in CustomTabBar.
+extension CustomTabBar {
     var tabBar: some View {
         HStack {
             Spacer()
