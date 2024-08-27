@@ -92,7 +92,6 @@ struct NoteEditView: View {
 }
 
 // MARK: - Extension to group secondary views in NoteEditView.
-// Each of these views is encapsulated in its own computed property to promote modularity and cleaner code.
 extension NoteEditView {
     var titleTextFieldView: some View {
         TextField(
