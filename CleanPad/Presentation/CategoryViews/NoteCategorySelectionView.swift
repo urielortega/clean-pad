@@ -15,6 +15,18 @@ struct NoteCategorySelectionView: View {
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        EmptyView()
+        VStack {
+            // dismissTopView
+            
+            CustomTopTitle(text: "Assign a Category")
+                .padding(.horizontal)
+            
+            // categoriesGridView
+        }
+        .padding(.top)
+        .presentationDragIndicator(.visible)
+        .presentationBackground(.regularMaterial)
+        .presentationCornerRadius(Constants.roundedRectCornerRadius)
+        .presentationDetents([.fraction(0.6)])
     }
 }
