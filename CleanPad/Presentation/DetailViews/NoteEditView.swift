@@ -153,6 +153,7 @@ extension NoteEditView {
         }
     }
     
+    /// Button for saving the current note by adding it to the ViewModel's notes array.
     var saveNoteButtonView: some View {
         Button("Save") {
             viewModel.add(note: note)
