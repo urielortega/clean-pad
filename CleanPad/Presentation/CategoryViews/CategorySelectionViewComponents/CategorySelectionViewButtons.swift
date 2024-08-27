@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 extension CategorySelectionView {
-    /// View for a Button that adapts according to Category Edition and Selection modes.
+    /// Button that adapts according to Category Edition and Selection modes.
     struct CategoryButton: View {
         @ObservedObject var viewModel: NotesListViewModel
         @ObservedObject var sheetsViewModel: SheetsViewModel
@@ -104,6 +104,7 @@ extension CategorySelectionView {
         }
     }
     
+    /// Button for changing the selected Category to noSelection.
     struct NoCategoryButton: View {
         @ObservedObject var viewModel: NotesListViewModel
         @ObservedObject var sheetsViewModel: SheetsViewModel
@@ -149,6 +150,7 @@ extension CategorySelectionView {
         }
     }
     
+    /// Button for creating a new Category by toggling the showCategoryCreationSheet property.
     struct CreateCategoryButton: View {
         @ObservedObject var viewModel: NotesListViewModel
         @ObservedObject var sheetsViewModel: SheetsViewModel
