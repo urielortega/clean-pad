@@ -55,7 +55,10 @@ struct AllNotesView: View {
             }
         }
     }
-    
+}
+
+// MARK: - Extension to group secondary views in AllNotesView.
+extension AllNotesView {
     /// View that shows notes as rows in a single column.
     var notesListView: some View {
         Group {
