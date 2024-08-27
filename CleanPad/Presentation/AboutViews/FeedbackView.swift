@@ -58,7 +58,11 @@ struct FeedbackView: View {
         .presentationBackground(.regularMaterial)
         .presentationCornerRadius(Constants.roundedRectCornerRadius)
     }
-    
+}
+
+// MARK: - Extension to group secondary views in FeedbackView.
+extension FeedbackView {
+    /// Header view displaying a greeting and the developer's name.
     var headerView: some View {
         HStack {
             VStack(alignment: .leading) {
@@ -76,6 +80,7 @@ struct FeedbackView: View {
         }
     }
     
+    /// Detailed view providing information on how users can reach out, give feedback, or support the developer.
     var detailsView: some View {
         VStack(alignment: .leading) {
             Text("Feel free to reach out and share your thoughts with me!")
@@ -96,6 +101,7 @@ struct FeedbackView: View {
         .accessibilityLabel("Feel free to provide feedback or support my work by using the buttons below.")
     }
     
+    /// Button for sending an iMessage to the developer.
     var iMessageButtonView: some View {
         Button {
             if let url = URL(string: "sms:urielortega2509@gmail.com") {
@@ -103,13 +109,14 @@ struct FeedbackView: View {
             }
         } label: {
             BorderedButtonLabel(
-                color: .green, 
+                color: .green,
                 labelText: "iMessage Me",
                 systemImageString: "message.fill"
             )
         }
     }
     
+    /// Button for supporting the developer through Buy Me a Coffee.
     var buyMeACoffeeButtonView: some View {
         Link(destination: URL(string: "https://www.buymeacoffee.com/urielortega")!) {
             BorderedButtonLabel(
