@@ -30,7 +30,11 @@ struct WelcomeView: View {
         }
         .presentationCornerRadius(Constants.roundedRectCornerRadius)
     }
-    
+}
+
+// MARK: - Extension to group secondary views in WelcomeView.
+extension WelcomeView {
+    /// Header view containing the app icon and welcome text.
     var headerView: some View {
         Group {
             AppIconView()
@@ -51,6 +55,7 @@ struct WelcomeView: View {
         }
     }
     
+    /// Detailed view explaining the purpose of the app.
     var detailsView: some View {
         Group {
             Text("This app is your canvas for capturing your thoughts, feelings, ideas and all you can imagine.")
@@ -68,6 +73,7 @@ struct WelcomeView: View {
         .padding(.horizontal)
     }
     
+    /// Button for dismissing the welcome screen.
     var dismissButtonView: some View {
         Button {
             HapticManager.instance.impact(style: .soft)
