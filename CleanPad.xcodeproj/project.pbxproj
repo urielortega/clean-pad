@@ -108,7 +108,6 @@
 			children = (
 				A4ED50E52C7E5F310077CB36 /* CategorySelectionViewComponents */,
 				A40111B52BA8F249006C5639 /* CategoryEditView.swift */,
-				A4961F372C7E8FFC0081FA43 /* NoteCategorySelectionView.swift */,
 			);
 			path = CategoryViews;
 			sourceTree = "<group>";
@@ -258,6 +257,7 @@
 			children = (
 				A4F10F5A2B8D73360014C68B /* CategorySelectionView.swift */,
 				A4ED50E62C7E5F830077CB36 /* CategorySelectionViewButtons.swift */,
+				A4961F372C7E8FFC0081FA43 /* NoteCategorySelectionView.swift */,
 			);
 			path = CategorySelectionViewComponents;
 			sourceTree = "<group>";
