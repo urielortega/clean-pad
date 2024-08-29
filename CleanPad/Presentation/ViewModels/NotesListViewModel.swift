@@ -40,6 +40,7 @@ final class NotesListViewModel: ObservableObject {
     
     @Published var selectedCategory: Category = .noSelection
     @Published var currentEditableCategory: Category = .noSelection
+    @Published var currentEditableNote: Note?
     
     /// Computed property that returns a Note array with all notes or the ones resulting from a search.
     var filteredNotes: [Note] {
