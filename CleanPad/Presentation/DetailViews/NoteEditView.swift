@@ -89,7 +89,11 @@ struct NoteEditView: View {
                     }
                 }
                 .sheet(isPresented: $sheetsViewModel.showNoteCategorySheet) {
-                    NoteCategorySelectionView(viewModel: viewModel, sheetsViewModel: sheetsViewModel)
+                    NoteCategorySelectionView(
+                        note: $note,
+                        viewModel: viewModel,
+                        sheetsViewModel: sheetsViewModel
+                    )
                 }
             }
         }

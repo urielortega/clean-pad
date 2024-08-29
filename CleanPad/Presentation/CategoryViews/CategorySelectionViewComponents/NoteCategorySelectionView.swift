@@ -9,6 +9,8 @@ import Foundation
 import SwiftUI
 
 struct NoteCategorySelectionView: View {
+    @Binding var note: Note
+
     @ObservedObject var viewModel: NotesListViewModel
     @ObservedObject var sheetsViewModel: SheetsViewModel
     
