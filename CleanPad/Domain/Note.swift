@@ -26,6 +26,7 @@ struct Note: Codable, Identifiable, Equatable {
     }
 }
 
+#if DEBUG
 extension Note {
     /// Example note for previews and testing.
     static let example = Note(
@@ -207,3 +208,4 @@ extension Note {
         )
     ]
 }
+#endif
