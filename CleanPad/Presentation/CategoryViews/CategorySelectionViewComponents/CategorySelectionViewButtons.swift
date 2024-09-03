@@ -173,3 +173,25 @@ extension CategorySelectionView {
         }
     }
 }
+
+extension NoteCategorySelectionView {
+    /// Button for assigning a Category to a Note.
+    struct NoteCategoryButton: View {
+        @Binding var note: Note
+        var category: Category
+        
+        @ObservedObject var viewModel: NotesListViewModel
+        @Environment(\.dismiss) var dismiss
+        
+        var body: some View {
+            Button(category.name) {
+                note.category = category
+                viewModel.update(note: note, updatingDate: false)
+                dismiss()
+            }
+            .padding()
+            .foregroundStyle(category.color)
+            .border((note.category == category) ? Color.black : Color.gray)
+        }
+    }
+}
