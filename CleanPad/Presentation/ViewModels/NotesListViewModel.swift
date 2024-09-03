@@ -138,14 +138,14 @@ extension NotesListViewModel {
     
     /// Function to update a note and save the changes in the ``notes`` array.
     /// - Parameter note: An existing ``Note`` object to be updated in the ``notes`` array.
-    func update(note: Note) {
+    func update(note: Note, updatingDate: Bool = true) {
         let index = self.getNoteIndexFromNotesArray(note: note)!
         
         // Replace the original note with the updated one:
         notes[index] = note
         
-        // Update note date.
-        notes[index].date = .now
+        // Update note date:
+        if updatingDate { notes[index].date = .now }
         
         saveAllNotes()
     }
