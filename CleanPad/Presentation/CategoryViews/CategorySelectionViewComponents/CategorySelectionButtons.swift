@@ -1,5 +1,5 @@
 //
-//  CategorySelectionViewButtons.swift
+//  CategorySelectionButtons.swift
 //  CleanPad
 //
 //  Created by Uriel Ortega on 27/08/24.

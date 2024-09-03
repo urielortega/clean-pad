@@ -39,7 +39,7 @@
 		A4D06FAE2B21428C0000D089 /* DateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D06FAD2B21428C0000D089 /* DateViewModel.swift */; };
 		A4DB7B0A2ABB837D0008AF12 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DB7B092ABB837D0008AF12 /* ContentView.swift */; };
 		A4ED50E42C7E50CC0077CB36 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ED50E32C7E50CC0077CB36 /* CustomTabBar.swift */; };
-		A4ED50E72C7E5F830077CB36 /* CategorySelectionViewButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ED50E62C7E5F830077CB36 /* CategorySelectionViewButtons.swift */; };
+		A4ED50E72C7E5F830077CB36 /* CategorySelectionButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ED50E62C7E5F830077CB36 /* CategorySelectionButtons.swift */; };
 		A4F10F5B2B8D73360014C68B /* CategorySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F10F5A2B8D73360014C68B /* CategorySelectionView.swift */; };
 /* End PBXBuildFile section */
 
@@ -77,7 +77,7 @@
 		A4D06FAD2B21428C0000D089 /* DateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateViewModel.swift; sourceTree = "<group>"; };
 		A4DB7B092ABB837D0008AF12 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = CleanPad/ContentView.swift; sourceTree = SOURCE_ROOT; };
 		A4ED50E32C7E50CC0077CB36 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
-		A4ED50E62C7E5F830077CB36 /* CategorySelectionViewButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectionViewButtons.swift; sourceTree = "<group>"; };
+		A4ED50E62C7E5F830077CB36 /* CategorySelectionButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectionButtons.swift; sourceTree = "<group>"; };
 		A4F10F5A2B8D73360014C68B /* CategorySelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -256,7 +256,7 @@
 			isa = PBXGroup;
 			children = (
 				A4F10F5A2B8D73360014C68B /* CategorySelectionView.swift */,
-				A4ED50E62C7E5F830077CB36 /* CategorySelectionViewButtons.swift */,
+				A4ED50E62C7E5F830077CB36 /* CategorySelectionButtons.swift */,
 				A4961F372C7E8FFC0081FA43 /* NoteCategorySelectionView.swift */,
 			);
 			path = CategorySelectionViewComponents;
@@ -341,7 +341,7 @@
 				A44E76A62AB1307A004BBB21 /* NotesListViewModel.swift in Sources */,
 				A4ADAFDD2B15238B00C14010 /* Constants.swift in Sources */,
 				A489F7A52B8429B500CB44AE /* CodableColor.swift in Sources */,
-				A4ED50E72C7E5F830077CB36 /* CategorySelectionViewButtons.swift in Sources */,
+				A4ED50E72C7E5F830077CB36 /* CategorySelectionButtons.swift in Sources */,
 				A4129AC72AF9AE1400518E1C /* KeyboardPublisher.swift in Sources */,
 				A4F10F5B2B8D73360014C68B /* CategorySelectionView.swift in Sources */,
 				A4961F382C7E8FFC0081FA43 /* NoteCategorySelectionView.swift in Sources */,
