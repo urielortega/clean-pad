@@ -54,10 +54,11 @@ extension NoteCategorySelectionView {
             ScrollView {
                 LazyVGrid(columns: layout) {
                     ForEach(viewModel.categories) { category in
-                        // TODO: Replace with a new NoteCategoryButton.
-                        Button(category.name) { }
-                            .padding()
-                            .border(Color.black)
+                        NoteCategoryButton(
+                            note: $note,
+                            category: category,
+                            viewModel: viewModel
+                        )
                     }
                 }
                 .padding()
