@@ -256,8 +256,8 @@
 			isa = PBXGroup;
 			children = (
 				A4F10F5A2B8D73360014C68B /* CategorySelectionView.swift */,
-				A4ED50E62C7E5F830077CB36 /* CategorySelectionButtons.swift */,
 				A4961F372C7E8FFC0081FA43 /* NoteCategorySelectionView.swift */,
+				A4ED50E62C7E5F830077CB36 /* CategorySelectionButtons.swift */,
 			);
 			path = CategorySelectionComponents;
 			sourceTree = "<group>";
