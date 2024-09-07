@@ -184,10 +184,12 @@ extension NoteCategorySelectionView {
         @Environment(\.dismiss) var dismiss
         
         var body: some View {
-            Button(category.name) {
+            Button {
                 note.category = category
                 viewModel.update(note: note, updatingDate: false)
                 dismiss()
+            } label: {
+                Text(category.name)
             }
             .padding()
             .foregroundStyle(category.color)
