@@ -193,10 +193,16 @@ extension NoteCategorySelectionView {
                 dismiss()
             } label: {
                 Text(category.name)
+                    .border((note.category == category) ? Color.black : Color.gray)
             }
-            .padding()
-            .foregroundStyle(category.color)
-            .border((note.category == category) ? Color.black : Color.gray)
+            .buttonStyle(
+                GradientButtonStyle(
+                    startColor: .gridLabelBackground,
+                    endColor: category.color,
+                    startColorOpacity: gradientStartColorOpacity,
+                    endColorOpacity: gradientEndColorOpacity
+                )
+            )
         }
     }
 }
