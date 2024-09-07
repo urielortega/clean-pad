@@ -183,6 +183,9 @@ extension NoteCategorySelectionView {
         @ObservedObject var viewModel: NotesListViewModel
         @Environment(\.dismiss) var dismiss
         
+        var gradientStartColorOpacity = Constants.gradientStartColorOpacity
+        var gradientEndColorOpacity = Constants.gradientEndColorOpacity
+        
         var body: some View {
             Button {
                 note.category = category
