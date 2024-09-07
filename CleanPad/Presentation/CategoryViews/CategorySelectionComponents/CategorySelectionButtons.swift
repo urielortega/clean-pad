@@ -193,7 +193,7 @@ extension NoteCategorySelectionView {
                 dismiss()
             } label: {
                 Text(category.name)
-                    .border((note.category == category) ? Color.black : Color.gray)
+                    .border((note.category?.id == category.id) ? Color.black : Color.gray.opacity(0.5))
             }
             .buttonStyle(
                 GradientButtonStyle(
