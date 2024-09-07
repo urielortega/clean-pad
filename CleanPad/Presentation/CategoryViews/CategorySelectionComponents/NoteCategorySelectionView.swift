@@ -10,6 +10,7 @@ import SwiftUI
 
 struct NoteCategorySelectionView: View {
     @Binding var note: Note
+    @Binding var creatingNewNote: Bool
 
     @ObservedObject var viewModel: NotesListViewModel
     @ObservedObject var sheetsViewModel: SheetsViewModel
@@ -57,6 +58,7 @@ extension NoteCategorySelectionView {
                         NoteCategoryButton(
                             note: $note,
                             category: category,
+                            creatingNewNote: $creatingNewNote,
                             viewModel: viewModel
                         )
                     }

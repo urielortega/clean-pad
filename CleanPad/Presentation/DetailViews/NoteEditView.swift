@@ -91,6 +91,7 @@ struct NoteEditView: View {
                 .sheet(isPresented: $sheetsViewModel.showNoteCategorySheet) {
                     NoteCategorySelectionView(
                         note: $note,
+                        creatingNewNote: $creatingNewNote,
                         viewModel: viewModel,
                         sheetsViewModel: sheetsViewModel
                     )

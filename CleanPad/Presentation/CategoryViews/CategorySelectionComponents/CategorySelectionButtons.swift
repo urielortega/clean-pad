@@ -179,6 +179,7 @@ extension NoteCategorySelectionView {
     struct NoteCategoryButton: View {
         @Binding var note: Note
         var category: Category
+        @Binding var creatingNewNote: Bool
         
         @ObservedObject var viewModel: NotesListViewModel
         @Environment(\.dismiss) var dismiss
