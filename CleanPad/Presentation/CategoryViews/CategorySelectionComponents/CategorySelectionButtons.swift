@@ -190,7 +190,12 @@ extension NoteCategorySelectionView {
         var body: some View {
             Button {
                 note.category = category
-                viewModel.update(note: note, updatingDate: false)
+                
+                // When changing an existing note, save its category using update().
+                if !creatingNewNote {
+                    viewModel.update(note: note, updatingDate: false)
+                }
+                
                 dismiss()
             } label: {
                 Text(category.name)
