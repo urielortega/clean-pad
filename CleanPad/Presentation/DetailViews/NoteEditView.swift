@@ -22,7 +22,7 @@ struct NoteEditView: View {
     @ObservedObject var sheetsViewModel: SheetsViewModel
     
     /// Property to show Cancel and Save buttons, and handle `onChange` closures.
-    var creatingNewNote: Bool
+    @State var creatingNewNote: Bool
     
     /// Property that stores the focus of the current text field.
     @FocusState private var focusedField: FocusField?
