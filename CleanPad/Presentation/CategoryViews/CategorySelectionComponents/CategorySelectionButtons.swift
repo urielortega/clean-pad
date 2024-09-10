@@ -187,6 +187,10 @@ extension NoteCategorySelectionView {
         var gradientStartColorOpacity = Constants.gradientStartColorOpacity
         var gradientEndColorOpacity = Constants.gradientEndColorOpacity
         
+        var strokeColorGradient: AnyGradient {
+            (note.category?.id == category.id) ? category.color.gradient : Color.gray.gradient
+        }
+        
         var body: some View {
             Button {
                 note.category = category
@@ -217,6 +221,7 @@ extension NoteCategorySelectionView {
                     endColorOpacity: gradientEndColorOpacity
                 )
             )
+            .overlay { adaptableOverlay }
         }
         
         /// View that visually differentiates the note category from the rest of the user's categories.
@@ -227,6 +232,17 @@ extension NoteCategorySelectionView {
             .foregroundStyle(category.color)
             .bold()
             .subtleShadow(color: .black.opacity(0.2))
+        }
+        
+        /// View that adapts the stroke if the category is currently selected.
+        var adaptableOverlay: some View {
+            RoundedRectangle(cornerRadius: Constants.materialButtonCornerRadius)
+                .stroke(
+                    strokeColorGradient.opacity(
+                        (note.category?.id == category.id) ? 0.5 : 0.1
+                    ),
+                    lineWidth: 4
+                )
         }
     }
 }
