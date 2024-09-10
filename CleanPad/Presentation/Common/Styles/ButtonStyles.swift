@@ -54,5 +54,6 @@ struct GradientButtonStyle: ButtonStyle {
             )
             .clipShape(.rect(cornerRadius: Constants.materialButtonCornerRadius))
             .softShadow(color: .gradientButtonShadow)
+            .opacity(configuration.isPressed ? 0.7 : 1)
     }
 }
