@@ -40,7 +40,7 @@ struct FeedbackView: View {
                         Spacer()
                         
                         DismissViewButton()
-                            .padding(.top)
+                            .padding([.top, .horizontal])
                     }
                     
                     Spacer()
