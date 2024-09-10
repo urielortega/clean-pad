@@ -198,8 +198,16 @@ extension NoteCategorySelectionView {
                 
                 dismiss()
             } label: {
-                Text(category.name)
-                    .border((note.category?.id == category.id) ? Color.black : Color.gray.opacity(0.5))
+                HStack {
+                    Text(category.displayName)
+                        .foregroundStyle(category.name.isEmpty ? .secondary : .primary)
+                        .lineLimit(1)
+                    
+                    Spacer()
+                    
+                    dynamicIndicator
+                }
+                .contentTransition(.symbolEffect(.automatic))
             }
             .buttonStyle(
                 GradientButtonStyle(
@@ -209,6 +217,16 @@ extension NoteCategorySelectionView {
                     endColorOpacity: gradientEndColorOpacity
                 )
             )
+        }
+        
+        /// View that visually differentiates the note category from the rest of the user's categories.
+        var dynamicIndicator: some View {
+            Image(
+                systemName: (note.category?.id == category.id) ? "circle.fill" : "circle"
+            )
+            .foregroundStyle(category.color)
+            .bold()
+            .subtleShadow(color: .black.opacity(0.2))
         }
     }
 }
