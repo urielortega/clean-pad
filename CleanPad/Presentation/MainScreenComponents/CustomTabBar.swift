@@ -15,6 +15,9 @@ struct CustomTabBar: View {
     @Binding var showNoteEditViewSheet: Bool
     @Binding var showCategoriesSheet: Bool
     
+    /// Local State property for managing the creation of a new note.
+    @State private var newNote = Note()
+
     /// Property to adapt the UI according to the available space.
     @Environment(\.horizontalSizeClass) var sizeClass
 
@@ -150,7 +153,9 @@ extension CustomTabBar {
     
     /// Button for creating a new note from the Tab Bar.
     var createNoteTabButton: some View {
-        Button {
+        Button { //                                             Non-locked note with General Category.     Locked note with General Category.
+            newNote = (viewModel.isNonLockedNotesTabSelected) ? Note(category: viewModel.categories[0]) : Note(isLocked: true, category: viewModel.categories[0])
+            
             showNoteEditViewSheet.toggle()
             HapticManager.instance.impact(style: .light)
         } label: {
@@ -160,23 +165,13 @@ extension CustomTabBar {
         }
         .dockButtonStyle(position: .right)
         .sheet(isPresented: $sheetsViewModel.showNoteEditViewSheet) {
-            if viewModel.isNonLockedNotesTabSelected {
-                // Open NoteEditView with a blank Note:
-                NoteEditView(
-                    note: Note(category: viewModel.categories[0]), // Assign General category from 'categories' array.
-                    viewModel: viewModel,
-                    sheetsViewModel: sheetsViewModel,
-                    creatingNewNote: true
-                )
-            } else { // Locked Notes Tab is selected.
-                // Open NoteEditView with a blank locked Note:
-                NoteEditView(
-                    note: Note(isLocked: true, category: viewModel.categories[0]), // Assign General category from 'categories' array.
-                    viewModel: viewModel,
-                    sheetsViewModel: sheetsViewModel,
-                    creatingNewNote: true
-                )
-            }
+            // Open NoteEditView with a new Note:
+            NoteEditView(
+                note: newNote,
+                viewModel: viewModel,
+                sheetsViewModel: sheetsViewModel,
+                creatingNewNote: true
+            )
         }
     }
     
