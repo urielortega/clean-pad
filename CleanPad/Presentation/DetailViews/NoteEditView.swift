@@ -15,8 +15,12 @@ fileprivate enum FocusField: Hashable {
 
 /// View that shows a note content allowing the user to modify it, update it, save it and lock the note itself.
 struct NoteEditView: View {
-    @State var note: Note
+    /// A modifiable copy of the note used for editing.
+    @State private var noteCopy: Note
     
+    /// A property for storing the original note, used to detect changes.
+    private let originalNote: Note
+
     // Using the viewModel created in ContentView with @ObservedObject.
     @ObservedObject var viewModel: NotesListViewModel
     @ObservedObject var sheetsViewModel: SheetsViewModel
@@ -32,11 +36,20 @@ struct NoteEditView: View {
     /// Property to adapt the UI for VoiceOver users.
     @Environment(\.accessibilityVoiceOverEnabled) var voiceOverEnabled
     
+    init(note: Note, viewModel: NotesListViewModel, sheetsViewModel: SheetsViewModel, creatingNewNote: Bool) {
+        _noteCopy = State(initialValue: note)
+        self.originalNote = note
+
+        self.viewModel = viewModel
+        self.sheetsViewModel = sheetsViewModel
+        self.creatingNewNote = creatingNewNote
+    }
+    
     var body: some View {
         NavigationStack {
             // Show UnlockNotesView only when...
             if ( // ...access is locked, the note is private and it isn't a new one.
-                !viewModel.isUnlocked && (note.isLocked == true) && !creatingNewNote
+                !viewModel.isUnlocked && (noteCopy.isLocked == true) && !creatingNewNote
             ) {
                 Group {
                     if voiceOverEnabled {
@@ -70,9 +83,9 @@ struct NoteEditView: View {
                                 Menu {
                                     isLockedToggleButtonView
                                     if !creatingNewNote {
-                                        ShareLink(item: "\(note.noteTitle)\n\(note.noteContent)")
+                                        ShareLink(item: "\(noteCopy.noteTitle)\n\(noteCopy.noteContent)")
                                         DeleteNoteButton(
-                                            note: note,
+                                            note: noteCopy,
                                             viewModel: viewModel,
                                             dismissView: true
                                         )
@@ -90,12 +103,18 @@ struct NoteEditView: View {
                 }
                 .sheet(isPresented: $sheetsViewModel.showNoteCategorySheet) {
                     NoteCategorySelectionView(
-                        note: $note,
+                        note: $noteCopy,
                         creatingNewNote: $creatingNewNote,
                         viewModel: viewModel,
                         sheetsViewModel: sheetsViewModel
                     )
                 }
+            }
+        }
+        .onDisappear {
+            // Only update if editing an existing note and changes were made:
+            if !creatingNewNote && noteCopy != originalNote {
+                viewModel.update(note: noteCopy)
             }
         }
         .presentationCornerRadius(Constants.roundedRectCornerRadius)
@@ -106,20 +125,14 @@ struct NoteEditView: View {
 extension NoteEditView {
     var titleTextFieldView: some View {
         TextField(
-            note.noteTitle,
-            text: $note.noteTitle,
+            noteCopy.noteTitle,
+            text: $noteCopy.noteTitle,
             prompt: Text(
                 Constants.untitledNotePlaceholders.randomElement() ?? "Title your note..."
             )
         )
         .font(.title2).bold()
         .padding(.leading)
-        .onChange(of: note.noteTitle) {
-            // When changing an existing note, save it while typing using update().
-            if !creatingNewNote {
-                viewModel.update(note: note)
-            }
-        }
         .focused($focusedField, equals: .titleTextField)
         .onAppear {
             if creatingNewNote { focusedField = .titleTextField }
@@ -129,37 +142,27 @@ extension NoteEditView {
     }
     
     var textContentTextEditorView: some View {
-        TextEditor(text: $note.noteContent)
+        TextEditor(text: $noteCopy.noteContent)
             .padding(.horizontal)
             .focused($focusedField, equals: .textEditorField)
-            .onChange(of: note.noteContent) {
-                // When changing an existing note, save it while typing using update().
-                if !creatingNewNote {
-                    viewModel.update(note: note)
-                }
-            }
     }
     
     /// Button to toggle `isLocked` property of a note, i.e., move it to or remove it from the private space.
     var isLockedToggleButtonView: some View {
         Button {
-            if creatingNewNote {
-                note.isLocked.toggle()
-            } else {
-                viewModel.updateLockStatus(for: note)
-            }
+            noteCopy.isLocked.toggle() // Toggle local copy.
         } label: {
             Label(
-                !note.isLocked ? "Move to private space" : "Remove from private space",
-                systemImage: !note.isLocked ? "lock.fill" : "lock.slash.fill"
+                !noteCopy.isLocked ? "Move to private space" : "Remove from private space",
+                systemImage: !noteCopy.isLocked ? "lock.fill" : "lock.slash.fill"
             )
         }
     }
     
-    /// Button for saving the current note by adding it to the ViewModel's notes array.
+    /// Button for saving a new note by adding it to the ViewModel's notes array.
     var saveNoteButtonView: some View {
         Button("Save") {
-            viewModel.add(note: note)
+            viewModel.add(note: noteCopy)
             dismiss()
             
             HapticManager.instance.notification(type: .success)
