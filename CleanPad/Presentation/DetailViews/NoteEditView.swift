@@ -149,17 +149,10 @@ extension NoteEditView {
                 viewModel.updateLockStatus(for: note)
             }
         } label: {
-            if creatingNewNote { // When creating a new note, Label responds to the State property.
-                Label(
-                    !note.isLocked ? "Move to private space" : "Remove from private space",
-                    systemImage: !note.isLocked ? "lock.fill" : "lock.slash.fill"
-                )
-            } else {
-                Label( // When editing an existing note, Label responds to the value of notes array (persistent storage).
-                    !(viewModel.getNoteFromNotesArray(note: note)!.isLocked) ? "Move to private space" : "Remove from private space",
-                    systemImage: !note.isLocked ? "lock.fill" : "lock.slash.fill"
-                )
-            }
+            Label(
+                !note.isLocked ? "Move to private space" : "Remove from private space",
+                systemImage: !note.isLocked ? "lock.fill" : "lock.slash.fill"
+            )
         }
     }
     
