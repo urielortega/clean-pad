@@ -28,6 +28,9 @@ struct NoteEditView: View {
     /// Property to show Cancel and Save buttons, and handle `onChange` closures.
     @State var creatingNewNote: Bool
     
+    /// Property to control the displaying of a note whose 'isLocked' property was recently toggled.
+    @State var editingAToggledNote: Bool = false
+    
     /// Property that stores the focus of the current text field.
     @FocusState private var focusedField: FocusField?
     
@@ -36,7 +39,15 @@ struct NoteEditView: View {
     /// Property to adapt the UI for VoiceOver users.
     @Environment(\.accessibilityVoiceOverEnabled) var voiceOverEnabled
     
-    init(note: Note, viewModel: NotesListViewModel, sheetsViewModel: SheetsViewModel, creatingNewNote: Bool) {
+    /// Property to modify access to locked notes when phase changes.
+    @Environment(\.scenePhase) private var scenePhase
+    
+    init(
+        note: Note,
+        viewModel: NotesListViewModel,
+        sheetsViewModel: SheetsViewModel,
+        creatingNewNote: Bool
+    ) {
         _noteCopy = State(initialValue: note)
         self.originalNote = note
 
@@ -48,8 +59,8 @@ struct NoteEditView: View {
     var body: some View {
         NavigationStack {
             // Show UnlockNotesView only when...
-            if ( // ...access is locked, the note is private and it isn't a new one.
-                !viewModel.isUnlocked && (noteCopy.isLocked == true) && !creatingNewNote
+            if ( // ...access is locked, the note is private, it isn't a new one and the 'isLocked' property wasn't recently toggled.
+                !viewModel.isUnlocked && (noteCopy.isLocked == true) && !creatingNewNote && !editingAToggledNote
             ) {
                 Group {
                     if voiceOverEnabled {
@@ -117,6 +128,13 @@ struct NoteEditView: View {
                 viewModel.update(note: noteCopy)
             }
         }
+        .onChange(of: scenePhase) { phase, _ in
+            // When on background phase...
+            if phase == ScenePhase.background {
+                // ...toggle editingAToggledNote, so the contents of the current private note can be hidden.
+                editingAToggledNote = false
+            }
+        }
         .presentationCornerRadius(Constants.roundedRectCornerRadius)
     }
 }
@@ -150,7 +168,10 @@ extension NoteEditView {
     /// Button to toggle `isLocked` property of a note, i.e., move it to or remove it from the private space.
     var isLockedToggleButtonView: some View {
         Button {
-            noteCopy.isLocked.toggle() // Toggle local copy.
+            viewModel.authenticate(for: .changeLockStatus) {
+                noteCopy.isLocked.toggle()
+                editingAToggledNote = true // 'isLocked' property was recently toggled.
+            }
         } label: {
             Label(
                 !noteCopy.isLocked ? "Move to private space" : "Remove from private space",
