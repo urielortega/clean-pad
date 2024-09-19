@@ -43,7 +43,7 @@ struct AboutCleanPadView: View {
                         Spacer()
                         
                         DismissViewButton()
-                            .padding(.top)
+                            .padding([.top, .horizontal])
                     }
                     .frame(maxWidth: geometry.size.width)
                     
