@@ -167,7 +167,7 @@
 				A4D06FAF2B214AC10000D089 /* ViewModels */,
 				A482F0DB2AC7D4410075A385 /* Common */,
 				A4DB7B0C2ABB84860008AF12 /* MainScreenComponents */,
-				A4DB7B132ABB84F80008AF12 /* DetailViews */,
+				A4DB7B132ABB84F80008AF12 /* NoteDetailViews */,
 				A40111B42BA8EE39006C5639 /* AboutViews */,
 				A40111B72BA8F2C2006C5639 /* CategoryViews */,
 				A4DB7B092ABB837D0008AF12 /* ContentView.swift */,
@@ -244,12 +244,12 @@
 			path = MainScreenComponents;
 			sourceTree = "<group>";
 		};
-		A4DB7B132ABB84F80008AF12 /* DetailViews */ = {
+		A4DB7B132ABB84F80008AF12 /* NoteDetailViews */ = {
 			isa = PBXGroup;
 			children = (
 				A465AB792ABA7149001CFFD9 /* NoteEditView.swift */,
 			);
-			path = DetailViews;
+			path = NoteDetailViews;
 			sourceTree = "<group>";
 		};
 		A4ED50E52C7E5F310077CB36 /* CategorySelectionComponents */ = {
