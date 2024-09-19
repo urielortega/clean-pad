@@ -224,8 +224,10 @@ extension NotesListViewModel {
         }
         
         // Update notes that have this category assigned.
-        for i in 0..<notes.count {
-            if notes[i].category?.id == category.id { notes[i].category = category }
+        for index in 0..<notes.count {
+            if notes[index].category?.id == category.id {
+                notes[index].category = category
+            }
         }
         
         saveAllCategories()
@@ -244,8 +246,10 @@ extension NotesListViewModel {
         }
         
         // Assign General category to notes that have this category assigned.
-        for i in 0..<notes.count {
-            if notes[i].category?.id == category.id { notes[i].category = categories[0] } // Assigning General category from 'categories' array.
+        for index in 0..<notes.count {
+            if notes[index].category?.id == category.id {
+                notes[index].category = categories[0] // Assigning General category from 'categories' array.
+            }
         }
         
         saveAllCategories()
