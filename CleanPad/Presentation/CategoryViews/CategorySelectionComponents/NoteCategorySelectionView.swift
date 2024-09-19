@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+/// View that shows all user categories. User can assign a category to a note by tapping one.
 struct NoteCategorySelectionView: View {
     @Binding var note: Note
     @Binding var creatingNewNote: Bool
