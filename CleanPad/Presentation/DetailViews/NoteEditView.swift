@@ -71,8 +71,10 @@ struct NoteEditView: View {
                 }
                 .padding(.bottom, 80)
             } else {
-                VStack {
+                VStack(spacing: .zero) {
                     titleTextFieldView
+                        .padding(.vertical)
+                    
                     Divider()
                     textContentTextEditorView
                     Divider()
