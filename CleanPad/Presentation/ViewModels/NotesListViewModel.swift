@@ -223,7 +223,13 @@ extension NotesListViewModel {
             selectedCategory = categories[index]
         }
         
+        // Update notes that have this category assigned.
+        for i in 0..<notes.count {
+            if notes[i].category?.id == category.id { notes[i].category = category }
+        }
+        
         saveAllCategories()
+        saveAllNotes()
     }
     
     /// Function to delete a category and save the changes in the ``categories`` array.
