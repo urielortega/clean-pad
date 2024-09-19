@@ -78,7 +78,7 @@ struct NoteEditView: View {
                     Divider()
                     textContentTextEditorView
                     Divider()
-                    Button("Show categories") { sheetsViewModel.showNoteCategorySheet.toggle() }
+                    Button("Change Note Category") { sheetsViewModel.showNoteCategorySheet.toggle() }
                 }
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {

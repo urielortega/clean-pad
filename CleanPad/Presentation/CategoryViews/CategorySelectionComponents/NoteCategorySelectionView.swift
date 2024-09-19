@@ -21,7 +21,7 @@ struct NoteCategorySelectionView: View {
         VStack {
             dismissTopView
             
-            CustomTopTitle(text: "Assign a Category")
+            CustomTopTitle(text: "Change Note Category")
                 .padding(.horizontal)
             
             categoriesGridView
