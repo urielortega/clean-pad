@@ -243,7 +243,13 @@ extension NotesListViewModel {
             selectedCategory = .noSelection
         }
         
+        // Assign General category to notes that have this category assigned.
+        for i in 0..<notes.count {
+            if notes[i].category?.id == category.id { notes[i].category = categories[0] } // Assigning General category from 'categories' array.
+        }
+        
         saveAllCategories()
+        saveAllNotes()
     }
     
     /// Function to save existing categories with documents directory.
