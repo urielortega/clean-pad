@@ -14,10 +14,16 @@ struct ListNoteLabel: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text(note.noteTitle.isEmpty ? "Untitled" : note.noteTitle)
-                .lineLimit(1)
-                .foregroundStyle(note.noteTitle.isEmpty ? .secondary : .primary)
-                .fontWeight(.medium)
+            HStack {
+                Circle()
+                    .fill(note.category!.color)
+                    .frame(width: 10, height: 10)
+                
+                Text(note.noteTitle.isEmpty ? "Untitled" : note.noteTitle)
+                    .lineLimit(1)
+                    .foregroundStyle(note.noteTitle.isEmpty ? .secondary : .primary)
+                    .fontWeight(.medium)
+            }
 
             HStack {
                 Text(
@@ -37,10 +43,6 @@ struct ListNoteLabel: View {
                     .foregroundStyle(.secondary)
             }
             .font(.caption2)
-            
-            // View for testing Category display.
-            Text("Category: \(note.unwrappedCategoryName)")
-                .foregroundStyle(note.category?.color ?? .red) // Red means "unable to get category color".
         }
         .noteLabelAccessibilityModifiers(note: note, viewModel: viewModel)
     }
@@ -53,10 +55,18 @@ struct GridNoteLabel: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text(note.noteTitle.isEmpty ? "Untitled" : note.noteTitle)
-                .lineLimit(1)
-                .foregroundStyle(note.noteTitle.isEmpty ? .secondary : .primary)
-                .fontWeight(.medium)
+            HStack {
+                Text(note.noteTitle.isEmpty ? "Untitled" : note.noteTitle)
+                    .lineLimit(1)
+                    .foregroundStyle(note.noteTitle.isEmpty ? .secondary : .primary)
+                    .fontWeight(.medium)
+                
+                Spacer()
+
+                Circle()
+                    .fill(note.category!.color)
+                    .frame(width: 10, height: 10)
+            }
 
             VStack(alignment: .leading) {
                 Text(
