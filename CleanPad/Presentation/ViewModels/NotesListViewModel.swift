@@ -44,14 +44,28 @@ final class NotesListViewModel: ObservableObject {
     
     /// Computed property that returns a Note array with all notes or the ones resulting from a search.
     var filteredNotes: [Note] {
-        if searchText.isEmpty {
-            return currentNotes // Locked or non-locked notes, sorted by date.
-        } else {
-            return currentNotes
-                .filter { // Returns notes that match the search field with its title or content.
-                    $0.noteTitle.localizedStandardContains(searchText) || $0.noteContent.localizedStandardContains(searchText)
-                }
-        }
+        currentNotes
+            .filter { note in
+                // If selectedCategory is .noSelection...
+                // ...the condition will always be true...
+                // ...so all notes will pass the filter.
+                                                // If a specific category is selected
+                                                // ...only the notes with that category will pass the filter.
+                selectedCategory == .noSelection || note.category?.id == selectedCategory.id
+            }
+            .filter { note in
+                // If the user hasn't entered any text...
+                // then the condition will always be true
+                // ...and all the remaining notes will pass this filter.
+                searchText.isEmpty ||
+                // If the search text is not empty, we proceed to the next conditions:
+                
+                    // If the noteTitle contains the search text...
+                    // ...this condition will return true for that note, and it will pass the filter.
+                    note.noteTitle.localizedStandardContains(searchText) ||
+                    // If either the title or content contains the search text, the note will pass this filter.
+                    note.noteContent.localizedStandardContains(searchText)
+            }
     }
         
     // MARK: Navigation and presentation properties.
@@ -109,7 +123,7 @@ final class NotesListViewModel: ObservableObject {
     @Published private(set) var authenticationError = "Unknown error"
     @Published var isShowingAuthenticationError = false
     
-    init() {        
+    init() {
         loadData()
     }
 }
@@ -451,7 +465,7 @@ extension NotesListViewModel {
     }
     
     /// Function for testing purposes that adds ten note examples to the ``notes`` array and saves the changes after the addition.
-    func addScreenshotsNoteExamples() {        
+    func addScreenshotsNoteExamples() {
         for note in Note.screenshotsExamples {
             add(note: note)
         }
@@ -465,7 +479,7 @@ extension NotesListViewModel {
 
         add(
             note: Note(
-                isLocked: false, 
+                isLocked: false,
                 noteTitle: "Test2 Category Note",
                 noteContent: "New Category!",
                 category: testCategory
