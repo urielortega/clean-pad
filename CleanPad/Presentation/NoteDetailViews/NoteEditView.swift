@@ -136,6 +136,11 @@ struct NoteEditView: View {
             if phase == ScenePhase.background {
                 // ...toggle editingAToggledNote, so the contents of the current private note can be hidden.
                 editingAToggledNote = false
+                
+                // Only update if editing an existing note and changes were made:
+                if !creatingNewNote && noteCopy != originalNote {
+                    viewModel.update(note: noteCopy)
+                }
             }
         }
         .presentationCornerRadius(Constants.roundedRectCornerRadius)
