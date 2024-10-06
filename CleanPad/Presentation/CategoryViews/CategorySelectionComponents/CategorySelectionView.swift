@@ -148,8 +148,17 @@ extension CategorySelectionView {
                     }
                 }
                 .padding()
-                .padding(.bottom, 80) // To avoid hiding the list behind the bottomSheetButton.
+                .padding(.bottom, 120) // To avoid hiding the list behind the bottomSheetButton.
             }
+            .overlay(alignment: .bottom) {
+                VariableBlurView(
+                    maxBlurRadius: 6,
+                    direction: .blurredBottomClearTop
+                )
+                .frame(height: 120)
+                .allowsHitTesting(false)
+            }
+            .ignoresSafeArea()
             
             VStack {
                 Spacer()
