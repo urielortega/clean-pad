@@ -38,6 +38,7 @@
 		A4C36C482AE73163001B4389 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C36C472AE73163001B4389 /* HapticManager.swift */; };
 		A4D06FAE2B21428C0000D089 /* DateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D06FAD2B21428C0000D089 /* DateViewModel.swift */; };
 		A4DB7B0A2ABB837D0008AF12 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DB7B092ABB837D0008AF12 /* ContentView.swift */; };
+		A4DC37282CA87D7600A5CF61 /* VariableBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DC37272CA87D6600A5CF61 /* VariableBlur.swift */; };
 		A4ED50E42C7E50CC0077CB36 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ED50E32C7E50CC0077CB36 /* CustomTabBar.swift */; };
 		A4ED50E72C7E5F830077CB36 /* CategorySelectionButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ED50E62C7E5F830077CB36 /* CategorySelectionButtons.swift */; };
 		A4F10F5B2B8D73360014C68B /* CategorySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F10F5A2B8D73360014C68B /* CategorySelectionView.swift */; };
@@ -76,6 +77,7 @@
 		A4C36C472AE73163001B4389 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		A4D06FAD2B21428C0000D089 /* DateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateViewModel.swift; sourceTree = "<group>"; };
 		A4DB7B092ABB837D0008AF12 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = CleanPad/ContentView.swift; sourceTree = SOURCE_ROOT; };
+		A4DC37272CA87D6600A5CF61 /* VariableBlur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableBlur.swift; sourceTree = "<group>"; };
 		A4ED50E32C7E50CC0077CB36 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		A4ED50E62C7E5F830077CB36 /* CategorySelectionButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectionButtons.swift; sourceTree = "<group>"; };
 		A4F10F5A2B8D73360014C68B /* CategorySelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectionView.swift; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 		A482F0DB2AC7D4410075A385 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				A4DC37272CA87D6600A5CF61 /* VariableBlur.swift */,
 				A482F0DE2AC7D7CA0075A385 /* ButtonViews.swift */,
 				A49E2FDF2AD61DA000D8EC6D /* EmptyListView.swift */,
 				A49C7DEB2ADF5BB9005922FC /* ViewModifiers.swift */,
@@ -346,6 +349,7 @@
 				A4F10F5B2B8D73360014C68B /* CategorySelectionView.swift in Sources */,
 				A4961F382C7E8FFC0081FA43 /* NoteCategorySelectionView.swift in Sources */,
 				A4C36C482AE73163001B4389 /* HapticManager.swift in Sources */,
+				A4DC37282CA87D7600A5CF61 /* VariableBlur.swift in Sources */,
 				A4B86F1D2B59B04D00560C66 /* AboutCleanPadView.swift in Sources */,
 				A48192E32BFFB03F00CA6412 /* TextFieldStyles.swift in Sources */,
 				A49C7DEC2ADF5BB9005922FC /* ViewModifiers.swift in Sources */,
