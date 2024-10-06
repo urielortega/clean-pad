@@ -78,8 +78,8 @@ struct NoteEditView: View {
                     Divider()
                     textContentTextEditorView
                     Divider()
-                    Button("Change Note Category") { sheetsViewModel.showNoteCategorySheet.toggle() }
-                        .padding(.vertical)
+                    
+                    changeNoteCategoryView
                 }
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
@@ -196,5 +196,26 @@ extension NoteEditView {
             
             HapticManager.instance.notification(type: .success)
         }
+    }
+    
+    var changeNoteCategoryView: some View {
+        HStack {
+            HStack {
+                Circle()
+                    .fill((noteCopy.category?.color ?? .gray).gradient)
+                    .frame(width: 10, height: 10)
+                
+                Text(noteCopy.category?.displayName ?? "No Category Selected")
+                    .bold(noteCopy.category == nil ? false : true)
+                    .foregroundStyle(noteCopy.category == nil ? .gray : Color(.label))
+                    .lineLimit(1)
+            }
+            
+            Spacer()
+            
+            Button("Change Category") { sheetsViewModel.showNoteCategorySheet.toggle() }
+                .padding(.vertical)
+        }
+        .padding(.horizontal)
     }
 }
