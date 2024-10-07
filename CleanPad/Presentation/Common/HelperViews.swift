@@ -53,3 +53,13 @@ struct AppIconView: View {
             .shadow(radius: Constants.iconShadowRadius)
     }
 }
+
+struct NoteCategoryIndicator: View {
+    var note: Note
+    
+    var body: some View {
+        Circle()
+            .fill(note.category!.color.gradient)
+            .frame(width: 10, height: 10)
+    }
+}
