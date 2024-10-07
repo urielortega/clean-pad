@@ -55,18 +55,10 @@ struct GridNoteLabel: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            HStack {
-                Text(note.noteTitle.isEmpty ? "Untitled" : note.noteTitle)
-                    .lineLimit(1)
-                    .foregroundStyle(note.noteTitle.isEmpty ? .secondary : .primary)
-                    .fontWeight(.medium)
-                
-                Spacer()
-
-                Circle()
-                    .fill(note.category!.color)
-                    .frame(width: 10, height: 10)
-            }
+            Text(note.noteTitle.isEmpty ? "Untitled" : note.noteTitle)
+                .lineLimit(1)
+                .foregroundStyle(note.noteTitle.isEmpty ? .secondary : .primary)
+                .fontWeight(.medium)
 
             VStack(alignment: .leading) {
                 Text(
@@ -80,13 +72,24 @@ struct GridNoteLabel: View {
                 .padding(.bottom, 1)
                 
                 Text(note.noteContent.isEmpty ? "No content..." : note.noteContent)
-                    .lineLimit(3, reservesSpace: true)
+                    .lineLimit(2, reservesSpace: true)
+                    .foregroundStyle(.secondary)
                     .foregroundStyle(note.noteContent.isEmpty ? .secondary : .primary)
                     .multilineTextAlignment(.leading)
             }
             .font(.caption2)
             
-            Spacer()
+            Divider()
+                .padding(.vertical, 2)
+            
+            HStack(alignment: .center) {
+                NoteCategoryIndicator(note: note)
+                Text(note.category?.displayName ?? "No Category Selected")
+                    .font(.caption2)
+                    .bold(note.category == nil ? false : true)
+                    .foregroundStyle(note.category == nil ? .gray : Color(.label))
+                    .lineLimit(1)
+            }
         }
         .foregroundStyle(Color(.label)) // To show an appropriate color in both light and dark mode.
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
