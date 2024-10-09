@@ -101,7 +101,10 @@ struct NoteLabelAccessibilityModifiers: ViewModifier {
     func body(content: Content) -> some View {
         content
             .accessibilityElement()
-            .accessibilityLabel(note.isLocked ? "Private note: \(note.noteTitle)" : "Note: \(note.noteTitle)")
+            .accessibilityLabel(
+                note.isLocked ? "Private note: \(note.noteTitle)" : "Note: \(note.noteTitle),"
+                + "in \(note.category?.displayName ?? "Unassigned") category."
+            )
             .accessibilityHint(
                 viewModel.isNoteDateEqualToToday(note: note)
                 ? "Created at \(note.date.formatted(date: .omitted, time: .shortened))"
