@@ -24,16 +24,7 @@ struct ListNoteLabel: View {
             }
 
             VStack(alignment: .leading) {
-                Text(
-                    note.date.formatted(
-                        // Shows abbreviated date only when note.date is different from today:
-                        date: viewModel.isNoteDateEqualToToday(note: note) ? .omitted : .abbreviated,
-                        time: .shortened
-                    )
-                )
-                .lineLimit(1)
-                .foregroundStyle(.primary)
-                .padding(.bottom, 1)
+                FormattedDateTextView(note: note, viewModel: viewModel)
                 
                 Text(note.noteContent.isEmpty ? "No content..." : note.noteContent)
                     .lineLimit(1)
@@ -59,15 +50,7 @@ struct GridNoteLabel: View {
                 .fontWeight(.medium)
 
             VStack(alignment: .leading) {
-                Text(
-                    note.date.formatted(
-                        // Shows abbreviated date when note.date is different from today:
-                        date: viewModel.isNoteDateEqualToToday(note: note) ? .omitted : .abbreviated,
-                        time: .shortened
-                    )
-                )
-                .multilineTextAlignment(.leading)
-                .padding(.bottom, 1)
+                FormattedDateTextView(note: note, viewModel: viewModel)
                 
                 Text(note.noteContent.isEmpty ? "No content..." : note.noteContent)
                     .lineLimit(2, reservesSpace: true)
@@ -123,6 +106,25 @@ struct ContextMenuPreview: View {
         }
         .frame(width: 300, height: 150)
         .padding()
+    }
+}
+
+fileprivate struct FormattedDateTextView: View {
+    var note: Note
+    @ObservedObject var viewModel: DateViewModel
+    
+    var body: some View {
+        Text(
+            note.date.formatted(
+                // Shows abbreviated date only when note.date is different from today:
+                date: viewModel.isNoteDateEqualToToday(note: note) ? .omitted : .abbreviated,
+                time: .shortened
+            )
+        )
+        .lineLimit(1)
+        .foregroundStyle(.primary)
+        .padding(.bottom, 1)
+
     }
 }
 
