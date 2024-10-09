@@ -15,17 +15,15 @@ struct ListNoteLabel: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Circle()
-                    .fill(note.category!.color)
-                    .frame(width: 10, height: 10)
-                
+                NoteCategoryIndicator(note: note)
+
                 Text(note.noteTitle.isEmpty ? "Untitled" : note.noteTitle)
                     .lineLimit(1)
                     .foregroundStyle(note.noteTitle.isEmpty ? .secondary : .primary)
                     .fontWeight(.medium)
             }
 
-            HStack {
+            VStack(alignment: .leading) {
                 Text(
                     note.date.formatted(
                         // Shows abbreviated date only when note.date is different from today:
@@ -34,15 +32,15 @@ struct ListNoteLabel: View {
                     )
                 )
                 .lineLimit(1)
-                .foregroundStyle(.secondary)
-                
-                CustomHStackDivider(width: 0.5, height: 14)
+                .foregroundStyle(.primary)
+                .padding(.bottom, 1)
                 
                 Text(note.noteContent.isEmpty ? "No content..." : note.noteContent)
                     .lineLimit(1)
                     .foregroundStyle(.secondary)
             }
             .font(.caption2)
+
         }
         .noteLabelAccessibilityModifiers(note: note, viewModel: viewModel)
     }
@@ -131,7 +129,8 @@ struct ContextMenuPreview: View {
 
 #Preview("List View") {
     ListNoteLabel(note: .example, viewModel: DateViewModel())
-        .border(.white, width: 0.5)
+        .padding()
+        .border(.gray, width: 0.5)
 }
 
 #Preview("Grid View") {
