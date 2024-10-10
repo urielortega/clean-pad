@@ -102,13 +102,13 @@ struct NoteLabelAccessibilityModifiers: ViewModifier {
         content
             .accessibilityElement()
             .accessibilityLabel(
-                note.isLocked ? "Private note: \(note.noteTitle)" : "Note: \(note.noteTitle),"
-                + "in \(note.category?.displayName ?? "Unassigned") category."
+                (note.isLocked ? "Private note: \(note.noteTitle)," : "Note: \(note.noteTitle),")
+                + "in the \(note.category?.displayName ?? "Unassigned") category."
             )
             .accessibilityHint(
                 viewModel.isNoteDateEqualToToday(note: note)
-                ? "Created at \(note.date.formatted(date: .omitted, time: .shortened))"
-                : "Created on \(note.date.formatted(date: .abbreviated, time: .omitted))"
+                ? "Created at \(note.date.formatted(date: .omitted, time: .shortened))."
+                : "Created on \(note.date.formatted(date: .abbreviated, time: .omitted))."
             )
     }
 }
