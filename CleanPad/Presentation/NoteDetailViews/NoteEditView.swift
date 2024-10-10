@@ -210,6 +210,8 @@ extension NoteEditView {
                     .foregroundStyle(noteCopy.category == nil ? .gray : Color(.label))
                     .lineLimit(1)
             }
+            .accessibilityElement()
+            .accessibilityLabel("Category: \(noteCopy.category?.displayName ?? "Unassigned").")
             
             Spacer()
             
