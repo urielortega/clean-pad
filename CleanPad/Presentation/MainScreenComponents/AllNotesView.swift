@@ -72,7 +72,7 @@ extension AllNotesView {
     var notesListView: some View {
         Group {
             if viewModel.filteredNotes.isEmpty {
-                ContentUnavailableView.search
+                NoResultsView()
             } else {
                 List {
                     ForEach(viewModel.filteredNotes) { note in
@@ -118,7 +118,7 @@ extension AllNotesView {
         
         return Group {
             if viewModel.filteredNotes.isEmpty {
-                ContentUnavailableView.search
+                NoResultsView()
             } else {
                 ScrollView {
                     LazyVGrid(columns: layout) {
