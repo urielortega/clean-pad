@@ -35,12 +35,16 @@ struct AllNotesView: View {
                     Group {
                         if voiceOverEnabled {
                             EmptyListView(
+                                viewModel: viewModel,
+                                sheetsViewModel: sheetsViewModel,
                                 showNoteEditViewSheet: $showNoteEditViewSheet,
                                 buttonActions: { }
                             )
                             .accessibilityEmptyListButton
                         } else {
                             EmptyListView(
+                                viewModel: viewModel,
+                                sheetsViewModel: sheetsViewModel,
                                 showNoteEditViewSheet: $showNoteEditViewSheet,
                                 imageSystemName: "note.text",
                                 label: "This looks a little empty...",
