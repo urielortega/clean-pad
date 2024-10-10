@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// A custom alternative to SwiftUI's ContentUnavailableView (iOS 17+), designed for a more personalized and expressive "No Results" display.
 struct NoResultsView: View {
     var body: some View {
         VStack(alignment: .center) {
