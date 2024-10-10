@@ -18,6 +18,7 @@
 		A44E76A42AB12C0A004BBB21 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44E76A32AB12C0A004BBB21 /* Note.swift */; };
 		A44E76A62AB1307A004BBB21 /* NotesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44E76A52AB1307A004BBB21 /* NotesListViewModel.swift */; };
 		A44E76A82AB13214004BBB21 /* FileManager-DocumentsDirectory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44E76A72AB13214004BBB21 /* FileManager-DocumentsDirectory.swift */; };
+		A45C87F22CB75EFC00718264 /* NoResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45C87F12CB75EFC00718264 /* NoResultsView.swift */; };
 		A46117282AF56E31001C0087 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46117272AF56E31001C0087 /* MainScreenView.swift */; };
 		A461172A2AF56EB6001C0087 /* AllNotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46117292AF56EB6001C0087 /* AllNotesView.swift */; };
 		A465AB7A2ABA7149001CFFD9 /* NoteEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A465AB792ABA7149001CFFD9 /* NoteEditView.swift */; };
@@ -57,6 +58,7 @@
 		A44E76A32AB12C0A004BBB21 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		A44E76A52AB1307A004BBB21 /* NotesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesListViewModel.swift; sourceTree = "<group>"; };
 		A44E76A72AB13214004BBB21 /* FileManager-DocumentsDirectory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager-DocumentsDirectory.swift"; sourceTree = "<group>"; };
+		A45C87F12CB75EFC00718264 /* NoResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoResultsView.swift; sourceTree = "<group>"; };
 		A45FD7342ABDE57300CBF255 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		A46117272AF56E31001C0087 /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
 		A46117292AF56EB6001C0087 /* AllNotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllNotesView.swift; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 				A4BFFA5E2AF087F4005CD3DE /* LabelViews.swift */,
 				A41F0F572BF2E2280090E84C /* UnlockNotesView.swift */,
 				A41324332C17C99D005B478C /* Styles */,
+				A45C87F12CB75EFC00718264 /* NoResultsView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 				A461172A2AF56EB6001C0087 /* AllNotesView.swift in Sources */,
 				A4DB7B0A2ABB837D0008AF12 /* ContentView.swift in Sources */,
 				A41F0F562BF2A4500090E84C /* SheetsViewModel.swift in Sources */,
+				A45C87F22CB75EFC00718264 /* NoResultsView.swift in Sources */,
 				A41F0F582BF2E2280090E84C /* UnlockNotesView.swift in Sources */,
 				A49E2FE02AD61DA000D8EC6D /* EmptyListView.swift in Sources */,
 				A44E76A82AB13214004BBB21 /* FileManager-DocumentsDirectory.swift in Sources */,
