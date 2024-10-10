@@ -4,7 +4,6 @@
 //
 //  Created by Uriel Ortega on 10/10/23.
 //
-// Inspired by ContentUnavailableView (iOS 17+)
 
 import SwiftUI
 
