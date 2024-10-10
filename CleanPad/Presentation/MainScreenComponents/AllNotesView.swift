@@ -34,7 +34,11 @@ struct AllNotesView: View {
                 if viewModel.currentNotes.isEmpty {
                     Group {
                         if voiceOverEnabled {
-                            EmptyListView(showNoteEditViewSheet: $showNoteEditViewSheet, buttonActions: { }).accessibilityEmptyListButton
+                            EmptyListView(
+                                showNoteEditViewSheet: $showNoteEditViewSheet,
+                                buttonActions: { }
+                            )
+                            .accessibilityEmptyListButton
                         } else {
                             EmptyListView(
                                 showNoteEditViewSheet: $showNoteEditViewSheet,
