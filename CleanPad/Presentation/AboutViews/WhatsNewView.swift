@@ -53,6 +53,32 @@ extension WhatsNewView {
         }
         .padding()
     }
+    
+    fileprivate struct NewFeatureView: View {
+        let imageSystemName: String
+        let featureTitle: String
+        let featureDescription: String
+        
+        var body: some View {
+            HStack(alignment: .center) {
+                Image(systemName: imageSystemName)
+                    .foregroundStyle(.accent.gradient)
+                    .font(.system(size: 40))
+                
+                VStack(alignment: .leading) {
+                    Text(featureTitle)
+                        .multilineTextAlignment(.leading)
+                        .font(.title3)
+                        .bold()
+                    
+                    Text(featureDescription)
+                        .foregroundStyle(.secondary)
+                    
+                }
+            }
+            .padding(.vertical)
+        }
+    }
 }
 
 
