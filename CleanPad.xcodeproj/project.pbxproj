@@ -12,6 +12,7 @@
 		A41324322C17C8AF005B478C /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41324312C17C8AF005B478C /* ButtonStyles.swift */; };
 		A41F0F562BF2A4500090E84C /* SheetsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41F0F552BF2A4500090E84C /* SheetsViewModel.swift */; };
 		A41F0F582BF2E2280090E84C /* UnlockNotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41F0F572BF2E2280090E84C /* UnlockNotesView.swift */; };
+		A42574272CBB09CE00D3C8A4 /* WhatsNewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42574262CBB09CE00D3C8A4 /* WhatsNewView.swift */; };
 		A44E76962AB11E70004BBB21 /* CleanPadApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44E76952AB11E70004BBB21 /* CleanPadApp.swift */; };
 		A44E769A2AB11E72004BBB21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A44E76992AB11E72004BBB21 /* Assets.xcassets */; };
 		A44E769D2AB11E72004BBB21 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A44E769C2AB11E72004BBB21 /* Preview Assets.xcassets */; };
@@ -51,6 +52,7 @@
 		A41324312C17C8AF005B478C /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
 		A41F0F552BF2A4500090E84C /* SheetsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetsViewModel.swift; sourceTree = "<group>"; };
 		A41F0F572BF2E2280090E84C /* UnlockNotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockNotesView.swift; sourceTree = "<group>"; };
+		A42574262CBB09CE00D3C8A4 /* WhatsNewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsNewView.swift; sourceTree = "<group>"; };
 		A44E76922AB11E70004BBB21 /* CleanPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CleanPad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A44E76952AB11E70004BBB21 /* CleanPadApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanPadApp.swift; sourceTree = "<group>"; };
 		A44E76992AB11E72004BBB21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				A475B9632ACCD7DE00BE6575 /* WelcomeView.swift */,
 				A4BB5F362B27D69600B509ED /* FeedbackView.swift */,
 				A4B86F1C2B59B04D00560C66 /* AboutCleanPadView.swift */,
+				A42574262CBB09CE00D3C8A4 /* WhatsNewView.swift */,
 			);
 			path = AboutViews;
 			sourceTree = "<group>";
@@ -345,6 +348,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A44E76A62AB1307A004BBB21 /* NotesListViewModel.swift in Sources */,
+				A42574272CBB09CE00D3C8A4 /* WhatsNewView.swift in Sources */,
 				A4ADAFDD2B15238B00C14010 /* Constants.swift in Sources */,
 				A489F7A52B8429B500CB44AE /* CodableColor.swift in Sources */,
 				A4ED50E72C7E5F830077CB36 /* CategorySelectionButtons.swift in Sources */,
