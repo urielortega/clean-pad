@@ -169,6 +169,7 @@ extension NoteEditView {
     
     var textContentTextEditorView: some View {
         TextEditor(text: $noteCopy.noteContent)
+            .ignoresSafeArea(.keyboard, edges: .bottom)
             .padding(.horizontal)
             .focused($focusedField, equals: .textEditorField)
     }
