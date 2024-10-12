@@ -20,7 +20,7 @@ struct WelcomeView: View {
                 .opacity(0.9)
                 .ignoresSafeArea()
             
-            VStack {
+            VStack(alignment: .center) {
                 Spacer()
                 headerView
                 detailsView
