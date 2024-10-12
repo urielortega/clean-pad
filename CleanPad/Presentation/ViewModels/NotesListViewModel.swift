@@ -134,20 +134,22 @@ extension NotesListViewModel {
     /// Function to add a note to the ``notes`` array and save the changes after the addition.
     /// - Parameter note: A  new ``Note`` object to be added to the ``notes`` array.
     func add(note: Note) {
-        if note.category == nil { // If 'note' has no category assigned...
-            let noteToAssignCategory = Note(
-                isLocked: note.isLocked,
-                noteTitle: note.noteTitle,
-                noteContent: note.noteContent,
-                category: categories[0] // ..assign General category from 'categories' array.
-            )
+        withAnimation {
+            if note.category == nil { // If 'note' has no category assigned...
+                let noteToAssignCategory = Note(
+                    isLocked: note.isLocked,
+                    noteTitle: note.noteTitle,
+                    noteContent: note.noteContent,
+                    category: categories[0] // ..assign General category from 'categories' array.
+                )
+                
+                notes.append(noteToAssignCategory)
+            } else {
+                notes.append(note)
+            }
             
-            notes.append(noteToAssignCategory)
-        } else {
-            notes.append(note)
+            saveAllNotes()
         }
-        
-        saveAllNotes()
     }
     
     /// Function to update a note and save the changes in the ``notes`` array.
