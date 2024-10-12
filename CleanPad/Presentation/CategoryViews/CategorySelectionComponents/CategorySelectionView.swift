@@ -27,7 +27,10 @@ struct CategorySelectionView: View {
         .presentationDragIndicator(.visible)
         .presentationBackground(.regularMaterial)
         .presentationCornerRadius(Constants.roundedRectCornerRadius)
-        .presentationDetents([.fraction(0.6)])
+        .presentationDetents(
+                            // Slightly taller on iPad.
+            viewModel.idiom == .pad ? [.fraction(0.8)] : [.fraction(0.6)]
+        )
     }
 }
 
