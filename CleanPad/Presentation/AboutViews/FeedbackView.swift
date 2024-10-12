@@ -53,7 +53,7 @@ struct FeedbackView: View {
                 }
             }
         }
-        .presentationDetents([.fraction(0.6)])
+        .presentationDetents([.fraction(0.7)])
         .presentationDragIndicator(.visible)
         .presentationBackground(.regularMaterial)
         .presentationCornerRadius(Constants.roundedRectCornerRadius)
