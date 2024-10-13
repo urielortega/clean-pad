@@ -35,7 +35,11 @@ struct WhatsNewView: View {
 extension WhatsNewView {
     /// Header view containing the "What's New" Text.
     var headerView: some View {
-        EmptyView()
+        Text("What's New in CleanPad")
+            .foregroundStyle(.black)
+            .font(.largeTitle)
+            .bold()
+            .padding(.vertical)
     }
     
     /// Detailed view explaining the changes in the new version of the app.
