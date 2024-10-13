@@ -16,7 +16,7 @@ struct FeedbackView: View {
             ZStack(alignment: .center) {
                 ScrollView {
                     HStack {
-                        VStack {
+                        VStack(alignment: .leading) {
                             Spacer()
                             headerView
                                 .padding()
