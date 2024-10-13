@@ -59,24 +59,38 @@ extension WhatsNewView {
         let featureTitle: String
         let featureDescription: String
         
+        @State private var animate = false
+
         var body: some View {
             HStack(alignment: .center) {
                 Image(systemName: imageSystemName)
                     .foregroundStyle(.accent.gradient)
                     .font(.system(size: 40))
+                    .symbolEffect(
+                        .bounce,
+                        options: .speed(0.8),
+                        value: animate
+                    )
+                    .frame(width: 40)
+                    .padding(.trailing)
                 
                 VStack(alignment: .leading) {
                     Text(featureTitle)
                         .multilineTextAlignment(.leading)
+                        .foregroundStyle(.black)
                         .font(.title3)
                         .bold()
                     
                     Text(featureDescription)
-                        .foregroundStyle(.secondary)
-                    
+                        .foregroundStyle(.black.opacity(0.7))
                 }
             }
             .padding(.vertical)
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    animate.toggle()
+                }
+            }
         }
     }
 }
