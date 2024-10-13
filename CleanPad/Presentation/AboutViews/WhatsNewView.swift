@@ -40,7 +40,27 @@ extension WhatsNewView {
     
     /// Detailed view explaining the changes in the new version of the app.
     var detailsView: some View {
-        EmptyView()
+        VStack(alignment: .leading) {
+            NewFeatureView(
+                imageSystemName: "line.3.horizontal.decrease.circle.fill",
+                featureTitle: "Every thought finds its place",
+                featureDescription: "Easily create and assign categories to organize your notes better"
+            )
+            
+            NewFeatureView(
+                imageSystemName: "lock.fill",
+                featureTitle: "Your private notes, still personal",
+                featureDescription: "Personal Notes are now called Private Notes to make things clearer"
+            )
+            
+            NewFeatureView(
+                imageSystemName: "sparkles",
+                featureTitle: "A smoother, comfier experience",
+                featureDescription: "Say hello to a refreshed interface that makes CleanPad smoother, more intuitive, and easier to navigate"
+            )
+        }
+        .padding(.vertical)
+        .presentationCornerRadius(Constants.roundedRectCornerRadius)
     }
     
     /// Button for dismissing the What's New screen.
