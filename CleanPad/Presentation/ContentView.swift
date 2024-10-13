@@ -16,6 +16,9 @@ struct ContentView: View {
     /// Property to show WelcomeView when launching app for the first time.
     @AppStorage("isFirstLaunch") var isFirstLaunch: Bool = true
     
+    /// Property to show WhatsNewView when updating app.
+    @AppStorage("isAppJustUpdated") var isAppJustUpdated: Bool = true
+    
     /// Property to modify access to locked notes when phase changes.
     @Environment(\.scenePhase) private var scenePhase
     
@@ -63,9 +66,14 @@ struct ContentView: View {
             if isFirstLaunch {
                 sheetsViewModel.showWelcomeSheet = true
                 isFirstLaunch = false // Setting the flag to false so WelcomeView won't show again.
+                isAppJustUpdated = false // Setting the flag to false so WhatsNewView won't show.
+            } else if isAppJustUpdated {
+                sheetsViewModel.showWhatsNewSheet = true
+                isAppJustUpdated = false // Setting the flag to false so WhatsNewView won't show again.
             }
         }
         .sheet(isPresented: $sheetsViewModel.showWelcomeSheet) { WelcomeView() }
+        .sheet(isPresented: $sheetsViewModel.showWhatsNewSheet) { WhatsNewView() }
         .sheet(isPresented: $sheetsViewModel.showFeedbackSheet) { FeedbackView() }
         .sheet(isPresented: $sheetsViewModel.showAboutSheet) { AboutCleanPadView() }
         .alert("Authentication error", isPresented: $viewModel.isShowingAuthenticationError) {
