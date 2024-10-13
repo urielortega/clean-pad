@@ -14,20 +14,35 @@ struct WhatsNewView: View {
     @State var gradientSpeed: Double = 0.4
     
     var body: some View {
-        ZStack(alignment: .center) {
-            ColorfulView(color: $gradientColors, speed: $gradientSpeed)
-                .opacity(0.9)
-                .ignoresSafeArea()
-            
-            VStack(alignment: .center) {
-                Spacer()
-                headerView
-                detailsView
-                Spacer()
-                dismissButtonView
+        GeometryReader { geometry in
+            ZStack(alignment: .center) {
+                ColorfulView(color: $gradientColors, speed: $gradientSpeed)
+                    .opacity(0.9)
+                    .ignoresSafeArea()
+                
+                ScrollView {
+                    VStack(alignment: .center) {
+                        Spacer()
+                        headerView
+                        detailsView
+                        Spacer()
+                    }
+                    .frame(
+                        maxWidth: geometry.size.width,
+                        minHeight: geometry.size.height
+                    )
+                    .padding(.horizontal)
+                }
+                
+                VStack {
+                    Spacer()
+                    dismissButtonView
+                }
             }
+            .frame(maxWidth: geometry.size.width)
+            .presentationDragIndicator(.visible)
+            .presentationCornerRadius(Constants.roundedRectCornerRadius)
         }
-        .presentationCornerRadius(Constants.roundedRectCornerRadius)
     }
 }
 
