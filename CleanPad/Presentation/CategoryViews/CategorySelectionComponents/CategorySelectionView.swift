@@ -146,8 +146,7 @@ extension CategorySelectionView {
                                 viewModel.customTabBarGlow()
                             }
                         }
-                        .padding(.vertical, 5)
-                        .padding(.horizontal, 5)
+                        .padding(5)
                     }
                 }
                 .padding()
