@@ -194,12 +194,9 @@ extension NoteCategorySelectionView {
         var body: some View {
             Button {
                 note.category = category
-                
                 // When changing an existing note, save its category using update().
-                if !creatingNewNote {
-                    viewModel.update(note: note, updatingDate: false)
-                }
-                
+                if !creatingNewNote { viewModel.update(note: note, updatingDate: false) }
+                HapticManager.instance.impact(style: .soft)
                 dismiss()
             } label: {
                 HStack {
