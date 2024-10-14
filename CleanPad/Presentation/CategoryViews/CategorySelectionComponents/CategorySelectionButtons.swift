@@ -242,4 +242,64 @@ extension NoteCategorySelectionView {
                 )
         }
     }
+    
+    /// Button for creating a new Category and assign it to a Note.
+    struct CreateAndAssignNoteCategoryButton: View {
+        @ObservedObject var viewModel: NotesListViewModel
+        @ObservedObject var sheetsViewModel: SheetsViewModel
+        
+        @Binding var note: Note
+        @State private var category = Category(id: UUID(), name: "", color: .gray)
+        
+        @State private var showingAlert = false
+        @State private var categoryName: String = ""
+        
+        @Environment(\.dismiss) var dismiss
+        
+        var body: some View {
+            Button {
+                HapticManager.instance.impact(style: .soft)
+                
+                showingAlert.toggle()
+            } label: {
+                Text("Create and assign new category")
+                    .foregroundStyle(Color(.label).gradient)
+                    .frame(minWidth: 200, maxHeight: 16) // Frame on Label so tap is better detected.
+            }
+            .padding()
+            .fontWeight(.medium)
+            .background(.thinMaterial)
+            .clipShape(.rect(cornerRadius: Constants.materialButtonCornerRadius))
+            .largeShadow(color: .black.opacity(0.3))
+            .overlay {
+                RoundedRectangle(cornerRadius: Constants.materialButtonCornerRadius)
+                    .stroke(Color.gray.gradient.opacity(0.1), lineWidth: 4)
+            }
+            .alert("Create a new category", isPresented: $showingAlert) {
+                Group {
+                    TextField("Enter your category name", text: $categoryName)
+                    Button("Save") {
+                        createAndAssignCategory()
+                        categoryName = "" // Clear the category name.
+                    }
+                    Button("Cancel", role: .cancel) { }
+                }
+                .tint(.accent)
+            } message: {
+                Text(
+                    """
+                    Your category will be created and assigned to your note.
+                    \nYou can further personalize it by tapping the Category Selection button in your Home Tab Bar.
+                    """
+                )
+            }
+        }
+        
+        /// Function to create a new category and assign it to the current note.
+        func createAndAssignCategory() {
+            // TODO: Create a new category. Assign it to the current note.
+            print("Your Category: \(categoryName). Your note: \(note.noteTitle)")
+            HapticManager.instance.notification(type: .success)
+        }
+    }
 }
