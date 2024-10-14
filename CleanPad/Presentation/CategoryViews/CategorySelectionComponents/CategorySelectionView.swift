@@ -158,10 +158,10 @@ extension CategorySelectionView {
                     maxBlurRadius: 6,
                     direction: .blurredBottomClearTop
                 )
+                .ignoresSafeArea()
                 .frame(height: 120)
                 .allowsHitTesting(false)
             }
-            .ignoresSafeArea()
             
             VStack {
                 Spacer()
