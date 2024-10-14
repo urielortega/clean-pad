@@ -150,7 +150,7 @@ extension CategorySelectionView {
                     }
                 }
                 .padding()
-                .padding(.bottom, 120) // To avoid hiding the list behind the bottomSheetButton.
+                .padding(.bottom, 100) // To avoid hiding the list behind the bottomSheetButton.
             }
             .overlay(alignment: .bottom) {
                 VariableBlurView(
