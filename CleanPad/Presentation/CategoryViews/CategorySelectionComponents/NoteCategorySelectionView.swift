@@ -62,6 +62,7 @@ extension NoteCategorySelectionView {
                             creatingNewNote: $creatingNewNote,
                             viewModel: viewModel
                         )
+                        .padding(5)
                     }
                 }
                 .padding()
