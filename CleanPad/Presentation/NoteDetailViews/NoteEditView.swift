@@ -128,7 +128,10 @@ struct NoteEditView: View {
         .onDisappear {
             // Only update if editing an existing note and changes were made:
             if !creatingNewNote && noteCopy != originalNote {
-                viewModel.update(note: noteCopy)
+                viewModel.update(
+                    note: noteCopy,
+                    updatingDate: editingAToggledNote ? false : true // Date is not updated when only the 'isLocked' property was toggled.
+                )
             }
         }
         .onChange(of: scenePhase) { phase, _ in
