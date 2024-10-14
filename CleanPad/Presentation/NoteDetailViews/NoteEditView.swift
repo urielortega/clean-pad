@@ -219,8 +219,11 @@ extension NoteEditView {
             
             Spacer()
             
-            Button("Change Category") { sheetsViewModel.showNoteCategorySheet.toggle() }
-                .padding(.vertical)
+            Button("Change Category") {
+                sheetsViewModel.showNoteCategorySheet.toggle()
+                HapticManager.instance.impact(style: .light)
+            }
+            .padding(.vertical)
         }
         .padding(.horizontal)
     }
