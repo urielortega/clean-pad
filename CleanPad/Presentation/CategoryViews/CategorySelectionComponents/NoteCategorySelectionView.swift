@@ -66,6 +66,26 @@ extension NoteCategorySelectionView {
                     }
                 }
                 .padding()
+                .padding(.bottom, 100) // To avoid hiding the list behind the CreateAndAssignNoteCategoryButton.
+            }
+            .overlay(alignment: .bottom) {
+                VariableBlurView(
+                    maxBlurRadius: 6,
+                    direction: .blurredBottomClearTop
+                )
+                .ignoresSafeArea()
+                .frame(height: 120)
+                .allowsHitTesting(true)
+            }
+            
+            VStack {
+                Spacer()
+                CreateAndAssignNoteCategoryButton(
+                    viewModel: viewModel,
+                    sheetsViewModel: sheetsViewModel,
+                    note: $note
+                )
+                .padding()
             }
         }
     }
