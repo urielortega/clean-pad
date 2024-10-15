@@ -45,6 +45,7 @@ extension NoteCategorySelectionView {
         .padding([.horizontal, .bottom])
     }
     
+    /// View that shows categories as a grid with multiple columns.
     var categoriesGridView: some View {
         let layout = [
             GridItem(
