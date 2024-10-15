@@ -83,6 +83,7 @@ struct GridNoteLabel: View {
     }
 }
 
+/// View that shows the preview of a note, including title and content. Meant to be displayed as a Context Menu Preview.
 struct ContextMenuPreview: View {
     var note: Note
     
@@ -109,6 +110,7 @@ struct ContextMenuPreview: View {
     }
 }
 
+/// Text View that shows the formatted date of a note, displaying the abbreviated date (when note's date is different than today) and shortened time.
 fileprivate struct FormattedDateTextView: View {
     var note: Note
     @ObservedObject var viewModel: DateViewModel
