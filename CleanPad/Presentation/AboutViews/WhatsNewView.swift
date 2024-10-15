@@ -8,6 +8,7 @@
 import ColorfulX
 import SwiftUI
 
+/// View displayed after the user updates the app, showcasing new features and improvements introduced.
 struct WhatsNewView: View {
     @Environment(\.dismiss) var dismiss
     @State var gradientColors: [Color] = [.white, .cleanPadIconBackground, .white]
