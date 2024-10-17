@@ -126,23 +126,24 @@ struct NoteEditView: View {
             }
         }
         .onDisappear {
-            // Only update if editing an existing note and changes were made:
-            if !creatingNewNote && noteCopy != originalNote {
+            if !creatingNewNote && (noteCopy != originalNote) { // Only update if editing an existing note and changes were made.
                 viewModel.update(
                     note: noteCopy,
-                    updatingDate: editingAToggledNote ? false : true // Date is not updated when only the 'isLocked' property was toggled.
+                    // Date is only updated when 'noteTitle'                                ...or 'noteContent' has changed.
+                    updatingDate: (noteCopy.noteTitle != originalNote.noteTitle) || (noteCopy.noteContent != originalNote.noteContent)
                 )
             }
         }
         .onChange(of: scenePhase) { phase, _ in
-            // When on background phase...
-            if phase == ScenePhase.background {
-                // ...toggle editingAToggledNote, so the contents of the current private note can be hidden.
-                editingAToggledNote = false
+            if phase == ScenePhase.background { // When on background phase...
+                editingAToggledNote = false // ...toggle 'editingAToggledNote', so the contents of the current private note can be hidden.
                 
-                // Only update if editing an existing note and changes were made:
-                if !creatingNewNote && noteCopy != originalNote {
-                    viewModel.update(note: noteCopy)
+                if !creatingNewNote && (noteCopy != originalNote) { // Only update if editing an existing note and changes were made.
+                    viewModel.update(
+                        note: noteCopy,
+                        // Date is only updated when 'noteTitle'                                ...or 'noteContent' has changed.
+                        updatingDate: (noteCopy.noteTitle != originalNote.noteTitle) || (noteCopy.noteContent != originalNote.noteContent)
+                    )
                 }
             }
         }
