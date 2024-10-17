@@ -278,7 +278,7 @@ extension NoteCategorySelectionView {
             .alert("Create a new category", isPresented: $showingAlert) {
                 Group {
                     TextField("Enter your category name", text: $categoryName)
-                    Button("Save") {
+                    Button("Save and Assign") {
                         createAndAssignCategory()
                         categoryName = "" // Clear the category name.
                     }
@@ -289,7 +289,7 @@ extension NoteCategorySelectionView {
                 Text(
                     """
                     Your category will be created and assigned to your note.
-                    \nYou can further personalize it by tapping the Category Selection button in your Home Tab Bar.
+                    \nYou can further personalize it by tapping the Category Selection button in your Dock.
                     """
                 )
             }
