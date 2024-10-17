@@ -297,8 +297,20 @@ extension NoteCategorySelectionView {
         
         /// Function to create a new category and assign it to the current note.
         func createAndAssignCategory() {
-            // TODO: Create a new category. Assign it to the current note.
             print("Your Category: \(categoryName). Your note: \(note.noteTitle)")
+            
+            withAnimation {
+                // Create a new category:
+                category.name = categoryName
+                viewModel.add(category: category)
+                
+                // Assign it to the current note, using the Category retrieved from the categories array:
+                // TODO: Refactor and move to VM:
+                note.category = viewModel.categories[viewModel.getCategoryIndexFromCategoriesArray(category: category)!]
+            }
+            
+            print("Current categories: \(viewModel.categories)")
+                        
             HapticManager.instance.notification(type: .success)
         }
     }
