@@ -47,7 +47,7 @@ struct WhatsNewView: View {
     }
 }
 
-// MARK: - Extension to group secondary views in WelcomeView.
+// MARK: - Extension to group secondary views in WhatsNewView.
 extension WhatsNewView {
     /// Header view containing the "What's New" Text.
     var headerView: some View {
@@ -94,6 +94,7 @@ extension WhatsNewView {
         .padding()
     }
     
+    /// View to display the description of a new feature.
     fileprivate struct NewFeatureView: View {
         let imageSystemName: String
         let featureTitle: String
