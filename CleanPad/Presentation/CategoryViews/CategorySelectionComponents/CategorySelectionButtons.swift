@@ -249,7 +249,7 @@ extension NoteCategorySelectionView {
         @ObservedObject var sheetsViewModel: SheetsViewModel
         
         @Binding var note: Note
-        @State private var category = Category(id: UUID(), name: "", color: .gray)
+        @State private var category: Category?
         
         @State private var showingAlert = false
         @State private var categoryName: String = ""
@@ -301,12 +301,16 @@ extension NoteCategorySelectionView {
             
             withAnimation {
                 // Create a new category:
-                category.name = categoryName
-                viewModel.add(category: category)
+                category = Category(id: UUID(), name: categoryName, color: .gray)
+                viewModel.add(
+                    category: category ?? Category(id: UUID(), name: "Unnamed Category", color: .gray)
+                )
                 
                 // Assign it to the current note, using the Category retrieved from the categories array:
                 // TODO: Refactor and move to VM:
-                note.category = viewModel.categories[viewModel.getCategoryIndexFromCategoriesArray(category: category)!]
+                note.category = viewModel.categories[
+                    viewModel.getCategoryIndexFromCategoriesArray(category: category!)!
+                ]
             }
             
             print("Current categories: \(viewModel.categories)")
