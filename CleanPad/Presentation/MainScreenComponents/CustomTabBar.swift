@@ -172,6 +172,7 @@ extension CustomTabBar {
                 sheetsViewModel: sheetsViewModel,
                 creatingNewNote: true
             )
+            .interactiveDismissDisabled()
         }
     }
     

@@ -54,6 +54,7 @@ struct EmptyListView: View {
                 sheetsViewModel: sheetsViewModel,
                 creatingNewNote: true
             )
+            .interactiveDismissDisabled()
         }
 
     }
