@@ -121,7 +121,7 @@ final class NotesListViewModel: ObservableObject {
     @Published private(set) var areChangesAllowed = false
     
     @Published private(set) var authenticationError = "Unknown error"
-    @Published var isShowingAuthenticationError = false
+    @Published var isShowingAuthenticationErrorOnMainScreen = false
     
     init() {
         loadData()
@@ -337,7 +337,7 @@ extension NotesListViewModel {
         guard context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) else {
             // Error handling for devices without biometrics.
             authenticationError = "Sorry, your device does not support biometrics."
-            isShowingAuthenticationError = true
+            isShowingAuthenticationErrorOnMainScreen = true
             return
         }
         
@@ -368,7 +368,7 @@ extension NotesListViewModel {
                     }
                     
                     self.authenticationError = errorDescription
-                    self.isShowingAuthenticationError = true
+                    self.isShowingAuthenticationErrorOnMainScreen = true
                 }
             }
         }
