@@ -33,5 +33,10 @@ struct MainScreenView: View {
                 showCategoriesSheet: $showCategoriesSheet
             )
         }
+        .alert("Authentication error", isPresented: $viewModel.isShowingAuthenticationErrorOnMainScreen) {
+            Button("OK") { }
+        } message: {
+            Text(viewModel.authenticationError)
+        }
     }
 }
