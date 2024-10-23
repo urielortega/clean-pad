@@ -76,11 +76,6 @@ struct ContentView: View {
         .sheet(isPresented: $sheetsViewModel.showWhatsNewSheet) { WhatsNewView() }
         .sheet(isPresented: $sheetsViewModel.showFeedbackSheet) { FeedbackView() }
         .sheet(isPresented: $sheetsViewModel.showAboutSheet) { AboutCleanPadView() }
-        .alert("Authentication error", isPresented: $viewModel.isShowingAuthenticationError) {
-            Button("OK") { }
-        } message: {
-            Text(viewModel.authenticationError)
-        }
         .onChange(of: scenePhase) { phase, _ in
             if phase == ScenePhase.background {
                 viewModel.isUnlocked = false
