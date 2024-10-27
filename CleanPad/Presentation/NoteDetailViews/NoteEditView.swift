@@ -42,6 +42,11 @@ struct NoteEditView: View {
     /// Property to modify access to locked notes when phase changes.
     @Environment(\.scenePhase) private var scenePhase
     
+    // Computed property to know if a note's title or content has been modified.
+    var noteHasBeenModified: Bool {
+        (noteCopy.noteTitle != originalNote.noteTitle) || (noteCopy.noteContent != originalNote.noteContent)
+    }
+    
     init(
         note: Note,
         viewModel: NotesListViewModel,
@@ -129,8 +134,8 @@ struct NoteEditView: View {
             if !creatingNewNote && (noteCopy != originalNote) { // Only update if editing an existing note and changes were made.
                 viewModel.update(
                     note: noteCopy,
-                    // Date is only updated when 'noteTitle'                                ...or 'noteContent' has changed.
-                    updatingDate: (noteCopy.noteTitle != originalNote.noteTitle) || (noteCopy.noteContent != originalNote.noteContent)
+                    // Date is only updated when 'noteTitle' or 'noteContent' has changed.
+                    updatingDate: noteHasBeenModified
                 )
             }
         }
@@ -141,8 +146,8 @@ struct NoteEditView: View {
                 if !creatingNewNote && (noteCopy != originalNote) { // Only update if editing an existing note and changes were made.
                     viewModel.update(
                         note: noteCopy,
-                        // Date is only updated when 'noteTitle'                                ...or 'noteContent' has changed.
-                        updatingDate: (noteCopy.noteTitle != originalNote.noteTitle) || (noteCopy.noteContent != originalNote.noteContent)
+                        // Date is only updated when 'noteTitle' or 'noteContent' has changed.
+                        updatingDate: noteHasBeenModified
                     )
                 }
             }
