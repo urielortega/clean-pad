@@ -129,7 +129,8 @@ struct NoteEditView: View {
             }
         }
         .onDisappear {
-            if !creatingNewNote && (noteCopy != originalNote) { // Update only if editing an existing note and changes have been made.
+            // Update only if editing an existing note:
+            if !creatingNewNote {
                 viewModel.update(
                     note: noteCopy,
                     // Date is only updated when 'noteTitle' or 'noteContent' has changed.
@@ -141,7 +142,8 @@ struct NoteEditView: View {
             if phase == ScenePhase.background { // When on background phase...
                 editingAToggledNote = false // ...toggle 'editingAToggledNote', so the contents of the current private note can be hidden.
                 
-                if !creatingNewNote && (noteCopy != originalNote) { // Update only if editing an existing note and changes have been made.
+                // Update only if editing an existing note:
+                if !creatingNewNote {
                     viewModel.update(
                         note: noteCopy,
                         // Date is only updated when 'noteTitle' or 'noteContent' has changed.
