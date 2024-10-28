@@ -42,10 +42,8 @@ struct NoteEditView: View {
     /// Property to modify access to locked notes when phase changes.
     @Environment(\.scenePhase) private var scenePhase
     
-    // Computed property to know if a note's title or content has been modified.
-    var noteHasBeenModified: Bool {
-        (noteCopy.noteTitle != originalNote.noteTitle) || (noteCopy.noteContent != originalNote.noteContent)
-    }
+    // Flag indicating whether the note's title or content has been modified, which triggers an update to the modification date.
+    @State private var willDateBeUpdated = false
     
     init(
         note: Note,
