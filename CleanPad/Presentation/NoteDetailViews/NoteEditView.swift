@@ -134,7 +134,7 @@ struct NoteEditView: View {
                 viewModel.update(
                     note: noteCopy,
                     // Date is only updated when 'noteTitle' or 'noteContent' has changed.
-                    updatingDate: noteHasBeenModified
+                    updatingDate: willDateBeUpdated
                 )
             }
         }
@@ -147,7 +147,7 @@ struct NoteEditView: View {
                     viewModel.update(
                         note: noteCopy,
                         // Date is only updated when 'noteTitle' or 'noteContent' has changed.
-                        updatingDate: noteHasBeenModified
+                        updatingDate: willDateBeUpdated
                     )
                 }
             }
@@ -162,7 +162,7 @@ struct NoteEditView: View {
                     // ...its date will be updated.
                     willDateBeUpdated = true
                 }
-            }
+            }            
         }
         .presentationCornerRadius(Constants.roundedRectCornerRadius)
         .alert("Authentication error", isPresented: $viewModel.isShowingAuthenticationErrorWhenEditing) {
