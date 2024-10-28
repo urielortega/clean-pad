@@ -152,6 +152,18 @@ struct NoteEditView: View {
                 }
             }
         }
+        .onChange(of: noteCopy) {
+            // Return early if the willDateBeUpdated flag is already true.
+            if willDateBeUpdated {
+                return
+            } else {
+                // If a note's title or content has been modified...
+                if (noteCopy.noteTitle != originalNote.noteTitle) || (noteCopy.noteContent != originalNote.noteContent) {
+                    // ...its date will be updated.
+                    willDateBeUpdated = true
+                }
+            }
+        }
         .presentationCornerRadius(Constants.roundedRectCornerRadius)
         .alert("Authentication error", isPresented: $viewModel.isShowingAuthenticationErrorWhenEditing) {
             Button("OK") { }
