@@ -1,5 +1,5 @@
 //
-//  CustomTabBar.swift
+//  DockView.swift
 //  CleanPad
 //
 //  Created by Uriel Ortega on 27/08/24.
@@ -200,7 +200,7 @@ extension DockView {
     }
 }
 
-#Preview("CustomTabBar") {
+#Preview("DockView") {
     DockView(
         viewModel: NotesListViewModel(),
         sheetsViewModel: SheetsViewModel(),
