@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-/// Main View that shows the list of notes, as well as buttons to access locked (private) notes and create new notes, and a custom tab bar.
+/// Main View that shows the list of notes, as well as buttons to access locked notes and the Dock.
 struct MainScreenView: View {
     // Using the viewModels created in ContentView with @ObservedObject.
     @ObservedObject var viewModel: NotesListViewModel
