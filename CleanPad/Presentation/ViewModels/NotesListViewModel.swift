@@ -96,18 +96,18 @@ final class NotesListViewModel: ObservableObject {
     /// Property to control the status of Category Edit Mode.
     @Published var isEditModeActive = false
 
-    // MARK: Tab Bar properties and functions.
-    @Published var isCustomTabBarGlowing = false
+    // MARK: Dock properties and functions.
+    @Published var isDockGlowing = false
     
-    /// Function to trigger delayed Custom Tab Bar Glow.
-    func customTabBarGlow() {
+    /// Function to trigger delayed Dock Glow.
+    func dockGlow() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             withAnimation(.easeInOut(duration: 1)) {
-                self.isCustomTabBarGlowing.toggle()
+                self.isDockGlowing.toggle()
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 withAnimation(.easeInOut(duration: 1)) {
-                    self.isCustomTabBarGlowing.toggle()
+                    self.isDockGlowing.toggle()
                 }
             }
         }

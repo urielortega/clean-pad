@@ -72,14 +72,14 @@ extension DockView {
     /// Button for accessing the non-locked notes list.
     var nonLockedNotesTabButton: some View {
         Button {
-            // Glow CustomTabBar when tapping nonLockedNotesTabButton and Non-Locked Notes Tab is selected:
+            // Glow Dock when tapping nonLockedNotesTabButton and Non-Locked Notes Tab is selected:
             if viewModel.isNonLockedNotesTabSelected {
                 withAnimation(.easeInOut(duration: 1)) {
-                    viewModel.isCustomTabBarGlowing.toggle()
+                    viewModel.isDockGlowing.toggle()
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     withAnimation(.easeInOut(duration: 1)) {
-                        viewModel.isCustomTabBarGlowing.toggle()
+                        viewModel.isDockGlowing.toggle()
                     }
                 }
             }
@@ -98,11 +98,11 @@ extension DockView {
             // Glow CustomTabBar when tapping lockedNotesTabButton and Locked Notes Tab is selected:
             if viewModel.isLockedNotesTabSelected {
                 withAnimation(.easeInOut(duration: 1)) {
-                    viewModel.isCustomTabBarGlowing.toggle()
+                    viewModel.isDockGlowing.toggle()
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     withAnimation(.easeInOut(duration: 1)) {
-                        viewModel.isCustomTabBarGlowing.toggle()
+                        viewModel.isDockGlowing.toggle()
                     }
                 }
             }

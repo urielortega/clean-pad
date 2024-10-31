@@ -124,7 +124,7 @@ extension CategorySelectionView {
                 HapticManager.instance.impact(style: .soft)
                 
                 dismiss()
-                viewModel.customTabBarGlow()
+                viewModel.dockGlow()
             } label: {
                 Text("All notes")
                     .foregroundStyle(Color(.label).gradient)

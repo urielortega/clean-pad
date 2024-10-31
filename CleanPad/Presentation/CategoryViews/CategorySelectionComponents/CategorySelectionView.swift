@@ -95,7 +95,7 @@ extension CategorySelectionView {
                                 HapticManager.instance.impact(style: .soft)
                                 
                                 dismiss()
-                                viewModel.customTabBarGlow()
+                                viewModel.dockGlow()
                             }
                         }
                         .padding(.vertical, 5)
@@ -143,7 +143,7 @@ extension CategorySelectionView {
                                 HapticManager.instance.impact(style: .soft)
                                 
                                 dismiss()
-                                viewModel.customTabBarGlow()
+                                viewModel.dockGlow()
                             }
                         }
                         .padding(5)
