@@ -27,7 +27,7 @@ struct DockView: View {
             
             HStack {
                 if viewModel.showingDockButtons {
-                    showCategoriesTabButton
+                    showCategoriesDockButton
                 }
                 
                 tabBar
@@ -176,8 +176,8 @@ extension DockView {
         }
     }
     
-    /// Button for showing all user categories from the Tab Bar.
-    var showCategoriesTabButton: some View {
+    /// Button for showing all user categories from the Dock.
+    var showCategoriesDockButton: some View {
         Button {
             showCategoriesSheet.toggle()
             HapticManager.instance.impact(style: .light)
