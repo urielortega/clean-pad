@@ -95,7 +95,7 @@ extension DockView {
     /// Button for accessing the locked notes list.
     var lockedNotesTabButton: some View {
         Button {
-            // Glow CustomTabBar when tapping lockedNotesTabButton and Locked Notes Tab is selected:
+            // Glow Dock when tapping lockedNotesTabButton and Locked Notes Tab is selected:
             if viewModel.isLockedNotesTabSelected {
                 withAnimation(.easeInOut(duration: 1)) {
                     viewModel.isDockGlowing.toggle()
