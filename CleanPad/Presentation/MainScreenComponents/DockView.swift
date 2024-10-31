@@ -44,7 +44,7 @@ struct DockView: View {
     }
 }
 
-// MARK: - Extension to group secondary views in CustomTabBar.
+// MARK: - Extension to group secondary views in DockView.
 extension DockView {
     /// View that holds the nonLockedNotesTabButton and the lockedNotesTabButton with a Dock style.
     var tabBar: some View {
