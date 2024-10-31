@@ -295,17 +295,17 @@ extension NoteCategorySelectionView {
             }
         }
         
-        /// Function to create a new category and assign it to the current note.
+        /// Creates a new category and assigns it to the current note.
         func createAndAssignCategory() {
             withAnimation {
-                // Create a new category:
+                // Create a new category with the specified name and default color.
                 category = Category(id: UUID(), name: categoryName, color: .gray)
+                // Add the category to the view model's list, providing a default if needed.
                 viewModel.add(
                     category: category ?? Category(id: UUID(), name: "Unnamed Category", color: .gray)
                 )
                 
-                // Assign it to the current note, using the Category retrieved from the categories array:
-                // TODO: Refactor and move to VM:
+                // Assign the newly created category to the current note.
                 note.category = viewModel.categories[
                     viewModel.getCategoryIndexFromCategoriesArray(category: category!)!
                 ]
