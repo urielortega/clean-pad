@@ -84,19 +84,7 @@ extension CategorySelectionView {
                             category: category,
                             role: viewModel.isEditModeActive ? .edition : .selection
                         ) {
-                            // TODO: Refactor and move to VM:
-                            if viewModel.isEditModeActive {
-                                viewModel.changeCurrentEditableCategory(with: category)
-                                sheetsViewModel.showCategoryEditSheet.toggle()
-                            } else {
-                                withAnimation(.bouncy) {
-                                    viewModel.changeSelectedCategory(with: category)
-                                }
-                                HapticManager.instance.impact(style: .soft)
-                                
-                                dismiss()
-                                viewModel.dockGlow()
-                            }
+                            editOrSelectCategory(category)
                         }
                         .padding(.vertical, 5)
                     }
@@ -132,19 +120,7 @@ extension CategorySelectionView {
                             role: viewModel.isEditModeActive ? .edition : .selection,
                             isButtonDisabled: viewModel.isEditModeActive && (category.id == Category.general.id) // Disable General Category Button when Edit Mode is active.
                         ) {
-                            // TODO: Refactor and move to VM:
-                            if viewModel.isEditModeActive {
-                                viewModel.changeCurrentEditableCategory(with: category)
-                                sheetsViewModel.showCategoryEditSheet.toggle()
-                            } else {
-                                withAnimation(.bouncy) {
-                                    viewModel.changeSelectedCategory(with: category)
-                                }
-                                HapticManager.instance.impact(style: .soft)
-                                
-                                dismiss()
-                                viewModel.dockGlow()
-                            }
+                            editOrSelectCategory(category)
                         }
                         .padding(5)
                     }
@@ -167,6 +143,23 @@ extension CategorySelectionView {
                 bottomSheetButton
                     .padding()
             }
+        }
+    }
+    
+    /// Displays the Category Edit Sheet or selects a category based on the `isEditModeActive` property.
+    /// - Parameter category: The category to either edit or select. If `isEditModeActive` is true, opens the Category Edit Sheet with the specified category. Otherwise, selects the category.
+    func editOrSelectCategory(_ category: Category) {
+        if viewModel.isEditModeActive {
+            viewModel.changeCurrentEditableCategory(with: category)
+            sheetsViewModel.showCategoryEditSheet.toggle()
+        } else {
+            withAnimation(.bouncy) {
+                viewModel.changeSelectedCategory(with: category)
+            }
+            HapticManager.instance.impact(style: .soft)
+            
+            dismiss()
+            viewModel.dockGlow()
         }
     }
 }
