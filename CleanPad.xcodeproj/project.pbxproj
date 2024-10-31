@@ -41,7 +41,7 @@
 		A4C36C482AE73163001B4389 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C36C472AE73163001B4389 /* HapticManager.swift */; };
 		A4D06FAE2B21428C0000D089 /* DateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D06FAD2B21428C0000D089 /* DateViewModel.swift */; };
 		A4DC37282CA87D7600A5CF61 /* VariableBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DC37272CA87D6600A5CF61 /* VariableBlur.swift */; };
-		A4ED50E42C7E50CC0077CB36 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ED50E32C7E50CC0077CB36 /* CustomTabBar.swift */; };
+		A4ED50E42C7E50CC0077CB36 /* DockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ED50E32C7E50CC0077CB36 /* DockView.swift */; };
 		A4ED50E72C7E5F830077CB36 /* CategorySelectionButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ED50E62C7E5F830077CB36 /* CategorySelectionButtons.swift */; };
 		A4F10F5B2B8D73360014C68B /* CategorySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F10F5A2B8D73360014C68B /* CategorySelectionView.swift */; };
 /* End PBXBuildFile section */
@@ -82,7 +82,7 @@
 		A4C36C472AE73163001B4389 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		A4D06FAD2B21428C0000D089 /* DateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateViewModel.swift; sourceTree = "<group>"; };
 		A4DC37272CA87D6600A5CF61 /* VariableBlur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableBlur.swift; sourceTree = "<group>"; };
-		A4ED50E32C7E50CC0077CB36 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
+		A4ED50E32C7E50CC0077CB36 /* DockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockView.swift; sourceTree = "<group>"; };
 		A4ED50E62C7E5F830077CB36 /* CategorySelectionButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectionButtons.swift; sourceTree = "<group>"; };
 		A4F10F5A2B8D73360014C68B /* CategorySelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -248,7 +248,7 @@
 			children = (
 				A46117272AF56E31001C0087 /* MainScreenView.swift */,
 				A46117292AF56EB6001C0087 /* AllNotesView.swift */,
-				A4ED50E32C7E50CC0077CB36 /* CustomTabBar.swift */,
+				A4ED50E32C7E50CC0077CB36 /* DockView.swift */,
 			);
 			path = MainScreenComponents;
 			sourceTree = "<group>";
@@ -380,7 +380,7 @@
 				A41324322C17C8AF005B478C /* ButtonStyles.swift in Sources */,
 				A475B9642ACCD7DE00BE6575 /* WelcomeView.swift in Sources */,
 				A489F7A32B84290F00CB44AE /* Category.swift in Sources */,
-				A4ED50E42C7E50CC0077CB36 /* CustomTabBar.swift in Sources */,
+				A4ED50E42C7E50CC0077CB36 /* DockView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

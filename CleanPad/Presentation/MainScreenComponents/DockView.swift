@@ -8,8 +8,8 @@
 import Foundation
 import SwiftUI
 
-/// Tab Bar with buttons to switch between the non-locked notes list and the locked notes list, show categories and create a new note.
-struct CustomTabBar: View {
+/// Dock with buttons to show categories, create a new note and switch between the non-locked notes list and the locked notes list.s
+struct DockView: View {
     @ObservedObject var viewModel: NotesListViewModel
     @ObservedObject var sheetsViewModel: SheetsViewModel
     @Binding var showNoteEditViewSheet: Bool
@@ -45,7 +45,7 @@ struct CustomTabBar: View {
 }
 
 // MARK: - Extension to group secondary views in CustomTabBar.
-extension CustomTabBar {
+extension DockView {
     /// View that holds the nonLockedNotesTabButton and the lockedNotesTabButton with a Dock style.
     var tabBar: some View {
         HStack {
@@ -201,7 +201,7 @@ extension CustomTabBar {
 }
 
 #Preview("CustomTabBar") {
-    CustomTabBar(
+    DockView(
         viewModel: NotesListViewModel(),
         sheetsViewModel: SheetsViewModel(),
         showNoteEditViewSheet: .constant(

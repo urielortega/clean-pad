@@ -26,7 +26,7 @@ struct MainScreenView: View {
                 showNoteEditViewSheet: $showNoteEditViewSheet
             )
             
-            CustomTabBar(
+            DockView(
                 viewModel: viewModel, 
                 sheetsViewModel: sheetsViewModel,
                 showNoteEditViewSheet: $showNoteEditViewSheet,
