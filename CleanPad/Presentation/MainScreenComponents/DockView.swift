@@ -33,7 +33,7 @@ struct DockView: View {
                 tabBar
                 
                 if viewModel.showingDockButtons {
-                    createNoteTabButton
+                    createNoteDockButton
                 }
             }
             .padding(
@@ -151,8 +151,8 @@ extension DockView {
         .accessibilityLabel("Your private notes.")
     }
     
-    /// Button for creating a new note from the Tab Bar.
-    var createNoteTabButton: some View {
+    /// Button for creating a new note from the Dock.
+    var createNoteDockButton: some View {
         Button { //                                             Non-locked note with General Category.     Locked note with General Category.
             newNote = (viewModel.isNonLockedNotesTabSelected) ? Note(category: viewModel.categories[0]) : Note(isLocked: true, category: viewModel.categories[0])
             
