@@ -23,16 +23,16 @@ struct DockView: View {
 
     var body: some View {
         VStack {
-            Spacer() // To push the TabBar to the bottom.
+            Spacer()
             
             HStack {
-                if viewModel.showingTabButtons {
+                if viewModel.showingDockButtons {
                     showCategoriesTabButton
                 }
                 
                 tabBar
                 
-                if viewModel.showingTabButtons {
+                if viewModel.showingDockButtons {
                     createNoteTabButton
                 }
             }
@@ -62,7 +62,7 @@ extension DockView {
         }
         .frame(height: 55)
         .dockStyle(viewModel: viewModel)
-        .padding(.horizontal, viewModel.showingTabButtons ? 0 : 10)
+        .padding(.horizontal, viewModel.showingDockButtons ? 0 : 10)
         .padding(
             .horizontal,
             (viewModel.idiom == .pad && sizeClass == .regular) ? 10 : 0

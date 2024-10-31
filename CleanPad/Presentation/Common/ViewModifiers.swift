@@ -18,7 +18,7 @@ struct Dock: ViewModifier {
             .roundedRectangleOverlayStroke()
             .glowingShadow(viewModel: viewModel)
             .padding(.vertical)
-            .padding(.horizontal, viewModel.showingTabButtons ? 0 : 10)
+            .padding(.horizontal, viewModel.showingDockButtons ? 0 : 10)
     }
 }
 
