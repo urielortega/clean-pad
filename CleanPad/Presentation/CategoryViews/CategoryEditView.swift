@@ -141,7 +141,7 @@ struct CategoryEditView: View {
 
 #Preview {
     CategoryEditView(
-        category: .example,
+        category: .thoughts,
         viewModel: NotesListViewModel(),
         creatingNewCategory: false
     )
