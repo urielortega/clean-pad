@@ -27,15 +27,60 @@ extension Category {
         color: .brown
     )
     
-    static let example = Category(
-        id: UUID(),
-        name: "Thoughts",
-        color: .cyan
-    )
-    
     static let noSelection = Category(
         id: UUID(uuidString: "0F8F3075-DCC8-4AC9-8FF4-19068D272AB8")!, // Static id for the permanent No Selection Category.
         name: "Show all notes",
         color: .gray
     )
 }
+
+#if DEBUG
+extension Category {
+    // MARK: Example categories:
+    static let thoughts = Category(
+        id: UUID(),
+        name: "Thoughts",
+        color: .cyan
+    )
+    
+    static let health = Category(
+        id: UUID(),
+        name: "Health",
+        color: .red
+    )
+    
+    static let cleanPad = Category(
+        id: UUID(),
+        name: "CleanPad",
+        color: .yellow
+    )
+    
+    static let professional = Category(
+        id: UUID(),
+        name: "Professional",
+        color: .indigo
+    )
+    
+    static let business = Category(
+        id: UUID(),
+        name: "Business",
+        color: .pink
+    )
+
+    
+    static let personal = Category(
+        id: UUID(),
+        name: "Personal",
+        color: .mint
+    )
+    
+    static let screenshotsExamples: [Category] = [
+        .thoughts,
+        .health,
+        .cleanPad,
+        .professional,
+        .business,
+        .personal
+    ]
+}
+#endif
