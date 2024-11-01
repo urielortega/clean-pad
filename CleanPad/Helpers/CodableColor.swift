@@ -8,11 +8,15 @@
 import Foundation
 import SwiftUI
 
+/// Extension to make SwiftUI's `Color` conform to `Codable`,
+/// allowing it to be encoded and decoded for storage or data transfer.
 extension Color: Codable {
+    /// Coding keys for extracting RGB components of a color.
     enum CodingKeys: String, CodingKey {
         case red, green, blue
     }
     
+    /// Initializes a `Color` instance by decoding its RGB components.
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let r = try container.decode(Double.self, forKey: .red)
@@ -22,6 +26,7 @@ extension Color: Codable {
         self.init(red: r, green: g, blue: b)
     }
     
+    /// Encodes a `Color` instance by storing its RGB components.
     public func encode(to encoder: Encoder) throws {
         guard let colorComponents = self.colorComponents else {
             return
@@ -36,15 +41,18 @@ extension Color: Codable {
 }
 
 fileprivate extension Color {
+    /// Helper property that extracts the RGB and alpha components of a `Color`.
+    /// Returns `nil` if the color cannot be converted into RGB format.
+    ///
+    /// Note: Colors using hue, saturation, and brightness may not work.
     var colorComponents: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat)? {
         var r: CGFloat = 0
         var g: CGFloat = 0
         var b: CGFloat = 0
         var a: CGFloat = 0
         
-        
-        // Color should be convertible into RGB format.
-        // Colors using hue, saturation and brightness won't work.
+        // Attempt to convert the color into RGB format.
+        // If conversion fails, `nil` is returned.
         guard UIColor(self).getRed(&r, green: &g, blue: &b, alpha: &a) else {
             return nil
         }
