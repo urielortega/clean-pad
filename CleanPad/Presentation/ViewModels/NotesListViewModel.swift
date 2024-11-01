@@ -477,6 +477,11 @@ extension NotesListViewModel {
     
     /// Function for testing purposes that adds ten note examples to the ``notes`` array and saves the changes after the addition.
     func addScreenshotsNoteExamples() {
+        // Adding the example categories (used in the Note.screenshotsExamples):
+        for category in Category.screenshotsExamples {
+            add(category: category)
+        }
+        
         for note in Note.screenshotsExamples {
             add(note: note)
         }
