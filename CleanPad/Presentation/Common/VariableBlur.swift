@@ -10,15 +10,20 @@ import UIKit
 import CoreImage.CIFilterBuiltins
 import QuartzCore
 
-
+/// Enum defining the direction of the variable blur effect.
 public enum VariableBlurDirection {
     case blurredTopClearBottom
     case blurredBottomClearTop
 }
 
-
+/// A SwiftUI view that applies a variable blur effect, with adjustable blur radius
+/// and direction. It bridges to UIKit's `UIVisualEffectView` to leverage Core Image filters.
+///
+/// - Parameters:
+///   - maxBlurRadius: The maximum blur radius applied at the most blurred part of the view.
+///   - direction: The direction of the blur transition, from top to bottom or vice versa.
+///   - startOffset: An offset that adjusts the initial blur radius for smoother transitions.
 public struct VariableBlurView: UIViewRepresentable {
-    
     public var maxBlurRadius: CGFloat = 20
     
     public var direction: VariableBlurDirection = .blurredTopClearBottom
@@ -26,6 +31,7 @@ public struct VariableBlurView: UIViewRepresentable {
     /// By default, variable blur starts from 0 blur radius and linearly increases to `maxBlurRadius`. Setting `startOffset` to a small negative coefficient (e.g. -0.1) will start blur from larger radius value which might look better in some cases.
     public var startOffset: CGFloat = 0
     
+    /// Initializes a `VariableBlurView` with customizable parameters.
     public init(maxBlurRadius: CGFloat = 20, direction: VariableBlurDirection = .blurredTopClearBottom, startOffset: CGFloat = 0) {
         self.maxBlurRadius = maxBlurRadius
         self.direction = direction
@@ -40,14 +46,15 @@ public struct VariableBlurView: UIViewRepresentable {
     }
 }
 
-
-/// credit https://github.com/jtrivedi/VariableBlurView
+/// A UIView subclass that applies a variable blur effect by using `CAFilter`.
+/// This class leverages a gradient mask to adjust the blur radius across different parts of the view.
+/// Credit https://github.com/jtrivedi/VariableBlurView
 open class VariableBlurUIView: UIVisualEffectView {
-
+    /// Initializes a `VariableBlurUIView` with a specific blur radius, direction, and offset.
     public init(maxBlurRadius: CGFloat = 20, direction: VariableBlurDirection = .blurredTopClearBottom, startOffset: CGFloat = 0) {
         super.init(effect: UIBlurEffect(style: .regular))
 
-        // `CAFilter` is a private QuartzCore class that dynamically create using Objective-C runtime.
+        // `CAFilter` is a private QuartzCore class dynamically created using Objective-C runtime.
         guard let CAFilter = NSClassFromString("CAFilter")! as? NSObject.Type else {
             print("[VariableBlur] Error: Can't find CAFilter class")
             return
@@ -82,19 +89,21 @@ open class VariableBlurUIView: UIVisualEffectView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    /// Ensures correct rendering on high-resolution screens to fix pixelization at the edge of the blur.
     open override func didMoveToWindow() {
         // fixes visible pixelization at unblurred edge (https://github.com/nikstar/VariableBlur/issues/1)
         guard let window, let backdropLayer = subviews.first?.layer else { return }
         backdropLayer.setValue(window.screen.scale, forKey: "scale")
     }
     
+    /// Override for trait collection changes; `super.traitCollectionDidChange` is omitted to avoid crashes.
     open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         // `super.traitCollectionDidChange(previousTraitCollection)` crashes the app
     }
     
+    /// Creates a gradient image to serve as a mask for the variable blur.
     private func makeGradientImage(width: CGFloat = 100, height: CGFloat = 100, startOffset: CGFloat, direction: VariableBlurDirection) -> CGImage { // much lower resolution might be acceptable
         let ciGradientFilter =  CIFilter.linearGradient()
-//        let ciGradientFilter =  CIFilter.smoothLinearGradient()
         ciGradientFilter.color0 = CIColor.black
         ciGradientFilter.color1 = CIColor.clear
         ciGradientFilter.point0 = CGPoint(x: 0, y: height)
