@@ -8,7 +8,8 @@
 import Foundation
 import SwiftUI
 
-/// Model defining the Note Category structure.
+/// Model representing a category that can be assigned to a note.
+/// Each category has a unique identifier, a name, and an associated color for visual distinction.
 struct Category: Codable, Identifiable, Equatable, Hashable {
     var id: UUID
     var name: String
