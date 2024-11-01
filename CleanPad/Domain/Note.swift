@@ -38,7 +38,7 @@ extension Note {
         category: .thoughts
     )
     
-    /// Example non-locked notes. Useful when testing the List UI.
+    /// Example non-locked notes for UI testing of the List UI.
     static let nonLockedExamples: [Note] =
     [
         Note(
@@ -83,7 +83,7 @@ extension Note {
         )
     ]
     
-    /// Example locked notes. Useful when testing the List UI.
+    /// Example locked notes for UI testing of the List UI.
     static let lockedExamples: [Note] =
     [
         Note(
@@ -133,6 +133,7 @@ extension Note {
         )
     ]
     
+    /// Example notes for UI testing screenshots.
     static let screenshotsExamples: [Note] =
     [
         Note(
