@@ -7,7 +7,8 @@
 
 import Foundation
 
-/// Main model in the app defining a note structure.
+/// Model representing a note in the app, defining its structure and properties.
+/// A note includes a title, content, category, creation date, and a flag indicating whether it is locked (private).
 struct Note: Codable, Identifiable, Equatable {
     var id = UUID()
     
