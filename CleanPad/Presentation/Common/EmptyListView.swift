@@ -21,7 +21,7 @@ struct EmptyListView: View {
     /// Local State property for managing the creation of a new note.
     @State private var newNote = Note()
     
-    /// State property to hold a random description from `Constants.emptyListPlaceholders`.
+    /// State property to hold a random description from `placeholders`.
     @State private var randomDescription: String = ""
     
     var buttonActions: () -> Void
@@ -61,7 +61,7 @@ struct EmptyListView: View {
         .onAppear {
             // Only set `randomDescription` once per appearance of the view
             if randomDescription.isEmpty {
-                randomDescription = Constants.emptyListPlaceholders.randomElement() ?? "Start writing..."
+                randomDescription = EmptyListView.placeholders.randomElement() ?? "Start writing..."
             }
         }
     }
@@ -85,6 +85,18 @@ extension EmptyListView {
         }
         .accessibilityLabel("Empty list. Tap to create a note.")
     }
+    
+    /// Strings shown when a list is empty to invite the user to create a note.
+    static let placeholders = [
+        "What's on your mind?",
+        "How's been your day?",
+        "How are you feeling right now?",
+        "It's OK. Write it down.",
+        "Make today a little bit better.",
+        "Let the words flow.",
+        "Capture the moment.",
+        "Start the symphony of thoughts."
+    ]
 }
 
 struct EmptyListView_Previews: PreviewProvider {

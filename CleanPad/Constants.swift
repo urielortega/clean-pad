@@ -16,18 +16,6 @@ enum Constants {
         case nonLockedNotes, lockedNotes
     }
     
-    /// Strings shown when a list is empty to invite the user to create a note.
-    static let emptyListPlaceholders = [
-        "What's on your mind?",
-        "How's been your day?",
-        "How are you feeling right now?",
-        "It's OK. Write it down.",
-        "Make today a little bit better.",
-        "Let the words flow.",
-        "Capture the moment.",
-        "Start the symphony of thoughts."
-    ]
-    
     /// Strings shown when a note is untitled to invite the user to title it.
     static let untitledNotePlaceholders = [
         "Title your note...",
