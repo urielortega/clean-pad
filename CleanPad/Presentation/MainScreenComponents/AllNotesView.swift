@@ -48,7 +48,6 @@ struct AllNotesView: View {
                                 showNoteEditViewSheet: $showNoteEditViewSheet,
                                 imageSystemName: "note.text",
                                 label: "This looks a little empty...",
-                                description: Constants.emptyListPlaceholders.randomElement() ?? "Start writing...",
                                 buttonLabel: "Create a note!"
                             ) { showNoteEditViewSheet.toggle() }
                         }

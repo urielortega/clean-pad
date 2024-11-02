@@ -16,11 +16,13 @@ struct EmptyListView: View {
     
     var imageSystemName: String = "questionmark"
     var label: String = "No Items"
-    var description: String = "Start adding items to your list."
     var buttonLabel: String = "Add item"
     
     /// Local State property for managing the creation of a new note.
     @State private var newNote = Note()
+    
+    /// State property to hold a random description from `Constants.emptyListPlaceholders`.
+    @State private var randomDescription: String = ""
     
     var buttonActions: () -> Void
     
@@ -36,7 +38,7 @@ struct EmptyListView: View {
                 .bold()
                 .padding(.bottom, 3)
             
-            Text(description)
+            Text(randomDescription)
                 .foregroundStyle(.secondary)
                 .padding(.bottom, 15)
             
@@ -56,7 +58,12 @@ struct EmptyListView: View {
             )
             .interactiveDismissDisabled()
         }
-
+        .onAppear {
+            // Only set `randomDescription` once per appearance of the view
+            if randomDescription.isEmpty {
+                randomDescription = Constants.emptyListPlaceholders.randomElement() ?? "Start writing..."
+            }
+        }
     }
 }
 
@@ -73,7 +80,6 @@ extension EmptyListView {
                 showNoteEditViewSheet: $showNoteEditViewSheet,
                 imageSystemName: "note.text",
                 label: "This looks a little empty...",
-                description: Constants.emptyListPlaceholders.randomElement() ?? "Start writing...",
                 buttonLabel: "Create a note!"
             ) { }
         }
