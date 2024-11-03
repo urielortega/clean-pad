@@ -45,6 +45,9 @@ struct NoteEditView: View {
     // Flag indicating whether the note's title or content has been modified, which triggers an update to the modification date.
     @State private var willDateBeUpdated = false
     
+    /// State property to hold a random String from `untitledNotePlaceholders`.
+    @State private var randomPlaceholder: String = ""
+    
     init(
         note: Note,
         viewModel: NotesListViewModel,
@@ -128,6 +131,12 @@ struct NoteEditView: View {
                 }
             }
         }
+        .onAppear {
+            // Only set `randomDescription` once per appearance of the view
+            if randomPlaceholder.isEmpty {
+                randomPlaceholder = NoteEditView.untitledNotePlaceholders.randomElement() ?? "Title your note..."
+            }
+        }
         .onDisappear {
             // Update only if editing an existing note:
             if !creatingNewNote {
@@ -176,9 +185,7 @@ extension NoteEditView {
         TextField(
             noteCopy.noteTitle,
             text: $noteCopy.noteTitle,
-            prompt: Text(
-                NoteEditView.untitledNotePlaceholders.randomElement() ?? "Title your note..."
-            )
+            prompt: Text(randomPlaceholder)
         )
         .font(.title2).bold()
         .padding(.leading)
