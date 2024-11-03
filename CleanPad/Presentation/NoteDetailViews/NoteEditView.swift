@@ -177,7 +177,7 @@ extension NoteEditView {
             noteCopy.noteTitle,
             text: $noteCopy.noteTitle,
             prompt: Text(
-                Constants.untitledNotePlaceholders.randomElement() ?? "Title your note..."
+                NoteEditView.untitledNotePlaceholders.randomElement() ?? "Title your note..."
             )
         )
         .font(.title2).bold()
@@ -247,4 +247,14 @@ extension NoteEditView {
         }
         .padding(.horizontal)
     }
+}
+
+// MARK: - Extension holding placeholders for untitled notes.
+extension NoteEditView {
+    /// Strings shown when a note is untitled to invite the user to title it.
+    static let untitledNotePlaceholders = [
+        "Title your note...",
+        "Title your imagination...",
+        "Title your inspiration..."
+    ]
 }

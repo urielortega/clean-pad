@@ -16,13 +16,6 @@ enum Constants {
         case nonLockedNotes, lockedNotes
     }
     
-    /// Strings shown when a note is untitled to invite the user to title it.
-    static let untitledNotePlaceholders = [
-        "Title your note...",
-        "Title your imagination...",
-        "Title your inspiration..."
-    ]
-    
     /// Path used to store ``notes`` with documents directory.
     static let savePath = FileManager.documentsDirectory.appendingPathComponent("SavedNotes")
     
