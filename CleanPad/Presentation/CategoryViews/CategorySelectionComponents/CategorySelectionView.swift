@@ -123,6 +123,9 @@ extension CategorySelectionView {
                             editOrSelectCategory(category)
                         }
                         .padding(5)
+                        .contextMenu {
+                            Button("OK") { print("Context Menu pressed!") }
+                        }
                     }
                 }
                 .padding()

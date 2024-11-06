@@ -64,6 +64,9 @@ extension NoteCategorySelectionView {
                             viewModel: viewModel
                         )
                         .padding(5)
+                        .contextMenu {
+                            Button("OK") { print("Context Menu pressed!") }
+                        }
                     }
                 }
                 .padding()
