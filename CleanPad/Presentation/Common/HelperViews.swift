@@ -54,6 +54,7 @@ struct AppIconView: View {
     }
 }
 
+/// View that displays a circular indicator representing the color of a note's category.
 struct NoteCategoryIndicator: View {
     var note: Note
     
