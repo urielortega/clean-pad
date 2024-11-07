@@ -8,6 +8,9 @@
 import Foundation
 import SwiftUI
 
+/// A custom `ButtonStyle` that applies a rounded rectangular shape, material background, and soft shadow to a button.
+///
+/// The button's opacity is slightly reduced when pressed for a subtle feedback effect.
 struct MaterialRoundedButtonStyle: ButtonStyle {
     func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
@@ -19,6 +22,9 @@ struct MaterialRoundedButtonStyle: ButtonStyle {
     }
 }
 
+/// A custom `ButtonStyle` that applies a circular shape, thin material background, and a shadow to a button.
+///
+/// The button's opacity is slightly reduced when pressed for a subtle feedback effect.
 struct MaterialCircleButtonStyle: ButtonStyle {
     func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
@@ -30,6 +36,10 @@ struct MaterialCircleButtonStyle: ButtonStyle {
     }
 }
 
+/// A custom `ButtonStyle` that applies a gradient background, rounded corners, and soft shadow to a button.
+///
+/// `GradientButtonStyle` provides a button with a gradient background that transitions between `startColor` and `endColor`.
+/// The button's opacity is slightly reduced when pressed for a subtle feedback effect.
 struct GradientButtonStyle: ButtonStyle {
     var startColor: Color
     var endColor: Color
