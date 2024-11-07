@@ -34,7 +34,7 @@ struct ContentView: View {
             .navigationTitle(viewModel.isNonLockedNotesTabSelected ? "Notes" : "Private Notes")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    if viewModel.isNonLockedNotesTabSelected {
+                    if viewModel.isNonLockedNotesTabSelected { // Non-Locked Notes Tab is selected.
                         lockAndUnlockNotesButtonView
                     } else { // Locked Notes Tab is selected.
                         if viewModel.isUnlocked {
@@ -77,6 +77,7 @@ struct ContentView: View {
         .sheet(isPresented: $sheetsViewModel.showFeedbackSheet) { FeedbackView() }
         .sheet(isPresented: $sheetsViewModel.showAboutSheet) { AboutCleanPadView() }
         .onChange(of: scenePhase) { phase, _ in
+            // Restrict access to locked notes when the app enters the background.
             if phase == ScenePhase.background {
                 viewModel.isUnlocked = false
             }
