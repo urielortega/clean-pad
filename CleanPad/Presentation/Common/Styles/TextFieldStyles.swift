@@ -8,6 +8,12 @@
 import Foundation
 import SwiftUI
 
+/// A custom `TextFieldStyle` that applies a gradient background, rounded corners, and a soft shadow to a text field.
+///
+/// The `GradientTextFieldStyle` struct creates a stylized text field with a gradient background transitioning
+/// between `startColor` and `endColor`. The gradient starts at the top leading corner and ends at the bottom trailing corner.
+///
+/// The style also includes rounded corners, a soft shadow, and an overlay with a gradient stroke border.
 struct GradientTextFieldStyle: TextFieldStyle {
     var startColor: Color
     var endColor: Color
