@@ -228,13 +228,17 @@ extension NoteEditView {
         }
     }
     
+    /// A view for displaying and changing the category of a note.
+    /// It shows the current category of the note, along with a "Change Category" button that allows users to select a new category.
     var changeNoteCategoryView: some View {
         HStack {
             HStack {
+                // Circular indicator showing the color of the current category:
                 Circle()
                     .fill((noteCopy.category?.color ?? .gray).gradient)
                     .frame(width: 10, height: 10)
                 
+                // Name of the selected category:
                 Text(noteCopy.category?.displayName ?? "No Category Selected")
                     .bold(noteCopy.category == nil ? false : true)
                     .foregroundStyle(noteCopy.category == nil ? .gray : Color(.label))
@@ -245,6 +249,7 @@ extension NoteEditView {
             
             Spacer()
             
+            // Button that toggles the sheet view to show category selection:
             Button("Change Category") {
                 sheetsViewModel.showNoteCategorySheet.toggle()
                 HapticManager.instance.impact(style: .light)
