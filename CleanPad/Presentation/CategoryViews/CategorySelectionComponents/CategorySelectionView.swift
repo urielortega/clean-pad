@@ -122,10 +122,16 @@ extension CategorySelectionView {
                         ) {
                             editOrSelectCategory(category)
                         }
-                        .padding(5)
                         .contextMenu {
-                            Button("OK") { print("Context Menu pressed!") }
+                            if !(category.id == Category.general.id) { // Disable contextMenu with General Category Button.
+                                // Button for accessing CategoryEditView sheet with the selected category.
+                                Button("Edit Category", systemImage: "pencil") {
+                                    viewModel.changeCurrentEditableCategory(with: category)
+                                    sheetsViewModel.showCategoryEditSheet.toggle()
+                                }
+                            }
                         }
+                        .padding(5)
                     }
                 }
                 .padding()
