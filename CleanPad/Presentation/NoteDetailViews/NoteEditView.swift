@@ -97,8 +97,7 @@ struct NoteEditView: View {
                     ToolbarItem(placement: .topBarTrailing) {
                         HStack {
                             if !(focusedField == .none) {
-                                // Button to dismiss keyboard when typing.
-                                Button("OK") { focusedField = .none }
+                                Button("OK") { focusedField = .none } // Button to dismiss keyboard when typing.
                             } else {
                                 Menu {
                                     isLockedToggleButtonView
