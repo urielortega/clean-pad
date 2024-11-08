@@ -34,7 +34,7 @@ struct CategoryEditView: View {
         NavigationStack {
             VStack {
                 CustomTopTitle(
-                    text: creatingNewCategory ? "Create New Category" : "Update Category"
+                    text: creatingNewCategory ? "Create New Category" : "Edit Category"
                 )
                 .padding([.horizontal, .top])
                 
