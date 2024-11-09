@@ -123,11 +123,26 @@ extension CategorySelectionView {
                             editOrSelectCategory(category)
                         }
                         .contextMenu {
-                            if !(category.id == Category.general.id) { // Disable contextMenu with General Category Button.
-                                // Button for accessing CategoryEditView sheet with the selected category.
-                                Button("Edit Category", systemImage: "pencil") {
-                                    viewModel.changeCurrentEditableCategory(with: category)
-                                    sheetsViewModel.showCategoryEditSheet.toggle()
+                            Group {
+                                Button(
+                                    // Display "Unselect Category" if the category is currently selected; otherwise, display "Select Category":
+                                    viewModel.isCategorySelected(category) ? "Unselect Category" : "Select Category",
+                                    systemImage: viewModel.isCategorySelected(category) ? "xmark.circle" : "checkmark.circle"
+                                ) {
+                                    withAnimation(.bouncy) {
+                                        viewModel.changeSelectedCategory(
+                                            // If the category is selected, unselect it (using Category.noSelection); otherwise, select it.
+                                            with: (viewModel.isCategorySelected(category) ? .noSelection : category)
+                                        )
+                                    }
+                                }
+                                
+                                if !(category.id == Category.general.id) { // Disable this button with General Category Button.
+                                    // Button for accessing CategoryEditView sheet with the selected category.
+                                    Button("Edit Category", systemImage: "pencil") {
+                                        viewModel.changeCurrentEditableCategory(with: category)
+                                        sheetsViewModel.showCategoryEditSheet.toggle()
+                                    }
                                 }
                             }
                         }
