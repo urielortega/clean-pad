@@ -63,10 +63,10 @@ extension NoteCategorySelectionView {
                             creatingNewNote: $creatingNewNote,
                             viewModel: viewModel
                         )
-                        .padding(5)
                         .contextMenu {
                             Button("OK") { print("Context Menu pressed!") }
                         }
+                        .padding(5)
                     }
                 }
                 .padding()
