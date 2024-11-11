@@ -236,6 +236,9 @@ extension NoteCategorySelectionView {
             )
             .overlay { adaptableOverlay }
             .sensoryFeedback(.error, trigger: triggerHapticFeedback)
+            .accessibilityElement()
+            .accessibilityAddTraits(.isButton)
+            .accessibilityLabel("\(category.displayName) Category")
         }
         
         /// Indicator that visually differentiates the current category selection.
