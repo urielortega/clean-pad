@@ -121,7 +121,6 @@ extension CategorySelectionView {
         
         var body: some View {
             Button {
-                // TODO: Refactor and move to VM:
                 withAnimation(.bouncy) {
                     viewModel.changeSelectedCategory(with: .noSelection)
                 }
@@ -140,6 +139,9 @@ extension CategorySelectionView {
             .clipShape(.rect(cornerRadius: Constants.materialButtonCornerRadius))
             .largeShadow(color: .black.opacity(0.3))
             .overlay { adaptableOverlay }
+            .accessibilityElement()
+            .accessibilityAddTraits(.isButton)
+            .accessibilityLabel("Show all notes")
         }
         
         /// Stroke overlay that adapts if the "All notes" category is selected.
