@@ -313,6 +313,9 @@ extension NoteCategorySelectionView {
                     """
                 )
             }
+            .accessibilityElement()
+            .accessibilityAddTraits(.isButton)
+            .accessibilityLabel("Create a new category and assign it to this note.")
         }
         
         /// Creates a new category and assigns it to the current note.
