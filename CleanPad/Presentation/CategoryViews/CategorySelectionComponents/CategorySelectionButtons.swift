@@ -179,7 +179,9 @@ extension NoteCategorySelectionView {
     struct NoteCategoryButton: View {
         @Binding var note: Note
         var category: Category
+        
         @Binding var creatingNewNote: Bool
+        @Binding var triggerHapticFeedback: Bool
         
         @ObservedObject var viewModel: NotesListViewModel
         @Environment(\.dismiss) var dismiss
@@ -208,7 +210,9 @@ extension NoteCategorySelectionView {
                     
                     dynamicIndicator
                 }
+                .contentShape(Rectangle()) // Makes the entire HStack area tappable.
                 .contentTransition(.symbolEffect(.automatic))
+                .onLongPressGesture(perform: { triggerHapticFeedback.toggle() } )
             }
             .buttonStyle(
                 GradientButtonStyle(
@@ -219,6 +223,7 @@ extension NoteCategorySelectionView {
                 )
             )
             .overlay { adaptableOverlay }
+            .sensoryFeedback(.error, trigger: triggerHapticFeedback)
         }
         
         /// View that visually differentiates the note category from the rest of the user's categories.

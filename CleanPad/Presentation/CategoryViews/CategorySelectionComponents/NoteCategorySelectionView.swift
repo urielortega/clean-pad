@@ -18,6 +18,8 @@ struct NoteCategorySelectionView: View {
     
     @Environment(\.dismiss) var dismiss
     
+    @State var triggerHapticFeedback: Bool = false
+    
     var body: some View {
         VStack {
             dismissTopView
@@ -61,11 +63,9 @@ extension NoteCategorySelectionView {
                             note: $note,
                             category: category,
                             creatingNewNote: $creatingNewNote,
+                            triggerHapticFeedback: $triggerHapticFeedback,
                             viewModel: viewModel
                         )
-                        .contextMenu {
-                            Button("OK") { print("Context Menu pressed!") }
-                        }
                         .padding(5)
                     }
                 }
