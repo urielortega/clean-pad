@@ -72,6 +72,9 @@ extension CategorySelectionView {
                 )
             }
             .opacity(isButtonDisabled ? 0.3 : 1.0)
+            .accessibilityElement()
+            .accessibilityAddTraits(.isButton)
+            .accessibilityLabel("\(category.displayName) Category")
         }
         
         /// A rounded rectangle overlay with a stroke, adapting to selection or edition mode.
