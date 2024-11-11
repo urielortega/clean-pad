@@ -176,6 +176,9 @@ extension CategorySelectionView {
                 Circle()
                     .stroke(Color.gray.gradient.opacity(0.1), lineWidth: 4)
             }
+            .accessibilityElement()
+            .accessibilityAddTraits(.isButton)
+            .accessibilityLabel("Create a Category")
         }
     }
 }
