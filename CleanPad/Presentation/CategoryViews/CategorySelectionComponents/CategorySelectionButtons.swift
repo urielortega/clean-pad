@@ -9,25 +9,26 @@ import Foundation
 import SwiftUI
 
 extension CategorySelectionView {
-    /// Button that adapts according to Category Edition and Selection modes.
+    /// Button that adapts its appearance and behavior based on the specified role (Selection or Edition).
     struct CategoryButton: View {
         @ObservedObject var viewModel: NotesListViewModel
         @ObservedObject var sheetsViewModel: SheetsViewModel
         
         var category: Category
-        var role: CategoryButtonRole
+        var role: CategoryButtonRole // Determines whether this button is used for category selection or editing
         var isButtonDisabled: Bool = false
         var gradientStartColorOpacity = Constants.gradientStartColorOpacity
         var gradientEndColorOpacity = Constants.gradientEndColorOpacity
-        var buttonActions: () -> Void
-        
+        var buttonActions: () -> Void // Actions to execute when button is tapped
+
+        /// Gradient for the button's stroke, changes based on selection state.
         var strokeColorGradient: AnyGradient {
             viewModel.selectedCategory == category ? category.color.gradient : Color.gray.gradient
         }
         
         enum CategoryButtonRole {
-            case selection
-            case edition
+            case selection // Button used for selecting a category
+            case edition   // Button used for editing a category
         }
         
         var body: some View {
@@ -55,6 +56,7 @@ extension CategorySelectionView {
             )
             .overlay { roleDependentOverlay }
             .sheet(isPresented: $sheetsViewModel.showCategoryEditSheet) {
+                // Presents the Category Edit sheet if `showCategoryEditSheet` is true.
                 CategoryEditView(
                     category: viewModel.currentEditableCategory,
                     viewModel: viewModel,
@@ -62,6 +64,7 @@ extension CategorySelectionView {
                 )
             }
             .sheet(isPresented: $sheetsViewModel.showCategoryCreationSheet) { // Category Creation sheet must be at the same level as Category Edit sheet.
+                // Presents the Category Creation sheet if `showCategoryCreationSheet` is true.
                 CategoryEditView(
                     category: Category(id: UUID(), name: "", color: .gray),
                     viewModel: viewModel,
@@ -71,7 +74,7 @@ extension CategorySelectionView {
             .opacity(isButtonDisabled ? 0.3 : 1.0)
         }
         
-        /// View that dynamically displays either a gray or a colorful stroke based on the current mode (Selection Mode or Edit Mode) and the category that is currently selected.
+        /// A rounded rectangle overlay with a stroke, adapting to selection or edition mode.
         var roleDependentOverlay: some View {
             if role == .selection {
                 RoundedRectangle(cornerRadius: Constants.materialButtonCornerRadius)
@@ -87,7 +90,7 @@ extension CategorySelectionView {
             }
         }
         
-        /// View that dynamically displays either a "Radio Button" or a "Disclosure Indicator" based on the current mode (Selection Mode or Edit Mode).
+        /// Displays a dynamic indicator (radio button or disclosure indicator) based on the button's role.
         var dynamicIndicator: some View {
             Image(
                 systemName:
@@ -104,13 +107,14 @@ extension CategorySelectionView {
         }
     }
     
-    /// Button for changing the selected Category to noSelection.
+    /// Button for selecting "All notes" (no category).
     struct NoCategoryButton: View {
         @ObservedObject var viewModel: NotesListViewModel
         @ObservedObject var sheetsViewModel: SheetsViewModel
         
         @Environment(\.dismiss) var dismiss
         
+        /// Gradient used for the stroke, based on selection state.
         var strokeColorGradient: AnyGradient {
             viewModel.selectedCategory == Category.noSelection ? Color(.label).gradient : Color.gray.gradient
         }
@@ -128,7 +132,7 @@ extension CategorySelectionView {
             } label: {
                 Text("All notes")
                     .foregroundStyle(Color(.label).gradient)
-                    .frame(width: 100, height: 16) // Frame on Label so tap is better detected.
+                    .frame(width: 100, height: 16) // Frame on Label to improve tap area.
             }
             .padding()
             .fontWeight(.medium)
@@ -138,7 +142,7 @@ extension CategorySelectionView {
             .overlay { adaptableOverlay }
         }
         
-        /// View that adapts the stroke if the category is currently selected.
+        /// Stroke overlay that adapts if the "All notes" category is selected.
         var adaptableOverlay: some View {
             RoundedRectangle(cornerRadius: Constants.materialButtonCornerRadius)
                 .stroke(
@@ -150,7 +154,7 @@ extension CategorySelectionView {
         }
     }
     
-    /// Button for creating a new Category by toggling the showCategoryCreationSheet property.
+    /// Button for toggling the display of the Category Creation sheet.
     struct CreateCategoryButton: View {
         @ObservedObject var viewModel: NotesListViewModel
         @ObservedObject var sheetsViewModel: SheetsViewModel
@@ -175,7 +179,7 @@ extension CategorySelectionView {
 }
 
 extension NoteCategorySelectionView {
-    /// Button for assigning a Category to a Note.
+    /// Button for assigning a specific Category to a Note.
     struct NoteCategoryButton: View {
         @Binding var note: Note
         var category: Category
@@ -226,7 +230,7 @@ extension NoteCategorySelectionView {
             .sensoryFeedback(.error, trigger: triggerHapticFeedback)
         }
         
-        /// View that visually differentiates the note category from the rest of the user's categories.
+        /// Indicator that visually differentiates the current category selection.
         var dynamicIndicator: some View {
             Image(
                 systemName: (note.category?.id == category.id) ? "circle.fill" : "circle"
@@ -236,7 +240,7 @@ extension NoteCategorySelectionView {
             .subtleShadow(color: .black.opacity(0.2))
         }
         
-        /// View that adapts the stroke if the category is currently selected.
+        /// Overlay stroke that adapts based on the current category selection.
         var adaptableOverlay: some View {
             RoundedRectangle(cornerRadius: Constants.materialButtonCornerRadius)
                 .stroke(
@@ -248,7 +252,7 @@ extension NoteCategorySelectionView {
         }
     }
     
-    /// Button for creating a new Category and assign it to a Note.
+    /// Button for creating a new Category and assigning it to a Note.
     struct CreateAndAssignNoteCategoryButton: View {
         @ObservedObject var viewModel: NotesListViewModel
         @ObservedObject var sheetsViewModel: SheetsViewModel
