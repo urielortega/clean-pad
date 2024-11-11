@@ -54,6 +54,7 @@ extension CategorySelectionView {
                 viewModel.isEditModeActive.toggle()
             }
         }
+        .accessibilityLabel(viewModel.isEditModeActive ? "Done Editing" : "Edit Categories")
     }
     
     /// View that shows either CreateCategoryButton or CategoryButton with no selection, depending on the status of Edit Mode.
