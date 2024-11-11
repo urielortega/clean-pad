@@ -212,7 +212,7 @@ extension NoteCategorySelectionView {
                 }
                 .contentShape(Rectangle()) // Makes the entire HStack area tappable.
                 .contentTransition(.symbolEffect(.automatic))
-                .onLongPressGesture(perform: { triggerHapticFeedback.toggle() } )
+                .onLongPressGesture(perform: { triggerHapticFeedback.toggle() } ) // Haptic Feedback to inform the user that Category Edition is disabled in this View.
             }
             .buttonStyle(
                 GradientButtonStyle(
