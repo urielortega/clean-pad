@@ -147,7 +147,7 @@ struct NoteEditView: View {
             }
         }
         .onChange(of: scenePhase) { phase, _ in
-            if (phase == ScenePhase.background || phase == ScenePhase.inactive) { // When on background or inactive phase...
+            if (phase == ScenePhase.background) { // When on background phase...
                 editingAToggledNote = false // ...toggle 'editingAToggledNote', so the contents of the current private note can be hidden.
 
                 if !creatingNewNote { // Update only if editing an existing note.
