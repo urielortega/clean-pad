@@ -5,6 +5,7 @@
 //  Created by Uriel Ortega on 18/03/24.
 //
 
+import AlertKit
 import SwiftUI
 
 /// Enum for controlling the focus state when creating or editing a category.
@@ -21,6 +22,12 @@ struct CategoryEditView: View {
     
     /// Property to show Cancel and Save buttons, and handle `onChange` closures.
     var creatingNewCategory: Bool
+    
+    /// Property that determines whether an `AlertAppleMusic17View` is displayed to inform the user that a category has been successfully created.
+    @State var isAlertPresented: Bool = false
+    
+    /// An `AlertAppleMusic17View` instance configured to display a success message when a category is created.
+    let alertView = AlertAppleMusic17View(title: "Category created!", subtitle: nil, icon: .done)
     
     /// Property that stores the focus of the current text field.
     @FocusState private var focusedField: FocusField?
@@ -101,7 +108,7 @@ struct CategoryEditView: View {
                 All notes in the "\(category.displayName)" category will be moved to the General category.
             """)
         }
-
+        .alert(isPresent: $isAlertPresented, view: alertView)
     }
     
     var categoryNameTextField: some View {
@@ -128,6 +135,7 @@ struct CategoryEditView: View {
         Button("Save") {
             if creatingNewCategory {
                 viewModel.add(category: category)
+                isAlertPresented.toggle() // Alert is only presented when creating a new category.
             } else {
                 viewModel.update(category: category)
             }
