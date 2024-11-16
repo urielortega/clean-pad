@@ -5,6 +5,7 @@
 //  Created by Uriel Ortega on 27/08/24.
 //
 
+import AlertKit
 import Foundation
 import SwiftUI
 
@@ -20,6 +21,12 @@ struct NoteCategorySelectionView: View {
     
     @State var triggerHapticFeedback: Bool = false
     
+    /// Property that determines whether an `AlertAppleMusic17View` is displayed to inform the user that a category has been successfully created and assigned to the current note.
+    @State var isAlertPresented: Bool = false
+    
+    /// An `AlertAppleMusic17View` instance configured to display a success message when a category is created and assigned to the current note.
+    let alertView = AlertAppleMusic17View(title: "Category created!", subtitle: "And assigned to your note", icon: .done)
+    
     var body: some View {
         VStack {
             dismissTopView
@@ -34,6 +41,7 @@ struct NoteCategorySelectionView: View {
         .presentationBackground(.regularMaterial)
         .presentationCornerRadius(Constants.roundedRectCornerRadius)
         .presentationDetents([.fraction(0.6)])
+        .alert(isPresent: $isAlertPresented, view: alertView)
     }
 }
 
@@ -87,7 +95,8 @@ extension NoteCategorySelectionView {
                 CreateAndAssignNoteCategoryButton(
                     viewModel: viewModel,
                     sheetsViewModel: sheetsViewModel,
-                    note: $note
+                    note: $note,
+                    isAlertPresented: $isAlertPresented
                 )
                 .padding()
             }

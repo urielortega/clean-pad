@@ -274,6 +274,10 @@ extension NoteCategorySelectionView {
         @State private var showingAlert = false
         @State private var categoryName: String = ""
         
+        /// A binding to a Boolean value that determines whether the `AlertAppleMusic17View` is presented.
+        /// This property allows the parent view to control the visibility of the alert.
+        @Binding var isAlertPresented: Bool
+        
         @Environment(\.dismiss) var dismiss
         
         var body: some View {
@@ -332,8 +336,10 @@ extension NoteCategorySelectionView {
                 note.category = viewModel.categories[
                     viewModel.getCategoryIndexFromCategoriesArray(category: category!)!
                 ]
-            }                        
+            }
+            
             HapticManager.instance.notification(type: .success)
+            isAlertPresented.toggle()
         }
     }
 }
