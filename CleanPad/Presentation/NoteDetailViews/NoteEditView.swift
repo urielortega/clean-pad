@@ -5,6 +5,7 @@
 //  Created by Uriel Ortega on 19/09/23.
 //
 
+import AlertKit
 import SwiftUI
 
 /// Enum for controlling the focus state when creating or editing a note.
@@ -30,6 +31,11 @@ struct NoteEditView: View {
     
     /// Property to control the displaying of a note whose 'isLocked' property was recently toggled.
     @State var editingAToggledNote: Bool = false
+    
+    /// Property that determines whether an `AlertAppleMusic17View` is displayed to inform the user that a note has been successfully created.
+    @State var isAlertPresented: Bool = false
+    
+    let alertView = AlertAppleMusic17View(title: "Note created!", subtitle: nil, icon: .done)
     
     /// Property that stores the focus of the current text field.
     @FocusState private var focusedField: FocusField?
@@ -172,6 +178,7 @@ struct NoteEditView: View {
             }            
         }
         .presentationCornerRadius(Constants.roundedRectCornerRadius)
+        .alert(isPresent: $isAlertPresented, view: alertView)
         .alert("Authentication error", isPresented: $viewModel.isShowingAuthenticationErrorWhenEditing) {
             Button("OK") { }
         } message: { Text(viewModel.authenticationError) }
@@ -225,6 +232,7 @@ extension NoteEditView {
             dismiss()
             
             HapticManager.instance.notification(type: .success)
+            isAlertPresented.toggle()
         }
     }
     
