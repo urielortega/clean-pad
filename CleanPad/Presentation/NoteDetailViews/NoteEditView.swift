@@ -35,6 +35,7 @@ struct NoteEditView: View {
     /// Property that determines whether an `AlertAppleMusic17View` is displayed to inform the user that a note has been successfully created.
     @State var isAlertPresented: Bool = false
     
+    /// An `AlertAppleMusic17View` instance configured to display a success message when a note is created.
     let alertView = AlertAppleMusic17View(title: "Note created!", subtitle: nil, icon: .done)
     
     /// Property that stores the focus of the current text field.
