@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A0C1A0A22CE918700058D62A /* AlertKit in Frameworks */ = {isa = PBXBuildFile; productRef = A0C1A0A12CE918700058D62A /* AlertKit */; };
 		A40111B62BA8F249006C5639 /* CategoryEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40111B52BA8F249006C5639 /* CategoryEditView.swift */; };
 		A41324322C17C8AF005B478C /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41324312C17C8AF005B478C /* ButtonStyles.swift */; };
 		A41F0F562BF2A4500090E84C /* SheetsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41F0F552BF2A4500090E84C /* SheetsViewModel.swift */; };
@@ -90,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0C1A0A22CE918700058D62A /* AlertKit in Frameworks */,
 				A480F7D52BD1A9F200B93BD3 /* ColorfulX in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -286,6 +288,7 @@
 			name = CleanPad;
 			packageProductDependencies = (
 				A480F7D42BD1A9F200B93BD3 /* ColorfulX */,
+				A0C1A0A12CE918700058D62A /* AlertKit */,
 			);
 			productName = CleanPad;
 			productReference = A44E76922AB11E70004BBB21 /* CleanPad.app */;
@@ -317,6 +320,7 @@
 			mainGroup = A44E76892AB11E70004BBB21;
 			packageReferences = (
 				A480F7D32BD1A9F200B93BD3 /* XCRemoteSwiftPackageReference "ColorfulX" */,
+				A0C1A0A02CE918700058D62A /* XCRemoteSwiftPackageReference "AlertKit" */,
 			);
 			productRefGroup = A44E76932AB11E70004BBB21 /* Products */;
 			projectDirPath = "";
@@ -600,6 +604,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		A0C1A0A02CE918700058D62A /* XCRemoteSwiftPackageReference "AlertKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparrowcode/AlertKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.9;
+			};
+		};
 		A480F7D32BD1A9F200B93BD3 /* XCRemoteSwiftPackageReference "ColorfulX" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Lakr233/ColorfulX.git";
@@ -611,6 +623,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		A0C1A0A12CE918700058D62A /* AlertKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A0C1A0A02CE918700058D62A /* XCRemoteSwiftPackageReference "AlertKit" */;
+			productName = AlertKit;
+		};
 		A480F7D42BD1A9F200B93BD3 /* ColorfulX */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A480F7D32BD1A9F200B93BD3 /* XCRemoteSwiftPackageReference "ColorfulX" */;
