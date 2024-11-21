@@ -463,6 +463,7 @@ extension NotesListViewModel {
         categories.contains(category)
     }
     
+    #if DEBUG
     // MARK: Testing functions.
     /// Function for testing purposes that adds twenty note examples to the ``notes`` array and saves the changes after the addition.
     func addTwentyNoteExamples() {
@@ -514,6 +515,7 @@ extension NotesListViewModel {
         add(category: testCategory)
         saveAllCategories()
     }
+    #endif
     
     // Deletes every category except the General category.
     func dropAllCategories() {
