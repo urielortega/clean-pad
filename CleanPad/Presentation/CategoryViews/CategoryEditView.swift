@@ -147,6 +147,7 @@ struct CategoryEditView: View {
     }
 }
 
+#if DEBUG
 #Preview {
     CategoryEditView(
         category: .thoughts,
@@ -154,3 +155,4 @@ struct CategoryEditView: View {
         creatingNewCategory: false
     )
 }
+#endif
