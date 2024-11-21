@@ -131,6 +131,7 @@ fileprivate struct FormattedDateTextView: View {
 }
 
 
+#if DEBUG
 #Preview("List View") {
     ListNoteLabel(note: .example, viewModel: DateViewModel())
         .padding()
@@ -146,4 +147,4 @@ fileprivate struct FormattedDateTextView: View {
     ContextMenuPreview(note: .example)
         .border(.gray, width: 0.5)
 }
-
+#endif
