@@ -60,7 +60,7 @@ struct NoteCategoryIndicator: View {
     
     var body: some View {
         Circle()
-            .fill(note.category!.color.gradient)
+            .fill(note.category?.color.gradient ?? Color.gray.gradient)
             .frame(width: 10, height: 10)
     }
 }
