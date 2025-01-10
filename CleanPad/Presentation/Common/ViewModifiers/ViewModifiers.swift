@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+// MARK: - Dock ViewModifiers
+
 /// A modifier that styles a view as a dock, applying background, corner radius, shadow, and padding.
 /// This modifier is used to create a dock that spans the full width and optionally displays buttons.
 struct Dock: ViewModifier {
@@ -85,6 +87,8 @@ extension View {
     }
 }
 
+// MARK: - Stroke ViewModifiers
+
 struct RoundedRectangleOverlayStroke: ViewModifier {
     func body(content: Content) -> some View {
         content
@@ -100,6 +104,8 @@ extension View {
         modifier(RoundedRectangleOverlayStroke())
     }
 }
+
+// MARK: - Accessibility ViewModifiers
 
 /// A view modifier that configures accessibility labels and hints for a note label,
 /// providing detailed information about the note's title, category, and creation date.
@@ -136,6 +142,8 @@ struct SoftShadow: ViewModifier {
             .shadow(color: color, radius: 2, x: 0, y: 4)
     }
 }
+
+// MARK: - Shadow ViewModifiers
 
 extension View {
     func softShadow(color: Color) -> some View {
