@@ -1,13 +1,11 @@
 //
-//  ViewModifiers.swift
+//  DockViewModifiers.swift
 //  CleanPad
 //
 //  Created by Uriel Ortega on 17/10/23.
 //
 
 import SwiftUI
-
-// MARK: - Dock ViewModifiers
 
 /// A modifier that styles a view as a dock, applying background, corner radius, shadow, and padding.
 /// This modifier is used to create a dock that spans the full width and optionally displays buttons.
