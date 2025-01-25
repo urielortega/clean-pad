@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A052A3C32D455366009826BA /* ConditionalViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A052A3C22D45535C009826BA /* ConditionalViewModifier.swift */; };
 		A0C1A0A22CE918700058D62A /* AlertKit in Frameworks */ = {isa = PBXBuildFile; productRef = A0C1A0A12CE918700058D62A /* AlertKit */; };
 		A40111B62BA8F249006C5639 /* CategoryEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40111B52BA8F249006C5639 /* CategoryEditView.swift */; };
 		A41324322C17C8AF005B478C /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41324312C17C8AF005B478C /* ButtonStyles.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A052A3C22D45535C009826BA /* ConditionalViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalViewModifier.swift; sourceTree = "<group>"; };
 		A40111B52BA8F249006C5639 /* CategoryEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEditView.swift; sourceTree = "<group>"; };
 		A41324312C17C8AF005B478C /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
 		A41F0F552BF2A4500090E84C /* SheetsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetsViewModel.swift; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 		A4C36C462AE7314D001B4389 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				A052A3C22D45535C009826BA /* ConditionalViewModifier.swift */,
 				A44E76A72AB13214004BBB21 /* FileManager-DocumentsDirectory.swift */,
 				A4C36C472AE73163001B4389 /* HapticManager.swift */,
 				A489F7A42B8429B500CB44AE /* CodableColor.swift */,
@@ -359,6 +362,7 @@
 				A489F7A52B8429B500CB44AE /* CodableColor.swift in Sources */,
 				A4ED50E72C7E5F830077CB36 /* CategorySelectionButtons.swift in Sources */,
 				A4F10F5B2B8D73360014C68B /* CategorySelectionView.swift in Sources */,
+				A052A3C32D455366009826BA /* ConditionalViewModifier.swift in Sources */,
 				A4961F382C7E8FFC0081FA43 /* NoteCategorySelectionView.swift in Sources */,
 				A4C36C482AE73163001B4389 /* HapticManager.swift in Sources */,
 				A4DC37282CA87D7600A5CF61 /* VariableBlur.swift in Sources */,
