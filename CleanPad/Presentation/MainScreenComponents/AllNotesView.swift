@@ -54,11 +54,16 @@ struct AllNotesView: View {
                     }
                     .padding(.bottom, 80)
                 } else {
-                    if viewModel.idiom == .pad || viewModel.isGridViewSelected {
-                        notesGridView
-                    } else {
-                        notesListView
+                    Group {
+                        if viewModel.idiom == .pad || viewModel.isGridViewSelected {
+                            notesGridView
+                        } else {
+                            notesListView
+                        }
                     }
+                    .blurWhenAppNotActive( // Apply blur when access to private notes is allowed and Private Notes Tab is selected.
+                        isBlurActive: viewModel.isUnlocked  && viewModel.isLockedNotesTabSelected
+                    )
                 }
             }
         }
