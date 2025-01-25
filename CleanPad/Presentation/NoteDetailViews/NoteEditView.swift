@@ -135,6 +135,7 @@ struct NoteEditView: View {
                         sheetsViewModel: sheetsViewModel
                     )
                 }
+                .blurWhenAppNotActive(isBlurActive: noteCopy.isLocked) // Apply blur when the current note is private.
             }
         }
         .onAppear {
