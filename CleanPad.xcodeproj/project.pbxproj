@@ -117,8 +117,8 @@
 		A40111B72BA8F2C2006C5639 /* CategoryViews */ = {
 			isa = PBXGroup;
 			children = (
-				A4ED50E52C7E5F310077CB36 /* CategorySelectionComponents */,
 				A40111B52BA8F249006C5639 /* CategoryEditView.swift */,
+				A4ED50E52C7E5F310077CB36 /* CategorySelectionComponents */,
 			);
 			path = CategoryViews;
 			sourceTree = "<group>";
@@ -216,12 +216,12 @@
 				A4DC37272CA87D6600A5CF61 /* VariableBlur.swift */,
 				A482F0DE2AC7D7CA0075A385 /* ButtonViews.swift */,
 				A49E2FDF2AD61DA000D8EC6D /* EmptyListView.swift */,
-				A07BDE1D2D3099BD006E6C78 /* ViewModifiers */,
 				A49C7DED2ADF5C1D005922FC /* HelperViews.swift */,
 				A4BFFA5E2AF087F4005CD3DE /* LabelViews.swift */,
 				A41F0F572BF2E2280090E84C /* UnlockNotesView.swift */,
-				A41324332C17C99D005B478C /* Styles */,
 				A45C87F12CB75EFC00718264 /* NoResultsView.swift */,
+				A07BDE1D2D3099BD006E6C78 /* ViewModifiers */,
+				A41324332C17C99D005B478C /* Styles */,
 			);
 			path = Common;
 			sourceTree = "<group>";
