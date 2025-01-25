@@ -17,7 +17,7 @@ struct BlurWhenAppNotActive: ViewModifier {
  
     func body(content: Content) -> some View {
         content
-            .blur(radius: (scenePhase != .active) ? 10 : 0)
+            .blur(radius: ((scenePhase != .active) && isBlurActive) ? 10 : 0)
             .animation(.default, value: scenePhase)
     }
 }
