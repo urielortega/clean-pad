@@ -172,12 +172,27 @@ struct NoteEditView: View {
             if willDateBeUpdated {
                 return
             } else {
-                // If a note's title or content has been modified...
+                // If the note title or content changes...
                 if (noteCopy.noteTitle != originalNote.noteTitle) || (noteCopy.noteContent != originalNote.noteContent) {
                     // ...its date will be updated.
                     willDateBeUpdated = true
                 }
-            }            
+            }
+            
+            // Check if the app is running as an iOS app on macOS.
+            if ProcessInfo.processInfo.isiOSAppOnMac {
+                // Swift Concurrency (Task) to introduce a non-blocking delay before saving:
+                Task {
+                    try await Task.sleep(nanoseconds: 500_000_000) // 0.5 sec delay
+                    
+                    // Save the note after the delay:
+                    viewModel.update(
+                        note: noteCopy,
+                        // Date is only updated when 'noteTitle' or 'noteContent' has changed.
+                        updatingDate: willDateBeUpdated
+                    )
+                }
+            }
         }
         .presentationCornerRadius(Constants.roundedRectCornerRadius)
         .alert(isPresent: $isAlertPresented, view: alertView)
