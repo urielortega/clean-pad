@@ -179,8 +179,8 @@ struct NoteEditView: View {
                 }
             }
             
-            // Check if the app is running as an iOS app on macOS.
-            if ProcessInfo.processInfo.isiOSAppOnMac {
+            // Check if the app is running on macOS or iPadOS to apply real-time saving.
+            if ProcessInfo.processInfo.isiOSAppOnMac || viewModel.idiom == .pad {
                 // Swift Concurrency (Task) to introduce a non-blocking delay before saving:
                 Task {
                     try await Task.sleep(nanoseconds: 500_000_000) // 0.5 sec delay
