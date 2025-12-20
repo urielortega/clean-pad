@@ -10,7 +10,7 @@ import SwiftUI
 
 /// Extension to make SwiftUI's `Color` conform to `Codable`,
 /// allowing it to be encoded and decoded for storage or data transfer.
-extension Color: Codable {
+extension Color: @retroactive Codable {
     /// Coding keys for extracting RGB components of a color.
     enum CodingKeys: String, CodingKey {
         case red, green, blue
