@@ -89,7 +89,7 @@ extension AllNotesView {
                                 creatingNewNote: false
                             )
                         } label: {
-                            ListNoteLabel(note: note, viewModel: dateViewModel)
+                            ListNoteRow(note: note, viewModel: dateViewModel)
                         }
                         .contextMenu {
                             NoteContextMenuButtons(note: note, viewModel: viewModel)

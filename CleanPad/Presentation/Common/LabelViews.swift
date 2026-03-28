@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// View that shows a note title, date, category and some content when user selects List View in AlINotesView.
-struct ListNoteLabel: View {
+struct ListNoteRow: View {
     var note: Note
     @ObservedObject var viewModel: DateViewModel
     
@@ -138,7 +138,7 @@ fileprivate struct FormattedDateTextView: View {
 
 #if DEBUG
 #Preview("List View") {
-    ListNoteLabel(note: .example, viewModel: DateViewModel())
+    ListNoteRow(note: .example, viewModel: DateViewModel())
         .padding()
         .border(.gray, width: 0.5)
 }
