@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A0500A562F788CAA00604E96 /* CleanPadIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = A0500A552F788CAA00604E96 /* CleanPadIcon.icon */; };
 		A052A3C32D455366009826BA /* ConditionalViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A052A3C22D45535C009826BA /* ConditionalViewModifier.swift */; };
-		A07568972EA46386000BAE0E /* CleanPadIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = A07568962EA46386000BAE0E /* CleanPadIcon.icon */; };
 		A0C1A0A22CE918700058D62A /* AlertKit in Frameworks */ = {isa = PBXBuildFile; productRef = A0C1A0A12CE918700058D62A /* AlertKit */; };
 		A40111B62BA8F249006C5639 /* CategoryEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40111B52BA8F249006C5639 /* CategoryEditView.swift */; };
 		A41324322C17C8AF005B478C /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41324312C17C8AF005B478C /* ButtonStyles.swift */; };
@@ -48,8 +48,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A0500A552F788CAA00604E96 /* CleanPadIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = CleanPadIcon.icon; sourceTree = "<group>"; };
 		A052A3C22D45535C009826BA /* ConditionalViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalViewModifier.swift; sourceTree = "<group>"; };
-		A07568962EA46386000BAE0E /* CleanPadIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = CleanPadIcon.icon; sourceTree = "<group>"; };
 		A40111B52BA8F249006C5639 /* CategoryEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEditView.swift; sourceTree = "<group>"; };
 		A41324312C17C8AF005B478C /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
 		A41F0F552BF2A4500090E84C /* SheetsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetsViewModel.swift; sourceTree = "<group>"; };
@@ -140,7 +140,7 @@
 				A44E76942AB11E70004BBB21 /* CleanPad */,
 				A44E76932AB11E70004BBB21 /* Products */,
 				A480F7D22BD1A9C200B93BD3 /* Frameworks */,
-				A07568962EA46386000BAE0E /* CleanPadIcon.icon */,
+				A0500A552F788CAA00604E96 /* CleanPadIcon.icon */,
 			);
 			sourceTree = "<group>";
 		};
@@ -347,7 +347,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A07568972EA46386000BAE0E /* CleanPadIcon.icon in Resources */,
+				A0500A562F788CAA00604E96 /* CleanPadIcon.icon in Resources */,
 				A44E769D2AB11E72004BBB21 /* Preview Assets.xcassets in Resources */,
 				A44E769A2AB11E72004BBB21 /* Assets.xcassets in Resources */,
 			);

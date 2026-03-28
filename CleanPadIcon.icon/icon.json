@@ -23,7 +23,19 @@
           "glass" : false,
           "image-name" : "4_CVector.svg",
           "name" : "4_CVector",
-          "opacity" : 1,
+          "opacity-specializations" : [
+            {
+              "value" : 0.8
+            },
+            {
+              "appearance" : "dark",
+              "value" : 1
+            },
+            {
+              "appearance" : "tinted",
+              "value" : 0.7
+            }
+          ],
           "position" : {
             "scale" : 1,
             "translation-in-points" : [
