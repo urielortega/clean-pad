@@ -136,7 +136,7 @@ extension AllNotesView {
                                     creatingNewNote: false
                                 )
                             } label: {
-                                GridNoteLabel(note: note, viewModel: dateViewModel)
+                                GridNoteCard(note: note, viewModel: dateViewModel)
                                     .padding(5)
                             }
                             .contextMenu {

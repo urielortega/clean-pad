@@ -40,7 +40,7 @@ struct ListNoteLabel: View {
 }
 
 /// View that shows a note title, date, category and some content when user selects Grid View in AlINotesView.
-struct GridNoteLabel: View {
+struct GridNoteCard: View {
     var note: Note
     @ObservedObject var viewModel: DateViewModel
     
@@ -144,7 +144,7 @@ fileprivate struct FormattedDateTextView: View {
 }
 
 #Preview("Grid View") {
-    GridNoteLabel(note: .example, viewModel: DateViewModel())
+    GridNoteCard(note: .example, viewModel: DateViewModel())
         .frame(width: 200, height: 100)
 }
 
