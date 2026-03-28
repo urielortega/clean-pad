@@ -21,6 +21,7 @@ struct ListNoteLabel: View {
                     .lineLimit(1)
                     .foregroundStyle(note.noteTitle.isEmpty ? .secondary : .primary)
                     .fontWeight(.medium)
+                    .contentTransition(.numericText(countsDown: true))
             }
 
             VStack(alignment: .leading) {
@@ -29,6 +30,7 @@ struct ListNoteLabel: View {
                 Text(note.noteContent.isEmpty ? "No content..." : note.noteContent)
                     .lineLimit(1)
                     .foregroundStyle(.secondary)
+                    .contentTransition(.numericText(countsDown: true))
             }
             .font(.caption2)
 
@@ -48,6 +50,7 @@ struct GridNoteLabel: View {
                 .lineLimit(1)
                 .foregroundStyle(note.noteTitle.isEmpty ? .secondary : .primary)
                 .fontWeight(.medium)
+                .contentTransition(.numericText(countsDown: true))
 
             VStack(alignment: .leading) {
                 FormattedDateTextView(note: note, viewModel: viewModel)
@@ -57,6 +60,7 @@ struct GridNoteLabel: View {
                     .foregroundStyle(.secondary)
                     .foregroundStyle(note.noteContent.isEmpty ? .secondary : .primary)
                     .multilineTextAlignment(.leading)
+                    .contentTransition(.numericText(countsDown: true))
             }
             .font(.caption2)
             
@@ -70,6 +74,7 @@ struct GridNoteLabel: View {
                     .bold(note.category == nil ? false : true)
                     .foregroundStyle(note.category == nil ? .gray : Color(.label))
                     .lineLimit(1)
+                    .contentTransition(.numericText(countsDown: true))
             }
         }
         .foregroundStyle(Color(.label)) // To show an appropriate color in both light and dark mode.
@@ -126,7 +131,7 @@ fileprivate struct FormattedDateTextView: View {
         .lineLimit(1)
         .foregroundStyle(.primary)
         .padding(.bottom, 1)
-
+        .contentTransition(.numericText(countsDown: true))
     }
 }
 
