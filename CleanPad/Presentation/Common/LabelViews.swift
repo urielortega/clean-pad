@@ -126,7 +126,7 @@ fileprivate struct FormattedDateTextView: View {
         .lineLimit(1)
         .foregroundStyle(.primary)
         .padding(.bottom, 1)
-
+        .contentTransition(.numericText(countsDown: true))
     }
 }
 
