@@ -32,8 +32,9 @@ struct ContentView: View {
                 showCategoriesSheet: $sheetsViewModel.showCategorySelectionSheet
             )
             .navigationTitle(viewModel.isNonLockedNotesTabSelected ? "Notes" : "Private Notes")
+            .toolbarTitleDisplayMode(.inlineLarge)
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
+                ToolbarItemGroup(placement: .topBarTrailing) {
                     if viewModel.isNonLockedNotesTabSelected { // Non-Locked Notes Tab is selected.
                         lockAndUnlockNotesButtonView
                     } else { // Locked Notes Tab is selected.
@@ -41,9 +42,7 @@ struct ContentView: View {
                             lockNotesButtonView
                         }
                     }
-                }
-                
-                ToolbarItem(placement: .topBarLeading) {
+                    
                     if viewModel.isNonLockedNotesTabSelected || (viewModel.isLockedNotesTabSelected && viewModel.isUnlocked) {
                         Menu {
                             if viewModel.idiom == .pad {
