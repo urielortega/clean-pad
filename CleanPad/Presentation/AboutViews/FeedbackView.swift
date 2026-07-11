@@ -7,50 +7,33 @@
 
 import SwiftUI
 
-/// View shown on the first app launch, containing fundamental information about the purpose and operation of the app.
+/// A feedback and support sheet that lets users contact the developer or support the app.
 struct FeedbackView: View {
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        GeometryReader { geometry in
-            ZStack(alignment: .center) {
-                ScrollView {
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Spacer()
-                            headerView
-                                .padding()
-                            detailsView
-                                .padding(.horizontal)
-                            Spacer()
-                            Spacer()
-                        }
-                        
-                        Spacer()
-                    }
-                    .frame(
-                        maxWidth: geometry.size.width,
-                        minHeight: geometry.size.height
-                    )
+        NavigationStack {
+            ScrollView {
+                VStack(alignment: .leading) {
+                    headerView
+                    detailsView
                 }
-                
-                // View for Support and Dismiss buttons:
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding()
+            }
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    DismissViewButton()
+                }
+            }
+            .toolbarBackground(.hidden, for: .navigationBar)
+            .safeAreaInset(edge: .bottom) {
+                // Action Buttons anchored at the bottom
                 VStack {
-                    HStack {
-                        Spacer()
-                        
-                        DismissViewButton()
-                            .padding([.top, .horizontal])
-                    }
-                    
-                    Spacer()
-                    
-                    VStack {
-                        iMessageButtonView
-                        buyMeACoffeeButtonView
-                    }
-                    .padding()
+                    iMessageButtonView
+                    buyMeACoffeeButtonView
                 }
+                .padding()
             }
         }
         .presentationDetents([.fraction(0.7)])
@@ -59,6 +42,7 @@ struct FeedbackView: View {
 }
 
 // MARK: - Extension to group secondary views in FeedbackView.
+
 extension FeedbackView {
     /// Header view displaying a greeting and the developer's name.
     var headerView: some View {
@@ -84,15 +68,18 @@ extension FeedbackView {
             Text("Feel free to reach out and share your thoughts with me!")
                 .bold()
                 .multilineTextAlignment(.leading)
+                .fixedSize(horizontal: false, vertical: true)
             
             Text("Whether it's a bug report, a suggestion, or just a friendly chat—I'm here for you.")
                 .bold()
                 .multilineTextAlignment(.leading)
+                .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 10)
             
             Text("If you enjoy using the app and would like to support my work, you can also buy me a coffee. Every sip fuels more improvements for this and future apps. Thank you! ☕️✨")
                 .font(.caption)
                 .multilineTextAlignment(.leading)
+                .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 60)
         }
         .accessibilityElement()
