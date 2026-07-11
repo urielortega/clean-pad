@@ -14,51 +14,45 @@ struct AboutCleanPadView: View {
     @State var gradientColors: [Color] = ColorfulPreset.aurora.colors
     @State var gradientSpeed: Double = 0.4
     
-    @Environment(\.dismiss) var dismiss
-    
     var body: some View {
-        GeometryReader { geometry in
-            ZStack(alignment: .center) {
-                ColorfulView(color: $gradientColors, speed: $gradientSpeed)
-                    .ignoresSafeArea()
-                
-                ScrollView {
-                    VStack {
-                        Spacer()
-                        headerView
-                        detailsView
-                        Spacer()
-                        Spacer()
-                    }
-                    .frame(
-                        maxWidth: geometry.size.width, 
-                        minHeight: geometry.size.height
-                    )
-                    .padding(.horizontal)
-                }
-                
-                // View for Dismiss Button:
-                VStack {
-                    HStack {
-                        Spacer()
-                        
-                        DismissViewButton()
-                            .padding([.top, .horizontal])
-                    }
-                    .frame(maxWidth: geometry.size.width)
+        NavigationStack {
+            GeometryReader { geometry in
+                ZStack(alignment: .center) {
+                    ColorfulView(color: $gradientColors, speed: $gradientSpeed)
+                        .ignoresSafeArea()
                     
-                    Spacer()
+                    ScrollView {
+                        VStack {
+                            Spacer()
+                            headerView
+                            detailsView
+                            Spacer()
+                            Spacer()
+                        }
+                        .frame(
+                            maxWidth: geometry.size.width, 
+                            minHeight: geometry.size.height
+                        )
+                        .padding(.horizontal)
+                    }
+                }
+                .frame(maxWidth: geometry.size.width)
+                .multilineTextAlignment(.center)
+                .onAppear(perform: updateBackgroundAndGreeting)
+            }
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    DismissViewButton()
                 }
             }
-            .frame(maxWidth: geometry.size.width)
-            .multilineTextAlignment(.center)
-            .onAppear(perform: updateBackgroundAndGreeting)
-            .presentationDragIndicator(.visible)
+            .toolbarBackground(.hidden, for: .navigationBar)
         }
+        .presentationDragIndicator(.visible)
     }
 }
 
 // MARK: - Extension to group secondary views in AboutCleanPadView.
+
 extension AboutCleanPadView {
     /// Header view displaying the app icon and a dynamic greeting based on the time of day.
     var headerView: some View {
@@ -122,8 +116,6 @@ extension AboutCleanPadView {
         }
     }
 }
-
-
 
 #Preview {
     AboutCleanPadView()
