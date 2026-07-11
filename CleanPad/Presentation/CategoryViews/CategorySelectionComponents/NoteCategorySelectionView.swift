@@ -38,8 +38,6 @@ struct NoteCategorySelectionView: View {
         }
         .padding(.top)
         .presentationDragIndicator(.visible)
-        .presentationBackground(.regularMaterial)
-        .presentationCornerRadius(Constants.roundedRectCornerRadius)
         .presentationDetents([.fraction(0.6)])
         .alert(isPresent: $isAlertPresented, view: alertView)
     }

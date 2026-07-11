@@ -42,7 +42,6 @@ struct WhatsNewView: View {
             }
             .frame(maxWidth: geometry.size.width)
             .presentationDragIndicator(.visible)
-            .presentationCornerRadius(Constants.roundedRectCornerRadius)
         }
     }
 }

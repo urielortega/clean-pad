@@ -194,7 +194,6 @@ struct NoteEditView: View {
                 }
             }
         }
-        .presentationCornerRadius(Constants.roundedRectCornerRadius)
         .alert(isPresent: $isAlertPresented, view: alertView)
         .alert("Authentication error", isPresented: $viewModel.isShowingAuthenticationErrorWhenEditing) {
             Button("OK") { }

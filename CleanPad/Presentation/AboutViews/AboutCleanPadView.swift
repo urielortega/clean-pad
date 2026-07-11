@@ -54,7 +54,6 @@ struct AboutCleanPadView: View {
             .multilineTextAlignment(.center)
             .onAppear(perform: updateBackgroundAndGreeting)
             .presentationDragIndicator(.visible)
-            .presentationCornerRadius(Constants.roundedRectCornerRadius)
         }
     }
 }
