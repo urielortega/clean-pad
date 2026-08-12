@@ -88,27 +88,59 @@ extension FeedbackView {
     
     /// Button for sending an iMessage to the developer.
     var iMessageButtonView: some View {
-        Button {
-            if let url = URL(string: "sms:urielortega2509@gmail.com") {
-                UIApplication.shared.open(url)
+        Group {
+            if #available(iOS 26.0, *) {
+                Button() {
+                    if let url = URL(string: "sms:urielortega2509@gmail.com") {
+                        UIApplication.shared.open(url)
+                    }
+                } label : {
+                    Label("iMessage Me", systemImage: "message.fill")
+                        .labelStyle(.automatic)
+                        .foregroundStyle(.white)
+                        .fontWeight(.medium)
+                        .frame(maxWidth: .infinity, minHeight: 44, maxHeight: 50, alignment: .center)
+                }
+                .buttonStyle(.glassProminent)
+                .tint(.green)
+            } else {
+                Button {
+                    if let url = URL(string: "sms:urielortega2509@gmail.com") {
+                        UIApplication.shared.open(url)
+                    }
+                } label: {
+                    BorderedButtonLabel(
+                        color: .green,
+                        labelText: "iMessage Me",
+                        systemImageString: "message.fill"
+                    )
+                }
             }
-        } label: {
-            BorderedButtonLabel(
-                color: .green,
-                labelText: "iMessage Me",
-                systemImageString: "message.fill"
-            )
         }
     }
     
     /// Button for supporting the developer through Buy Me a Coffee.
     var buyMeACoffeeButtonView: some View {
-        Link(destination: URL(string: "https://www.buymeacoffee.com/urielortega")!) {
-            BorderedButtonLabel(
-                color: .black.opacity(0.8),
-                labelText: "Buy Me A Coffee",
-                systemImageString: "cup.and.saucer.fill"
-            )
+        Group {
+            if #available(iOS 26.0, *) {
+                Link(destination: URL(string: "https://www.buymeacoffee.com/urielortega")!) {
+                    Label("Buy Me A Coffee", systemImage: "cup.and.saucer.fill")
+                        .labelStyle(.automatic)
+                        .foregroundStyle(.white)
+                        .fontWeight(.medium)
+                        .frame(maxWidth: .infinity, minHeight: 44, maxHeight: 50, alignment: .center)
+                }
+                .buttonStyle(.glassProminent)
+                .tint(.black.opacity(0.8))
+            } else {
+                Link(destination: URL(string: "https://www.buymeacoffee.com/urielortega")!) {
+                    BorderedButtonLabel(
+                        color: .black.opacity(0.8),
+                        labelText: "Buy Me A Coffee",
+                        systemImageString: "cup.and.saucer.fill"
+                    )
+                }
+            }
         }
     }
 }
