@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		A0500A562F788CAA00604E96 /* CleanPadIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = A0500A552F788CAA00604E96 /* CleanPadIcon.icon */; };
 		A052A3C32D455366009826BA /* ConditionalViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A052A3C22D45535C009826BA /* ConditionalViewModifier.swift */; };
+		A09997623002D1FE00D0DDA9 /* CloseActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09997613002D1FE00D0DDA9 /* CloseActionButton.swift */; };
+		A09997643002D26900D0DDA9 /* DismissViewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09997633002D26900D0DDA9 /* DismissViewButton.swift */; };
 		A0C1A0A22CE918700058D62A /* AlertKit in Frameworks */ = {isa = PBXBuildFile; productRef = A0C1A0A12CE918700058D62A /* AlertKit */; };
 		A40111B62BA8F249006C5639 /* CategoryEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40111B52BA8F249006C5639 /* CategoryEditView.swift */; };
 		A41324322C17C8AF005B478C /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41324312C17C8AF005B478C /* ButtonStyles.swift */; };
@@ -50,6 +52,8 @@
 /* Begin PBXFileReference section */
 		A0500A552F788CAA00604E96 /* CleanPadIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = CleanPadIcon.icon; sourceTree = "<group>"; };
 		A052A3C22D45535C009826BA /* ConditionalViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalViewModifier.swift; sourceTree = "<group>"; };
+		A09997613002D1FE00D0DDA9 /* CloseActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseActionButton.swift; sourceTree = "<group>"; };
+		A09997633002D26900D0DDA9 /* DismissViewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissViewButton.swift; sourceTree = "<group>"; };
 		A40111B52BA8F249006C5639 /* CategoryEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEditView.swift; sourceTree = "<group>"; };
 		A41324312C17C8AF005B478C /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
 		A41F0F552BF2A4500090E84C /* SheetsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetsViewModel.swift; sourceTree = "<group>"; };
@@ -216,6 +220,8 @@
 		A482F0DB2AC7D4410075A385 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				A09997633002D26900D0DDA9 /* DismissViewButton.swift */,
+				A09997613002D1FE00D0DDA9 /* CloseActionButton.swift */,
 				A4DC37272CA87D6600A5CF61 /* VariableBlur.swift */,
 				A482F0DE2AC7D7CA0075A385 /* ButtonViews.swift */,
 				A49E2FDF2AD61DA000D8EC6D /* EmptyListView.swift */,
@@ -360,6 +366,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A09997623002D1FE00D0DDA9 /* CloseActionButton.swift in Sources */,
 				A44E76A62AB1307A004BBB21 /* NotesListViewModel.swift in Sources */,
 				A42574272CBB09CE00D3C8A4 /* WhatsNewView.swift in Sources */,
 				A4ADAFDD2B15238B00C14010 /* Constants.swift in Sources */,
@@ -372,6 +379,7 @@
 				A4DC37282CA87D7600A5CF61 /* VariableBlur.swift in Sources */,
 				A4B86F1D2B59B04D00560C66 /* AboutCleanPadView.swift in Sources */,
 				A48192E32BFFB03F00CA6412 /* TextFieldStyles.swift in Sources */,
+				A09997643002D26900D0DDA9 /* DismissViewButton.swift in Sources */,
 				A482F0DF2AC7D7CA0075A385 /* ButtonViews.swift in Sources */,
 				A4D06FAE2B21428C0000D089 /* DateViewModel.swift in Sources */,
 				A49C7DEE2ADF5C1D005922FC /* HelperViews.swift in Sources */,

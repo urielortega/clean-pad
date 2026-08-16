@@ -25,8 +25,6 @@ struct CategorySelectionView: View {
         }
         .padding(.top)
         .presentationDragIndicator(.visible)
-        .presentationBackground(.regularMaterial)
-        .presentationCornerRadius(Constants.roundedRectCornerRadius)
         .presentationDetents(
                             // Slightly taller on iPad.
             viewModel.idiom == .pad ? [.fraction(0.8)] : [.fraction(0.6)]

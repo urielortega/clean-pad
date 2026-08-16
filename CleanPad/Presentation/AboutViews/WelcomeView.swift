@@ -43,7 +43,6 @@ struct WelcomeView: View {
             .frame(maxWidth: geometry.size.width)
             .multilineTextAlignment(.center)
             .presentationDragIndicator(.visible)
-            .presentationCornerRadius(Constants.roundedRectCornerRadius)
         }
     }
 }

@@ -339,9 +339,9 @@ extension NotesListViewModel {
         var error: NSError?
         let reason = "Please authenticate yourself to lock and unlock your notes data." // Used for Touch ID.
         
-        guard context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) else {
-            // Error handling for devices without biometrics.
-            authenticationError = "Sorry, your device does not support biometrics."
+        guard context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) else {
+            // Error handling for devices without a configured passcode.
+            authenticationError = "Sorry, your device does not support authentication."
             
             if authenticationReason == .viewNotes {
                 isShowingAuthenticationErrorOnMainScreen = true
