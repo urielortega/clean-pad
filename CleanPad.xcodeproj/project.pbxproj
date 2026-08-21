@@ -11,6 +11,7 @@
 		A0081F89303893D200886854 /* CategoriesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0081F88303893CC00886854 /* CategoriesRepository.swift */; };
 		A0081F8B303893E500886854 /* FileNotesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0081F8A303893E400886854 /* FileNotesRepository.swift */; };
 		A0081F8D303893EC00886854 /* FileCategoriesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0081F8C303893E900886854 /* FileCategoriesRepository.swift */; };
+		A0081F903038970500886854 /* NotesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0081F8F3038970400886854 /* NotesStore.swift */; };
 		A0500A562F788CAA00604E96 /* CleanPadIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = A0500A552F788CAA00604E96 /* CleanPadIcon.icon */; };
 		A052A3C32D455366009826BA /* ConditionalViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A052A3C22D45535C009826BA /* ConditionalViewModifier.swift */; };
 		A09997623002D1FE00D0DDA9 /* CloseActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09997613002D1FE00D0DDA9 /* CloseActionButton.swift */; };
@@ -58,6 +59,7 @@
 		A0081F88303893CC00886854 /* CategoriesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesRepository.swift; sourceTree = "<group>"; };
 		A0081F8A303893E400886854 /* FileNotesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileNotesRepository.swift; sourceTree = "<group>"; };
 		A0081F8C303893E900886854 /* FileCategoriesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCategoriesRepository.swift; sourceTree = "<group>"; };
+		A0081F8F3038970400886854 /* NotesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesStore.swift; sourceTree = "<group>"; };
 		A0500A552F788CAA00604E96 /* CleanPadIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = CleanPadIcon.icon; sourceTree = "<group>"; };
 		A052A3C22D45535C009826BA /* ConditionalViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalViewModifier.swift; sourceTree = "<group>"; };
 		A09997613002D1FE00D0DDA9 /* CloseActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseActionButton.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 		A0081F8E3038966400886854 /* Stores */ = {
 			isa = PBXGroup;
 			children = (
+				A0081F8F3038970400886854 /* NotesStore.swift */,
 			);
 			path = Stores;
 			sourceTree = "<group>";
@@ -433,6 +436,7 @@
 				A44E76962AB11E70004BBB21 /* CleanPadApp.swift in Sources */,
 				A44BC8E62CBC488E001DD717 /* ContentView.swift in Sources */,
 				A4BB5F372B27D69600B509ED /* FeedbackView.swift in Sources */,
+				A0081F903038970500886854 /* NotesStore.swift in Sources */,
 				A40111B62BA8F249006C5639 /* CategoryEditView.swift in Sources */,
 				A46117282AF56E31001C0087 /* MainScreenView.swift in Sources */,
 				A44E76A42AB12C0A004BBB21 /* Note.swift in Sources */,
