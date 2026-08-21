@@ -136,6 +136,13 @@
 			path = Repositories;
 			sourceTree = "<group>";
 		};
+		A0081F8E3038966400886854 /* Stores */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Stores;
+			sourceTree = "<group>";
+		};
 		A40111B42BA8EE39006C5639 /* AboutViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -191,7 +198,6 @@
 				A465AB7C2ABB395E001CFFD9 /* Domain */,
 				A465AB7B2ABB2D50001CFFD9 /* App */,
 				A465AB742ABA704B001CFFD9 /* Presentation */,
-				A4ADAFDC2B15238B00C14010 /* Constants.swift */,
 				A44E76992AB11E72004BBB21 /* Assets.xcassets */,
 				A45FD7342ABDE57300CBF255 /* Info.plist */,
 				A44E769B2AB11E72004BBB21 /* Preview Content */,
@@ -211,12 +217,14 @@
 			isa = PBXGroup;
 			children = (
 				A44BC8E52CBC488E001DD717 /* ContentView.swift */,
-				A4D06FAF2B214AC10000D089 /* ViewModels */,
+				A4ADAFDC2B15238B00C14010 /* Constants.swift */,
+				A40111B42BA8EE39006C5639 /* AboutViews */,
+				A40111B72BA8F2C2006C5639 /* CategoryViews */,
 				A482F0DB2AC7D4410075A385 /* Common */,
 				A4DB7B0C2ABB84860008AF12 /* MainScreenComponents */,
 				A4DB7B132ABB84F80008AF12 /* NoteDetailViews */,
-				A40111B42BA8EE39006C5639 /* AboutViews */,
-				A40111B72BA8F2C2006C5639 /* CategoryViews */,
+				A0081F8E3038966400886854 /* Stores */,
+				A4D06FAF2B214AC10000D089 /* ViewModels */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
