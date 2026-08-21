@@ -17,9 +17,11 @@ final class NotesListViewModel: ObservableObject {
     @Published private(set) var categories: [Category] = [.general]
         
     // MARK: Search properties.
+    
     @Published var searchText = ""
     
     // MARK: Filtering and sorting properties.
+    
     var lockedNotes: [Note] {
         notes.filter { $0.isLocked }
     }
@@ -69,6 +71,7 @@ final class NotesListViewModel: ObservableObject {
     }
         
     // MARK: Navigation and presentation properties.
+    
     @Published var selectedTab: Constants.Tab = .nonLockedNotes
     var isNonLockedNotesTabSelected: Bool { selectedTab == .nonLockedNotes }
     var isLockedNotesTabSelected: Bool { selectedTab == .lockedNotes }
@@ -101,6 +104,7 @@ final class NotesListViewModel: ObservableObject {
     @Published var isEditModeActive = false
 
     // MARK: Dock properties and functions.
+    
     @Published var isDockGlowing = false
     
     /// Function to trigger delayed Dock Glow.
@@ -128,14 +132,24 @@ final class NotesListViewModel: ObservableObject {
     @Published var isShowingAuthenticationErrorOnMainScreen = false
     @Published var isShowingAuthenticationErrorWhenEditing = false
     
-    init() {
+    private let notesRepository: NotesRepository
+    private let categoriesRepository: CategoriesRepository
+    
+    init(
+        notesRepository: NotesRepository = FileNotesRepository(),
+        categoriesRepository: CategoriesRepository = FileCategoriesRepository()
+    ) {
+        self.notesRepository = notesRepository
+        self.categoriesRepository = categoriesRepository
         loadData()
     }
 }
 
 /// ViewModel functions:
 extension NotesListViewModel {
-    // MARK: Note CRUD functions.
+    
+    // MARK: - Note CRUD functions.
+    
     /// Function to add a note to the ``notes`` array and save the changes after the addition.
     /// - Parameter note: A  new ``Note`` object to be added to the ``notes`` array.
     func add(note: Note) {
@@ -217,14 +231,14 @@ extension NotesListViewModel {
     /// Function to save existing notes with documents directory.
     func saveAllNotes() {
         do {
-            let data = try JSONEncoder().encode(notes)
-            try data.write(to: Constants.savePath, options: [.atomic, .completeFileProtection])
+            try notesRepository.saveNotes(notes)
         } catch {
-            print("Unable to save data.")
+            print("Unable to save notes data.")
         }
     }
     
-    // MARK: Category CRUD functions.
+    // MARK: - Category CRUD functions.
+    
     /// Function to add a category to the ``categories`` array and save the changes after the addition.
     /// - Parameter category: A  new ``Category`` object to be added to the ``categories`` array.
     func add(category: Category) {
@@ -281,10 +295,9 @@ extension NotesListViewModel {
     /// Function to save existing categories with documents directory.
     func saveAllCategories() {
         do {
-            let data = try JSONEncoder().encode(categories)
-            try data.write(to: Constants.categoriesPath, options: [.atomic, .completeFileProtection])
+            try categoriesRepository.saveCategories(categories)
         } catch {
-            print("Unable to save data.")
+            print("Unable to save categories data.")
         }
     }
     
@@ -298,22 +311,18 @@ extension NotesListViewModel {
         currentEditableCategory = category
     }
     
-    // MARK: Data loading functions.
+    // MARK: - Data loading functions.
+    
     /// Function responsible for loading user data with documents directory when launching app.
     func loadData() {
         do {
-            // Loading notes data:
-            let data = try Data(contentsOf: Constants.savePath)
-            notes = try JSONDecoder().decode([Note].self, from: data)
+            notes = try notesRepository.loadNotes()
         } catch {
             notes = []
         }
         
         do {
-            // Loading categories data:
-            let categoriesData = try Data(contentsOf: Constants.categoriesPath)
-            categories = try JSONDecoder().decode([Category].self, from: categoriesData)
-            
+            categories = try categoriesRepository.loadCategories()
             setGeneralCategoryToUnassignedNotes()
         } catch {
             categories = [.general]
@@ -413,7 +422,8 @@ extension NotesListViewModel {
         areChangesAllowed = false
     }
     
-    // MARK: Note retrieving functions.
+    // MARK: - Note retrieving functions.
+    
     /// Function to retrieve a note index from the global ``notes`` array.
     /// - Parameter note: A ``Note`` object that might be in the ``notes`` array.
     /// - Returns: An Integer index representing the position of the note in the ``notes`` array.
@@ -436,7 +446,8 @@ extension NotesListViewModel {
         return self.notes[index]
     }
     
-    // MARK: Category retrieving functions.
+    // MARK: - Category retrieving functions.
+    
     /// Function to retrieve a category index from the global ``categories`` array.
     /// - Parameter category: A ``Category`` object that might be in the ``categories`` array.
     /// - Returns: An Integer index representing the position of the category in the ``categories`` array.
@@ -464,7 +475,7 @@ extension NotesListViewModel {
     }
     
     #if DEBUG
-    // MARK: Testing functions.
+    // MARK: - Testing functions.
     /// Function for testing purposes that adds twenty note examples to the ``notes`` array and saves the changes after the addition.
     func addTwentyNoteExamples() {
         if isLockedNotesTabSelected {
