@@ -14,10 +14,11 @@ struct NoteCategorySelectionView: View {
     @Binding var note: Note
     @Binding var creatingNewNote: Bool
 
-    @ObservedObject var viewModel: NotesListViewModel
+    var viewModel: NotesListViewModel
     @ObservedObject var sheetsViewModel: SheetsViewModel
     
     @Environment(\.dismiss) var dismiss
+    @Environment(NotesStore.self) private var notesStore
     
     @State var triggerHapticFeedback: Bool = false
     
@@ -64,7 +65,7 @@ extension NoteCategorySelectionView {
         return ZStack {
             ScrollView {
                 LazyVGrid(columns: layout) {
-                    ForEach(viewModel.categories) { category in
+                    ForEach(notesStore.categories) { category in
                         NoteCategoryButton(
                             note: $note,
                             category: category,

@@ -10,7 +10,7 @@ import SwiftUI
 
 /// Dock with buttons to show categories, create a new note and switch between the non-locked notes list and the locked notes list.s
 struct DockView: View {
-    @ObservedObject var viewModel: NotesListViewModel
+    @Bindable var viewModel: NotesListViewModel
     @ObservedObject var sheetsViewModel: SheetsViewModel
     @Binding var showNoteEditViewSheet: Bool
     @Binding var showCategoriesSheet: Bool
@@ -20,6 +20,7 @@ struct DockView: View {
 
     /// Property to adapt the UI according to the available space.
     @Environment(\.horizontalSizeClass) var sizeClass
+    @Environment(NotesStore.self) private var notesStore
 
     var body: some View {
         VStack {
@@ -154,7 +155,7 @@ extension DockView {
     /// Button for creating a new note from the Dock.
     var createNoteDockButton: some View {
         Button { //                                             Non-locked note with General Category.     Locked note with General Category.
-            newNote = (viewModel.isNonLockedNotesTabSelected) ? Note(category: viewModel.categories[0]) : Note(isLocked: true, category: viewModel.categories[0])
+            newNote = viewModel.isNonLockedNotesTabSelected ? Note(category: notesStore.categories[0]) : Note(isLocked: true, category: notesStore.categories[0])
             
             showNoteEditViewSheet.toggle()
             HapticManager.instance.impact(style: .light)
@@ -209,4 +210,5 @@ extension DockView {
         ),
         showCategoriesSheet: .constant(false)
     )
+    .environment(NotesStore())
 }

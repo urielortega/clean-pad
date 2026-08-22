@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
-    // Creating shared ViewModels with @StateObject.
-    @StateObject var viewModel = NotesListViewModel()
+    // Creating shared app state.
+    @State private var notesStore = NotesStore()
+    @State private var viewModel = NotesListViewModel()
     @StateObject var dateViewModel = DateViewModel()
     @StateObject var sheetsViewModel = SheetsViewModel()
     
@@ -61,6 +62,7 @@ struct ContentView: View {
                 }
             }
         }
+        .environment(notesStore)
         .onAppear {
             if isFirstLaunch {
                 sheetsViewModel.showWelcomeSheet = true

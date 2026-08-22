@@ -10,7 +10,7 @@ import SwiftUI
 /// A modifier that styles a view as a dock, applying background, corner radius, shadow, and padding.
 /// This modifier is used to create a dock that spans the full width and optionally displays buttons.
 struct Dock: ViewModifier {
-    @ObservedObject var viewModel: NotesListViewModel
+    var viewModel: NotesListViewModel
 
     func body(content: Content) -> some View {
         content
@@ -59,7 +59,7 @@ extension View {
 /// A modifier that adds a glowing shadow to the dock, giving visual emphasis when a category is selected.
 /// The shadow color and radius vary based on the dock's glowing state.
 struct GlowingShadow: ViewModifier {
-    @ObservedObject var viewModel: NotesListViewModel
+    var viewModel: NotesListViewModel
 
     func body(content: Content) -> some View {
         content

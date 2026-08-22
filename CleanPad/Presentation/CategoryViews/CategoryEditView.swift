@@ -18,7 +18,7 @@ struct CategoryEditView: View {
     @State var category: Category
     @State private var showingConfirmation = false
     
-    @ObservedObject var viewModel: NotesListViewModel
+    var viewModel: NotesListViewModel
     
     /// Property to show Cancel and Save buttons, and handle `onChange` closures.
     var creatingNewCategory: Bool
@@ -33,6 +33,7 @@ struct CategoryEditView: View {
     @FocusState private var focusedField: FocusField?
     
     @Environment(\.dismiss) var dismiss
+    @Environment(NotesStore.self) private var notesStore
     
     /// Property to adapt the UI for VoiceOver users.
     @Environment(\.accessibilityVoiceOverEnabled) var voiceOverEnabled
@@ -133,10 +134,11 @@ struct CategoryEditView: View {
     var saveCategoryButtonView: some View {
         Button("Save") {
             if creatingNewCategory {
-                viewModel.add(category: category)
+                notesStore.add(category: category)
                 isAlertPresented.toggle() // Alert is only presented when creating a new category.
             } else {
-                viewModel.update(category: category)
+                notesStore.update(category: category)
+                viewModel.handleUpdatedCategory(category, in: notesStore)
             }
             
             dismiss()
@@ -153,5 +155,6 @@ struct CategoryEditView: View {
         viewModel: NotesListViewModel(),
         creatingNewCategory: false
     )
+    .environment(NotesStore())
 }
 #endif

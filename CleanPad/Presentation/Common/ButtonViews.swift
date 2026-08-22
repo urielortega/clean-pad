@@ -11,10 +11,10 @@ import SwiftUI
 /// Button to definitely delete a note, with optional view dismissal.
 struct DeleteNoteButton: View {
     var note: Note
-    @ObservedObject var viewModel: NotesListViewModel
     var dismissView: Bool
 
     @Environment(\.dismiss) var dismiss
+    @Environment(NotesStore.self) private var notesStore
     
     var body: some View {
         Button(role: .destructive) {
@@ -24,12 +24,12 @@ struct DeleteNoteButton: View {
                 // Delete note after delay.
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                     withAnimation(.bouncy) {
-                        viewModel.delete(note: note)
+                        notesStore.delete(note: note)
                     }
                 }
             } else {
                 withAnimation(.bouncy) {
-                    viewModel.delete(note: note)
+                    notesStore.delete(note: note)
                 }
             }
         } label: {
@@ -41,10 +41,11 @@ struct DeleteNoteButton: View {
 /// Button to definitely delete a category, with optional view dismissal.
 struct DeleteCategoryButton: View {
     var category: Category
-    @ObservedObject var viewModel: NotesListViewModel
+    var viewModel: NotesListViewModel
     var dismissView: Bool
 
     @Environment(\.dismiss) var dismiss
+    @Environment(NotesStore.self) private var notesStore
     
     var body: some View {
         Button(role: .destructive) {
@@ -53,10 +54,16 @@ struct DeleteCategoryButton: View {
                 
                 // Delete category after delay:
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                    withAnimation(.bouncy) { viewModel.delete(category: category) }
+                    withAnimation(.bouncy) {
+                        notesStore.delete(category: category)
+                        viewModel.handleDeletedCategory(category)
+                    }
                 }
             } else {
-                withAnimation(.bouncy) { viewModel.delete(category: category) }
+                withAnimation(.bouncy) {
+                    notesStore.delete(category: category)
+                    viewModel.handleDeletedCategory(category)
+                }
             }
         } label: {
             Label("Yes, delete this category", systemImage: "trash")
@@ -133,7 +140,7 @@ struct MaterialButtonLabel: View {
 /// Buttons to show when ContextMenu appears over a Note Label.
 struct NoteContextMenuButtons: View {
     var note: Note
-    @ObservedObject var viewModel: NotesListViewModel
+    var viewModel: NotesListViewModel
     
     var body: some View {
         IsLockedToggleButton(
@@ -143,7 +150,6 @@ struct NoteContextMenuButtons: View {
         ShareLink(item: "\(note.noteTitle)\n\(note.noteContent)")
         DeleteNoteButton(
             note: note,
-            viewModel: viewModel,
             dismissView: false
         )
     }
@@ -152,11 +158,13 @@ struct NoteContextMenuButtons: View {
 /// Button to change isLocked note property, i.e., remove it from or move it to private space.
 struct IsLockedToggleButton: View {
     var note: Note
-    @ObservedObject var viewModel: NotesListViewModel
+    var viewModel: NotesListViewModel
+    
+    @Environment(NotesStore.self) private var notesStore
     
     var body: some View {
         Button {
-            viewModel.updateLockStatus(for: note)
+            viewModel.updateLockStatus(for: note, in: notesStore)
         } label: {
             Label(
                 viewModel.isLockedNotesTabSelected ? "Remove from private space" : "Move to private space",

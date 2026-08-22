@@ -9,7 +9,7 @@ import SwiftUI
 
 /// View to authenticate and show locked notes.
 struct UnlockNotesView: View {
-    @ObservedObject var viewModel: NotesListViewModel
+    var viewModel: NotesListViewModel
     
     var body: some View {
         VStack {

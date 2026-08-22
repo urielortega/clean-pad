@@ -7,107 +7,190 @@
 
 import Foundation
 import LocalAuthentication
+import Observation
 import SwiftUI
 
-final class NotesListViewModel: ObservableObject {
-    /// Array saved in documents directory containing all user notes.
-    @Published private(set) var notes: [Note] = []
-    
-    /// Array saved in documents directory containing note categories.
-    @Published private(set) var categories: [Category] = [.general]
-        
+/// Presentation state and UI logic for the main notes list experience.
+///
+/// `NotesListViewModel` does not own notes or categories. Persistent note data lives in
+/// `NotesStore`; this type only decides how that data is filtered, sorted, selected,
+/// presented, and protected by the private-notes authentication flow.
+@Observable
+final class NotesListViewModel {
     // MARK: Search properties.
     
-    @Published var searchText = ""
+    /// Text used to filter notes by title or content.
+    var searchText = ""
     
     // MARK: Filtering and sorting properties.
     
-    var lockedNotes: [Note] {
-        notes.filter { $0.isLocked }
-    }
+    /// Category currently used to filter the notes list.
+    ///
+    /// `.noSelection` means all categories.
+    var selectedCategory: Category = .noSelection
     
-    var nonLockedNotes: [Note] {
-        notes.filter { $0.isLocked == false }
-    }
+    /// Category currently being edited in the category sheet flow.
+    var currentEditableCategory: Category = .noSelection
     
-    var sortedByDateLockedNotes: [Note] {
-        lockedNotes
-            .sorted { $0.date > $1.date }
-    }
+    /// Note currently being edited by presentation flows that need to keep a selected note reference.
+    var currentEditableNote: Note?
     
-    var sortedByDateNonLockedNotes: [Note] {
-        nonLockedNotes
-            .sorted { $0.date > $1.date }
-    }
-    
-    @Published var selectedCategory: Category = .noSelection
-    @Published var currentEditableCategory: Category = .noSelection
-    @Published var currentEditableNote: Note?
-    
-    /// Computed property that returns a Note array with all notes or the ones resulting from a search.
-    var filteredNotes: [Note] {
-        currentNotes
-            .filter { note in
-                // If selectedCategory is .noSelection...
-                // ...the condition will always be true...
-                // ...so all notes will pass the filter.
-                                                // If a specific category is selected
-                                                // ...only the notes with that category will pass the filter.
-                selectedCategory == .noSelection || note.category?.id == selectedCategory.id
-            }
-            .filter { note in
-                // If the user hasn't entered any text...
-                // then the condition will always be true
-                // ...and all the remaining notes will pass this filter.
-                searchText.isEmpty ||
-                // If the search text is not empty, we proceed to the next conditions:
-                
-                    // If the noteTitle contains the search text...
-                    // ...this condition will return true for that note, and it will pass the filter.
-                    note.noteTitle.localizedStandardContains(searchText) ||
-                    // If either the title or content contains the search text, the note will pass this filter.
-                    note.noteContent.localizedStandardContains(searchText)
-            }
-    }
-        
     // MARK: Navigation and presentation properties.
     
-    @Published var selectedTab: Constants.Tab = .nonLockedNotes
+    /// Selected notes tab: regular notes or private notes.
+    var selectedTab: Constants.Tab = .nonLockedNotes
     var isNonLockedNotesTabSelected: Bool { selectedTab == .nonLockedNotes }
     var isLockedNotesTabSelected: Bool { selectedTab == .lockedNotes }
     
-    var currentNotes: [Note] {
-        if isLockedNotesTabSelected {
-            sortedByDateLockedNotes
-        } else {
-            sortedByDateNonLockedNotes
-        }
-    }
-    
+    /// Indicates whether dock side buttons can be shown for the current tab and access state.
     var showingDockButtons: Bool {
-        // Dock Buttons are shown only when the Non-Locked Notes Tab is selected...
-        // ...or the Locked Notes Tab is selected and access to it is granted.
         isNonLockedNotesTabSelected || (isLockedNotesTabSelected && isUnlocked)
     }
     
-    @AppStorage("isGridViewSelected") var isGridViewSelected = false
-    
-    var idiom: UIUserInterfaceIdiom { UIDevice.current.userInterfaceIdiom }
-    
-    var isSomeCategorySelected: Bool { selectedCategory != .noSelection }
-    
-    func isCategorySelected(_ category: Category) -> Bool {
-        return selectedCategory == category
+    /// Persisted preference that controls whether notes are shown as a grid instead of a list.
+    var isGridViewSelected = UserDefaults.standard.bool(forKey: "isGridViewSelected") {
+        didSet {
+            UserDefaults.standard.set(isGridViewSelected, forKey: "isGridViewSelected")
+        }
     }
     
-    /// Property to control the status of Category Edit Mode.
-    @Published var isEditModeActive = false
+    /// Current device idiom used by views to adapt layout density.
+    var idiom: UIUserInterfaceIdiom { UIDevice.current.userInterfaceIdiom }
+    
+    /// Indicates whether the notes list is filtered by a specific category.
+    var isSomeCategorySelected: Bool { selectedCategory != .noSelection }
+    
+    /// Indicates whether category selection is currently in edit mode.
+    var isEditModeActive = false
 
     // MARK: Dock properties and functions.
     
-    @Published var isDockGlowing = false
+    /// Controls the temporary glow animation shown after category selection.
+    var isDockGlowing = false
     
-    /// Function to trigger delayed Dock Glow.
+    // MARK: Access control properties.
+    
+    /// Indicates whether access to private notes is currently unlocked.
+    var isUnlocked = false
+    
+    /// Indicates whether changing a note's lock status is currently permitted.
+    private(set) var areChangesAllowed = false
+    
+    /// Last authentication error message shown to the user.
+    private(set) var authenticationError = "Unknown error"
+    
+    /// Controls the authentication error alert on the main screen.
+    var isShowingAuthenticationErrorOnMainScreen = false
+    
+    /// Controls the authentication error alert while editing a note.
+    var isShowingAuthenticationErrorWhenEditing = false
+}
+
+// MARK: - ViewModel Methods:
+
+extension NotesListViewModel {
+    // MARK: - Filtering and sorting
+    
+    /// Returns private notes from the provided collection.
+    func lockedNotes(from notes: [Note]) -> [Note] {
+        notes.filter { $0.isLocked }
+    }
+    
+    /// Returns regular, non-private notes from the provided collection.
+    func nonLockedNotes(from notes: [Note]) -> [Note] {
+        notes.filter { $0.isLocked == false }
+    }
+    
+    /// Returns private notes sorted from newest to oldest.
+    func sortedByDateLockedNotes(from notes: [Note]) -> [Note] {
+        lockedNotes(from: notes)
+            .sorted { $0.date > $1.date }
+    }
+    
+    /// Returns regular notes sorted from newest to oldest.
+    func sortedByDateNonLockedNotes(from notes: [Note]) -> [Note] {
+        nonLockedNotes(from: notes)
+            .sorted { $0.date > $1.date }
+    }
+    
+    /// Returns the notes that belong to the currently selected tab.
+    func currentNotes(from notes: [Note]) -> [Note] {
+        if isLockedNotesTabSelected {
+            sortedByDateLockedNotes(from: notes)
+        } else {
+            sortedByDateNonLockedNotes(from: notes)
+        }
+    }
+    
+    /// Returns notes matching the selected tab, selected category, and search text.
+    func filteredNotes(from notes: [Note]) -> [Note] {
+        currentNotes(from: notes)
+            .filter { note in
+                selectedCategory == .noSelection || note.category?.id == selectedCategory.id
+            }
+            .filter { note in
+                searchText.isEmpty ||
+                    note.noteTitle.localizedStandardContains(searchText) ||
+                    note.noteContent.localizedStandardContains(searchText)
+            }
+    }
+    
+    /// Removes notes from the active list using offsets produced by SwiftUI's list deletion.
+    func removeNoteFromList(at offsets: IndexSet, in notesStore: NotesStore) {
+        if isNonLockedNotesTabSelected {
+            removeNonLockedNoteFromList(at: offsets, in: notesStore)
+        } else {
+            removeLockedNoteFromList(at: offsets, in: notesStore)
+        }
+    }
+    
+    /// Removes notes from the private-note projection and merges the remaining notes back into the store.
+    private func removeLockedNoteFromList(at offsets: IndexSet, in notesStore: NotesStore) {
+        var sortedLockedNotes = sortedByDateLockedNotes(from: notesStore.notes)
+        sortedLockedNotes.remove(atOffsets: offsets)
+        
+        notesStore.replaceNotes(with: sortedLockedNotes + nonLockedNotes(from: notesStore.notes))
+    }
+    
+    /// Removes notes from the regular-note projection and merges the remaining notes back into the store.
+    private func removeNonLockedNoteFromList(at offsets: IndexSet, in notesStore: NotesStore) {
+        var sortedNonLockedNotes = sortedByDateNonLockedNotes(from: notesStore.notes)
+        sortedNonLockedNotes.remove(atOffsets: offsets)
+        
+        notesStore.replaceNotes(with: sortedNonLockedNotes + lockedNotes(from: notesStore.notes))
+    }
+    
+    /// Indicates whether the provided category is the active category filter.
+    func isCategorySelected(_ category: Category) -> Bool {
+        selectedCategory == category
+    }
+    
+    /// Selects the active category filter.
+    func changeSelectedCategory(with category: Category) {
+        selectedCategory = category
+    }
+    
+    /// Stores the category currently being edited.
+    func changeCurrentEditableCategory(with category: Category) {
+        currentEditableCategory = category
+    }
+    
+    /// Keeps the selected category filter synchronized after a category update.
+    func handleUpdatedCategory(_ category: Category, in notesStore: NotesStore) {
+        if currentEditableCategory == selectedCategory,
+           let updatedCategory = notesStore.getCategoryFromCategoriesArray(category: category) {
+            selectedCategory = updatedCategory
+        }
+    }
+    
+    /// Clears the selected category filter when that category was deleted.
+    func handleDeletedCategory(_ category: Category) {
+        if currentEditableCategory == selectedCategory {
+            selectedCategory = .noSelection
+        }
+    }
+    
+    /// Triggers the dock glow animation used as category-selection feedback.
     func dockGlow() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             withAnimation(.easeInOut(duration: 1)) {
@@ -120,229 +203,14 @@ final class NotesListViewModel: ObservableObject {
             }
         }
     }
-        
-    // MARK: Access control properties.
-    /// Property to control access to locked notes (private space).
-    @Published var isUnlocked = false
     
-    /// Property to control changes in notes.
-    @Published private(set) var areChangesAllowed = false
+    // MARK: - Access control.
     
-    @Published private(set) var authenticationError = "Unknown error"
-    @Published var isShowingAuthenticationErrorOnMainScreen = false
-    @Published var isShowingAuthenticationErrorWhenEditing = false
-    
-    private let notesRepository: NotesRepository
-    private let categoriesRepository: CategoriesRepository
-    
-    init(
-        notesRepository: NotesRepository = FileNotesRepository(),
-        categoriesRepository: CategoriesRepository = FileCategoriesRepository()
-    ) {
-        self.notesRepository = notesRepository
-        self.categoriesRepository = categoriesRepository
-        loadData()
-    }
-}
-
-/// ViewModel functions:
-extension NotesListViewModel {
-    
-    // MARK: - Note CRUD functions.
-    
-    /// Function to add a note to the ``notes`` array and save the changes after the addition.
-    /// - Parameter note: A  new ``Note`` object to be added to the ``notes`` array.
-    func add(note: Note) {
-        withAnimation {
-            if note.category == nil { // If 'note' has no category assigned...
-                let noteToAssignCategory = Note(
-                    isLocked: note.isLocked,
-                    noteTitle: note.noteTitle,
-                    noteContent: note.noteContent,
-                    category: categories[0] // ..assign General category from 'categories' array.
-                )
-                
-                notes.append(noteToAssignCategory)
-            } else {
-                notes.append(note)
-            }
-            
-            saveAllNotes()
-        }
-    }
-    
-    /// Function to update a note and save the changes in the ``notes`` array.
-    /// - Parameter note: An existing ``Note`` object to be updated in the ``notes`` array.
-    func update(note: Note, updatingDate: Bool = true) {
-        withAnimation {
-            if let index = self.getNoteIndexFromNotesArray(note: note) {
-                
-                // Replace the original note with the updated one:
-                notes[index] = note
-                
-                // Update note date:
-                if updatingDate { notes[index].date = .now }
-                
-                saveAllNotes()
-            }
-        }
-    }
-    
-    /// Function to delete a note and save the changes in the ``notes`` array.
-    /// - Parameter note: An existing ``Note`` object to be deleted from the ``notes`` array.
-    func delete(note: Note) {
-        let index = self.getNoteIndexFromNotesArray(note: note)!
-        notes.remove(at: index)
-        saveAllNotes()
-    }
-    
-    /// Function to remove a locked note from the ``notes`` array by using offsets.
-    func removeLockedNoteFromList(at offsets: IndexSet) {
-        // Array used to locate and remove a specific note using offsets.
-        var sortedLockedNotes = sortedByDateLockedNotes
-        sortedLockedNotes.remove(atOffsets: offsets)
-        
-        // Merging the notes shown in the List and the rest of the notes (nonLockedNotes).
-        notes = sortedLockedNotes + nonLockedNotes
-        
-        saveAllNotes()
-    }
-    
-    /// Function to remove a non-locked note from the ``notes`` array by using offsets.
-    func removeNonLockedNoteFromList(at offsets: IndexSet) {
-        // Array used to locate and remove a specific note using offsets.
-        var sortedNonLockedNotes = sortedByDateNonLockedNotes
-        sortedNonLockedNotes.remove(atOffsets: offsets)
-        
-        // Merging the notes shown in the List and the rest of the notes (lockedNotes).
-        notes = sortedNonLockedNotes + lockedNotes
-        
-        saveAllNotes()
-    }
-
-    func removeNoteFromList(at offsets: IndexSet) {
-        if isNonLockedNotesTabSelected {
-            removeNonLockedNoteFromList(at: offsets)
-        } else {
-            removeLockedNoteFromList(at: offsets)
-        }
-    }
-    
-    /// Function to save existing notes with documents directory.
-    func saveAllNotes() {
-        do {
-            try notesRepository.saveNotes(notes)
-        } catch {
-            print("Unable to save notes data.")
-        }
-    }
-    
-    // MARK: - Category CRUD functions.
-    
-    /// Function to add a category to the ``categories`` array and save the changes after the addition.
-    /// - Parameter category: A  new ``Category`` object to be added to the ``categories`` array.
-    func add(category: Category) {
-        categories.append(category)
-        saveAllCategories()
-    }
-    
-    /// Function to update a category and save the changes in the ``categories`` array.
-    /// - Parameter category: An existing ``Category`` object to be updated in the ``categories`` array.
-    func update(category: Category) {
-        let index = self.getCategoryIndexFromCategoriesArray(category: category)!
-        
-        // Replace the original category with the updated one:
-        categories[index] = category
-        
-        if currentEditableCategory == selectedCategory {
-            // Assign the updated category to selectedCategory.
-            selectedCategory = categories[index]
-        }
-        
-        // Update notes that have this category assigned.
-        for index in 0..<notes.count {
-            if notes[index].category?.id == category.id {
-                notes[index].category = category
-            }
-        }
-        
-        saveAllCategories()
-        saveAllNotes()
-    }
-    
-    /// Function to delete a category and save the changes in the ``categories`` array.
-    /// - Parameter category: An existing ``Category`` object to be deleted from the ``categories`` array.
-    func delete(category: Category) {
-        let index = self.getCategoryIndexFromCategoriesArray(category: category)!
-        categories.remove(at: index)
-        
-        if currentEditableCategory == selectedCategory {
-            // No Category selected when deleting the selectedCategory.
-            selectedCategory = .noSelection
-        }
-        
-        // Assign General category to notes that have this category assigned.
-        for index in 0..<notes.count {
-            if notes[index].category?.id == category.id {
-                notes[index].category = categories[0] // Assigning General category from 'categories' array.
-            }
-        }
-        
-        saveAllCategories()
-        saveAllNotes()
-    }
-    
-    /// Function to save existing categories with documents directory.
-    func saveAllCategories() {
-        do {
-            try categoriesRepository.saveCategories(categories)
-        } catch {
-            print("Unable to save categories data.")
-        }
-    }
-    
-    /// Function to change the value of the selectedCategory property.
-    func changeSelectedCategory(with category: Category) {
-        selectedCategory = category
-    }
-    
-    /// Function to change the value of the currentEditableCategory property.
-    func changeCurrentEditableCategory(with category: Category) {
-        currentEditableCategory = category
-    }
-    
-    // MARK: - Data loading functions.
-    
-    /// Function responsible for loading user data with documents directory when launching app.
-    func loadData() {
-        do {
-            notes = try notesRepository.loadNotes()
-        } catch {
-            notes = []
-        }
-        
-        do {
-            categories = try categoriesRepository.loadCategories()
-            setGeneralCategoryToUnassignedNotes()
-        } catch {
-            categories = [.general]
-        }
-    }
-    
-    /// Function that sets General category to notes that are currently unassigned to any category.
-    func setGeneralCategoryToUnassignedNotes() {
-        for index in notes.indices {
-            if notes[index].category == nil {
-                notes[index].category = categories[0] // Using General category from 'categories' array.
-            }
-        }
-    }
-    
-    // MARK: Access control functions.
-    /// Function to authenticate with biometrics or passcode and allow access and changes to user notes.
+    /// Authenticates the user and updates the matching private-notes permission state.
+    ///
     /// - Parameters:
-    ///   - authenticationReason: Controls the flow involved in the modification of permissions.
-    ///   - successAction: Closure called when authentication is successful.
+    ///   - authenticationReason: Determines whether authentication unlocks private notes or allows lock-status changes.
+    ///   - successAction: Closure called after successful authentication and state update.
     func authenticate(for authenticationReason: Constants.AuthenticationReason, successAction: @escaping () -> Void) {
         let context = LAContext()
         var error: NSError?
@@ -399,117 +267,66 @@ extension NotesListViewModel {
         }
     }
 
-    /// Function to change the `isLocked` property of a ``Note`` object.
-    /// - Parameter note: A ``Note`` object, whose `isLocked` property changes if authentication is successful.
-    func updateLockStatus(for note: Note) {
+    /// Authenticates the user and toggles a note's private status when authentication succeeds.
+    ///
+    /// - Parameters:
+    ///   - note: Note whose `isLocked` property should be toggled.
+    ///   - notesStore: Store that owns and persists the note mutation.
+    func updateLockStatus(for note: Note, in notesStore: NotesStore) {
         authenticate(for: .changeLockStatus) {
-            let index = self.getNoteIndexFromNotesArray(note: note)!
-            
-            // Update isLocked property.
-            self.notes[index].isLocked.toggle()
-            
-            self.saveAllNotes()
-            
+            notesStore.toggleLockStatus(for: note)
             self.forbidChanges()
         }
     }
     
+    /// Locks private notes again.
     func lockNotes() {
         isUnlocked = false
     }
     
+    /// Revokes permission to change note lock status.
     func forbidChanges() {
         areChangesAllowed = false
     }
     
-    // MARK: - Note retrieving functions.
-    
-    /// Function to retrieve a note index from the global ``notes`` array.
-    /// - Parameter note: A ``Note`` object that might be in the ``notes`` array.
-    /// - Returns: An Integer index representing the position of the note in the ``notes`` array.
-    func getNoteIndexFromNotesArray(note: Note) -> Int? {
-        // To find the given note.
-        guard let index = self.notes.firstIndex(where: {$0.id == note.id}) else {
-            print("Couldn't find note in the 'notes' array.")
-            return nil
-        }
-        
-        return index
-    }
-    
-    /// Function to retrieve a note from the global ``notes`` array.
-    /// - Parameter note: A ``Note`` object that might be in the ``notes`` array.
-    /// - Returns: A ``Note`` object, found in the ``notes`` array, with up to date data.
-    func getNoteFromNotesArray(note: Note) -> Note? {
-        let index = getNoteIndexFromNotesArray(note: note)!
-        
-        return self.notes[index]
-    }
-    
-    // MARK: - Category retrieving functions.
-    
-    /// Function to retrieve a category index from the global ``categories`` array.
-    /// - Parameter category: A ``Category`` object that might be in the ``categories`` array.
-    /// - Returns: An Integer index representing the position of the category in the ``categories`` array.
-    func getCategoryIndexFromCategoriesArray(category: Category) -> Int? {
-        // To find the given category.
-        guard let index = self.categories.firstIndex(where: {$0.id == category.id}) else {
-            print("Couldn't find category in the 'categories' array.")
-            return nil
-        }
-        
-        return index
-    }
-    
-    /// Function to retrieve a note from the global ``categories`` array.
-    /// - Parameter category: A ``Category`` object that might be in the ``categories`` array.
-    /// - Returns: A ``Category`` object, found in the ``categories`` array, with up to date data.
-    func getCategoryFromCategoriesArray(category: Category) -> Category? {
-        let index = getCategoryIndexFromCategoriesArray(category: category)!
-        
-        return self.categories[index]
-    }
-    
-    func isCategoryInCategoriesArray(category: Category) -> Bool {
-        categories.contains(category)
-    }
-    
     #if DEBUG
     // MARK: - Testing functions.
-    /// Function for testing purposes that adds twenty note examples to the ``notes`` array and saves the changes after the addition.
-    func addTwentyNoteExamples() {
+    
+    /// Adds twenty sample notes to the active tab for manual UI checks.
+    func addTwentyNoteExamples(to notesStore: NotesStore) {
         if isLockedNotesTabSelected {
             for index in 1...20 {
-                add(note: Note(isLocked: true, noteTitle: String(index)))
+                notesStore.add(note: Note(isLocked: true, noteTitle: String(index)))
             }
-            saveAllNotes()
+            notesStore.saveAllNotes()
         } else {
             for index in 1...20 {
-                add(note: Note(noteTitle: String(index)))
+                notesStore.add(note: Note(noteTitle: String(index)))
             }
-            saveAllNotes()
+            notesStore.saveAllNotes()
         }
     }
     
-    /// Function for testing purposes that adds ten note examples to the ``notes`` array and saves the changes after the addition.
-    func addScreenshotsNoteExamples() {
+    /// Adds screenshot-oriented categories and notes for manual visual checks.
+    func addScreenshotsNoteExamples(to notesStore: NotesStore) {
         // Adding the example categories (used in the Note.screenshotsExamples):
         for category in Category.screenshotsExamples {
-            add(category: category)
+            notesStore.add(category: category)
         }
         
         for note in Note.screenshotsExamples {
-            add(note: note)
+            notesStore.add(note: note)
         }
     }
     
-    func addTestNoteWithTestCategory() {
+    /// Adds one note assigned to a test category for category UI checks.
+    func addTestNoteWithTestCategory(to notesStore: NotesStore) {
         let testCategory = Category(id: UUID(), name: "Test2", color: .green)
         
-        add(category: testCategory)
-        saveAllCategories()
+        notesStore.add(category: testCategory)
+        notesStore.saveAllCategories()
 
-        add(
+        notesStore.add(
             note: Note(
                 isLocked: false,
                 noteTitle: "Test2 Category Note",
@@ -517,21 +334,21 @@ extension NotesListViewModel {
                 category: testCategory
             )
         )
-        saveAllNotes()
+        notesStore.saveAllNotes()
     }
     
-    func addTestCategory() {
+    /// Adds one custom category for category UI checks.
+    func addTestCategory(to notesStore: NotesStore) {
         let testCategory = Category(id: UUID(), name: "Test3", color: .pink)
         
-        add(category: testCategory)
-        saveAllCategories()
+        notesStore.add(category: testCategory)
+        notesStore.saveAllCategories()
     }
     #endif
     
-    // Deletes every category except the General category.
-    func dropAllCategories() {
-        categories = [.general]
-        saveAllCategories()
-        print(categories)
+    /// Deletes every category except the General category.
+    func dropAllCategories(in notesStore: NotesStore) {
+        notesStore.dropAllCategories()
+        print(notesStore.categories)
     }
 }
