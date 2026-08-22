@@ -250,7 +250,10 @@ extension NoteEditView {
     /// Button for saving a new note by adding it to the ViewModel's notes array.
     var saveNoteButtonView: some View {
         Button("Save") {
-            notesStore.add(note: noteCopy)
+            withAnimation {
+                notesStore.add(note: noteCopy)
+            }
+            
             dismiss()
             
             HapticManager.instance.notification(type: .success)
