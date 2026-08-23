@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import LocalAuthentication
 import Observation
 import SwiftUI
 
@@ -17,6 +16,13 @@ import SwiftUI
 /// presented, and protected by the private-notes authentication flow.
 @Observable
 final class NotesListViewModel {
+    /// Service used to request identity verification before private-note actions.
+    @ObservationIgnored private let authenticationService: any AuthenticationService
+    
+    init(authenticationService: any AuthenticationService) {
+        self.authenticationService = authenticationService
+    }
+    
     // MARK: Search properties.
     
     /// Text used to filter notes by title or content.
@@ -211,59 +217,51 @@ extension NotesListViewModel {
     /// - Parameters:
     ///   - authenticationReason: Determines whether authentication unlocks private notes or allows lock-status changes.
     ///   - successAction: Closure called after successful authentication and state update.
-    func authenticate(for authenticationReason: Constants.AuthenticationReason, successAction: @escaping () -> Void) {
-        let context = LAContext()
-        var error: NSError?
-        let reason = "Please authenticate yourself to lock and unlock your notes data." // Used for Touch ID.
-        
-        guard context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) else {
-            // Error handling for devices without a configured passcode.
-            authenticationError = "Sorry, your device does not support authentication."
-            
-            if authenticationReason == .viewNotes {
-                isShowingAuthenticationErrorOnMainScreen = true
-            } else if authenticationReason == .changeLockStatus {
-                isShowingAuthenticationErrorWhenEditing = true
+    func authenticate(
+        for authenticationReason: Constants.AuthenticationReason,
+        successAction: @escaping () -> Void
+    ) {
+        Task { @MainActor in
+            do {
+                try await authenticationService.authenticate(reason: authenticationPromptReason)
+                handleSuccessfulAuthentication(for: authenticationReason, successAction: successAction)
+            } catch {
+                handleFailedAuthentication(error, for: authenticationReason)
             }
-            
-            return
         }
-        
-        context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { success, authenticationError in
-            Task { @MainActor in
-                if success {
-                    withAnimation(.bouncy) {
-                        if authenticationReason == .viewNotes {
-                            self.isUnlocked = true
-                        } else if authenticationReason == .changeLockStatus {
-                            self.areChangesAllowed = true
-                        }
-                        successAction()
-                    }
-                } else {
-                    // Error handling for authentication failure.
-                    let errorDescription: String
-                    
-                    switch authenticationError {
-                    case LAError.authenticationFailed?:
-                        errorDescription = "Authentication failed. Please try again."
-                    case LAError.userCancel?, LAError.userFallback?:
-                        errorDescription = "Authentication canceled."
-                    case LAError.biometryNotAvailable?, LAError.biometryNotEnrolled?:
-                        errorDescription = "Biometrics not available or not enrolled. Use passcode instead."
-                    default:
-                        errorDescription = "Authentication error. Try again later."
-                    }
-                    
-                    self.authenticationError = errorDescription
-                    
-                    if authenticationReason == .viewNotes {
-                        self.isShowingAuthenticationErrorOnMainScreen = true
-                    } else if authenticationReason == .changeLockStatus {
-                        self.isShowingAuthenticationErrorWhenEditing = true
-                    }
-                }
+    }
+    
+    /// User-facing reason shown by the system authentication prompt.
+    private var authenticationPromptReason: String {
+        "Please authenticate yourself to lock and unlock your notes data."
+    }
+    
+    /// Applies the permission changes associated with a successful authentication.
+    private func handleSuccessfulAuthentication(
+        for authenticationReason: Constants.AuthenticationReason,
+        successAction: () -> Void
+    ) {
+        withAnimation(.bouncy) {
+            if authenticationReason == .viewNotes {
+                isUnlocked = true
+            } else if authenticationReason == .changeLockStatus {
+                areChangesAllowed = true
             }
+            successAction()
+        }
+    }
+    
+    /// Stores the authentication error and opens the alert used by the active flow.
+    private func handleFailedAuthentication(
+        _ error: Error,
+        for authenticationReason: Constants.AuthenticationReason
+    ) {
+        authenticationError = error.localizedDescription
+        
+        if authenticationReason == .viewNotes {
+            isShowingAuthenticationErrorOnMainScreen = true
+        } else if authenticationReason == .changeLockStatus {
+            isShowingAuthenticationErrorWhenEditing = true
         }
     }
 

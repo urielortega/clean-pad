@@ -187,8 +187,3 @@ extension CategorySelectionView {
         }
     }
 }
-
-#Preview("CategorySelectionView Sheet") {
-    CategorySelectionView(viewModel: NotesListViewModel(), sheetsViewModel: SheetsViewModel())
-        .environment(NotesStore())
-}

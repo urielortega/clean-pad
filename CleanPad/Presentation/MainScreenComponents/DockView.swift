@@ -200,15 +200,3 @@ extension DockView {
         }
     }
 }
-
-#Preview("DockView") {
-    DockView(
-        viewModel: NotesListViewModel(),
-        sheetsViewModel: SheetsViewModel(),
-        showNoteEditViewSheet: .constant(
-            false
-        ),
-        showCategoriesSheet: .constant(false)
-    )
-    .environment(NotesStore())
-}

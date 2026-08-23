@@ -101,14 +101,3 @@ extension EmptyListView {
         "Start the symphony of thoughts."
     ]
 }
-
-struct EmptyListView_Previews: PreviewProvider {
-    static var previews: some View {
-        EmptyListView(
-            viewModel: NotesListViewModel(),
-            sheetsViewModel: SheetsViewModel(),
-            showNoteEditViewSheet: .constant(false)
-        ) { }
-        .environment(NotesStore())
-    }
-}

@@ -45,7 +45,3 @@ extension UnlockNotesView {
         .accessibilityLabel("Private notes are protected. Tap to enable access.")
     }
 }
-
-#Preview {
-    UnlockNotesView(viewModel: NotesListViewModel())
-}

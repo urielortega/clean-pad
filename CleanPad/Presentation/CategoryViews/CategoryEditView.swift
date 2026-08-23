@@ -147,14 +147,3 @@ struct CategoryEditView: View {
         }
     }
 }
-
-#if DEBUG
-#Preview {
-    CategoryEditView(
-        category: .thoughts,
-        viewModel: NotesListViewModel(),
-        creatingNewCategory: false
-    )
-    .environment(NotesStore())
-}
-#endif
