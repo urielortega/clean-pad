@@ -19,15 +19,16 @@ struct AllNotesView: View {
     /// Property to adapt the UI for VoiceOver users.
     @Environment(\.accessibilityVoiceOverEnabled) var voiceOverEnabled
     @Environment(NotesStore.self) private var notesStore
+    @Environment(PrivateNotesAccessState.self) private var privateNotesAccess
 
     var body: some View {
         Group {
-            if viewModel.isLockedNotesTabSelected && !viewModel.isUnlocked {
+            if viewModel.isLockedNotesTabSelected && !privateNotesAccess.isUnlocked {
                 Group {
                     if voiceOverEnabled {
-                        UnlockNotesView(viewModel: viewModel).accessibilityUnlockNotesView
+                        UnlockNotesView().accessibilityUnlockNotesView
                     } else {
-                        UnlockNotesView(viewModel: viewModel)
+                        UnlockNotesView()
                     }
                 }
                 .padding(.bottom, 80)
@@ -63,7 +64,7 @@ struct AllNotesView: View {
                         }
                     }
                     .blurWhenAppNotActive( // Apply blur when access to private notes is allowed and Private Notes Tab is selected.
-                        isBlurActive: viewModel.isUnlocked  && viewModel.isLockedNotesTabSelected
+                        isBlurActive: privateNotesAccess.isUnlocked && viewModel.isLockedNotesTabSelected
                     )
                 }
             }

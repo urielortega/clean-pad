@@ -43,6 +43,7 @@ struct NoteEditView: View {
     
     @Environment(\.dismiss) var dismiss
     @Environment(NotesStore.self) private var notesStore
+    @Environment(PrivateNotesAccessState.self) private var privateNotesAccess
     
     /// Property to adapt the UI for VoiceOver users.
     @Environment(\.accessibilityVoiceOverEnabled) var voiceOverEnabled
@@ -71,16 +72,18 @@ struct NoteEditView: View {
     }
     
     var body: some View {
+        @Bindable var privateNotesAccess = privateNotesAccess
+        
         NavigationStack {
             // Show UnlockNotesView only when...
             if ( // ...access is locked, the note is private, it isn't a new one and the 'isLocked' property wasn't recently toggled.
-                !viewModel.isUnlocked && (noteCopy.isLocked == true) && !creatingNewNote && !editingAToggledNote
+                !privateNotesAccess.isUnlocked && (noteCopy.isLocked == true) && !creatingNewNote && !editingAToggledNote
             ) {
                 Group {
                     if voiceOverEnabled {
-                        UnlockNotesView(viewModel: viewModel).accessibilityUnlockNotesView
+                        UnlockNotesView().accessibilityUnlockNotesView
                     } else {
-                        UnlockNotesView(viewModel: viewModel)
+                        UnlockNotesView()
                     }
                 }
                 .padding(.bottom, 80)
@@ -201,9 +204,9 @@ struct NoteEditView: View {
             }
         }
         .alert(isPresent: $isAlertPresented, view: alertView)
-        .alert("Authentication error", isPresented: $viewModel.isShowingAuthenticationErrorWhenEditing) {
+        .alert("Authentication error", isPresented: $privateNotesAccess.isShowingAuthenticationErrorWhenEditing) {
             Button("OK") { }
-        } message: { Text(viewModel.authenticationError) }
+        } message: { Text(privateNotesAccess.authenticationError) }
     }
 }
 
@@ -235,7 +238,7 @@ extension NoteEditView {
     /// Button to toggle `isLocked` property of a note, i.e., move it to or remove it from the private space.
     var isLockedToggleButtonView: some View {
         Button {
-            viewModel.authenticate(for: .changeLockStatus) {
+            privateNotesAccess.authenticate(for: .changeLockStatus) {
                 noteCopy.isLocked.toggle()
                 editingAToggledNote = true // 'isLocked' property was recently toggled.
             }

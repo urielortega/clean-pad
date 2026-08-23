@@ -11,18 +11,10 @@ import SwiftUI
 
 /// Presentation state and UI logic for the main notes list experience.
 ///
-/// `NotesListViewModel` does not own notes or categories. Persistent note data lives in
-/// `NotesStore`; this type only decides how that data is filtered, sorted, selected,
-/// presented, and protected by the private-notes authentication flow.
+/// `MainScreenViewModel` does not own notes or categories. Persistent note data lives in
+/// `NotesStore`; this type only decides how that data is filtered, sorted, selected, and presented.
 @Observable
 final class MainScreenViewModel {
-    /// Service used to request identity verification before private-note actions.
-    @ObservationIgnored private let authenticationService: any AuthenticationService
-    
-    init(authenticationService: any AuthenticationService) {
-        self.authenticationService = authenticationService
-    }
-    
     // MARK: Search properties.
     
     /// Text used to filter notes by title or content.
@@ -48,9 +40,9 @@ final class MainScreenViewModel {
     var isNonLockedNotesTabSelected: Bool { selectedTab == .nonLockedNotes }
     var isLockedNotesTabSelected: Bool { selectedTab == .lockedNotes }
     
-    /// Indicates whether dock side buttons can be shown for the current tab and access state.
-    var showingDockButtons: Bool {
-        isNonLockedNotesTabSelected || (isLockedNotesTabSelected && isUnlocked)
+    /// Indicates whether dock side buttons can be shown for the current tab and private-note access state.
+    func showingDockButtons(isPrivateAccessUnlocked: Bool) -> Bool {
+        isNonLockedNotesTabSelected || (isLockedNotesTabSelected && isPrivateAccessUnlocked)
     }
     
     /// Persisted preference that controls whether notes are shown as a grid instead of a list.
@@ -74,22 +66,6 @@ final class MainScreenViewModel {
     /// Controls the temporary glow animation shown after category selection.
     var isDockGlowing = false
     
-    // MARK: Access control properties.
-    
-    /// Indicates whether access to private notes is currently unlocked.
-    var isUnlocked = false
-    
-    /// Indicates whether changing a note's lock status is currently permitted.
-    private(set) var areChangesAllowed = false
-    
-    /// Last authentication error message shown to the user.
-    private(set) var authenticationError = "Unknown error"
-    
-    /// Controls the authentication error alert on the main screen.
-    var isShowingAuthenticationErrorOnMainScreen = false
-    
-    /// Controls the authentication error alert while editing a note.
-    var isShowingAuthenticationErrorWhenEditing = false
 }
 
 // MARK: - ViewModel Methods:
@@ -208,83 +184,6 @@ extension MainScreenViewModel {
                 }
             }
         }
-    }
-    
-    // MARK: - Access control.
-    
-    /// Authenticates the user and updates the matching private-notes permission state.
-    ///
-    /// - Parameters:
-    ///   - authenticationReason: Determines whether authentication unlocks private notes or allows lock-status changes.
-    ///   - successAction: Closure called after successful authentication and state update.
-    func authenticate(
-        for authenticationReason: Constants.AuthenticationReason,
-        successAction: @escaping () -> Void
-    ) {
-        Task { @MainActor in
-            do {
-                try await authenticationService.authenticate(reason: authenticationPromptReason)
-                handleSuccessfulAuthentication(for: authenticationReason, successAction: successAction)
-            } catch {
-                handleFailedAuthentication(error, for: authenticationReason)
-            }
-        }
-    }
-    
-    /// User-facing reason shown by the system authentication prompt.
-    private var authenticationPromptReason: String {
-        "Please authenticate yourself to lock and unlock your notes data."
-    }
-    
-    /// Applies the permission changes associated with a successful authentication.
-    private func handleSuccessfulAuthentication(
-        for authenticationReason: Constants.AuthenticationReason,
-        successAction: () -> Void
-    ) {
-        withAnimation(.bouncy) {
-            if authenticationReason == .viewNotes {
-                isUnlocked = true
-            } else if authenticationReason == .changeLockStatus {
-                areChangesAllowed = true
-            }
-            successAction()
-        }
-    }
-    
-    /// Stores the authentication error and opens the alert used by the active flow.
-    private func handleFailedAuthentication(
-        _ error: Error,
-        for authenticationReason: Constants.AuthenticationReason
-    ) {
-        authenticationError = error.localizedDescription
-        
-        if authenticationReason == .viewNotes {
-            isShowingAuthenticationErrorOnMainScreen = true
-        } else if authenticationReason == .changeLockStatus {
-            isShowingAuthenticationErrorWhenEditing = true
-        }
-    }
-
-    /// Authenticates the user and toggles a note's private status when authentication succeeds.
-    ///
-    /// - Parameters:
-    ///   - note: Note whose `isLocked` property should be toggled.
-    ///   - notesStore: Store that owns and persists the note mutation.
-    func updateLockStatus(for note: Note, in notesStore: NotesStore) {
-        authenticate(for: .changeLockStatus) {
-            notesStore.toggleLockStatus(for: note)
-            self.forbidChanges()
-        }
-    }
-    
-    /// Locks private notes again.
-    func lockNotes() {
-        isUnlocked = false
-    }
-    
-    /// Revokes permission to change note lock status.
-    func forbidChanges() {
-        areChangesAllowed = false
     }
     
     #if DEBUG

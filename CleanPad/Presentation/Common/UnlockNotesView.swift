@@ -9,7 +9,8 @@ import SwiftUI
 
 /// View to authenticate and show locked notes.
 struct UnlockNotesView: View {
-    var viewModel: MainScreenViewModel
+    /// State that authorizes access to private notes.
+    @Environment(PrivateNotesAccessState.self) private var privateNotesAccess
     
     var body: some View {
         VStack {
@@ -26,7 +27,7 @@ struct UnlockNotesView: View {
                 .foregroundStyle(.secondary)
             
             Button("Unlock") {
-                viewModel.authenticate(for: .viewNotes) {  }
+                privateNotesAccess.authenticate(for: .viewNotes) { }
             }
             .padding()
         }
@@ -38,9 +39,9 @@ extension UnlockNotesView {
     /// Adapted UnlockNotesView for VoiceOver users.
     var accessibilityUnlockNotesView: some View {
         Button {
-            viewModel.authenticate(for: .viewNotes) {  }
+            privateNotesAccess.authenticate(for: .viewNotes) { }
         } label: {
-            UnlockNotesView(viewModel: viewModel)
+            UnlockNotesView()
         }
         .accessibilityLabel("Private notes are protected. Tap to enable access.")
     }

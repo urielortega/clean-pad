@@ -17,7 +17,12 @@ struct MainScreenView: View {
     @Binding var showNoteEditViewSheet: Bool
     @Binding var showCategoriesSheet: Bool
     
+    /// State that controls private-notes access and authentication alerts.
+    @Environment(PrivateNotesAccessState.self) private var privateNotesAccess
+    
     var body: some View {
+        @Bindable var privateNotesAccess = privateNotesAccess
+        
         ZStack {
             AllNotesView(
                 viewModel: viewModel,
@@ -33,10 +38,10 @@ struct MainScreenView: View {
                 showCategoriesSheet: $showCategoriesSheet
             )
         }
-        .alert("Authentication error", isPresented: $viewModel.isShowingAuthenticationErrorOnMainScreen) {
+        .alert("Authentication error", isPresented: $privateNotesAccess.isShowingAuthenticationErrorOnMainScreen) {
             Button("OK") { }
         } message: {
-            Text(viewModel.authenticationError)
+            Text(privateNotesAccess.authenticationError)
         }
     }
 }

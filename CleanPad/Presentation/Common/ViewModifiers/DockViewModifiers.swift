@@ -11,6 +11,7 @@ import SwiftUI
 /// This modifier is used to create a dock that spans the full width and optionally displays buttons.
 struct Dock: ViewModifier {
     var viewModel: MainScreenViewModel
+    let isPrivateAccessUnlocked: Bool
 
     func body(content: Content) -> some View {
         content
@@ -20,13 +21,13 @@ struct Dock: ViewModifier {
             .roundedRectangleOverlayStroke()
             .glowingShadow(viewModel: viewModel)
             .padding(.vertical)
-            .padding(.horizontal, viewModel.showingDockButtons ? 0 : 10)
+            .padding(.horizontal, viewModel.showingDockButtons(isPrivateAccessUnlocked: isPrivateAccessUnlocked) ? 0 : 10)
     }
 }
 
 extension View {
-    func dockStyle(viewModel: MainScreenViewModel) -> some View {
-        modifier(Dock(viewModel: viewModel))
+    func dockStyle(viewModel: MainScreenViewModel, isPrivateAccessUnlocked: Bool) -> some View {
+        modifier(Dock(viewModel: viewModel, isPrivateAccessUnlocked: isPrivateAccessUnlocked))
     }
 }
 

@@ -21,19 +21,20 @@ struct DockView: View {
     /// Property to adapt the UI according to the available space.
     @Environment(\.horizontalSizeClass) var sizeClass
     @Environment(NotesStore.self) private var notesStore
+    @Environment(PrivateNotesAccessState.self) private var privateNotesAccess
 
     var body: some View {
         VStack {
             Spacer()
             
             HStack {
-                if viewModel.showingDockButtons {
+                if viewModel.showingDockButtons(isPrivateAccessUnlocked: privateNotesAccess.isUnlocked) {
                     showCategoriesDockButton
                 }
                 
                 tabBar
                 
-                if viewModel.showingDockButtons {
+                if viewModel.showingDockButtons(isPrivateAccessUnlocked: privateNotesAccess.isUnlocked) {
                     createNoteDockButton
                 }
             }
@@ -62,8 +63,8 @@ extension DockView {
             Spacer()
         }
         .frame(height: 55)
-        .dockStyle(viewModel: viewModel)
-        .padding(.horizontal, viewModel.showingDockButtons ? 0 : 10)
+        .dockStyle(viewModel: viewModel, isPrivateAccessUnlocked: privateNotesAccess.isUnlocked)
+        .padding(.horizontal, viewModel.showingDockButtons(isPrivateAccessUnlocked: privateNotesAccess.isUnlocked) ? 0 : 10)
         .padding(
             .horizontal,
             (viewModel.idiom == .pad && sizeClass == .regular) ? 10 : 0
@@ -138,7 +139,7 @@ extension DockView {
             Spacer()
             Label(
                 "Private",
-                systemImage: viewModel.isUnlocked ? "lock.open.fill" : "lock.fill"
+                systemImage: privateNotesAccess.isUnlocked ? "lock.open.fill" : "lock.fill"
             )
             .labelStyle(.titleOnly)
             .padding(.bottom, 4)

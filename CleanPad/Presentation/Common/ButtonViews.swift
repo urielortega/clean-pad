@@ -161,10 +161,14 @@ struct IsLockedToggleButton: View {
     var viewModel: MainScreenViewModel
     
     @Environment(NotesStore.self) private var notesStore
+    @Environment(PrivateNotesAccessState.self) private var privateNotesAccess
     
     var body: some View {
         Button {
-            viewModel.updateLockStatus(for: note, in: notesStore)
+            privateNotesAccess.authenticate(for: .changeLockStatus) {
+                notesStore.toggleLockStatus(for: note)
+                privateNotesAccess.forbidChanges()
+            }
         } label: {
             Label(
                 viewModel.isLockedNotesTabSelected ? "Remove from private space" : "Move to private space",
