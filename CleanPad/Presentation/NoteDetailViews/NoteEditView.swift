@@ -23,7 +23,7 @@ struct NoteEditView: View {
     private let originalNote: Note
 
     // Using the viewModel created in ContentView.
-    @Bindable var viewModel: NotesListViewModel
+    @Bindable var viewModel: MainScreenViewModel
     @ObservedObject var sheetsViewModel: SheetsViewModel
     
     /// Property to show Cancel and Save buttons, and handle `onChange` closures.
@@ -58,7 +58,7 @@ struct NoteEditView: View {
     
     init(
         note: Note,
-        viewModel: NotesListViewModel,
+        viewModel: MainScreenViewModel,
         sheetsViewModel: SheetsViewModel,
         creatingNewNote: Bool
     ) {

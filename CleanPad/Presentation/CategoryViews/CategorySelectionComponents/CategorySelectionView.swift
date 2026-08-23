@@ -9,7 +9,7 @@ import SwiftUI
 
 /// View that shows all user categories. User can filter notes by selecting one category or tap a button to edit categories.
 struct CategorySelectionView: View {
-    var viewModel: NotesListViewModel
+    var viewModel: MainScreenViewModel
     @ObservedObject var sheetsViewModel: SheetsViewModel
     
     @Environment(\.dismiss) var dismiss

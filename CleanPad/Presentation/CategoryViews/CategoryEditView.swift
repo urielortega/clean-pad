@@ -18,7 +18,7 @@ struct CategoryEditView: View {
     @State var category: Category
     @State private var showingConfirmation = false
     
-    var viewModel: NotesListViewModel
+    var viewModel: MainScreenViewModel
     
     /// Property to show Cancel and Save buttons, and handle `onChange` closures.
     var creatingNewCategory: Bool

@@ -11,7 +11,7 @@ import SwiftUI
 extension CategorySelectionView {
     /// Button that adapts its appearance and behavior based on the specified role (Selection or Edition).
     struct CategoryButton: View {
-        var viewModel: NotesListViewModel
+        var viewModel: MainScreenViewModel
         @ObservedObject var sheetsViewModel: SheetsViewModel
         
         var category: Category
@@ -112,7 +112,7 @@ extension CategorySelectionView {
     
     /// Button for selecting "All notes" (no category).
     struct NoCategoryButton: View {
-        var viewModel: NotesListViewModel
+        var viewModel: MainScreenViewModel
         @ObservedObject var sheetsViewModel: SheetsViewModel
         
         @Environment(\.dismiss) var dismiss
@@ -161,7 +161,7 @@ extension CategorySelectionView {
     
     /// Button for toggling the display of the Category Creation sheet.
     struct CreateCategoryButton: View {
-        var viewModel: NotesListViewModel
+        var viewModel: MainScreenViewModel
         @ObservedObject var sheetsViewModel: SheetsViewModel
         
         var body: some View {
@@ -195,7 +195,7 @@ extension NoteCategorySelectionView {
         @Binding var creatingNewNote: Bool
         @Binding var triggerHapticFeedback: Bool
         
-        var viewModel: NotesListViewModel
+        var viewModel: MainScreenViewModel
         @Environment(\.dismiss) var dismiss
         @Environment(NotesStore.self) private var notesStore
         
@@ -266,7 +266,7 @@ extension NoteCategorySelectionView {
     
     /// Button for creating a new Category and assigning it to a Note.
     struct CreateAndAssignNoteCategoryButton: View {
-        var viewModel: NotesListViewModel
+        var viewModel: MainScreenViewModel
         @ObservedObject var sheetsViewModel: SheetsViewModel
         
         @Binding var note: Note

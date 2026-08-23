@@ -1,5 +1,5 @@
 //
-//  NotesListViewModel.swift
+//  MainScreenViewModel.swift
 //  CleanPad
 //
 //  Created by Uriel Ortega on 12/09/23.
@@ -15,7 +15,7 @@ import SwiftUI
 /// `NotesStore`; this type only decides how that data is filtered, sorted, selected,
 /// presented, and protected by the private-notes authentication flow.
 @Observable
-final class NotesListViewModel {
+final class MainScreenViewModel {
     /// Service used to request identity verification before private-note actions.
     @ObservationIgnored private let authenticationService: any AuthenticationService
     
@@ -94,7 +94,7 @@ final class NotesListViewModel {
 
 // MARK: - ViewModel Methods:
 
-extension NotesListViewModel {
+extension MainScreenViewModel {
     // MARK: - Filtering and sorting
     
     /// Returns private notes from the provided collection.

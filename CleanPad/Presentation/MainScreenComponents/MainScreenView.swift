@@ -10,7 +10,7 @@ import SwiftUI
 /// Main View that shows the list of notes, as well as buttons to access locked notes and the Dock.
 struct MainScreenView: View {
     // Using the viewModels created in ContentView.
-    @Bindable var viewModel: NotesListViewModel
+    @Bindable var viewModel: MainScreenViewModel
     @ObservedObject var dateViewModel: DateViewModel
     @ObservedObject var sheetsViewModel: SheetsViewModel
     

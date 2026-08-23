@@ -10,7 +10,7 @@ import SwiftUI
 /// View that shows non-locked and locked notes, and let users tap a note to view and edit it.
 struct AllNotesView: View {
     // Using the viewModels created in ContentView.
-    @Bindable var viewModel: NotesListViewModel
+    @Bindable var viewModel: MainScreenViewModel
     @ObservedObject var dateViewModel: DateViewModel
     @ObservedObject var sheetsViewModel: SheetsViewModel
     

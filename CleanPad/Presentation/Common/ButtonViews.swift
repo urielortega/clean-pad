@@ -41,7 +41,7 @@ struct DeleteNoteButton: View {
 /// Button to definitely delete a category, with optional view dismissal.
 struct DeleteCategoryButton: View {
     var category: Category
-    var viewModel: NotesListViewModel
+    var viewModel: MainScreenViewModel
     var dismissView: Bool
 
     @Environment(\.dismiss) var dismiss
@@ -140,7 +140,7 @@ struct MaterialButtonLabel: View {
 /// Buttons to show when ContextMenu appears over a Note Label.
 struct NoteContextMenuButtons: View {
     var note: Note
-    var viewModel: NotesListViewModel
+    var viewModel: MainScreenViewModel
     
     var body: some View {
         IsLockedToggleButton(
@@ -158,7 +158,7 @@ struct NoteContextMenuButtons: View {
 /// Button to change isLocked note property, i.e., remove it from or move it to private space.
 struct IsLockedToggleButton: View {
     var note: Note
-    var viewModel: NotesListViewModel
+    var viewModel: MainScreenViewModel
     
     @Environment(NotesStore.self) private var notesStore
     

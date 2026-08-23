@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     // Creating shared app state.
     @State private var notesStore = NotesStore()
-    @State private var viewModel = NotesListViewModel(authenticationService: LocalAuthenticationService())
+    @State private var viewModel = MainScreenViewModel(authenticationService: LocalAuthenticationService())
     @StateObject var dateViewModel = DateViewModel()
     @StateObject var sheetsViewModel = SheetsViewModel()
     

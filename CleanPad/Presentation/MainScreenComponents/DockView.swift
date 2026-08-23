@@ -10,7 +10,7 @@ import SwiftUI
 
 /// Dock with buttons to show categories, create a new note and switch between the non-locked notes list and the locked notes list.s
 struct DockView: View {
-    @Bindable var viewModel: NotesListViewModel
+    @Bindable var viewModel: MainScreenViewModel
     @ObservedObject var sheetsViewModel: SheetsViewModel
     @Binding var showNoteEditViewSheet: Bool
     @Binding var showCategoriesSheet: Bool

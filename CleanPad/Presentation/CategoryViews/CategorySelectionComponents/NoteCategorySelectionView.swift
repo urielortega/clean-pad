@@ -14,7 +14,7 @@ struct NoteCategorySelectionView: View {
     @Binding var note: Note
     @Binding var creatingNewNote: Bool
 
-    var viewModel: NotesListViewModel
+    var viewModel: MainScreenViewModel
     @ObservedObject var sheetsViewModel: SheetsViewModel
     
     @Environment(\.dismiss) var dismiss
