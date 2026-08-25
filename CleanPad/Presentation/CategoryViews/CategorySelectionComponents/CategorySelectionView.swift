@@ -9,10 +9,11 @@ import SwiftUI
 
 /// View that shows all user categories. User can filter notes by selecting one category or tap a button to edit categories.
 struct CategorySelectionView: View {
-    @ObservedObject var viewModel: NotesListViewModel
+    var viewModel: MainScreenViewModel
     @ObservedObject var sheetsViewModel: SheetsViewModel
     
     @Environment(\.dismiss) var dismiss
+    @Environment(NotesStore.self) private var notesStore
     
     var body: some View {
         VStack {
@@ -76,7 +77,7 @@ extension CategorySelectionView {
         ZStack {
             ScrollView {
                 LazyVStack {
-                    ForEach(viewModel.categories) { category in
+                    ForEach(notesStore.categories) { category in
                         CategoryButton(
                             viewModel: viewModel,
                             sheetsViewModel: sheetsViewModel,
@@ -111,7 +112,7 @@ extension CategorySelectionView {
         return ZStack {
             ScrollView {
                 LazyVGrid(columns: layout) {
-                    ForEach(viewModel.categories) { category in
+                    ForEach(notesStore.categories) { category in
                         CategoryButton(
                             viewModel: viewModel,
                             sheetsViewModel: sheetsViewModel,
@@ -185,8 +186,4 @@ extension CategorySelectionView {
             viewModel.dockGlow()
         }
     }
-}
-
-#Preview("CategorySelectionView Sheet") {
-    CategorySelectionView(viewModel: NotesListViewModel(), sheetsViewModel: SheetsViewModel())
 }

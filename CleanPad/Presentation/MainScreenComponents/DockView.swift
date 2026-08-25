@@ -10,7 +10,7 @@ import SwiftUI
 
 /// Dock with buttons to show categories, create a new note and switch between the non-locked notes list and the locked notes list.s
 struct DockView: View {
-    @ObservedObject var viewModel: NotesListViewModel
+    @Bindable var viewModel: MainScreenViewModel
     @ObservedObject var sheetsViewModel: SheetsViewModel
     @Binding var showNoteEditViewSheet: Bool
     @Binding var showCategoriesSheet: Bool
@@ -20,19 +20,21 @@ struct DockView: View {
 
     /// Property to adapt the UI according to the available space.
     @Environment(\.horizontalSizeClass) var sizeClass
+    @Environment(NotesStore.self) private var notesStore
+    @Environment(PrivateNotesAccessState.self) private var privateNotesAccess
 
     var body: some View {
         VStack {
             Spacer()
             
             HStack {
-                if viewModel.showingDockButtons {
+                if viewModel.showingDockButtons(isPrivateAccessUnlocked: privateNotesAccess.isUnlocked) {
                     showCategoriesDockButton
                 }
                 
                 tabBar
                 
-                if viewModel.showingDockButtons {
+                if viewModel.showingDockButtons(isPrivateAccessUnlocked: privateNotesAccess.isUnlocked) {
                     createNoteDockButton
                 }
             }
@@ -61,8 +63,8 @@ extension DockView {
             Spacer()
         }
         .frame(height: 55)
-        .dockStyle(viewModel: viewModel)
-        .padding(.horizontal, viewModel.showingDockButtons ? 0 : 10)
+        .dockStyle(viewModel: viewModel, isPrivateAccessUnlocked: privateNotesAccess.isUnlocked)
+        .padding(.horizontal, viewModel.showingDockButtons(isPrivateAccessUnlocked: privateNotesAccess.isUnlocked) ? 0 : 10)
         .padding(
             .horizontal,
             (viewModel.idiom == .pad && sizeClass == .regular) ? 10 : 0
@@ -137,7 +139,7 @@ extension DockView {
             Spacer()
             Label(
                 "Private",
-                systemImage: viewModel.isUnlocked ? "lock.open.fill" : "lock.fill"
+                systemImage: privateNotesAccess.isUnlocked ? "lock.open.fill" : "lock.fill"
             )
             .labelStyle(.titleOnly)
             .padding(.bottom, 4)
@@ -154,7 +156,7 @@ extension DockView {
     /// Button for creating a new note from the Dock.
     var createNoteDockButton: some View {
         Button { //                                             Non-locked note with General Category.     Locked note with General Category.
-            newNote = (viewModel.isNonLockedNotesTabSelected) ? Note(category: viewModel.categories[0]) : Note(isLocked: true, category: viewModel.categories[0])
+            newNote = viewModel.isNonLockedNotesTabSelected ? Note(category: notesStore.categories[0]) : Note(isLocked: true, category: notesStore.categories[0])
             
             showNoteEditViewSheet.toggle()
             HapticManager.instance.impact(style: .light)
@@ -198,15 +200,4 @@ extension DockView {
             CategorySelectionView(viewModel: viewModel, sheetsViewModel: sheetsViewModel)
         }
     }
-}
-
-#Preview("DockView") {
-    DockView(
-        viewModel: NotesListViewModel(),
-        sheetsViewModel: SheetsViewModel(),
-        showNoteEditViewSheet: .constant(
-            false
-        ),
-        showCategoriesSheet: .constant(false)
-    )
 }

@@ -9,15 +9,20 @@ import SwiftUI
 
 /// Main View that shows the list of notes, as well as buttons to access locked notes and the Dock.
 struct MainScreenView: View {
-    // Using the viewModels created in ContentView with @ObservedObject.
-    @ObservedObject var viewModel: NotesListViewModel
+    // Using the viewModels created in ContentView.
+    @Bindable var viewModel: MainScreenViewModel
     @ObservedObject var dateViewModel: DateViewModel
     @ObservedObject var sheetsViewModel: SheetsViewModel
     
     @Binding var showNoteEditViewSheet: Bool
     @Binding var showCategoriesSheet: Bool
     
+    /// State that controls private-notes access and authentication alerts.
+    @Environment(PrivateNotesAccessState.self) private var privateNotesAccess
+    
     var body: some View {
+        @Bindable var privateNotesAccess = privateNotesAccess
+        
         ZStack {
             AllNotesView(
                 viewModel: viewModel,
@@ -27,16 +32,16 @@ struct MainScreenView: View {
             )
             
             DockView(
-                viewModel: viewModel, 
+                viewModel: viewModel,
                 sheetsViewModel: sheetsViewModel,
                 showNoteEditViewSheet: $showNoteEditViewSheet,
                 showCategoriesSheet: $showCategoriesSheet
             )
         }
-        .alert("Authentication error", isPresented: $viewModel.isShowingAuthenticationErrorOnMainScreen) {
+        .alert("Authentication error", isPresented: $privateNotesAccess.isShowingAuthenticationErrorOnMainScreen) {
             Button("OK") { }
         } message: {
-            Text(viewModel.authenticationError)
+            Text(privateNotesAccess.authenticationError)
         }
     }
 }

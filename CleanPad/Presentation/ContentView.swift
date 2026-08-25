@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
-    // Creating shared ViewModels with @StateObject.
-    @StateObject var viewModel = NotesListViewModel()
+    // Creating shared app state.
+    @State private var notesStore = NotesStore()
+    @State private var viewModel = MainScreenViewModel()
+    @State private var privateNotesAccess = PrivateNotesAccessState(authenticationService: LocalAuthenticationService())
     @StateObject var dateViewModel = DateViewModel()
     @StateObject var sheetsViewModel = SheetsViewModel()
     
@@ -38,12 +40,12 @@ struct ContentView: View {
                     if viewModel.isNonLockedNotesTabSelected { // Non-Locked Notes Tab is selected.
                         lockAndUnlockNotesButtonView
                     } else { // Locked Notes Tab is selected.
-                        if viewModel.isUnlocked {
+                        if privateNotesAccess.isUnlocked {
                             lockNotesButtonView
                         }
                     }
                     
-                    if viewModel.isNonLockedNotesTabSelected || (viewModel.isLockedNotesTabSelected && viewModel.isUnlocked) {
+                    if viewModel.showingDockButtons(isPrivateAccessUnlocked: privateNotesAccess.isUnlocked) {
                         Menu {
                             if viewModel.idiom == .pad {
                                 showAboutViewButtonView
@@ -61,6 +63,8 @@ struct ContentView: View {
                 }
             }
         }
+        .environment(notesStore)
+        .environment(privateNotesAccess)
         .onAppear {
             if isFirstLaunch {
                 sheetsViewModel.showWelcomeSheet = true
@@ -78,7 +82,7 @@ struct ContentView: View {
         .onChange(of: scenePhase) { phase, _ in
             // Restrict access to locked notes when the app enters the background.
             if phase == ScenePhase.background {
-                viewModel.isUnlocked = false
+                privateNotesAccess.lockNotes()
             }
         }
     }
@@ -90,7 +94,7 @@ extension ContentView {
     var lockNotesButtonView: some View {
         Button {
             withAnimation(.bouncy) {
-                viewModel.lockNotes()
+                privateNotesAccess.lockNotes()
                 HapticManager.instance.impact(style: .rigid)
             }
         } label: {
@@ -103,21 +107,21 @@ extension ContentView {
     var lockAndUnlockNotesButtonView: some View {
         Button {
             withAnimation(.bouncy) {
-                if viewModel.isUnlocked {
-                    viewModel.lockNotes()
+                if privateNotesAccess.isUnlocked {
+                    privateNotesAccess.lockNotes()
                     HapticManager.instance.impact(style: .rigid)
                 } else {
-                    viewModel.authenticate(for: .viewNotes) { }
+                    privateNotesAccess.authenticate(for: .viewNotes) { }
                 }
             }
         } label: {
-            Image(systemName: viewModel.isUnlocked ? "lock.open.fill" : "lock.fill")
+            Image(systemName: privateNotesAccess.isUnlocked ? "lock.open.fill" : "lock.fill")
                 .contentTransition(.symbolEffect(.replace))
         }
         .accessibilityLabel(
-            viewModel.isUnlocked ? "Your private notes are currently accessible" : "Your private notes are currently locked"
+            privateNotesAccess.isUnlocked ? "Your private notes are currently accessible" : "Your private notes are currently locked"
         )
-        .accessibilityHint(viewModel.isUnlocked ? "Tap to lock access" : "Tap to unlock access")
+        .accessibilityHint(privateNotesAccess.isUnlocked ? "Tap to lock access" : "Tap to unlock access")
         .accessibilityAddTraits(.isButton)
     }
     

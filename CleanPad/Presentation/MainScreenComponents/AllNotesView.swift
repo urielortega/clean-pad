@@ -9,8 +9,8 @@ import SwiftUI
 
 /// View that shows non-locked and locked notes, and let users tap a note to view and edit it.
 struct AllNotesView: View {
-    // Using the viewModels created in ContentView with @ObservedObject.
-    @ObservedObject var viewModel: NotesListViewModel
+    // Using the viewModels created in ContentView.
+    @Bindable var viewModel: MainScreenViewModel
     @ObservedObject var dateViewModel: DateViewModel
     @ObservedObject var sheetsViewModel: SheetsViewModel
     
@@ -18,20 +18,22 @@ struct AllNotesView: View {
     
     /// Property to adapt the UI for VoiceOver users.
     @Environment(\.accessibilityVoiceOverEnabled) var voiceOverEnabled
+    @Environment(NotesStore.self) private var notesStore
+    @Environment(PrivateNotesAccessState.self) private var privateNotesAccess
 
     var body: some View {
         Group {
-            if viewModel.isLockedNotesTabSelected && !viewModel.isUnlocked {
+            if viewModel.isLockedNotesTabSelected && !privateNotesAccess.isUnlocked {
                 Group {
                     if voiceOverEnabled {
-                        UnlockNotesView(viewModel: viewModel).accessibilityUnlockNotesView
+                        UnlockNotesView().accessibilityUnlockNotesView
                     } else {
-                        UnlockNotesView(viewModel: viewModel)
+                        UnlockNotesView()
                     }
                 }
                 .padding(.bottom, 80)
             } else {
-                if viewModel.currentNotes.isEmpty {
+                if viewModel.currentNotes(from: notesStore.notes).isEmpty {
                     Group {
                         if voiceOverEnabled {
                             EmptyListView(
@@ -62,7 +64,7 @@ struct AllNotesView: View {
                         }
                     }
                     .blurWhenAppNotActive( // Apply blur when access to private notes is allowed and Private Notes Tab is selected.
-                        isBlurActive: viewModel.isUnlocked  && viewModel.isLockedNotesTabSelected
+                        isBlurActive: privateNotesAccess.isUnlocked && viewModel.isLockedNotesTabSelected
                     )
                 }
             }
@@ -75,11 +77,11 @@ extension AllNotesView {
     /// View that shows notes as rows in a single column.
     var notesListView: some View {
         Group {
-            if viewModel.filteredNotes.isEmpty {
+            if viewModel.filteredNotes(from: notesStore.notes).isEmpty {
                 NoResultsView()
             } else {
                 List {
-                    ForEach(viewModel.filteredNotes) { note in
+                    ForEach(viewModel.filteredNotes(from: notesStore.notes)) { note in
                         NavigationLink {
                             // Open NoteEditView with the tapped note.
                             NoteEditView(
@@ -99,7 +101,7 @@ extension AllNotesView {
                     }
                     // To avoid unexpected list behavior, note removal is forbidden when making a search.
                     .onDelete(
-                        perform: viewModel.searchText.isEmpty ? viewModel.removeNoteFromList : nil
+                        perform: viewModel.searchText.isEmpty ? deleteNotes : nil
                     )
                 }
                 .safeAreaInset(edge: .bottom) {
@@ -121,12 +123,12 @@ extension AllNotesView {
         ]
         
         return Group {
-            if viewModel.filteredNotes.isEmpty {
+            if viewModel.filteredNotes(from: notesStore.notes).isEmpty {
                 NoResultsView()
             } else {
                 ScrollView {
                     LazyVGrid(columns: layout) {
-                        ForEach(viewModel.filteredNotes) { note in
+                        ForEach(viewModel.filteredNotes(from: notesStore.notes)) { note in
                             NavigationLink {
                                 // Open NoteEditView with the tapped note.
                                 NoteEditView(
@@ -152,5 +154,9 @@ extension AllNotesView {
             }
         }
         .searchable(text: $viewModel.searchText, prompt: "Look for a note...")
+    }
+    
+    func deleteNotes(at offsets: IndexSet) {
+        viewModel.removeNoteFromList(at: offsets, in: notesStore)
     }
 }

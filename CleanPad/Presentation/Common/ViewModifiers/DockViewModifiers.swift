@@ -10,7 +10,8 @@ import SwiftUI
 /// A modifier that styles a view as a dock, applying background, corner radius, shadow, and padding.
 /// This modifier is used to create a dock that spans the full width and optionally displays buttons.
 struct Dock: ViewModifier {
-    @ObservedObject var viewModel: NotesListViewModel
+    var viewModel: MainScreenViewModel
+    let isPrivateAccessUnlocked: Bool
 
     func body(content: Content) -> some View {
         content
@@ -20,13 +21,13 @@ struct Dock: ViewModifier {
             .roundedRectangleOverlayStroke()
             .glowingShadow(viewModel: viewModel)
             .padding(.vertical)
-            .padding(.horizontal, viewModel.showingDockButtons ? 0 : 10)
+            .padding(.horizontal, viewModel.showingDockButtons(isPrivateAccessUnlocked: isPrivateAccessUnlocked) ? 0 : 10)
     }
 }
 
 extension View {
-    func dockStyle(viewModel: NotesListViewModel) -> some View {
-        modifier(Dock(viewModel: viewModel))
+    func dockStyle(viewModel: MainScreenViewModel, isPrivateAccessUnlocked: Bool) -> some View {
+        modifier(Dock(viewModel: viewModel, isPrivateAccessUnlocked: isPrivateAccessUnlocked))
     }
 }
 
@@ -59,7 +60,7 @@ extension View {
 /// A modifier that adds a glowing shadow to the dock, giving visual emphasis when a category is selected.
 /// The shadow color and radius vary based on the dock's glowing state.
 struct GlowingShadow: ViewModifier {
-    @ObservedObject var viewModel: NotesListViewModel
+    var viewModel: MainScreenViewModel
 
     func body(content: Content) -> some View {
         content
@@ -80,7 +81,7 @@ struct GlowingShadow: ViewModifier {
 }
 
 extension View {
-    func glowingShadow(viewModel: NotesListViewModel) -> some View {
+    func glowingShadow(viewModel: MainScreenViewModel) -> some View {
         modifier(GlowingShadow(viewModel: viewModel))
     }
 }

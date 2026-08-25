@@ -22,8 +22,8 @@ struct NoteEditView: View {
     /// A property for storing the original note, used to detect changes.
     private let originalNote: Note
 
-    // Using the viewModel created in ContentView with @ObservedObject.
-    @ObservedObject var viewModel: NotesListViewModel
+    // Using the viewModel created in ContentView.
+    @Bindable var viewModel: MainScreenViewModel
     @ObservedObject var sheetsViewModel: SheetsViewModel
     
     /// Property to show Cancel and Save buttons, and handle `onChange` closures.
@@ -42,6 +42,8 @@ struct NoteEditView: View {
     @FocusState private var focusedField: FocusField?
     
     @Environment(\.dismiss) var dismiss
+    @Environment(NotesStore.self) private var notesStore
+    @Environment(PrivateNotesAccessState.self) private var privateNotesAccess
     
     /// Property to adapt the UI for VoiceOver users.
     @Environment(\.accessibilityVoiceOverEnabled) var voiceOverEnabled
@@ -57,7 +59,7 @@ struct NoteEditView: View {
     
     init(
         note: Note,
-        viewModel: NotesListViewModel,
+        viewModel: MainScreenViewModel,
         sheetsViewModel: SheetsViewModel,
         creatingNewNote: Bool
     ) {
@@ -70,16 +72,18 @@ struct NoteEditView: View {
     }
     
     var body: some View {
+        @Bindable var privateNotesAccess = privateNotesAccess
+        
         NavigationStack {
             // Show UnlockNotesView only when...
             if ( // ...access is locked, the note is private, it isn't a new one and the 'isLocked' property wasn't recently toggled.
-                !viewModel.isUnlocked && (noteCopy.isLocked == true) && !creatingNewNote && !editingAToggledNote
+                !privateNotesAccess.isUnlocked && (noteCopy.isLocked == true) && !creatingNewNote && !editingAToggledNote
             ) {
                 Group {
                     if voiceOverEnabled {
-                        UnlockNotesView(viewModel: viewModel).accessibilityUnlockNotesView
+                        UnlockNotesView().accessibilityUnlockNotesView
                     } else {
-                        UnlockNotesView(viewModel: viewModel)
+                        UnlockNotesView()
                     }
                 }
                 .padding(.bottom, 80)
@@ -112,7 +116,6 @@ struct NoteEditView: View {
                                         ShareLink(item: "\(noteCopy.noteTitle)\n\(noteCopy.noteContent)")
                                         DeleteNoteButton(
                                             note: noteCopy,
-                                            viewModel: viewModel,
                                             dismissView: true
                                         )
                                     }
@@ -147,11 +150,13 @@ struct NoteEditView: View {
         .onDisappear {
             // Update only if editing an existing note:
             if !creatingNewNote {
-                viewModel.update(
-                    note: noteCopy,
-                    // Date is only updated when 'noteTitle' or 'noteContent' has changed.
-                    updatingDate: willDateBeUpdated
-                )
+                withAnimation {
+                    notesStore.update(
+                        note: noteCopy,
+                        // Date is only updated when 'noteTitle' or 'noteContent' has changed.
+                        updatingDate: willDateBeUpdated
+                    )
+                }
             }
         }
         .onChange(of: scenePhase) { phase, _ in
@@ -159,11 +164,13 @@ struct NoteEditView: View {
                 editingAToggledNote = false // ...toggle 'editingAToggledNote', so the contents of the current private note can be hidden.
 
                 if !creatingNewNote { // Update only if editing an existing note.
-                    viewModel.update(
-                        note: noteCopy,
-                        // Date is only updated when 'noteTitle' or 'noteContent' has changed.
-                        updatingDate: willDateBeUpdated
-                    )
+                    withAnimation {
+                        notesStore.update(
+                            note: noteCopy,
+                            // Date is only updated when 'noteTitle' or 'noteContent' has changed.
+                            updatingDate: willDateBeUpdated
+                        )
+                    }
                 }
             }
         }
@@ -186,18 +193,20 @@ struct NoteEditView: View {
                     try await Task.sleep(nanoseconds: 500_000_000) // 0.5 sec delay
                     
                     // Save the note after the delay:
-                    viewModel.update(
-                        note: noteCopy,
-                        // Date is only updated when 'noteTitle' or 'noteContent' has changed.
-                        updatingDate: willDateBeUpdated
-                    )
+                    withAnimation {
+                        notesStore.update(
+                            note: noteCopy,
+                            // Date is only updated when 'noteTitle' or 'noteContent' has changed.
+                            updatingDate: willDateBeUpdated
+                        )
+                    }
                 }
             }
         }
         .alert(isPresent: $isAlertPresented, view: alertView)
-        .alert("Authentication error", isPresented: $viewModel.isShowingAuthenticationErrorWhenEditing) {
+        .alert("Authentication error", isPresented: $privateNotesAccess.isShowingAuthenticationErrorWhenEditing) {
             Button("OK") { }
-        } message: { Text(viewModel.authenticationError) }
+        } message: { Text(privateNotesAccess.authenticationError) }
     }
 }
 
@@ -229,7 +238,7 @@ extension NoteEditView {
     /// Button to toggle `isLocked` property of a note, i.e., move it to or remove it from the private space.
     var isLockedToggleButtonView: some View {
         Button {
-            viewModel.authenticate(for: .changeLockStatus) {
+            privateNotesAccess.authenticate(for: .changeLockStatus) {
                 noteCopy.isLocked.toggle()
                 editingAToggledNote = true // 'isLocked' property was recently toggled.
             }
@@ -244,7 +253,10 @@ extension NoteEditView {
     /// Button for saving a new note by adding it to the ViewModel's notes array.
     var saveNoteButtonView: some View {
         Button("Save") {
-            viewModel.add(note: noteCopy)
+            withAnimation {
+                notesStore.add(note: noteCopy)
+            }
+            
             dismiss()
             
             HapticManager.instance.notification(type: .success)

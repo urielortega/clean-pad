@@ -11,7 +11,7 @@ import SwiftUI
 extension CategorySelectionView {
     /// Button that adapts its appearance and behavior based on the specified role (Selection or Edition).
     struct CategoryButton: View {
-        @ObservedObject var viewModel: NotesListViewModel
+        var viewModel: MainScreenViewModel
         @ObservedObject var sheetsViewModel: SheetsViewModel
         
         var category: Category
@@ -112,7 +112,7 @@ extension CategorySelectionView {
     
     /// Button for selecting "All notes" (no category).
     struct NoCategoryButton: View {
-        @ObservedObject var viewModel: NotesListViewModel
+        var viewModel: MainScreenViewModel
         @ObservedObject var sheetsViewModel: SheetsViewModel
         
         @Environment(\.dismiss) var dismiss
@@ -161,7 +161,7 @@ extension CategorySelectionView {
     
     /// Button for toggling the display of the Category Creation sheet.
     struct CreateCategoryButton: View {
-        @ObservedObject var viewModel: NotesListViewModel
+        var viewModel: MainScreenViewModel
         @ObservedObject var sheetsViewModel: SheetsViewModel
         
         var body: some View {
@@ -195,8 +195,9 @@ extension NoteCategorySelectionView {
         @Binding var creatingNewNote: Bool
         @Binding var triggerHapticFeedback: Bool
         
-        @ObservedObject var viewModel: NotesListViewModel
+        var viewModel: MainScreenViewModel
         @Environment(\.dismiss) var dismiss
+        @Environment(NotesStore.self) private var notesStore
         
         var gradientStartColorOpacity = Constants.gradientStartColorOpacity
         var gradientEndColorOpacity = Constants.gradientEndColorOpacity
@@ -209,7 +210,7 @@ extension NoteCategorySelectionView {
             Button {
                 note.category = category
                 // When changing an existing note, save its category using update().
-                if !creatingNewNote { viewModel.update(note: note, updatingDate: false) }
+                if !creatingNewNote { notesStore.update(note: note, updatingDate: false) }
                 HapticManager.instance.impact(style: .soft)
                 dismiss()
             } label: {
@@ -265,7 +266,7 @@ extension NoteCategorySelectionView {
     
     /// Button for creating a new Category and assigning it to a Note.
     struct CreateAndAssignNoteCategoryButton: View {
-        @ObservedObject var viewModel: NotesListViewModel
+        var viewModel: MainScreenViewModel
         @ObservedObject var sheetsViewModel: SheetsViewModel
         
         @Binding var note: Note
@@ -279,6 +280,7 @@ extension NoteCategorySelectionView {
         @Binding var isAlertPresented: Bool
         
         @Environment(\.dismiss) var dismiss
+        @Environment(NotesStore.self) private var notesStore
         
         var body: some View {
             Button {
@@ -327,15 +329,12 @@ extension NoteCategorySelectionView {
             withAnimation {
                 // Create a new category with the specified name and default color.
                 category = Category(id: UUID(), name: categoryName, color: .gray)
-                // Add the category to the view model's list, providing a default if needed.
-                viewModel.add(
-                    category: category ?? Category(id: UUID(), name: "Unnamed Category", color: .gray)
-                )
+                // Add the category to the store's list, providing a default if needed.
+                let newCategory = category ?? Category(id: UUID(), name: "Unnamed Category", color: .gray)
+                notesStore.add(category: newCategory)
                 
                 // Assign the newly created category to the current note.
-                note.category = viewModel.categories[
-                    viewModel.getCategoryIndexFromCategoriesArray(category: category!)!
-                ]
+                note.category = notesStore.getCategoryFromCategoriesArray(category: newCategory)
             }
             
             HapticManager.instance.notification(type: .success)

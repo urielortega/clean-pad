@@ -10,7 +10,8 @@ import SwiftUI
 /// View meant to be used when a list is empty, inviting the user to add an item.
 /// Can be personalized modifying its default parameters values.
 struct EmptyListView: View {
-    @ObservedObject var viewModel: NotesListViewModel
+    var viewModel: MainScreenViewModel
+    
     @ObservedObject var sheetsViewModel: SheetsViewModel
     @Binding var showNoteEditViewSheet: Bool
     
@@ -25,6 +26,8 @@ struct EmptyListView: View {
     @State private var randomDescription: String = ""
     
     var buttonActions: () -> Void
+    
+    @Environment(NotesStore.self) private var notesStore
     
     var body: some View {
         VStack(alignment: .center) {
@@ -43,7 +46,7 @@ struct EmptyListView: View {
                 .padding(.bottom, 15)
             
             Button(buttonLabel) { //                               Non-locked note with General Category.     Locked note with General Category.
-                newNote = (viewModel.isNonLockedNotesTabSelected) ? Note(category: viewModel.categories[0]) : Note(isLocked: true, category: viewModel.categories[0])
+                newNote = viewModel.isNonLockedNotesTabSelected ? Note(category: notesStore.categories[0]) : Note(isLocked: true, category: notesStore.categories[0])
                 
                 buttonActions()
             }
@@ -71,7 +74,7 @@ extension EmptyListView {
     /// Adapted EmptyListView for VoiceOver users.
     var accessibilityEmptyListButton: some View {
         Button { //                                             Non-locked note with General Category.     Locked note with General Category.
-            newNote = (viewModel.isNonLockedNotesTabSelected) ? Note(category: viewModel.categories[0]) : Note(isLocked: true, category: viewModel.categories[0])
+            newNote = viewModel.isNonLockedNotesTabSelected ? Note(category: notesStore.categories[0]) : Note(isLocked: true, category: notesStore.categories[0])
             showNoteEditViewSheet.toggle()
         } label: {
             EmptyListView(
@@ -97,14 +100,4 @@ extension EmptyListView {
         "Capture the moment.",
         "Start the symphony of thoughts."
     ]
-}
-
-struct EmptyListView_Previews: PreviewProvider {
-    static var previews: some View {
-        EmptyListView(
-            viewModel: NotesListViewModel(),
-            sheetsViewModel: SheetsViewModel(),
-            showNoteEditViewSheet: .constant(false)
-        ) { }
-    }
 }
