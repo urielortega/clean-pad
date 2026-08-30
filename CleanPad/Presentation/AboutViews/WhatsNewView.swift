@@ -50,32 +50,43 @@ struct WhatsNewView: View {
 extension WhatsNewView {
     /// Header view containing the "What's New" Text.
     var headerView: some View {
-        Text("What's New in CleanPad")
-            .foregroundStyle(.black)
-            .font(.largeTitle)
-            .bold()
-            .padding(.vertical)
+        HStack {
+            Text("What's New in CleanPad")
+                .multilineTextAlignment(.leading)
+                .foregroundStyle(.black)
+                .font(.largeTitle)
+                .bold()
+                .padding(.top)
+            
+            Spacer()
+        }
     }
     
     /// Detailed view explaining the changes in the new version of the app.
     var detailsView: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 20) {
             NewFeatureView(
-                imageSystemName: "line.3.horizontal.decrease.circle.fill",
-                featureTitle: "Every thought finds its place",
-                featureDescription: "Easily create and assign categories to organize your notes better"
+                imageSystemName: "externaldrive.badge.checkmark",
+                featureTitle: "More reliable note saving",
+                featureDescription: "Notes now save more consistently while editing, reducing the chance of lost changes"
             )
             
             NewFeatureView(
-                imageSystemName: "lock.fill",
-                featureTitle: "Your private notes, still personal",
-                featureDescription: "Personal Notes are now called Private Notes to make things clearer"
+                imageSystemName: "app.badge",
+                featureTitle: "New App Icon",
+                featureDescription: "A refreshed icon designed to feel at home with the latest iOS look"
             )
             
             NewFeatureView(
-                imageSystemName: "sparkles",
-                featureTitle: "A smoother, comfier experience",
-                featureDescription: "Say hello to a refreshed interface that makes CleanPad smoother, more intuitive, and easier to navigate"
+                imageSystemName: "drop",
+                featureTitle: "Liquid Glass refresh",
+                featureDescription: "CleanPad now adopts the system's new Liquid Glass styling, with refined components"
+            )
+            
+            NewFeatureView(
+                imageSystemName: "lock.shield",
+                featureTitle: "Improved private notes access",
+                featureDescription: "Authentication now supports PIN fallback when biometrics are unavailable and works correctly with iPhone Mirroring!"
             )
         }
         .padding(.vertical)
@@ -105,10 +116,10 @@ extension WhatsNewView {
             HStack(alignment: .center) {
                 Image(systemName: imageSystemName)
                     .foregroundStyle(.accent.gradient)
-                    .font(.system(size: 40))
+                    .font(.system(size: 30))
                     .symbolEffect(
                         .bounce,
-                        options: .speed(0.8),
+                        options: .speed(0.6),
                         value: animate
                     )
                     .frame(width: 40)
@@ -125,7 +136,6 @@ extension WhatsNewView {
                         .foregroundStyle(.black.opacity(0.7))
                 }
             }
-            .padding(.vertical)
             .onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                     animate.toggle()
