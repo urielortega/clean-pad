@@ -90,7 +90,6 @@ extension WhatsNewView {
             )
         }
         .padding(.vertical)
-        .presentationCornerRadius(Constants.roundedRectCornerRadius)
     }
     
     /// Button for dismissing the What's New screen.
