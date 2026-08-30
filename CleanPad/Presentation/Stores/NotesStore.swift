@@ -23,6 +23,11 @@ final class NotesStore {
     @ObservationIgnored private let notesRepository: NotesRepository
     @ObservationIgnored private let categoriesRepository: CategoriesRepository
     
+    /// Category used when a note does not have an explicit category.
+    var defaultCategory: Category {
+        categories.first ?? .general
+    }
+    
     /// Creates a notes store backed by the provided repositories.
     init(
         notesRepository: NotesRepository = FileNotesRepository(),
@@ -39,18 +44,9 @@ extension NotesStore {
     
     /// Adds a note and assigns the General category when no category is set.
     func add(note: Note) {
-        if note.category == nil {
-            let noteToAssignCategory = Note(
-                isLocked: note.isLocked,
-                noteTitle: note.noteTitle,
-                noteContent: note.noteContent,
-                category: categories[0]
-            )
-            
-            notes.append(noteToAssignCategory)
-        } else {
-            notes.append(note)
-        }
+        var noteToSave = note
+        noteToSave.category = note.category ?? defaultCategory
+        notes.append(noteToSave)
         
         saveAllNotes()
     }
@@ -155,7 +151,9 @@ extension NotesStore {
         }
         
         do {
-            categories = try categoriesRepository.loadCategories()
+            let loadedCategories = try categoriesRepository.loadCategories()
+            categories = loadedCategories.isEmpty ? [.general] : loadedCategories
+            
             setGeneralCategoryToUnassignedNotes()
         } catch {
             categories = [.general]
@@ -211,7 +209,7 @@ extension NotesStore {
     func setGeneralCategoryToUnassignedNotes() {
         for index in notes.indices {
             if notes[index].category == nil {
-                notes[index].category = categories[0]
+                notes[index].category = defaultCategory
             }
         }
     }
@@ -229,7 +227,7 @@ extension NotesStore {
     private func assignGeneralCategoryToNotesAssignedToCategory(_ category: Category) {
         for index in notes.indices {
             if notes[index].category?.id == category.id {
-                notes[index].category = categories[0]
+                notes[index].category = defaultCategory
             }
         }
     }

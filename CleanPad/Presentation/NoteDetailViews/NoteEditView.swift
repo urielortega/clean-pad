@@ -152,6 +152,10 @@ struct NoteEditView: View {
             }
         }
         .onAppear {
+            if creatingNewNote && noteCopy.category == nil {
+                noteCopy.category = notesStore.defaultCategory
+            }
+            
             // Only set `randomDescription` once per appearance of the view
             if randomPlaceholder.isEmpty {
                 randomPlaceholder = NoteEditView.untitledNotePlaceholders.randomElement() ?? "Title your note..."
