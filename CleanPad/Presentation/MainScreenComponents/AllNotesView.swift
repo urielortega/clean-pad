@@ -11,7 +11,6 @@ import SwiftUI
 struct AllNotesView: View {
     // Using the viewModels created in ContentView.
     @Bindable var viewModel: MainScreenViewModel
-    @ObservedObject var dateViewModel: DateViewModel
     @ObservedObject var sheetsViewModel: SheetsViewModel
     
     @Binding var showNoteEditViewSheet: Bool
@@ -91,7 +90,7 @@ extension AllNotesView {
                                 creatingNewNote: false
                             )
                         } label: {
-                            ListNoteRow(note: note, viewModel: dateViewModel)
+                            ListNoteRow(note: note)
                         }
                         .contextMenu {
                             NoteContextMenuButtons(note: note, viewModel: viewModel)
@@ -138,7 +137,7 @@ extension AllNotesView {
                                     creatingNewNote: false
                                 )
                             } label: {
-                                GridNoteCard(note: note, viewModel: dateViewModel)
+                                GridNoteCard(note: note)
                                     .padding(5)
                             }
                             .contextMenu {

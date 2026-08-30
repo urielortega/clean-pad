@@ -12,7 +12,6 @@ struct ContentView: View {
     @State private var notesStore = NotesStore()
     @State private var viewModel = MainScreenViewModel()
     @State private var privateNotesAccess = PrivateNotesAccessState(authenticationService: LocalAuthenticationService())
-    @StateObject var dateViewModel = DateViewModel()
     @StateObject var sheetsViewModel = SheetsViewModel()
     
     /// Property to show WelcomeView when launching app for the first time.
@@ -28,7 +27,6 @@ struct ContentView: View {
         NavigationStack {
             MainScreenView(
                 viewModel: viewModel,
-                dateViewModel: dateViewModel,
                 sheetsViewModel: sheetsViewModel,
                 showNoteEditViewSheet: $sheetsViewModel.showNoteEditViewSheet,
                 showCategoriesSheet: $sheetsViewModel.showCategorySelectionSheet

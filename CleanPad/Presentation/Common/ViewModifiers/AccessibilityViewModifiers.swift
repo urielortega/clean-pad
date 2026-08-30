@@ -11,7 +11,6 @@ import SwiftUI
 /// providing detailed information about the note's title, category, and creation date.
 struct NoteLabelAccessibilityModifiers: ViewModifier {
     var note: Note
-    @ObservedObject var viewModel: DateViewModel
     
     func body(content: Content) -> some View {
         content
@@ -21,7 +20,7 @@ struct NoteLabelAccessibilityModifiers: ViewModifier {
                 + "in the \(note.category?.displayName ?? "Unassigned") category."
             )
             .accessibilityHint(
-                viewModel.isNoteDateEqualToToday(note: note)
+                note.date.isToday
                 ? "Created at \(note.date.formatted(date: .omitted, time: .shortened))."
                 : "Created on \(note.date.formatted(date: .abbreviated, time: .omitted))."
             )
@@ -29,8 +28,8 @@ struct NoteLabelAccessibilityModifiers: ViewModifier {
 }
 
 extension View {
-    func noteLabelAccessibilityModifiers(note: Note, viewModel: DateViewModel) -> some View {
-        modifier(NoteLabelAccessibilityModifiers(note: note, viewModel: viewModel))
+    func noteLabelAccessibilityModifiers(note: Note) -> some View {
+        modifier(NoteLabelAccessibilityModifiers(note: note))
     }
 }
 

@@ -15,6 +15,7 @@
 		A030C1C2303AA7E0005F2741 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A030C1C1303AA7DF005F2741 /* AuthenticationService.swift */; };
 		A030C1C4303AA7E7005F2741 /* LocalAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A030C1C3303AA7E5005F2741 /* LocalAuthenticationService.swift */; };
 		A030C1D4303AB341005F2741 /* PrivateNotesAccessState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A030C1D3303AB340005F2741 /* PrivateNotesAccessState.swift */; };
+		A04EFD653044DED400D23CFB /* Date+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04EFD643044DED100D23CFB /* Date+Helpers.swift */; };
 		A0500A562F788CAA00604E96 /* CleanPadIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = A0500A552F788CAA00604E96 /* CleanPadIcon.icon */; };
 		A052A3C32D455366009826BA /* ConditionalViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A052A3C22D45535C009826BA /* ConditionalViewModifier.swift */; };
 		A09997623002D1FE00D0DDA9 /* CloseActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09997613002D1FE00D0DDA9 /* CloseActionButton.swift */; };
@@ -50,7 +51,6 @@
 		A4BB5F372B27D69600B509ED /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BB5F362B27D69600B509ED /* FeedbackView.swift */; };
 		A4BFFA5F2AF087F4005CD3DE /* LabelViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BFFA5E2AF087F4005CD3DE /* LabelViews.swift */; };
 		A4C36C482AE73163001B4389 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C36C472AE73163001B4389 /* HapticManager.swift */; };
-		A4D06FAE2B21428C0000D089 /* DateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D06FAD2B21428C0000D089 /* DateViewModel.swift */; };
 		A4DC37282CA87D7600A5CF61 /* VariableBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DC37272CA87D6600A5CF61 /* VariableBlur.swift */; };
 		A4ED50E42C7E50CC0077CB36 /* DockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ED50E32C7E50CC0077CB36 /* DockView.swift */; };
 		A4ED50E72C7E5F830077CB36 /* CategorySelectionButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ED50E62C7E5F830077CB36 /* CategorySelectionButtons.swift */; };
@@ -66,6 +66,7 @@
 		A030C1C1303AA7DF005F2741 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		A030C1C3303AA7E5005F2741 /* LocalAuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthenticationService.swift; sourceTree = "<group>"; };
 		A030C1D3303AB340005F2741 /* PrivateNotesAccessState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateNotesAccessState.swift; sourceTree = "<group>"; };
+		A04EFD643044DED100D23CFB /* Date+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Helpers.swift"; sourceTree = "<group>"; };
 		A0500A552F788CAA00604E96 /* CleanPadIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = CleanPadIcon.icon; sourceTree = "<group>"; };
 		A052A3C22D45535C009826BA /* ConditionalViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalViewModifier.swift; sourceTree = "<group>"; };
 		A09997613002D1FE00D0DDA9 /* CloseActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseActionButton.swift; sourceTree = "<group>"; };
@@ -101,7 +102,6 @@
 		A4BB5F362B27D69600B509ED /* FeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackView.swift; sourceTree = "<group>"; };
 		A4BFFA5E2AF087F4005CD3DE /* LabelViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelViews.swift; sourceTree = "<group>"; };
 		A4C36C472AE73163001B4389 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
-		A4D06FAD2B21428C0000D089 /* DateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateViewModel.swift; sourceTree = "<group>"; };
 		A4DC37272CA87D6600A5CF61 /* VariableBlur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableBlur.swift; sourceTree = "<group>"; };
 		A4ED50E32C7E50CC0077CB36 /* DockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockView.swift; sourceTree = "<group>"; };
 		A4ED50E62C7E5F830077CB36 /* CategorySelectionButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectionButtons.swift; sourceTree = "<group>"; };
@@ -310,6 +310,7 @@
 		A4C36C462AE7314D001B4389 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				A04EFD643044DED100D23CFB /* Date+Helpers.swift */,
 				A052A3C22D45535C009826BA /* ConditionalViewModifier.swift */,
 				A44E76A72AB13214004BBB21 /* FileManager-DocumentsDirectory.swift */,
 				A4C36C472AE73163001B4389 /* HapticManager.swift */,
@@ -322,7 +323,6 @@
 			isa = PBXGroup;
 			children = (
 				A44E76A52AB1307A004BBB21 /* MainScreenViewModel.swift */,
-				A4D06FAD2B21428C0000D089 /* DateViewModel.swift */,
 				A41F0F552BF2A4500090E84C /* SheetsViewModel.swift */,
 			);
 			path = ViewModels;
@@ -458,7 +458,6 @@
 				A48192E32BFFB03F00CA6412 /* TextFieldStyles.swift in Sources */,
 				A09997643002D26900D0DDA9 /* DismissViewButton.swift in Sources */,
 				A482F0DF2AC7D7CA0075A385 /* ButtonViews.swift in Sources */,
-				A4D06FAE2B21428C0000D089 /* DateViewModel.swift in Sources */,
 				A49C7DEE2ADF5C1D005922FC /* HelperViews.swift in Sources */,
 				A461172A2AF56EB6001C0087 /* AllNotesView.swift in Sources */,
 				A41F0F562BF2A4500090E84C /* SheetsViewModel.swift in Sources */,
@@ -470,6 +469,7 @@
 				A44E76962AB11E70004BBB21 /* CleanPadApp.swift in Sources */,
 				A44BC8E62CBC488E001DD717 /* ContentView.swift in Sources */,
 				A4BB5F372B27D69600B509ED /* FeedbackView.swift in Sources */,
+				A04EFD653044DED400D23CFB /* Date+Helpers.swift in Sources */,
 				A0081F903038970500886854 /* NotesStore.swift in Sources */,
 				A40111B62BA8F249006C5639 /* CategoryEditView.swift in Sources */,
 				A46117282AF56E31001C0087 /* MainScreenView.swift in Sources */,
