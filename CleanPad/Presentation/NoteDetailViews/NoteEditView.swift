@@ -41,6 +41,19 @@ struct NoteEditView: View {
     /// Property that stores the focus of the current text field.
     @FocusState private var focusedField: FocusField?
     
+    /// Incremented whenever the editable note changes and a debounced autosave should be scheduled.
+    @State private var autosaveRevision = 0
+    
+    /// Indicates whether the editable note has changes that have not been written to the store.
+    @State private var hasPendingAutosave = false
+    
+    /// Delay used to coalesce rapid edits into a single autosave operation.
+    ///
+    /// Every `noteCopy` change increments `autosaveRevision`, which restarts the `.task(id:)`
+    /// autosave task. The task only reaches `saveExistingNoteIfNeeded()` after the note has
+    /// stayed unchanged for this amount of time.
+    private let autosaveDelayNanoseconds: UInt64 = 1_500_000_000
+    
     @Environment(\.dismiss) var dismiss
     @Environment(NotesStore.self) private var notesStore
     @Environment(PrivateNotesAccessState.self) private var privateNotesAccess
@@ -50,9 +63,6 @@ struct NoteEditView: View {
     
     /// Property to modify access to locked notes when phase changes.
     @Environment(\.scenePhase) private var scenePhase
-    
-    // Flag indicating whether the note's title or content has been modified, which triggers an update to the modification date.
-    @State private var willDateBeUpdated = false
     
     /// State property to hold a random String from `untitledNotePlaceholders`.
     @State private var randomPlaceholder: String = ""
@@ -148,59 +158,33 @@ struct NoteEditView: View {
             }
         }
         .onDisappear {
-            // Update only if editing an existing note:
-            if !creatingNewNote {
-                withAnimation {
-                    notesStore.update(
-                        note: noteCopy,
-                        // Date is only updated when 'noteTitle' or 'noteContent' has changed.
-                        updatingDate: willDateBeUpdated
-                    )
-                }
-            }
+            saveExistingNoteIfNeeded()
         }
-        .onChange(of: scenePhase) { phase, _ in
-            if (phase == ScenePhase.background) { // When on background phase...
+        .onChange(of: scenePhase) { _, newPhase in
+            if newPhase != .active { // When leaving the active phase...
                 editingAToggledNote = false // ...toggle 'editingAToggledNote', so the contents of the current private note can be hidden.
-
-                if !creatingNewNote { // Update only if editing an existing note.
-                    withAnimation {
-                        notesStore.update(
-                            note: noteCopy,
-                            // Date is only updated when 'noteTitle' or 'noteContent' has changed.
-                            updatingDate: willDateBeUpdated
-                        )
-                    }
-                }
+                saveExistingNoteIfNeeded()
             }
         }
         .onChange(of: noteCopy) {
-            // Return early if the willDateBeUpdated flag is already true.
-            if willDateBeUpdated {
-                return
-            } else {
-                // If the note title or content changes...
-                if (noteCopy.noteTitle != originalNote.noteTitle) || (noteCopy.noteContent != originalNote.noteContent) {
-                    // ...its date will be updated.
-                    willDateBeUpdated = true
-                }
-            }
+            guard !creatingNewNote else { return }
             
-            // Check if the app is running on macOS or iPadOS to apply real-time saving.
-            if ProcessInfo.processInfo.isiOSAppOnMac || viewModel.idiom == .pad {
-                // Swift Concurrency (Task) to introduce a non-blocking delay before saving:
-                Task {
-                    try await Task.sleep(nanoseconds: 500_000_000) // 0.5 sec delay
-                    
-                    // Save the note after the delay:
-                    withAnimation {
-                        notesStore.update(
-                            note: noteCopy,
-                            // Date is only updated when 'noteTitle' or 'noteContent' has changed.
-                            updatingDate: willDateBeUpdated
-                        )
-                    }
-                }
+            // Mark the current note copy as dirty so lifecycle events or debounce can persist it.
+            hasPendingAutosave = true
+            
+            // Changing this value cancels the previous `.task(id:)` autosave and starts a new delay.
+            autosaveRevision += 1
+        }
+        .task(id: autosaveRevision) {
+            // Ignore the initial task run and any state that should not autosave.
+            guard autosaveRevision > 0, hasPendingAutosave, !creatingNewNote else { return }
+            
+            do {
+                // Wait for editing to pause; a new revision cancels this sleep before it can save.
+                try await Task.sleep(nanoseconds: autosaveDelayNanoseconds)
+                saveExistingNoteIfNeeded()
+            } catch {
+                return
             }
         }
         .alert(isPresent: $isAlertPresented, view: alertView)
@@ -211,7 +195,32 @@ struct NoteEditView: View {
 }
 
 // MARK: - Extension to group secondary views in NoteEditView.
+
 extension NoteEditView {
+    /// Indicates whether title or content changes should refresh the modification date.
+    private var shouldUpdateModificationDate: Bool {
+        (noteCopy.noteTitle != originalNote.noteTitle) || (noteCopy.noteContent != originalNote.noteContent)
+    }
+    
+    /// Saves pending changes for existing notes.
+    ///
+    /// This method is shared by autosave, `onDisappear`, and scene phase changes. It skips new notes because they are not in `NotesStore`
+    /// until the user taps Save, and it skips clean notes to avoid unnecessary JSON encoding and file writes.
+    /// The modification date is refreshed only when the title or content changed.
+    private func saveExistingNoteIfNeeded() {
+        guard !creatingNewNote, hasPendingAutosave else { return }
+        
+        withAnimation {
+            notesStore.update(
+                note: noteCopy,
+                updatingDate: shouldUpdateModificationDate
+            )
+        }
+        
+        hasPendingAutosave = false
+    }
+    
+    /// Text field used to edit the note title.
     var titleTextFieldView: some View {
         TextField(
             noteCopy.noteTitle,
@@ -228,6 +237,7 @@ extension NoteEditView {
         .submitLabel(.next)
     }
     
+    /// Text editor used to edit the note content.
     var textContentTextEditorView: some View {
         TextEditor(text: $noteCopy.noteContent)
             .ignoresSafeArea(.keyboard, edges: .bottom)
@@ -297,6 +307,7 @@ extension NoteEditView {
 }
 
 // MARK: - Extension holding placeholders for untitled notes.
+
 extension NoteEditView {
     /// Strings shown when a note is untitled to invite the user to title it.
     static let untitledNotePlaceholders = [

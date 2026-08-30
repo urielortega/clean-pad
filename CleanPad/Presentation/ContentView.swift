@@ -79,9 +79,9 @@ struct ContentView: View {
         .sheet(isPresented: $sheetsViewModel.showWhatsNewSheet) { WhatsNewView() }
         .sheet(isPresented: $sheetsViewModel.showFeedbackSheet) { FeedbackView() }
         .sheet(isPresented: $sheetsViewModel.showAboutSheet) { AboutCleanPadView() }
-        .onChange(of: scenePhase) { phase, _ in
+        .onChange(of: scenePhase) { _, newPhase in
             // Restrict access to locked notes when the app enters the background.
-            if phase == ScenePhase.background {
+            if newPhase == ScenePhase.background {
                 privateNotesAccess.lockNotes()
             }
         }
