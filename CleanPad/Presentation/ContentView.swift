@@ -25,37 +25,45 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-            MainScreenView(
-                viewModel: viewModel,
-                sheetsViewModel: sheetsViewModel,
-                showNoteEditViewSheet: $sheetsViewModel.showNoteEditViewSheet,
-                showCategoriesSheet: $sheetsViewModel.showCategorySelectionSheet
-            )
-            .navigationTitle(viewModel.isNonLockedNotesTabSelected ? "Notes" : "Private Notes")
-            .toolbarTitleDisplayMode(.inlineLarge)
-            .toolbar {
-                ToolbarItemGroup(placement: .topBarTrailing) {
-                    if viewModel.isNonLockedNotesTabSelected { // Non-Locked Notes Tab is selected.
-                        lockAndUnlockNotesButtonView
-                    } else { // Locked Notes Tab is selected.
-                        if privateNotesAccess.isUnlocked {
-                            lockNotesButtonView
-                        }
-                    }
-                    
-                    if viewModel.showingDockButtons(isPrivateAccessUnlocked: privateNotesAccess.isUnlocked) {
-                        Menu {
-                            if viewModel.idiom == .pad {
-                                showAboutViewButtonView
-                                showFeedbackViewButtonView
-                            } else {
-                                switchViewsButtonView
-                                Divider()
-                                showAboutViewButtonView
-                                showFeedbackViewButtonView
+            Group {
+                if notesStore.isLoadingData {
+                    ProgressView()
+                } else {
+                    MainScreenView(
+                        viewModel: viewModel,
+                        sheetsViewModel: sheetsViewModel,
+                        showNoteEditViewSheet: $sheetsViewModel.showNoteEditViewSheet,
+                        showCategoriesSheet: $sheetsViewModel.showCategorySelectionSheet
+                    )
+                    .navigationTitle(viewModel.isNonLockedNotesTabSelected ? "Notes" : "Private Notes")
+                    .toolbarTitleDisplayMode(.inlineLarge)
+                    .toolbar {
+                        ToolbarItemGroup(placement: .topBarTrailing) {
+                            if viewModel.isNonLockedNotesTabSelected { // Non-Locked Notes Tab is selected.
+                                lockAndUnlockNotesButtonView
+                            } else { // Locked Notes Tab is selected.
+                                if privateNotesAccess.isUnlocked {
+                                    lockNotesButtonView
+                                }
                             }
-                        } label: {
-                            Label("More options", systemImage: "ellipsis.circle")
+                            
+                            if viewModel.showingDockButtons(
+                                isPrivateAccessUnlocked: privateNotesAccess.isUnlocked
+                            ) {
+                                Menu {
+                                    if viewModel.idiom == .pad {
+                                        showAboutViewButtonView
+                                        showFeedbackViewButtonView
+                                    } else {
+                                        switchViewsButtonView
+                                        Divider()
+                                        showAboutViewButtonView
+                                        showFeedbackViewButtonView
+                                    }
+                                } label: {
+                                    Label("More options", systemImage: "ellipsis.circle")
+                                }
+                            }
                         }
                     }
                 }
@@ -89,6 +97,7 @@ struct ContentView: View {
                 privateNotesAccess.lockNotes()
             }
         }
+        .animation(.default, value: notesStore.isLoadingData)
     }
 }
 

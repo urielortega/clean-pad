@@ -12,6 +12,7 @@ import Observation
 ///
 /// `NotesStore` owns the in-memory note library, applies business rules that affect both notes and categories,
 /// and persists changes through repository protocols.
+@MainActor
 @Observable
 final class NotesStore {
     /// All notes currently loaded in memory.
@@ -19,6 +20,9 @@ final class NotesStore {
     
     /// All user categories currently loaded in memory. Always falls back to `General`.
     private(set) var categories: [Category] = [.general]
+    
+    /// Indicates whether notes and categories are still loading from disk.
+    private(set) var isLoadingData = true
     
     @ObservationIgnored private let notesRepository: NotesRepository
     @ObservationIgnored private let categoriesRepository: CategoriesRepository
@@ -142,21 +146,42 @@ extension NotesStore {
         }
     }
     
-    /// Loads notes and categories from persistence, using empty/default fallbacks.
+    /// Loads notes and categories from persistence without blocking initial UI rendering.
+    ///
+    /// File reads and JSON decoding are synchronous operations, so this method runs them inside
+    /// a detached task. Once loading finishes, the resulting state is applied on the main actor
+    /// because `notes`, `categories`, and `isLoadingData` are observed by SwiftUI.
     func loadData() {
-        do {
-            notes = try notesRepository.loadNotes()
-        } catch {
-            notes = []
-        }
+        isLoadingData = true
         
-        do {
-            let loadedCategories = try categoriesRepository.loadCategories()
-            categories = loadedCategories.isEmpty ? [.general] : loadedCategories
+        let notesRepository = notesRepository
+        let categoriesRepository = categoriesRepository
+        
+        Task {
+            let (loadedNotes, loadedCategories) = await Task.detached(priority: .userInitiated) {
+                let loadedNotes: [Note]
+                let loadedCategories: [Category]
+                
+                do {
+                    loadedNotes = try notesRepository.loadNotes()
+                } catch {
+                    loadedNotes = []
+                }
+                
+                do {
+                    let categories = try categoriesRepository.loadCategories()
+                    loadedCategories = categories.isEmpty ? [.general] : categories
+                } catch {
+                    loadedCategories = [.general]
+                }
+                
+                return (loadedNotes, loadedCategories)
+            }.value
             
-            setGeneralCategoryToUnassignedNotes()
-        } catch {
-            categories = [.general]
+            self.notes = loadedNotes
+            self.categories = loadedCategories
+            self.setGeneralCategoryToUnassignedNotes()
+            self.isLoadingData = false
         }
     }
     

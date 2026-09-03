@@ -13,6 +13,7 @@ import SwiftUI
 ///
 /// `MainScreenViewModel` does not own notes or categories. Persistent note data lives in
 /// `NotesStore`; this type only decides how that data is filtered, sorted, selected, and presented.
+@MainActor
 @Observable
 final class MainScreenViewModel {
     // MARK: Search properties.
