@@ -26,6 +26,7 @@ final class NotesStore {
     
     @ObservationIgnored private let notesRepository: NotesRepository
     @ObservationIgnored private let categoriesRepository: CategoriesRepository
+    @ObservationIgnored private var loadTask: Task<Void, Never>?
     
     /// Category used when a note does not have an explicit category.
     var defaultCategory: Category {
@@ -40,6 +41,10 @@ final class NotesStore {
         self.notesRepository = notesRepository
         self.categoriesRepository = categoriesRepository
         loadData()
+    }
+    
+    deinit {
+        loadTask?.cancel()
     }
 }
 
@@ -148,16 +153,18 @@ extension NotesStore {
     
     /// Loads notes and categories from persistence without blocking initial UI rendering.
     ///
-    /// File reads and JSON decoding are synchronous operations, so this method runs them inside
-    /// a detached task. Once loading finishes, the resulting state is applied on the main actor
-    /// because `notes`, `categories`, and `isLoadingData` are observed by SwiftUI.
+    /// The store keeps a handle to the current load task so repeated loads or deinitialization can
+    /// cancel outdated work. File reads and JSON decoding are synchronous operations, so they run in
+    /// a detached task outside the main actor. If the load task is canceled before the detached work
+    /// returns, its result is ignored instead of being applied to SwiftUI-observed state.
     func loadData() {
+        loadTask?.cancel()
         isLoadingData = true
         
         let notesRepository = notesRepository
         let categoriesRepository = categoriesRepository
         
-        Task {
+        loadTask = Task { [weak self] in
             let (loadedNotes, loadedCategories) = await Task.detached(priority: .userInitiated) {
                 let loadedNotes: [Note]
                 let loadedCategories: [Category]
@@ -177,6 +184,8 @@ extension NotesStore {
                 
                 return (loadedNotes, loadedCategories)
             }.value
+            
+            guard !Task.isCancelled, let self else { return }
             
             self.notes = loadedNotes
             self.categories = loadedCategories
