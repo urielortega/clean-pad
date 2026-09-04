@@ -32,8 +32,8 @@ struct FeedbackView: View {
                 VStack {
                     iMessageButtonView
                     HStack {
-                        buyMeACoffeeButtonView
                         linkedInButtonView
+                        buyMeACoffeeButtonView
                     }
                 }
                 .padding()
@@ -99,7 +99,7 @@ extension FeedbackView {
                     }
                 } label : {
                     Label("iMessage Me", systemImage: "message.fill")
-                        .labelStyle(.automatic)
+                        .labelStyle(CenteredLabelStyle())
                         .foregroundStyle(.white)
                         .fontWeight(.medium)
                         .frame(maxWidth: .infinity, minHeight: 44, maxHeight: 50, alignment: .center)
@@ -128,7 +128,7 @@ extension FeedbackView {
             if #available(iOS 26.0, *) {
                 Link(destination: URL(string: "https://www.buymeacoffee.com/urielortega")!) {
                     Label("Buy Me A Coffee", systemImage: "cup.and.saucer.fill")
-                        .labelStyle(.automatic)
+                        .labelStyle(CenteredLabelStyle())
                         .foregroundStyle(.white)
                         .fontWeight(.medium)
                         .frame(maxWidth: .infinity, minHeight: 44, maxHeight: 50, alignment: .center)
@@ -153,7 +153,7 @@ extension FeedbackView {
             if #available(iOS 26.0, *) {
                 Link(destination: URL(string: "https://www.linkedin.com/in/uriel-ortega")!) {
                     Label("Connect on LinkedIn", systemImage: "briefcase.fill")
-                        .labelStyle(.automatic)
+                        .labelStyle(CenteredLabelStyle())
                         .foregroundStyle(.white)
                         .fontWeight(.medium)
                         .frame(maxWidth: .infinity, minHeight: 44, maxHeight: 50, alignment: .center)

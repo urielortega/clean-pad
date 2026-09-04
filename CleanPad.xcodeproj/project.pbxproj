@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A0019EF0304A4A92007482C3 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0019EEF304A4A8F007482C3 /* Color+Extensions.swift */; };
+		A0019EF2304A4CE7007482C3 /* LabelStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0019EF1304A4CE5007482C3 /* LabelStyles.swift */; };
 		A0081F87303893C800886854 /* NotesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0081F86303893C700886854 /* NotesRepository.swift */; };
 		A0081F89303893D200886854 /* CategoriesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0081F88303893CC00886854 /* CategoriesRepository.swift */; };
 		A0081F8B303893E500886854 /* FileNotesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0081F8A303893E400886854 /* FileNotesRepository.swift */; };
@@ -60,6 +61,7 @@
 
 /* Begin PBXFileReference section */
 		A0019EEF304A4A8F007482C3 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
+		A0019EF1304A4CE5007482C3 /* LabelStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelStyles.swift; sourceTree = "<group>"; };
 		A0081F86303893C700886854 /* NotesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesRepository.swift; sourceTree = "<group>"; };
 		A0081F88303893CC00886854 /* CategoriesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesRepository.swift; sourceTree = "<group>"; };
 		A0081F8A303893E400886854 /* FileNotesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileNotesRepository.swift; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 		A41324332C17C99D005B478C /* Styles */ = {
 			isa = PBXGroup;
 			children = (
+				A0019EF1304A4CE5007482C3 /* LabelStyles.swift */,
 				A48192E22BFFB03F00CA6412 /* TextFieldStyles.swift */,
 				A41324312C17C8AF005B478C /* ButtonStyles.swift */,
 			);
@@ -470,6 +473,7 @@
 				A48192E32BFFB03F00CA6412 /* TextFieldStyles.swift in Sources */,
 				A09997643002D26900D0DDA9 /* DismissViewButton.swift in Sources */,
 				A482F0DF2AC7D7CA0075A385 /* ButtonViews.swift in Sources */,
+				A0019EF2304A4CE7007482C3 /* LabelStyles.swift in Sources */,
 				A49C7DEE2ADF5C1D005922FC /* HelperViews.swift in Sources */,
 				A461172A2AF56EB6001C0087 /* AllNotesView.swift in Sources */,
 				A41F0F562BF2A4500090E84C /* SheetsViewModel.swift in Sources */,
