@@ -31,7 +31,10 @@ struct FeedbackView: View {
                 // Action Buttons anchored at the bottom
                 VStack {
                     iMessageButtonView
-                    buyMeACoffeeButtonView
+                    HStack {
+                        buyMeACoffeeButtonView
+                        linkedInButtonView
+                    }
                 }
                 .padding()
             }
@@ -138,6 +141,31 @@ extension FeedbackView {
                         color: .black.opacity(0.8),
                         labelText: "Buy Me A Coffee",
                         systemImageString: "cup.and.saucer.fill"
+                    )
+                }
+            }
+        }
+    }
+    
+    /// Button for connecting with the developer through LinkedIn.
+    var linkedInButtonView: some View {
+        Group {
+            if #available(iOS 26.0, *) {
+                Link(destination: URL(string: "https://www.linkedin.com/in/uriel-ortega")!) {
+                    Label("Connect on LinkedIn", systemImage: "briefcase.fill")
+                        .labelStyle(.automatic)
+                        .foregroundStyle(.white)
+                        .fontWeight(.medium)
+                        .frame(maxWidth: .infinity, minHeight: 44, maxHeight: 50, alignment: .center)
+                }
+                .buttonStyle(.glassProminent)
+                .tint(Color.linkedInBlue.opacity(0.8))
+            } else {
+                Link(destination: URL(string: "https://www.linkedin.com/in/uriel-ortega")!) {
+                    BorderedButtonLabel(
+                        color: Color.linkedInBlue.opacity(0.8),
+                        labelText: "Connect on LinkedIn",
+                        systemImageString: "briefcase.fill"
                     )
                 }
             }

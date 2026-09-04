@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A0019EF0304A4A92007482C3 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0019EEF304A4A8F007482C3 /* Color+Extensions.swift */; };
 		A0081F87303893C800886854 /* NotesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0081F86303893C700886854 /* NotesRepository.swift */; };
 		A0081F89303893D200886854 /* CategoriesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0081F88303893CC00886854 /* CategoriesRepository.swift */; };
 		A0081F8B303893E500886854 /* FileNotesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0081F8A303893E400886854 /* FileNotesRepository.swift */; };
@@ -58,6 +59,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A0019EEF304A4A8F007482C3 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		A0081F86303893C700886854 /* NotesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesRepository.swift; sourceTree = "<group>"; };
 		A0081F88303893CC00886854 /* CategoriesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesRepository.swift; sourceTree = "<group>"; };
 		A0081F8A303893E400886854 /* FileNotesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileNotesRepository.swift; sourceTree = "<group>"; };
@@ -125,6 +127,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A0019EEE304A4A55007482C3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A0019EEF304A4A8F007482C3 /* Color+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		A0081F843038939900886854 /* Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -292,6 +302,7 @@
 		A482F0DB2AC7D4410075A385 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				A0019EEE304A4A55007482C3 /* Extensions */,
 				A09997633002D26900D0DDA9 /* DismissViewButton.swift */,
 				A09997613002D1FE00D0DDA9 /* CloseActionButton.swift */,
 				A4DC37272CA87D6600A5CF61 /* VariableBlur.swift */,
@@ -442,6 +453,7 @@
 				A44E76A62AB1307A004BBB21 /* MainScreenViewModel.swift in Sources */,
 				A42574272CBB09CE00D3C8A4 /* WhatsNewView.swift in Sources */,
 				A0081F89303893D200886854 /* CategoriesRepository.swift in Sources */,
+				A0019EF0304A4A92007482C3 /* Color+Extensions.swift in Sources */,
 				A4ADAFDD2B15238B00C14010 /* Constants.swift in Sources */,
 				A0081F87303893C800886854 /* NotesRepository.swift in Sources */,
 				A030C1C4303AA7E7005F2741 /* LocalAuthenticationService.swift in Sources */,
