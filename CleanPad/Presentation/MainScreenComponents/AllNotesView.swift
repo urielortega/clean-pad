@@ -92,6 +92,7 @@ extension AllNotesView {
                         } label: {
                             ListNoteRow(note: note)
                         }
+                        .listRowBackground(Rectangle().fill(.ultraThinMaterial))
                         .contextMenu {
                             NoteContextMenuButtons(note: note, viewModel: viewModel)
                         } preview: {
@@ -108,6 +109,7 @@ extension AllNotesView {
                     Spacer()
                         .frame(height: 80)
                 }
+                .scrollContentBackground(.hidden)
             }
         }
         .searchable(text: $viewModel.searchText, prompt: "Look for a note...")
