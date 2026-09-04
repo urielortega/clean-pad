@@ -104,8 +104,7 @@ extension FeedbackView {
                         .fontWeight(.medium)
                         .frame(maxWidth: .infinity, minHeight: 44, maxHeight: 50, alignment: .center)
                 }
-                .buttonStyle(.glassProminent)
-                .tint(.green)
+                .buttonStyle(.glass(.regular.tint(.green)))
             } else {
                 Button {
                     if let url = URL(string: "sms:urielortega2509@gmail.com") {
@@ -133,8 +132,7 @@ extension FeedbackView {
                         .fontWeight(.medium)
                         .frame(maxWidth: .infinity, minHeight: 44, maxHeight: 50, alignment: .center)
                 }
-                .buttonStyle(.glassProminent)
-                .tint(.black.opacity(0.8))
+                .buttonStyle(.glass(.regular.tint(.black.opacity(0.8))))
             } else {
                 Link(destination: URL(string: "https://www.buymeacoffee.com/urielortega")!) {
                     BorderedButtonLabel(
@@ -158,12 +156,11 @@ extension FeedbackView {
                         .fontWeight(.medium)
                         .frame(maxWidth: .infinity, minHeight: 44, maxHeight: 50, alignment: .center)
                 }
-                .buttonStyle(.glassProminent)
-                .tint(Color.linkedInBlue.opacity(0.8))
+                .buttonStyle(.glass(.regular.tint(Color.linkedInBlue)))
             } else {
                 Link(destination: URL(string: "https://www.linkedin.com/in/uriel-ortega")!) {
                     BorderedButtonLabel(
-                        color: Color.linkedInBlue.opacity(0.8),
+                        color: Color.linkedInBlue,
                         labelText: "Connect on LinkedIn",
                         systemImageString: "briefcase.fill"
                     )
