@@ -54,11 +54,19 @@ struct ContentView: View {
                                     if viewModel.idiom == .pad {
                                         showAboutViewButtonView
                                         showFeedbackViewButtonView
+                                        #if DEBUG
+                                        Divider()
+                                        addScreenshotsNoteExamplesButtonView
+                                        #endif
                                     } else {
                                         switchViewsButtonView
                                         Divider()
                                         showAboutViewButtonView
                                         showFeedbackViewButtonView
+                                        #if DEBUG
+                                        Divider()
+                                        addScreenshotsNoteExamplesButtonView
+                                        #endif
                                     }
                                 } label: {
                                     Label("More options", systemImage: "ellipsis.circle")
@@ -169,6 +177,18 @@ extension ContentView {
             Label("Feedback", systemImage: "ellipsis.message")
         }
     }
+    
+    #if DEBUG
+    /// Button for adding screenshot-oriented sample notes.
+    var addScreenshotsNoteExamplesButtonView: some View {
+        Button {
+            viewModel.addScreenshotsNoteExamples(to: notesStore)
+            HapticManager.instance.impact(style: .light)
+        } label: {
+            Label("Add screenshot examples", systemImage: "photo.on.rectangle.angled")
+        }
+    }
+    #endif
     
     /// Button for showing View for providing feedback.
     var showAboutViewButtonView: some View {
