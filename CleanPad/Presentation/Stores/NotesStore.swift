@@ -12,6 +12,7 @@ import Observation
 ///
 /// `NotesStore` owns the in-memory note library, applies business rules that affect both notes and categories,
 /// and persists changes through repository protocols.
+@MainActor
 @Observable
 final class NotesStore {
     /// All notes currently loaded in memory.
@@ -20,8 +21,17 @@ final class NotesStore {
     /// All user categories currently loaded in memory. Always falls back to `General`.
     private(set) var categories: [Category] = [.general]
     
+    /// Indicates whether notes and categories are still loading from disk.
+    private(set) var isLoadingData = true
+    
     @ObservationIgnored private let notesRepository: NotesRepository
     @ObservationIgnored private let categoriesRepository: CategoriesRepository
+    @ObservationIgnored private var loadTask: Task<Void, Never>?
+    
+    /// Category used when a note does not have an explicit category.
+    var defaultCategory: Category {
+        categories.first ?? .general
+    }
     
     /// Creates a notes store backed by the provided repositories.
     init(
@@ -32,6 +42,10 @@ final class NotesStore {
         self.categoriesRepository = categoriesRepository
         loadData()
     }
+    
+    deinit {
+        loadTask?.cancel()
+    }
 }
 
 extension NotesStore {
@@ -39,18 +53,9 @@ extension NotesStore {
     
     /// Adds a note and assigns the General category when no category is set.
     func add(note: Note) {
-        if note.category == nil {
-            let noteToAssignCategory = Note(
-                isLocked: note.isLocked,
-                noteTitle: note.noteTitle,
-                noteContent: note.noteContent,
-                category: categories[0]
-            )
-            
-            notes.append(noteToAssignCategory)
-        } else {
-            notes.append(note)
-        }
+        var noteToSave = note
+        noteToSave.category = note.category ?? defaultCategory
+        notes.append(noteToSave)
         
         saveAllNotes()
     }
@@ -146,19 +151,46 @@ extension NotesStore {
         }
     }
     
-    /// Loads notes and categories from persistence, using empty/default fallbacks.
+    /// Loads notes and categories from persistence without blocking initial UI rendering.
+    ///
+    /// The store keeps a handle to the current load task so repeated loads or deinitialization can
+    /// cancel outdated work. File reads and JSON decoding are synchronous operations, so they run in
+    /// a detached task outside the main actor. If the load task is canceled before the detached work
+    /// returns, its result is ignored instead of being applied to SwiftUI-observed state.
     func loadData() {
-        do {
-            notes = try notesRepository.loadNotes()
-        } catch {
-            notes = []
-        }
+        loadTask?.cancel()
+        isLoadingData = true
         
-        do {
-            categories = try categoriesRepository.loadCategories()
-            setGeneralCategoryToUnassignedNotes()
-        } catch {
-            categories = [.general]
+        let notesRepository = notesRepository
+        let categoriesRepository = categoriesRepository
+        
+        loadTask = Task { [weak self] in
+            let (loadedNotes, loadedCategories) = await Task.detached(priority: .userInitiated) {
+                let loadedNotes: [Note]
+                let loadedCategories: [Category]
+                
+                do {
+                    loadedNotes = try notesRepository.loadNotes()
+                } catch {
+                    loadedNotes = []
+                }
+                
+                do {
+                    let categories = try categoriesRepository.loadCategories()
+                    loadedCategories = categories.isEmpty ? [.general] : categories
+                } catch {
+                    loadedCategories = [.general]
+                }
+                
+                return (loadedNotes, loadedCategories)
+            }.value
+            
+            guard !Task.isCancelled, let self else { return }
+            
+            self.notes = loadedNotes
+            self.categories = loadedCategories
+            self.setGeneralCategoryToUnassignedNotes()
+            self.isLoadingData = false
         }
     }
     
@@ -211,7 +243,7 @@ extension NotesStore {
     func setGeneralCategoryToUnassignedNotes() {
         for index in notes.indices {
             if notes[index].category == nil {
-                notes[index].category = categories[0]
+                notes[index].category = defaultCategory
             }
         }
     }
@@ -229,7 +261,7 @@ extension NotesStore {
     private func assignGeneralCategoryToNotesAssignedToCategory(_ category: Category) {
         for index in notes.indices {
             if notes[index].category?.id == category.id {
-                notes[index].category = categories[0]
+                notes[index].category = defaultCategory
             }
         }
     }

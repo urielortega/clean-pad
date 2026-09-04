@@ -95,7 +95,7 @@ struct BorderedButtonLabel: View {
                     .fontWeight(.medium)
             } else {
                 Label(labelText, systemImage: systemImageString!)
-                    .labelStyle(.automatic)
+                    .labelStyle(CenteredLabelStyle())
                     .foregroundStyle(.white)
                     .fontWeight(.medium)
             }

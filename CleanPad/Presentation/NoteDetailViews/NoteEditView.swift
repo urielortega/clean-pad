@@ -152,6 +152,10 @@ struct NoteEditView: View {
             }
         }
         .onAppear {
+            if creatingNewNote && noteCopy.category == nil {
+                noteCopy.category = notesStore.defaultCategory
+            }
+            
             // Only set `randomDescription` once per appearance of the view
             if randomPlaceholder.isEmpty {
                 randomPlaceholder = NoteEditView.untitledNotePlaceholders.randomElement() ?? "Title your note..."
@@ -240,6 +244,8 @@ extension NoteEditView {
     /// Text editor used to edit the note content.
     var textContentTextEditorView: some View {
         TextEditor(text: $noteCopy.noteContent)
+            .scrollContentBackground(.hidden)
+            .background(.clear)
             .ignoresSafeArea(.keyboard, edges: .bottom)
             .padding(.horizontal)
             .focused($focusedField, equals: .textEditorField)

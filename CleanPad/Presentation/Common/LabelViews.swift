@@ -10,7 +10,6 @@ import SwiftUI
 /// View that shows a note title, date, category and some content when user selects List View in AlINotesView.
 struct ListNoteRow: View {
     var note: Note
-    @ObservedObject var viewModel: DateViewModel
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -25,7 +24,7 @@ struct ListNoteRow: View {
             }
 
             VStack(alignment: .leading) {
-                FormattedDateTextView(note: note, viewModel: viewModel)
+                FormattedDateTextView(note: note)
                 
                 Text(note.noteContent.isEmpty ? "No content..." : note.noteContent)
                     .lineLimit(1)
@@ -35,14 +34,13 @@ struct ListNoteRow: View {
             .font(.caption2)
 
         }
-        .noteLabelAccessibilityModifiers(note: note, viewModel: viewModel)
+        .noteLabelAccessibilityModifiers(note: note)
     }
 }
 
 /// View that shows a note title, date, category and some content when user selects Grid View in AlINotesView.
 struct GridNoteCard: View {
     var note: Note
-    @ObservedObject var viewModel: DateViewModel
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -53,7 +51,7 @@ struct GridNoteCard: View {
                 .contentTransition(.numericText(countsDown: true))
 
             VStack(alignment: .leading) {
-                FormattedDateTextView(note: note, viewModel: viewModel)
+                FormattedDateTextView(note: note)
                 
                 Text(note.noteContent.isEmpty ? "No content..." : note.noteContent)
                     .lineLimit(2, reservesSpace: true)
@@ -84,7 +82,7 @@ struct GridNoteCard: View {
         .clipShape(.rect(cornerRadius: Constants.roundedRectCornerRadius))
         .roundedRectangleOverlayStroke()
         .softShadow(color: .gridLabelShadow)
-        .noteLabelAccessibilityModifiers(note: note, viewModel: viewModel)
+        .noteLabelAccessibilityModifiers(note: note)
     }
 }
 
@@ -118,13 +116,12 @@ struct ContextMenuPreview: View {
 /// Text View that shows the formatted date of a note, displaying the abbreviated date (when note's date is different than today) and shortened time.
 fileprivate struct FormattedDateTextView: View {
     var note: Note
-    @ObservedObject var viewModel: DateViewModel
     
     var body: some View {
         Text(
             note.date.formatted(
                 // Shows abbreviated date only when note.date is different from today:
-                date: viewModel.isNoteDateEqualToToday(note: note) ? .omitted : .abbreviated,
+                date: note.date.isToday ? .omitted : .abbreviated,
                 time: .shortened
             )
         )
@@ -138,13 +135,13 @@ fileprivate struct FormattedDateTextView: View {
 
 #if DEBUG
 #Preview("List View") {
-    ListNoteRow(note: .example, viewModel: DateViewModel())
+    ListNoteRow(note: .example)
         .padding()
         .border(.gray, width: 0.5)
 }
 
 #Preview("Grid View") {
-    GridNoteCard(note: .example, viewModel: DateViewModel())
+    GridNoteCard(note: .example)
         .frame(width: 200, height: 100)
 }
 

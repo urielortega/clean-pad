@@ -11,7 +11,6 @@ import SwiftUI
 struct MainScreenView: View {
     // Using the viewModels created in ContentView.
     @Bindable var viewModel: MainScreenViewModel
-    @ObservedObject var dateViewModel: DateViewModel
     @ObservedObject var sheetsViewModel: SheetsViewModel
     
     @Binding var showNoteEditViewSheet: Bool
@@ -26,7 +25,6 @@ struct MainScreenView: View {
         ZStack {
             AllNotesView(
                 viewModel: viewModel,
-                dateViewModel: dateViewModel,
                 sheetsViewModel: sheetsViewModel,
                 showNoteEditViewSheet: $showNoteEditViewSheet
             )
