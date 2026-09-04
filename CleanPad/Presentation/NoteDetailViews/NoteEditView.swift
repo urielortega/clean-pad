@@ -244,6 +244,8 @@ extension NoteEditView {
     /// Text editor used to edit the note content.
     var textContentTextEditorView: some View {
         TextEditor(text: $noteCopy.noteContent)
+            .scrollContentBackground(.hidden)
+            .background(.clear)
             .ignoresSafeArea(.keyboard, edges: .bottom)
             .padding(.horizontal)
             .focused($focusedField, equals: .textEditorField)
