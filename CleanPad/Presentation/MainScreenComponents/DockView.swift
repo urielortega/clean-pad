@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-/// Dock with buttons to show categories, create a new note and switch between the non-locked notes list and the locked notes list.s
+/// Dock with buttons to show categories, create a new note and switch between the non-locked notes list and the locked notes list.
 struct DockView: View {
     @Bindable var viewModel: MainScreenViewModel
     @ObservedObject var sheetsViewModel: SheetsViewModel
@@ -27,27 +27,48 @@ struct DockView: View {
         VStack {
             Spacer()
             
-            HStack {
-                if viewModel.showingDockButtons(isPrivateAccessUnlocked: privateNotesAccess.isUnlocked) {
-                    showCategoriesDockButton
-                }
-                
-                tabBar
-                
-                if viewModel.showingDockButtons(isPrivateAccessUnlocked: privateNotesAccess.isUnlocked) {
-                    createNoteDockButton
-                }
-            }
-            .padding(
-                .horizontal,
-                (viewModel.idiom == .pad && sizeClass == .regular) ? 20 : 0
-            )
+            dockControls
+                .padding(
+                    .horizontal,
+                    (viewModel.idiom == .pad && sizeClass == .regular) ? 20 : 0
+                )
         }
     }
 }
 
 // MARK: - Extension to group secondary views in DockView.
+
 extension DockView {
+    
+    /// Dock controls grouped in a Liquid Glass container on iOS 26 and later.
+    ///
+    /// The container lets the category button, tab bar, and create button participate in the same
+    /// Liquid Glass rendering pass so their shapes can blend when they move close to each other.
+    @ViewBuilder
+    var dockControls: some View {
+        if #available(iOS 26.0, *) {
+            GlassEffectContainer(spacing: 10) {
+                dockControlsContent
+            }
+        } else {
+            dockControlsContent
+        }
+    }
+
+    var dockControlsContent: some View {
+        HStack {
+            if viewModel.showingDockButtons(isPrivateAccessUnlocked: privateNotesAccess.isUnlocked) {
+                showCategoriesDockButton
+            }
+
+            tabBar
+
+            if viewModel.showingDockButtons(isPrivateAccessUnlocked: privateNotesAccess.isUnlocked) {
+                createNoteDockButton
+            }
+        }
+    }
+
     /// View that holds the nonLockedNotesTabButton and the lockedNotesTabButton with a Dock style.
     var tabBar: some View {
         HStack {
@@ -63,7 +84,11 @@ extension DockView {
             Spacer()
         }
         .frame(height: 55)
-        .dockStyle(viewModel: viewModel, isPrivateAccessUnlocked: privateNotesAccess.isUnlocked)
+        .dockStyle(
+            viewModel: viewModel,
+            isPrivateAccessUnlocked: privateNotesAccess.isUnlocked,
+            isInteractive: true
+        )
         .padding(.horizontal, viewModel.showingDockButtons(isPrivateAccessUnlocked: privateNotesAccess.isUnlocked) ? 0 : 10)
         .padding(
             .horizontal,
@@ -164,6 +189,7 @@ extension DockView {
             Label("New note", systemImage: "plus")
                 .labelStyle(.iconOnly)
                 .frame(width: 55, height: 55) // Frame on Label so tap is better detected.
+                .contentShape(.rect(cornerRadius: Constants.roundedRectCornerRadius))
         }
         .dockButtonStyle(position: .right)
         .sheet(isPresented: $sheetsViewModel.showNoteEditViewSheet) {
@@ -190,6 +216,7 @@ extension DockView {
             )
             .labelStyle(.iconOnly)
             .frame(width: 55, height: 55) // Frame on Label so Menu Tap is better detected.
+            .contentShape(.rect(cornerRadius: Constants.roundedRectCornerRadius))
             .imageScale(.large)
             .tint(viewModel.selectedCategory.color.gradient)
         }
