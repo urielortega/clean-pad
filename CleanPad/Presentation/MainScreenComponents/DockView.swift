@@ -36,10 +36,63 @@ struct DockView: View {
     }
 }
 
+/// A non-interactive light beam focused behind the tab bar glow area.
+private struct DockTabBarGlowBeam: View {
+    let color: Color
+    let isVisible: Bool
+
+    @Environment(\.colorScheme) private var colorScheme
+
+    var body: some View {
+        LinearGradient(
+            stops: [
+                .init(color: color.opacity(Constants.dockGlowBeamTopOpacity), location: Constants.dockGlowBeamTopLocation),
+                .init(color: color.opacity(middleOpacity), location: Constants.dockGlowBeamMiddleLocation),
+                .init(color: color.opacity(bottomOpacity), location: Constants.dockGlowBeamBottomLocation)
+            ],
+            startPoint: .top,
+            endPoint: .bottom
+        )
+        .frame(maxWidth: .infinity)
+        .frame(height: Constants.dockGlowBeamHeight)
+        .blur(radius: blurRadius)
+        .blendMode(blendMode)
+        .opacity(isVisible ? 1 : 0)
+        .allowsHitTesting(false)
+        .accessibilityHidden(true)
+    }
+
+    private var middleOpacity: Double {
+        colorScheme == .dark ? Constants.dockGlowBeamDarkModeMiddleOpacity : Constants.dockGlowBeamLightModeMiddleOpacity
+    }
+
+    private var bottomOpacity: Double {
+        colorScheme == .dark ? Constants.dockGlowBeamDarkModeBottomOpacity : Constants.dockGlowBeamLightModeBottomOpacity
+    }
+
+    private var blurRadius: CGFloat {
+        colorScheme == .dark ? Constants.dockGlowBeamDarkModeBlurRadius : Constants.dockGlowBeamLightModeBlurRadius
+    }
+
+    private var blendMode: BlendMode {
+        colorScheme == .dark ? .screen : .normal
+    }
+}
+
 // MARK: - Extension to group secondary views in DockView.
 
 extension DockView {
-    
+    /// Decorative category-colored light beam used as tab bar glow feedback on iOS 26 and later.
+    @ViewBuilder
+    var tabBarGlowBeam: some View {
+        if #available(iOS 26.0, *) {
+            DockTabBarGlowBeam(
+                color: viewModel.selectedCategory.color,
+                isVisible: viewModel.isDockGlowing && viewModel.isSomeCategorySelected
+            )
+        }
+    }
+
     /// Dock controls grouped in a Liquid Glass container on iOS 26 and later.
     ///
     /// The container lets the category button, tab bar, and create button participate in the same
@@ -89,6 +142,9 @@ extension DockView {
             isPrivateAccessUnlocked: privateNotesAccess.isUnlocked,
             isInteractive: true
         )
+        .background(alignment: .bottom) {
+            tabBarGlowBeam
+        }
         .padding(.horizontal, viewModel.showingDockButtons(isPrivateAccessUnlocked: privateNotesAccess.isUnlocked) ? 0 : 10)
         .padding(
             .horizontal,

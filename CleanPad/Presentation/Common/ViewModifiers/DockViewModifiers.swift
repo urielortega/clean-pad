@@ -106,21 +106,34 @@ extension View {
 struct GlowingShadow: ViewModifier {
     var viewModel: MainScreenViewModel
 
+    @Environment(\.colorScheme) private var colorScheme
+
     func body(content: Content) -> some View {
         content
             .shadow(
                 color: getGlowingShadowColor(),
-                radius: viewModel.isDockGlowing ? 16 : 8
+                radius: getGlowingShadowRadius()
             )
     }
     
     /// Determines the color of the glowing shadow based on the selected category and dock state.
     func getGlowingShadowColor() -> Color {
         if (viewModel.isDockGlowing && viewModel.isSomeCategorySelected) {
-            viewModel.selectedCategory.color.opacity(0.7)
+            viewModel.selectedCategory.color.opacity(getGlowingShadowOpacity())
         } else {
-            Color(.sRGBLinear, white: 0, opacity: 0.14)
+            Color(.sRGBLinear, white: 0, opacity: Constants.dockGlowInactiveShadowOpacity)
         }
+    }
+
+    /// Uses stronger shadow feedback in Light Mode and a softer glow in Dark Mode.
+    func getGlowingShadowOpacity() -> Double {
+        colorScheme == .dark ? Constants.dockGlowDarkModeShadowOpacity : Constants.dockGlowLightModeShadowOpacity
+    }
+
+    /// Keeps the glow concentrated around the dock while improving visibility in Light Mode.
+    func getGlowingShadowRadius() -> CGFloat {
+        guard viewModel.isDockGlowing else { return Constants.dockGlowInactiveShadowRadius }
+        return colorScheme == .dark ? Constants.dockGlowDarkModeShadowRadius : Constants.dockGlowLightModeShadowRadius
     }
 }
 
