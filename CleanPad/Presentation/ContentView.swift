@@ -47,30 +47,30 @@ struct ContentView: View {
                                 }
                             }
                             
-                            if viewModel.showingDockButtons(
-                                isPrivateAccessUnlocked: privateNotesAccess.isUnlocked
-                            ) {
-                                Menu {
-                                    if viewModel.idiom == .pad {
-                                        showAboutViewButtonView
-                                        showFeedbackViewButtonView
-                                        #if DEBUG
-                                        Divider()
-                                        addScreenshotsNoteExamplesButtonView
-                                        #endif
-                                    } else {
-                                        switchViewsButtonView
-                                        Divider()
-                                        showAboutViewButtonView
-                                        showFeedbackViewButtonView
-                                        #if DEBUG
-                                        Divider()
-                                        addScreenshotsNoteExamplesButtonView
-                                        #endif
-                                    }
-                                } label: {
-                                    Label("More options", systemImage: "ellipsis.circle")
+                            Menu {
+                                // Locked Private Space mode: expose only app-level actions that don't require note access.
+                                if viewModel.isLockedNotesTabSelected && !privateNotesAccess.isUnlocked {
+                                    showAboutViewButtonView
+                                    showFeedbackViewButtonView
+                                } else if viewModel.idiom == .pad { // iPad mode: notes always use the grid layout.
+                                    showAboutViewButtonView
+                                    showFeedbackViewButtonView
+                                    #if DEBUG
+                                    Divider()
+                                    addScreenshotsNoteExamplesButtonView
+                                    #endif
+                                } else { // iPhone accessible-space mode: include layout switching alongside app-level actions.
+                                    switchViewsButtonView
+                                    Divider()
+                                    showAboutViewButtonView
+                                    showFeedbackViewButtonView
+                                    #if DEBUG
+                                    Divider()
+                                    addScreenshotsNoteExamplesButtonView
+                                    #endif
                                 }
+                            } label: {
+                                Label("More options", systemImage: "ellipsis.circle")
                             }
                         }
                     }
