@@ -70,7 +70,7 @@ struct ContentView: View {
                                     #endif
                                 }
                             } label: {
-                                Label("More options", systemImage: "ellipsis.circle")
+                                Label("More options", systemImage: "ellipsis")
                             }
                         }
                     }
