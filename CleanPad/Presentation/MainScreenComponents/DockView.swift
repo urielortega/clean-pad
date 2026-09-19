@@ -124,17 +124,14 @@ extension DockView {
 
     /// View that holds the nonLockedNotesTabButton and the lockedNotesTabButton with a Dock style.
     var tabBar: some View {
-        HStack {
-            Spacer()
-            
+        HStack(spacing: 0) {
             nonLockedNotesTabButton
-            
+            lockedNotesTabButton
+        }
+        .overlay {
             CustomHStackDivider()
                 .padding(.vertical)
-            
-            lockedNotesTabButton
-            
-            Spacer()
+                .allowsHitTesting(false)
         }
         .frame(height: 55)
         .dockStyle(
@@ -172,7 +169,6 @@ extension DockView {
         } label: {
             nonLockedNotesTabLabel
         }
-        .padding(.horizontal, 10)
     }
     
     /// Button for accessing the locked notes list.
@@ -195,22 +191,24 @@ extension DockView {
         } label: {
             lockedNotesTabLabel
         }
-        .padding(.trailing, 10)
     }
     
     /// Label for nonLockedNotesTabButton.
     var nonLockedNotesTabLabel: some View {
         HStack {
             Spacer()
-            Label("Notes", systemImage: "note.text")
-                .labelStyle(.titleOnly)
+            
+            Text("Notes")
                 .padding(.bottom, 4)
                 .tint(viewModel.isNonLockedNotesTabSelected ? .accentColor : .gray)
-                .bold(viewModel.isNonLockedNotesTabSelected ? true : false)
+                .bold(viewModel.isNonLockedNotesTabSelected)
                 .scaleEffect(viewModel.isNonLockedNotesTabSelected ? 1.0 : 0.9)
+
             Spacer()
         }
+        .frame(maxWidth: .infinity)
         .frame(height: 50)
+        .contentShape(.rect)
         .accessibilityLabel("Your notes.")
     }
     
@@ -218,19 +216,18 @@ extension DockView {
     var lockedNotesTabLabel: some View {
         HStack {
             Spacer()
-            Label(
-                "Private",
-                systemImage: privateNotesAccess.isUnlocked ? "lock.open.fill" : "lock.fill"
-            )
-            .labelStyle(.titleOnly)
-            .padding(.bottom, 4)
-            .tint(viewModel.isLockedNotesTabSelected ? .accentColor : .gray)
-            .bold(viewModel.isLockedNotesTabSelected ? true : false)
-            .scaleEffect(viewModel.isLockedNotesTabSelected ? 1.0 : 0.9)
+            
+            Text("Private")
+                .padding(.bottom, 4)
+                .tint(viewModel.isLockedNotesTabSelected ? .accentColor : .gray)
+                .bold(viewModel.isLockedNotesTabSelected)
+                .scaleEffect(viewModel.isLockedNotesTabSelected ? 1.0 : 0.9)
             
             Spacer()
         }
+        .frame(maxWidth: .infinity)
         .frame(height: 50)
+        .contentShape(.rect)
         .accessibilityLabel("Your private notes.")
     }
     
