@@ -112,7 +112,11 @@ extension AllNotesView {
                 .scrollContentBackground(.hidden)
             }
         }
-        .searchable(text: $viewModel.searchText, prompt: "Look for a note...")
+        .searchable(
+            text: $viewModel.searchText,
+            placement: .navigationBarDrawer(displayMode: .automatic),
+            prompt: "Look for a note..."
+        )
     }
     
     /// View that shows notes as a grid with multiple columns.
@@ -154,7 +158,11 @@ extension AllNotesView {
                 }
             }
         }
-        .searchable(text: $viewModel.searchText, prompt: "Look for a note...")
+        .searchable(
+            text: $viewModel.searchText,
+            placement: .navigationBarDrawer(displayMode: .automatic),
+            prompt: "Look for a note..."
+        )
     }
     
     func deleteNotes(at offsets: IndexSet) {
