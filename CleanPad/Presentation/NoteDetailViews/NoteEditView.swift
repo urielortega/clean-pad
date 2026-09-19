@@ -131,7 +131,7 @@ struct NoteEditView: View {
                                     }
                                     
                                 } label: {
-                                    Label("More options", systemImage: "ellipsis.circle")
+                                    Label("More options", systemImage: "ellipsis")
                                 }
                                 if creatingNewNote {
                                     saveNoteButtonView
