@@ -66,27 +66,21 @@ extension WhatsNewView {
     var detailsView: some View {
         VStack(alignment: .leading, spacing: 20) {
             NewFeatureView(
-                imageSystemName: "externaldrive.badge.checkmark",
-                featureTitle: "More reliable note saving",
-                featureDescription: "Notes now save more consistently while editing, reducing the chance of lost changes"
-            )
-            
-            NewFeatureView(
-                imageSystemName: "app.badge",
-                featureTitle: "New App Icon",
-                featureDescription: "A refreshed icon designed to feel at home with the latest iOS look"
-            )
-            
-            NewFeatureView(
                 imageSystemName: "drop",
-                featureTitle: "Liquid Glass refresh",
-                featureDescription: "CleanPad now adopts the system's new Liquid Glass styling, with refined components"
+                featureTitle: "Liquid Glass, refined",
+                featureDescription: "The Dock now flows (and glows) more naturally on iOS 26+, with a more seamless Liquid Glass experience."
             )
             
             NewFeatureView(
-                imageSystemName: "lock.shield",
-                featureTitle: "Improved private notes access",
-                featureDescription: "Authentication now supports PIN fallback when biometrics are unavailable and works correctly with iPhone Mirroring!"
+                imageSystemName: "hand.point.up.left",
+                featureTitle: "Smoother interactions",
+                featureDescription: "Refined controls bring more fluid animations throughout CleanPad."
+            )
+            
+            NewFeatureView(
+                imageSystemName: "magnifyingglass",
+                featureTitle: "Search, right where you need it",
+                featureDescription: "Search now lives outside the Dock, giving navigation more room while keeping search easy to access."
             )
         }
         .padding(.vertical)
